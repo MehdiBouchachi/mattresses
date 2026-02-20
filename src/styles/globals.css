@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* Custom global styles */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: white;
+  color: #111827;
+}
+
+@theme {
+  --color-brand-primary: #2b2d6e;
+  --color-brand-beige: #f5efe6;
+  --color-brand-sand: #d6cfc7;
+  --color-brand-gold: #c6a75e;
+  --color-brand-charcoal: #1e1e1e;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+}
+
+body {
+  font-family: var(--font-body);
+}
