@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import RelatedSection from "../RelatedSection";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/store/slices/cartSlice";
 
 const product = {
   name: "Memory Foam Deluxe",
@@ -96,6 +98,7 @@ export default function ProductPage() {
   const [quantity, setQuantity] = useState(1);
   const [openFAQ, setOpenFAQ] = useState(null);
   const [zoomStyle, setZoomStyle] = useState({});
+  const dispatch = useDispatch();
 
   const totalPrice = selectedDimension.price * quantity;
 
@@ -254,7 +257,21 @@ export default function ProductPage() {
             </div>
           </div>
 
-          <button className="w-full bg-[#2B2D6E] text-white py-5 rounded-full hover:opacity-90 transition text-lg">
+          <button
+            onClick={() =>
+              dispatch(
+                addToCart({
+                  id: product.id,
+                  name: product.name,
+                  image: selectedImage,
+                  price: selectedDimension.price,
+                  size: selectedDimension.size,
+                  quantity,
+                }),
+              )
+            }
+            className="w-full bg-[#2B2D6E] text-white py-5 rounded-full hover:opacity-90 transition text-lg"
+          >
             Add to Cart
           </button>
         </div>

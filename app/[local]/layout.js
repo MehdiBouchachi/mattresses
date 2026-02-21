@@ -1,6 +1,8 @@
 import { Playfair_Display, Inter } from "next/font/google";
 import "@/styles/globals.css";
 import Providers from "../providers";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const headingFont = Playfair_Display({
   subsets: ["latin"],
@@ -25,7 +27,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${headingFont.variable} ${bodyFont.variable} antialiased bg-[#F5EFE6] text-[#1E1E1E] transition-colors duration-300`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          {children}
+
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

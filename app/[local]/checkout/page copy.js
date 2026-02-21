@@ -165,43 +165,44 @@ export default function CheckoutPage() {
         {/* ================= RIGHT - SUMMARY ================= */}
         {/* ================= RIGHT - SUMMARY ================= */}
         <div
-          className="bg-white rounded-[36px] p-12 h-fit sticky top-28
-             shadow-[0_30px_80px_rgba(0,0,0,0.07)]
+          className="bg-white rounded-[44px] p-16 h-fit sticky top-28
+             shadow-[0_40px_120px_rgba(0,0,0,0.08)]
              border border-[#E9E2D8]"
         >
-          <h2 className="text-xl font-semibold mb-12 tracking-tight">
+          <h2 className="text-2xl font-semibold mb-16 tracking-tight">
             Order Summary
           </h2>
 
-          <div className="space-y-10">
+          <div className="space-y-14">
             {items.map((item) => (
               <div
                 key={item.id + item.size}
-                className="pb-8 border-b border-[#F1EDE7] last:border-none last:pb-0"
+                className="pb-10 border-b border-[#F0ECE6] last:border-none last:pb-0"
               >
                 <div className="flex justify-between items-start gap-6">
-                  {/* LEFT */}
-                  <div className="flex flex-col gap-3">
-                    <p className="font-semibold text-base leading-tight">
+                  {/* LEFT SIDE */}
+                  <div className="flex flex-col gap-4">
+                    <p className="font-semibold text-lg leading-tight">
                       {item.name}
                     </p>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-4">
                       <span className="text-sm text-gray-500">{item.size}</span>
 
+                      {/* STRONGER QUANTITY BADGE */}
                       <span
-                        className="px-3 py-1 rounded-full
-                               bg-[#2B2D6E]/10
-                               text-[#2B2D6E]
-                               text-[11px] font-semibold tracking-wide"
+                        className="px-4 py-1.5 rounded-full 
+                               bg-[#2B2D6E]/10 
+                               text-[#2B2D6E] 
+                               text-xs font-semibold tracking-wide"
                       >
-                        Quantity × {item.quantity}
+                        Quantity: {item.quantity}
                       </span>
                     </div>
                   </div>
 
                   {/* PRICE */}
-                  <p className="font-semibold text-base whitespace-nowrap">
+                  <p className="font-semibold text-lg whitespace-nowrap">
                     {formatPrice(item.price * item.quantity)}
                   </p>
                 </div>
@@ -209,17 +210,17 @@ export default function CheckoutPage() {
             ))}
           </div>
 
-          {/* TOTAL */}
-          <div className="mt-12 pt-8 border-t border-[#E9E2D8] space-y-5">
+          {/* TOTAL SECTION */}
+          <div className="mt-16 pt-10 border-t border-[#E9E2D8] space-y-6">
             <div className="flex justify-between text-gray-500 text-sm">
               <span>Subtotal</span>
               <span>{formatPrice(total)}</span>
             </div>
 
             <div className="flex justify-between items-center">
-              <span className="text-xl font-semibold">Total</span>
+              <span className="text-2xl font-semibold">Total</span>
 
-              <span className="text-2xl font-bold text-[#2B2D6E]">
+              <span className="text-3xl font-bold text-[#2B2D6E]">
                 {formatPrice(total)}
               </span>
             </div>

@@ -10,7 +10,7 @@ import TrustStrip from "@/components/sections/TrustStrip";
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#F3EEE6] text-[#1C1C1C]">
-      <Header />
+    
 
       {/* ================= HERO ================= */}
       <section className="pt-48 pb-32 bg-[#F3EEE6]">
@@ -61,7 +61,6 @@ export default function Home() {
       {/* ================= FINAL CTA ================= */}
       <FinalCTA />
 
-      <Footer />
     </div>
   );
 }
