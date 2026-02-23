@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 const formatPrice = (price) =>
-  new Intl.NumberFormat("fr-DZ").format(price) + " DA";
+  new Intl.NumberFormat("fr-DZ").format(price || 0) + " DA";
 
 export default function RelatedSection({ currentProduct, allProducts }) {
-  const scrollRef = useRef(null);
+  const params = useParams();
+  const locale = params?.local || "en";
   const [recentlyViewed, setRecentlyViewed] = useState([]);
 
   /* ================= RELATED ================= */
@@ -16,7 +19,6 @@ export default function RelatedSection({ currentProduct, allProducts }) {
       p.slug !== currentProduct.slug && p.category === currentProduct.category,
   );
 
-  /* ================= ALSO BOUGHT (Mock Logic) ================= */
   const alsoBought = allProducts.filter(
     (p) =>
       p.slug !== currentProduct.slug &&
@@ -25,109 +27,142 @@ export default function RelatedSection({ currentProduct, allProducts }) {
 
   /* ================= RECENTLY VIEWED ================= */
   useEffect(() => {
-    const viewed = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+    if (!currentProduct?.slug) return;
 
-    const updated = [
-      currentProduct,
-      ...viewed.filter((p) => p.slug !== currentProduct.slug),
+    const stored = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+
+    const updatedSlugs = [
+      currentProduct.slug,
+      ...stored.filter((slug) => slug !== currentProduct.slug),
     ].slice(0, 5);
 
-    localStorage.setItem("recentlyViewed", JSON.stringify(updated));
-    setRecentlyViewed(updated.slice(1));
-  }, [currentProduct]);
+    localStorage.setItem("recentlyViewed", JSON.stringify(updatedSlugs));
 
-  /* ================= AUTO SCROLL ================= */
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
+    const hydrated = updatedSlugs
+      .slice(1)
+      .map((slug) => allProducts.find((p) => p.slug === slug))
+      .filter(Boolean);
 
-    const interval = setInterval(() => {
-      container.scrollBy({ left: 300, behavior: "smooth" });
-    }, 4000);
+    setRecentlyViewed(hydrated);
+  }, [currentProduct, allProducts]);
 
-    return () => clearInterval(interval);
-  }, []);
+  /* ================= SECTION ================= */
+  const Section = ({ title, products }) => {
+    const scrollRef = useRef(null);
 
-  /* ================= DRAG SCROLL ================= */
-  let isDown = false;
-  let startX;
-  let scrollLeft;
+    const scroll = (direction) => {
+      const container = scrollRef.current;
+      if (!container) return;
+      const width = container.offsetWidth;
+      container.scrollBy({
+        left: direction === "left" ? -width : width,
+        behavior: "smooth",
+      });
+    };
 
-  const handleMouseDown = (e) => {
-    isDown = true;
-    startX = e.pageX - scrollRef.current.offsetLeft;
-    scrollLeft = scrollRef.current.scrollLeft;
-  };
+    if (!products.length) return null;
 
-  const handleMouseLeave = () => (isDown = false);
-  const handleMouseUp = () => (isDown = false);
+    return (
+      <section className="py-24 border-t border-[#E9E2D8] relative">
+        <div className="max-w-7xl mx-auto px-8 relative">
+          <h2 className="text-4xl font-semibold mb-14">{title}</h2>
 
-  const handleMouseMove = (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
-    scrollRef.current.scrollLeft = scrollLeft - walk;
-  };
+          {/* ARROWS */}
+          <button
+            onClick={() => scroll("left")}
+            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center border border-[#E9E2D8]"
+          >
+            ‹
+          </button>
 
-  const Section = ({ title, products }) => (
-    <section className="py-28 border-t border-[#E9E2D8]">
-      <div className="max-w-7xl mx-auto px-8">
-        <h2 className="text-4xl font-semibold mb-16">{title}</h2>
+          <button
+            onClick={() => scroll("right")}
+            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center border border-[#E9E2D8]"
+          >
+            ›
+          </button>
 
-        <div
-          ref={scrollRef}
-          onMouseDown={handleMouseDown}
-          onMouseLeave={handleMouseLeave}
-          onMouseUp={handleMouseUp}
-          onMouseMove={handleMouseMove}
-          className="flex gap-10 overflow-x-auto scrollbar-hide cursor-grab"
-        >
-          {products.map((item) => (
-            <motion.div
-              key={item.slug}
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="min-w-[320px] bg-white rounded-[32px] border border-[#E9E2D8] shadow-sm hover:shadow-lg transition"
-            >
-              <div className="overflow-hidden rounded-t-[32px]">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-[260px] object-cover hover:scale-105 transition duration-500"
-                />
-              </div>
+          {/* SCROLL CONTAINER */}
+          <div
+            ref={scrollRef}
+            className="flex gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar pb-6"
+          >
+            {products.map((item) => {
+              const image = item.images?.[0] ?? item.image;
 
-              <div className="p-8">
-                <p className="text-xs uppercase tracking-widest text-[#9A8F82] mb-2">
-                  {item.category}
-                </p>
+              const basePrice = item.basePrice ?? item.price ?? 0;
 
-                <h3 className="text-xl font-semibold mb-4">{item.name}</h3>
+              const oldPrice = item.oldPrice ?? null;
+              const discount = item.discount ?? 0;
 
-                <p className="text-[#2B2D6E] font-bold text-lg mb-6">
-                  {formatPrice(item.price)}
-                </p>
+              const hasDiscount = discount > 0 && oldPrice;
 
-                <button className="w-full border border-[#2B2D6E] text-[#2B2D6E] py-3 rounded-full hover:bg-[#2B2D6E] hover:text-white transition">
-                  View Product
-                </button>
-              </div>
-            </motion.div>
-          ))}
+              const finalPrice = hasDiscount
+                ? Math.round(basePrice * (1 - discount / 100))
+                : basePrice;
+
+              return (
+                <motion.div
+                  key={item.slug}
+                  whileHover={{ y: -6 }}
+                  className="snap-start min-w-[300px] bg-white rounded-[28px] border border-[#E9E2D8] shadow-sm hover:shadow-lg transition"
+                >
+                  <div className="overflow-hidden rounded-t-[28px] relative">
+                    <img
+                      src={image}
+                      alt={item.name}
+                      className="w-full h-[240px] object-cover transition duration-500 hover:scale-105"
+                    />
+
+                    {hasDiscount && (
+                      <div className="absolute top-4 right-4 bg-[#2B2D6E] text-white text-xs px-3 py-1 rounded-full">
+                        -{discount}%
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="p-6">
+                    <p className="text-xs uppercase tracking-widest text-[#9A8F82] mb-2">
+                      {item.category}
+                    </p>
+
+                    <h3 className="text-lg font-semibold mb-4">{item.name}</h3>
+
+                    {hasDiscount ? (
+                      <>
+                        <p className="text-[#2B2D6E] font-bold text-lg">
+                          {formatPrice(finalPrice)}
+                        </p>
+                        <p className="text-sm text-gray-400 line-through">
+                          {formatPrice(oldPrice)}
+                        </p>
+                      </>
+                    ) : (
+                      <p className="text-[#2B2D6E] font-bold text-lg">
+                        {formatPrice(basePrice)}
+                      </p>
+                    )}
+
+                    <Link href={`/${locale}/product/${item.slug}`}>
+                      <button className="mt-6 w-full border border-[#2B2D6E] text-[#2B2D6E] py-2 rounded-full hover:bg-[#2B2D6E] hover:text-white transition">
+                        View Product
+                      </button>
+                    </Link>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  };
 
   return (
     <>
       <Section title="Related Products" products={related} />
       <Section title="Customers Also Bought" products={alsoBought} />
-
-      {recentlyViewed.length > 0 && (
-        <Section title="Recently Viewed" products={recentlyViewed} />
-      )}
+      <Section title="Recently Viewed" products={recentlyViewed} />
     </>
   );
 }

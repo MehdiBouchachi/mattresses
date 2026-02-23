@@ -12,22 +12,23 @@ function ProductCard({ product }) {
   const {
     name,
     description,
-    price,
+    basePrice,
     oldPrice = null,
-    image,
+    images,
     available = true,
     category,
     slug,
+    discount = 0,
   } = product;
 
-  // Derived logic
-  const hasDiscount = oldPrice && oldPrice > price;
+  const image = images?.[0];
 
-  const calculatedDiscount = hasDiscount
-    ? Math.round(((oldPrice - price) / oldPrice) * 100)
-    : 0;
-
+  const hasDiscount = discount > 0 && oldPrice;
   const isAvailable = Boolean(available);
+
+  const finalPrice = hasDiscount
+    ? Math.round(basePrice * (1 - discount / 100))
+    : basePrice;
 
   return (
     <div
@@ -56,7 +57,7 @@ function ProductCard({ product }) {
 
         {hasDiscount && isAvailable && (
           <div className="absolute top-4 right-4 bg-[#2B2D6E] text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-md">
-            -{calculatedDiscount}%
+            -{discount}%
           </div>
         )}
 
@@ -95,7 +96,7 @@ function ProductCard({ product }) {
             {hasDiscount ? (
               <>
                 <span className="text-2xl font-bold text-[#2B2D6E] leading-tight">
-                  {formatPrice(price)}
+                  {formatPrice(finalPrice)}
                 </span>
                 <span className="text-sm text-[#A8A29E] line-through mt-2">
                   {formatPrice(oldPrice)}
@@ -103,7 +104,7 @@ function ProductCard({ product }) {
               </>
             ) : (
               <span className="text-xl font-semibold text-[#2B2D6E]">
-                {formatPrice(price)}
+                {formatPrice(basePrice)}
               </span>
             )}
           </div>

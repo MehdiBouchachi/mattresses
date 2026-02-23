@@ -1,3 +1,5 @@
+"use client";
+
 import { useReducer, useMemo } from "react";
 import { products, itemsPerPage } from "@/constants/products";
 
@@ -55,20 +57,31 @@ function reducer(state, action) {
 export default function useProducts() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  /* ================= FILTERING ================= */
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
+      /* ---------- CATEGORY ---------- */
       const categoryMatch =
-        state.category === "all" || p.category === state.category;
+        state.category === "all" ||
+        p.category?.toLowerCase() === state.category.toLowerCase();
 
+      /* ---------- SUBCATEGORY ---------- */
       const subMatch =
-        state.subcategory === "all" || p.subcategory === state.subcategory;
+        state.subcategory === "all" ||
+        p.subcategory?.toLowerCase() === state.subcategory.toLowerCase();
 
-      const priceMatch = p.price >= state.minPrice && p.price <= state.maxPrice;
+      /* ---------- PRICE (SAFE) ---------- */
+      const productPrice =
+        p.basePrice ?? p.price ?? p.details?.dimensions?.[0]?.price ?? 0;
+
+      const priceMatch =
+        productPrice >= state.minPrice && productPrice <= state.maxPrice;
 
       return categoryMatch && subMatch && priceMatch;
     });
   }, [state]);
 
+  /* ================= PAGINATION ================= */
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   const paginatedProducts = filteredProducts.slice(

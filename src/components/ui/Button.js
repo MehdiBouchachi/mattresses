@@ -1,10 +1,13 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Button({
   children,
   variant = "primary",
   size = "md",
   className = "",
+  href,
   ...props
 }) {
   const base =
@@ -22,11 +25,20 @@ export default function Button({
     gold: "bg-[#C6A75E] text-white shadow-md hover:shadow-xl",
   };
 
+  const classes = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
+
+  // If href exists → render Link (anchor)
+  if (href) {
+    return (
+      <Link href={href} className={classes}>
+        {children}
+      </Link>
+    );
+  }
+
+  // Otherwise render button
   return (
-    <button
-      className={`${base} ${sizes[size]} ${variants[variant]} ${className}`}
-      {...props}
-    >
+    <button type="button" className={classes} {...props}>
       {children}
     </button>
   );

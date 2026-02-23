@@ -1,108 +1,55 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useParams, notFound } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import RelatedSection from "../RelatedSection";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/slices/cartSlice";
-
-const product = {
-  name: "Memory Foam Deluxe",
-  description:
-    "Pressure-relief memory foam with breathable comfort and orthopedic support designed for optimal spinal alignment.",
-
-  category: "Foam",
-  subcategory: "Memory",
-
-  available: true,
-
-  images: ["/images/mattresses.png", "/images/mattresses.png"],
-
-  details: {
-    thickness: 25,
-    firmness: 7,
-
-    dimensions: [
-      { size: "90 x 190", price: 115000 },
-      { size: "140 x 190", price: 145000 },
-      { size: "160 x 200", price: 165000 },
-    ],
-
-    technicalSpecs: [
-      { label: "Technology", value: "100% polyurethane foam" },
-      { label: "Density", value: "D30 orthopedic support" },
-      { label: "Fabric", value: "Stretch breathable textile" },
-      { label: "Warranty", value: "10 years" },
-      { label: "Thickness", value: "25 cm" },
-    ],
-
-    advantages: [
-      "Professional orthopedic support",
-      "High density D30 foam",
-      "Soft comfort upper layer",
-      "Made in Algeria",
-    ],
-
-    faq: [
-      {
-        question: "What is D30 foam?",
-        answer:
-          "D30 foam has a density of 30kg/m³ providing firm and durable support.",
-      },
-      {
-        question: "Is it suitable for back pain?",
-        answer:
-          "Yes. The orthopedic density provides excellent spinal alignment.",
-      },
-    ],
-  },
-};
-
-const allProducts = [
-  product, // current one
-
-  {
-    name: "Ortho Flex Premium",
-    slug: "ortho-flex-premium",
-    category: "Foam",
-    subcategory: "Memory",
-    price: 125000,
-    image: "/images/mattresses.png",
-  },
-  {
-    name: "Ocean Comfort",
-    slug: "ocean-comfort",
-    category: "Foam",
-    subcategory: "Latex",
-    price: 135000,
-    image: "/images/mattresses.png",
-  },
-  {
-    name: "Luxury Spine Support",
-    slug: "luxury-spine-support",
-    category: "Foam",
-    subcategory: "Memory",
-    price: 155000,
-    image: "/images/mattresses.png",
-  },
-];
-
+import { products } from "@/constants/products";
+import { useRouter } from "next/navigation";
 const formatPrice = (price) =>
   new Intl.NumberFormat("fr-DZ").format(price) + " DA";
 
 export default function ProductPage() {
-  const [selectedImage, setSelectedImage] = useState(product.images[0]);
-  const [selectedDimension, setSelectedDimension] = useState(
-    product.details.dimensions[0],
-  );
+  const params = useParams();
+  const locale = params?.locale || "en";
+  const { slug } = params;
+  const dispatch = useDispatch();
+  const router = useRouter();
+  // ✅ Real product by slug
+  const product = useMemo(() => {
+    return products.find((p) => p.slug === slug);
+  }, [slug]);
+
+  // ✅ Safe fallbacks without changing UI
+  const images = product.images?.length ? product.images : [product.image];
+  const dimensions = product.details?.dimensions?.length
+    ? product.details.dimensions
+    : [{ size: "Default", price: product.price }];
+
+  const firmness = product.details?.firmness ?? 0;
+  const technicalSpecs = product.details?.technicalSpecs ?? [];
+  const faq = product.details?.faq ?? [];
+
+  const [selectedImage, setSelectedImage] = useState(images[0]);
+  const [selectedDimension, setSelectedDimension] = useState(dimensions[0]);
   const [quantity, setQuantity] = useState(1);
   const [openFAQ, setOpenFAQ] = useState(null);
   const [zoomStyle, setZoomStyle] = useState({});
-  const dispatch = useDispatch();
 
-  const totalPrice = selectedDimension.price * quantity;
+  const unitBasePrice = selectedDimension.price ?? product.basePrice ?? 0;
 
-  // Zoom logic
+  const discount = product.discount ?? 0;
+  const hasDiscount = discount > 0;
+
+  const discountedUnitPrice = hasDiscount
+    ? Math.round(unitBasePrice * (1 - discount / 100))
+    : unitBasePrice;
+
+  const totalPrice = discountedUnitPrice * quantity;
+
+  // Zoom logic (same)
   const handleMouseMove = (e) => {
     const { left, top, width, height } =
       e.currentTarget.getBoundingClientRect();
@@ -123,14 +70,56 @@ export default function ProductPage() {
     });
   };
 
-  const relatedProducts = allProducts.filter(
-    (p) => p.name !== product.name && p.category === product.category,
+  const relatedProducts = products.filter(
+    (p) => p.slug !== product.slug && p.category === product.category,
   );
+  const handleCheckout = () => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.name,
+        image: selectedImage,
+        price: discountedUnitPrice,
+        size: selectedDimension.size,
+        quantity,
+      }),
+    );
 
+    router.push(`/${locale}/checkout`);
+  };
   return (
     <div className="bg-[#F8F6F2]">
+      {/* ================= PAGE HEADER ================= */}
+      <section className="max-w-7xl mx-auto px-8 pt-28 pb-10">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-sm text-[#8C857A] mb-6">
+          <button
+            onClick={() => router.push(`/${locale}`)}
+            className="hover:text-[#2B2D6E] transition"
+          >
+            Home
+          </button>
+          <span>/</span>
+          <button
+            onClick={() => router.push(`/${locale}/mattresses`)}
+            className="hover:text-[#2B2D6E] transition"
+          >
+            Mattresses
+          </button>
+          <span>/</span>
+          <span className="text-[#2B2D6E] font-medium">{product.name}</span>
+        </div>
+
+        {/* Back Button */}
+        <button
+          onClick={() => router.back()}
+          className="inline-flex items-center gap-2 text-sm text-[#2B2D6E] hover:underline"
+        >
+          ← Back to products
+        </button>
+      </section>
       {/* ================= HERO ================= */}
-      <section className="max-w-7xl mx-auto px-8 py-28 grid lg:grid-cols-2 gap-24">
+      <section className="max-w-7xl mx-auto px-8 pb-28 grid lg:grid-cols-2 gap-24 items-start">
         {/* LEFT SIDE */}
         <div>
           <div
@@ -151,7 +140,7 @@ export default function ProductPage() {
           </div>
 
           <div className="flex gap-4">
-            {product.images.map((img, i) => (
+            {images.map((img, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(img)}
@@ -173,23 +162,68 @@ export default function ProductPage() {
 
         {/* RIGHT SIDE */}
         <div className="lg:sticky lg:top-24 self-start bg-white p-12 rounded-[40px] shadow-lg border border-[#E9E2D8]">
-          <p className="text-xs uppercase tracking-widest text-[#9A8F82] mb-3">
-            {product.category} / {product.subcategory}
-          </p>
+          <div className="mb-6">
+            <p className="text-xs uppercase tracking-widest text-[#9A8F82] mb-4">
+              {product.category} · {product.subcategory}
+            </p>
 
-          <h1 className="text-5xl font-semibold mb-6 leading-tight">
-            {product.name}
-          </h1>
+            <h1 className="text-5xl font-semibold leading-tight tracking-tight text-[#1F1F1F]">
+              {product.name}
+            </h1>
+          </div>
 
           <p className="text-[#6E6A64] mb-10 leading-relaxed text-lg">
             {product.description}
           </p>
-
+          <div className="w-16 h-[2px] bg-[#2B2D6E] mb-10 opacity-20"></div>
           {/* PRICE */}
-          <div className="mb-10">
-            <span className="text-4xl font-bold text-[#2B2D6E]">
-              {formatPrice(totalPrice)}
-            </span>
+          <div className="mb-10 border-b border-[#E9E2D8] pb-8">
+            {/* Old price */}
+            {hasDiscount && (
+              <p className="text-base text-gray-400 line-through mb-2">
+                {formatPrice(unitBasePrice)}
+              </p>
+            )}
+
+            {/* MAIN PRICE DISPLAY */}
+            <div className="flex items-end gap-4 flex-wrap">
+              {/* If quantity = 1 → show unit price big */}
+              {quantity === 1 ? (
+                <span className="text-5xl font-bold text-[#2B2D6E] tracking-tight">
+                  {formatPrice(discountedUnitPrice)}
+                </span>
+              ) : (
+                <>
+                  {/* BIG TOTAL */}
+                  <span className="text-5xl font-bold text-[#2B2D6E] tracking-tight">
+                    {formatPrice(totalPrice)}
+                  </span>
+
+                  <span className="text-sm text-[#6E6A64] pb-2">
+                    ({quantity} × {formatPrice(discountedUnitPrice)})
+                  </span>
+                </>
+              )}
+
+              {/* Discount badge */}
+              {hasDiscount && (
+                <span className="text-xs font-medium bg-[#2B2D6E]/10 text-[#2B2D6E] px-3 py-1 rounded-full">
+                  −{discount}%
+                </span>
+              )}
+            </div>
+
+            {/* Clear unit info */}
+            {quantity > 1 && (
+              <p className="text-base text-[#6E6A64] mt-3">
+                Unit price:{" "}
+                <span className="font-medium text-black">
+                  {formatPrice(discountedUnitPrice)}
+                </span>
+              </p>
+            )}
+
+            {/* Savings */}
           </div>
 
           {/* DIMENSIONS */}
@@ -199,7 +233,7 @@ export default function ProductPage() {
             </h3>
 
             <div className="grid grid-cols-2 gap-4">
-              {product.details.dimensions.map((dim) => (
+              {dimensions.map((dim) => (
                 <button
                   key={dim.size}
                   onClick={() => setSelectedDimension(dim)}
@@ -251,82 +285,103 @@ export default function ProductPage() {
               <div
                 className="absolute h-2 bg-[#2B2D6E] rounded-full"
                 style={{
-                  width: `${product.details.firmness * 10}%`,
+                  width: `${Math.min(10, Math.max(0, firmness)) * 10}%`,
                 }}
               />
             </div>
           </div>
-
-          <button
-            onClick={() =>
-              dispatch(
-                addToCart({
-                  id: product.id,
-                  name: product.name,
-                  image: selectedImage,
-                  price: selectedDimension.price,
-                  size: selectedDimension.size,
-                  quantity,
-                }),
-              )
-            }
-            className="w-full bg-[#2B2D6E] text-white py-5 rounded-full hover:opacity-90 transition text-lg"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </section>
-      <section className="max-w-7xl mx-auto px-8 py-24 border-t border-[#E9E2D8]">
-        <h2 className="text-4xl font-semibold mb-14">
-          Technical Specifications
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-12">
-          {product.details.technicalSpecs.map((spec) => (
-            <div
-              key={spec.label}
-              className="flex justify-between border-b pb-5 text-lg"
+          <div className="mt-10 space-y-6">
+            {/* PRIMARY ACTION */}
+            <button
+              onClick={handleCheckout}
+              className="w-full bg-[#2B2D6E] text-white py-5 rounded-2xl text-lg font-medium transition-all duration-300 hover:bg-[#1E204F] shadow-lg hover:shadow-xl"
             >
-              <span>{spec.label}</span>
-              <span className="text-[#6E6A64]">{spec.value}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+              Buy Now
+            </button>
 
-      {/* ================= FAQ ================= */}
-      <section className="max-w-5xl mx-auto px-8 py-24 border-t border-[#E9E2D8]">
-        <h2 className="text-4xl font-semibold mb-14">
-          Frequently Asked Questions
-        </h2>
-
-        <div className="space-y-6">
-          {product.details.faq.map((item, i) => (
-            <div
-              key={i}
-              className="border border-[#E9E2D8] rounded-2xl p-8 cursor-pointer"
-              onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
+            {/* SECONDARY ACTION */}
+            <button
+              onClick={() =>
+                dispatch(
+                  addToCart({
+                    id: product.id,
+                    name: product.name,
+                    image: selectedImage,
+                    price: discountedUnitPrice,
+                    size: selectedDimension.size,
+                    quantity,
+                  }),
+                )
+              }
+              className="w-full border border-[#2B2D6E] text-[#2B2D6E] py-4 rounded-2xl transition hover:bg-[#F4F3FF]"
             >
-              <h4 className="font-semibold text-lg mb-2">{item.question}</h4>
+              Add to Cart
+            </button>
 
-              <AnimatePresence>
-                {openFAQ === i && (
-                  <motion.p
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="text-[#6E6A64]"
-                  >
-                    {item.answer}
-                  </motion.p>
-                )}
-              </AnimatePresence>
+            <div className="pt-4 border-t border-[#E9E2D8] text-sm text-[#6E6A64] text-center">
+              Free delivery • 10-year warranty • Secure checkout
             </div>
-          ))}
+          </div>
         </div>
       </section>
-      {/* ================= RELATED PRODUCTS ================= */}
-      <RelatedSection currentProduct={product} allProducts={allProducts} />
+
+      {/* TECH SPECS */}
+      {technicalSpecs.length > 0 && (
+        <section className="max-w-7xl mx-auto px-8 py-24 border-t border-[#E9E2D8]">
+          <h2 className="text-4xl font-semibold mb-14">
+            Technical Specifications
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {technicalSpecs.map((spec) => (
+              <div
+                key={spec.label}
+                className="flex justify-between border-b pb-5 text-lg"
+              >
+                <span>{spec.label}</span>
+                <span className="text-[#6E6A64]">{spec.value}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* FAQ */}
+      {faq.length > 0 && (
+        <section className="max-w-5xl mx-auto px-8 py-24 border-t border-[#E9E2D8]">
+          <h2 className="text-4xl font-semibold mb-14">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-6">
+            {faq.map((item, i) => (
+              <div
+                key={i}
+                className="border border-[#E9E2D8] rounded-2xl p-8 cursor-pointer"
+                onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
+              >
+                <h4 className="font-semibold text-lg mb-2">{item.question}</h4>
+
+                <AnimatePresence>
+                  {openFAQ === i && (
+                    <motion.p
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="text-[#6E6A64]"
+                    >
+                      {item.answer}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* RELATED PRODUCTS (same place, same design) */}
+      <RelatedSection currentProduct={product} allProducts={relatedProducts} />
     </div>
   );
 }

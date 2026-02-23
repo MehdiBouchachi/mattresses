@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import RelatedSection from "../RelatedSection";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/store/slices/cartSlice";
 
 const product = {
   name: "Memory Foam Deluxe",
@@ -55,6 +58,35 @@ const product = {
   },
 };
 
+const allProducts = [
+  product, // current one
+
+  {
+    name: "Ortho Flex Premium",
+    slug: "ortho-flex-premium",
+    category: "Foam",
+    subcategory: "Memory",
+    price: 125000,
+    image: "/images/mattresses.png",
+  },
+  {
+    name: "Ocean Comfort",
+    slug: "ocean-comfort",
+    category: "Foam",
+    subcategory: "Latex",
+    price: 135000,
+    image: "/images/mattresses.png",
+  },
+  {
+    name: "Luxury Spine Support",
+    slug: "luxury-spine-support",
+    category: "Foam",
+    subcategory: "Memory",
+    price: 155000,
+    image: "/images/mattresses.png",
+  },
+];
+
 const formatPrice = (price) =>
   new Intl.NumberFormat("fr-DZ").format(price) + " DA";
 
@@ -65,8 +97,35 @@ export default function ProductPage() {
   );
   const [quantity, setQuantity] = useState(1);
   const [openFAQ, setOpenFAQ] = useState(null);
+  const [zoomStyle, setZoomStyle] = useState({});
+  const dispatch = useDispatch();
 
   const totalPrice = selectedDimension.price * quantity;
+
+  // Zoom logic
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } =
+      e.currentTarget.getBoundingClientRect();
+
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(1.8)",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setZoomStyle({
+      transform: "scale(1)",
+      transformOrigin: "center",
+    });
+  };
+
+  const relatedProducts = allProducts.filter(
+    (p) => p.name !== product.name && p.category === product.category,
+  );
 
   return (
     <div className="bg-[#F8F6F2]">
@@ -74,23 +133,21 @@ export default function ProductPage() {
       <section className="max-w-7xl mx-auto px-8 py-28 grid lg:grid-cols-2 gap-24">
         {/* LEFT SIDE */}
         <div>
-          <div className="bg-white rounded-[48px] shadow-md overflow-hidden mb-6 relative">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={selectedImage}
-                src={selectedImage}
-                alt={product.name}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                className="w-full h-[600px] object-cover"
-              />
-            </AnimatePresence>
-
-            <div className="absolute top-6 left-6 bg-[#2B2D6E] text-white px-4 py-1 rounded-full text-xs">
-              10 Years Warranty
-            </div>
+          <div
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className="bg-white rounded-[48px] shadow-lg overflow-hidden mb-6 relative cursor-zoom-in"
+          >
+            <motion.img
+              key={selectedImage}
+              src={selectedImage}
+              alt={product.name}
+              style={zoomStyle}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="w-full h-[600px] object-cover transition-transform duration-300 ease-out"
+            />
           </div>
 
           <div className="flex gap-4">
@@ -115,7 +172,7 @@ export default function ProductPage() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="lg:sticky lg:top-24 self-start bg-white p-12 rounded-[40px] shadow-md border border-[#E9E2D8]">
+        <div className="lg:sticky lg:top-24 self-start bg-white p-12 rounded-[40px] shadow-lg border border-[#E9E2D8]">
           <p className="text-xs uppercase tracking-widest text-[#9A8F82] mb-3">
             {product.category} / {product.subcategory}
           </p>
@@ -129,14 +186,14 @@ export default function ProductPage() {
           </p>
 
           {/* PRICE */}
-          <div className="mb-8">
+          <div className="mb-10">
             <span className="text-4xl font-bold text-[#2B2D6E]">
               {formatPrice(totalPrice)}
             </span>
           </div>
 
           {/* DIMENSIONS */}
-          <div className="mb-8">
+          <div className="mb-10">
             <h3 className="text-sm uppercase tracking-wider text-[#9A8F82] mb-4">
               Select Size
             </h3>
@@ -158,25 +215,33 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/* QUANTITY */}
-          <div className="flex items-center gap-4 mb-8">
-            <button
-              onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="w-10 h-10 rounded-full border"
-            >
-              -
-            </button>
-            <span className="text-lg font-medium">{quantity}</span>
-            <button
-              onClick={() => setQuantity(quantity + 1)}
-              className="w-10 h-10 rounded-full border"
-            >
-              +
-            </button>
+          {/* QUANTITY (Improved) */}
+          <div className="mb-10">
+            <h3 className="text-sm uppercase tracking-wider text-[#9A8F82] mb-4">
+              Quantity
+            </h3>
+
+            <div className="flex items-center border rounded-full w-fit overflow-hidden">
+              <button
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                className="px-5 py-3 hover:bg-gray-100 transition"
+              >
+                −
+              </button>
+
+              <div className="px-6 text-lg font-medium">{quantity}</div>
+
+              <button
+                onClick={() => setQuantity(quantity + 1)}
+                className="px-5 py-3 hover:bg-gray-100 transition"
+              >
+                +
+              </button>
+            </div>
           </div>
 
           {/* FIRMNESS */}
-          <div className="mb-8">
+          <div className="mb-10">
             <div className="flex justify-between text-sm mb-2">
               <span>Soft</span>
               <span>Firm</span>
@@ -192,18 +257,25 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/* DELIVERY INFO */}
-          <div className="text-sm text-[#6E6A64] mb-8">
-            🚚 Estimated delivery: 2-4 days
-          </div>
-
-          <button className="w-full bg-[#2B2D6E] text-white py-4 rounded-full hover:opacity-90 transition text-lg">
+          <button
+            onClick={() =>
+              dispatch(
+                addToCart({
+                  id: product.id,
+                  name: product.name,
+                  image: selectedImage,
+                  price: selectedDimension.price,
+                  size: selectedDimension.size,
+                  quantity,
+                }),
+              )
+            }
+            className="w-full bg-[#2B2D6E] text-white py-5 rounded-full hover:opacity-90 transition text-lg"
+          >
             Add to Cart
           </button>
         </div>
       </section>
-
-      {/* ================= TECH SPECS ================= */}
       <section className="max-w-7xl mx-auto px-8 py-24 border-t border-[#E9E2D8]">
         <h2 className="text-4xl font-semibold mb-14">
           Technical Specifications
@@ -253,6 +325,8 @@ export default function ProductPage() {
           ))}
         </div>
       </section>
+      {/* ================= RELATED PRODUCTS ================= */}
+      <RelatedSection currentProduct={product} allProducts={allProducts} />
     </div>
   );
 }

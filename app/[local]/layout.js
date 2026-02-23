@@ -23,7 +23,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${headingFont.variable} ${bodyFont.variable} antialiased bg-[#F5EFE6] text-[#1E1E1E] transition-colors duration-300`}
       >

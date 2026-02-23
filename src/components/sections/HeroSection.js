@@ -1,6 +1,18 @@
+"use client";
+
+import { useRouter, usePathname } from "next/navigation";
 import Button from "../ui/Button";
 
 export default function HeroSection() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split("/")[1];
+
+  const handleScrollToCollection = () => {
+    const section = document.getElementById("collections");
+    section?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section className="pt-48 pb-32 bg-[#F3EEE6]">
       <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-24 items-center">
@@ -21,11 +33,19 @@ export default function HeroSection() {
           </p>
 
           <div className="flex gap-5 pt-4">
-            <Button variant="primary" size="lg">
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => router.push(`/${locale}/mattresses`)}
+            >
               Shop Mattresses
             </Button>
 
-            <Button variant="secondary" size="lg">
+            <Button
+              variant="secondary"
+              size="lg"
+              onClick={handleScrollToCollection}
+            >
               View Collection
             </Button>
           </div>

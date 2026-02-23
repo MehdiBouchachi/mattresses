@@ -5,17 +5,17 @@ import { categories } from "@/constants/products";
 export default function CategoryFilter({ state, dispatch }) {
   return (
     <div>
-      <h3 className="text-sm uppercase tracking-[0.25em] text-[#9A8F82] mb-8">
+      <h3 className="text-xs uppercase tracking-widest text-[#888] mb-6">
         Category
       </h3>
 
-      <div className="space-y-2">
+      <div className="space-y-3 text-sm">
         <button
           onClick={() => dispatch({ type: "SET_CATEGORY", payload: "all" })}
-          className={`w-full text-sm text-left px-4 py-2 rounded-lg transition-all duration-200 ${
+          className={`block transition ${
             state.category === "all"
-              ? "bg-[#E9E8F8] text-[#2B2D6E] font-medium"
-              : "text-[#444] hover:bg-[#F2EFE9]"
+              ? "text-[#2B2D6E] font-semibold"
+              : "text-[#555] hover:text-black"
           }`}
         >
           All
@@ -27,10 +27,10 @@ export default function CategoryFilter({ state, dispatch }) {
             onClick={() =>
               dispatch({ type: "SET_CATEGORY", payload: cat.value })
             }
-            className={`w-full text-sm text-left px-4 py-2 rounded-lg transition-all duration-200 ${
+            className={`block transition ${
               state.category === cat.value
-                ? "bg-[#E9E8F8] text-[#2B2D6E] font-medium"
-                : "text-[#444] hover:bg-[#F2EFE9]"
+                ? "text-[#2B2D6E] font-semibold"
+                : "text-[#555] hover:text-black"
             }`}
           >
             {cat.name}

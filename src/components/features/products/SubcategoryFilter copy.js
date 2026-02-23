@@ -7,17 +7,17 @@ export default function SubcategoryFilter({ state, dispatch }) {
 
   return (
     <div>
-      <h3 className="text-sm uppercase tracking-[0.25em] text-[#9A8F82] mb-8">
+      <h3 className="text-xs uppercase tracking-widest text-[#888] mb-6">
         Subcategory
       </h3>
 
-      <div className="space-y-2">
+      <div className="space-y-3 text-sm">
         <button
           onClick={() => dispatch({ type: "SET_SUBCATEGORY", payload: "all" })}
-          className={`w-full text-sm text-left px-4 py-2 rounded-lg transition-all duration-200 ${
+          className={`block transition ${
             state.subcategory === "all"
-              ? "bg-[#E9E8F8] text-[#2B2D6E] font-medium"
-              : "text-[#444] hover:bg-[#F2EFE9]"
+              ? "text-[#2B2D6E] font-semibold"
+              : "text-[#555] hover:text-black"
           }`}
         >
           All
@@ -27,10 +27,10 @@ export default function SubcategoryFilter({ state, dispatch }) {
           <button
             key={sub}
             onClick={() => dispatch({ type: "SET_SUBCATEGORY", payload: sub })}
-            className={`w-full text-sm text-left px-4 py-2 rounded-lg capitalize transition-all duration-200 ${
+            className={`block capitalize transition ${
               state.subcategory === sub
-                ? "bg-[#E9E8F8] text-[#2B2D6E] font-medium"
-                : "text-[#444] hover:bg-[#F2EFE9]"
+                ? "text-[#2B2D6E] font-semibold"
+                : "text-[#555] hover:text-black"
             }`}
           >
             {sub}
