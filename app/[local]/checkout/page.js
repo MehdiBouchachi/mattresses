@@ -68,13 +68,13 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="bg-[#F8F6F2] min-h-screen">
+    <div className="bg-beige-100 min-h-screen">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20">
         {/* HEADER */}
         <div className="mb-14">
           <button
             onClick={() => router.back()}
-            className="text-sm text-[#2B2D6E] hover:underline mb-4"
+            className="text-sm text-primary-600 hover:underline mb-4"
           >
             ← Back to Cart
           </button>
@@ -96,8 +96,8 @@ export default function CheckoutPage() {
                   name="firstName"
                   placeholder="First Name"
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E9E2D8] bg-white
-                  focus:border-[#2B2D6E] focus:ring-1 focus:ring-[#2B2D6E]
+                  className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
+                  focus:border-primary-600 focus:ring-1 focus:ring-primary-600
                   outline-none transition"
                 />
 
@@ -105,8 +105,8 @@ export default function CheckoutPage() {
                   name="lastName"
                   placeholder="Last Name"
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E9E2D8] bg-white
-                  focus:border-[#2B2D6E] focus:ring-1 focus:ring-[#2B2D6E]
+                  className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
+                  focus:border-primary-600 focus:ring-1 focus:ring-primary-600
                   outline-none transition"
                 />
               </div>
@@ -115,8 +115,8 @@ export default function CheckoutPage() {
                 name="email"
                 placeholder="Email Address"
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-[#E9E2D8] bg-white
-                focus:border-[#2B2D6E] focus:ring-1 focus:ring-[#2B2D6E]
+                className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
+                focus:border-primary-600 focus:ring-1 focus:ring-primary-600
                 outline-none transition"
               />
 
@@ -124,8 +124,8 @@ export default function CheckoutPage() {
                 name="phone"
                 placeholder="Phone Number"
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-[#E9E2D8] bg-white
-                focus:border-[#2B2D6E] focus:ring-1 focus:ring-[#2B2D6E]
+                className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
+                focus:border-primary-600 focus:ring-1 focus:ring-primary-600
                 outline-none transition"
               />
             </section>
@@ -139,8 +139,8 @@ export default function CheckoutPage() {
                   name="wilaya"
                   placeholder="Wilaya"
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E9E2D8] bg-white
-                  focus:border-[#2B2D6E] focus:ring-1 focus:ring-[#2B2D6E]
+                  className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
+                  focus:border-primary-600 focus:ring-1 focus:ring-primary-600
                   outline-none transition"
                 />
 
@@ -148,8 +148,8 @@ export default function CheckoutPage() {
                   name="city"
                   placeholder="City"
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E9E2D8] bg-white
-                  focus:border-[#2B2D6E] focus:ring-1 focus:ring-[#2B2D6E]
+                  className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
+                  focus:border-primary-600 focus:ring-1 focus:ring-primary-600
                   outline-none transition"
                 />
               </div>
@@ -158,8 +158,8 @@ export default function CheckoutPage() {
                 name="street"
                 placeholder="Street Address"
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-[#E9E2D8] bg-white
-                focus:border-[#2B2D6E] focus:ring-1 focus:ring-[#2B2D6E]
+                className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
+                focus:border-primary-600 focus:ring-1 focus:ring-primary-600
                 outline-none transition"
               />
 
@@ -167,8 +167,8 @@ export default function CheckoutPage() {
                 name="mapLink"
                 placeholder="Google Maps Link (optional)"
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-[#E9E2D8] bg-white
-                focus:border-[#2B2D6E] focus:ring-1 focus:ring-[#2B2D6E]
+                className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
+                focus:border-primary-600 focus:ring-1 focus:ring-primary-600
                 outline-none transition"
               />
             </section>
@@ -177,9 +177,9 @@ export default function CheckoutPage() {
             <section className="space-y-4">
               <h2 className="text-lg font-semibold">Payment Method</h2>
 
-              <div className="border border-[#E9E2D8] rounded-xl p-6 bg-white">
+              <div className="border border-beige-500 rounded-xl p-6 bg-white">
                 <p className="font-medium">Cash on Delivery</p>
-                <p className="text-sm text-[#6E6A64] mt-1">
+                <p className="text-sm text-text-muted mt-1">
                   Pay securely when your order is delivered.
                 </p>
               </div>
@@ -189,8 +189,8 @@ export default function CheckoutPage() {
             <button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className="w-full bg-[#2B2D6E] text-white py-4 rounded-xl
-              hover:bg-[#1E204F] transition duration-300
+              className="w-full bg-primary-600 text-white py-4 rounded-xl
+              hover:bg-primary-700 transition duration-300
               shadow-md hover:shadow-lg disabled:opacity-60"
             >
               {isSubmitting ? "Processing..." : "Complete Order"}
@@ -201,7 +201,7 @@ export default function CheckoutPage() {
           <div
             className="bg-white rounded-[36px] p-12 h-fit sticky top-28
           shadow-[0_30px_80px_rgba(0,0,0,0.07)]
-          border border-[#E9E2D8]"
+          border border-beige-500"
           >
             <h2 className="text-xl font-semibold mb-12 tracking-tight">
               Order Summary
@@ -211,7 +211,7 @@ export default function CheckoutPage() {
               {items.map((item) => (
                 <div
                   key={item.id + item.size}
-                  className="pb-8 border-b border-[#F1EDE7] last:border-none last:pb-0"
+                  className="pb-8 border-b border-beige-500 last:border-none last:pb-0"
                 >
                   <div className="flex justify-between items-start gap-6">
                     <div className="flex flex-col gap-3">
@@ -224,7 +224,7 @@ export default function CheckoutPage() {
                           {item.size}
                         </span>
 
-                        <span className="px-3 py-1 rounded-full bg-[#2B2D6E]/10 text-[#2B2D6E] text-[11px] font-semibold tracking-wide">
+                        <span className="px-3 py-1 rounded-full bg-primary-600/10 text-primary-600 text-[11px] font-semibold tracking-wide">
                           × {item.quantity}
                         </span>
                       </div>
@@ -238,7 +238,7 @@ export default function CheckoutPage() {
               ))}
             </div>
 
-            <div className="mt-12 pt-8 border-t border-[#E9E2D8] space-y-5">
+            <div className="mt-12 pt-8 border-t border-beige-500 space-y-5">
               <div className="flex justify-between text-gray-500 text-sm">
                 <span>Subtotal</span>
                 <span>{formatPrice(total)}</span>
@@ -247,11 +247,11 @@ export default function CheckoutPage() {
               <div className="flex justify-between items-center">
                 <span className="text-xl font-semibold">Total</span>
 
-                <span className="text-2xl font-bold text-[#2B2D6E]">
+                <span className="text-2xl font-bold text-primary-600">
                   {formatPrice(total)}
                 </span>
               </div>
-              <div className="mt-6 pt-6 border-t border-[#E9E2D8] text-sm text-[#6E6A64] space-y-2">
+              <div className="mt-6 pt-6 border-t border-beige-500 text-sm text-text-muted space-y-2">
                 <p>✓ Secure order processing</p>
                 <p>✓ Phone confirmation before delivery</p>
                 <p>✓ 10-year mattress warranty</p>

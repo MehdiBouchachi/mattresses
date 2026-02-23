@@ -13,26 +13,26 @@ export default function MattressesPage() {
   const locale = params?.locale || "en";
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2]">
+    <div className="min-h-screen bg-beige-100">
       {/* ================= PAGE HEADER ================= */}
       <section className="max-w-7xl mx-auto px-8 pt-40 pb-16">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-[#8C857A] mb-6">
+        <div className="flex items-center gap-2 text-sm text-text-soft mb-6">
           <button
             onClick={() => router.push(`/${locale}`)}
-            className="hover:text-[#2B2D6E] transition"
+            className="hover:text-primary-600 transition"
           >
             Home
           </button>
           <span>/</span>
-          <span className="text-[#2B2D6E] font-medium">Mattresses</span>
+          <span className="text-primary-600 font-medium">Mattresses</span>
         </div>
 
         <h1 className="text-5xl font-semibold tracking-tight mb-6">
           All Mattresses
         </h1>
 
-        <p className="text-[#6A6A6A] max-w-xl text-lg">
+        <p className="text-text-muted max-w-xl text-lg">
           Explore our full product universe engineered for premium comfort.
         </p>
       </section>
@@ -41,10 +41,10 @@ export default function MattressesPage() {
       <Filters state={state} dispatch={dispatch} />
 
       {/* ================= PRODUCTS ================= */}
-      <section className="py-10 border-t border-[#E9E2D8]">
+      <section className="py-10 border-t border-beige-500">
         <div className="max-w-7xl mx-auto px-8">
           {/* Product Count */}
-          <div className="mb-10 text-sm text-[#8C857A]">
+          <div className="mb-10 text-sm text-text-soft">
             Showing {paginatedProducts.length} products
           </div>
 

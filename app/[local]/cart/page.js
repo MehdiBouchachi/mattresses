@@ -34,14 +34,14 @@ export default function CartPage() {
 
   if (!items.length) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-[#F8F6F2]">
+      <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-beige-100">
         <h1 className="text-3xl font-semibold mb-4">Your Cart is Empty</h1>
         <p className="text-gray-500 mb-8">
           Looks like you haven’t added anything yet.
         </p>
         <button
           onClick={() => router.back()}
-          className="text-[#2B2D6E] font-medium hover:underline"
+          className="text-primary-600 font-medium hover:underline"
         >
           ← Continue Shopping
         </button>
@@ -50,13 +50,13 @@ export default function CartPage() {
   }
 
   return (
-    <div className="bg-[#F8F6F2] min-h-screen">
+    <div className="bg-beige-100 min-h-screen">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-24">
         {/* HEADER */}
         <div className="mb-16">
           <button
             onClick={() => router.back()}
-            className="text-sm text-[#2B2D6E] hover:underline mb-5"
+            className="text-sm text-primary-600 hover:underline mb-5"
           >
             ← Continue Shopping
           </button>
@@ -73,11 +73,11 @@ export default function CartPage() {
               return (
                 <div
                   key={item.id + item.size}
-                  className="bg-white rounded-2xl p-6 border border-[#E9E2D8] shadow-sm hover:shadow-md transition"
+                  className="bg-white rounded-2xl p-6 border border-beige-500 shadow-sm hover:shadow-md transition"
                 >
                   <div className="flex flex-col md:flex-row gap-8">
                     {/* IMAGE */}
-                    <div className="relative w-full md:w-36 h-36 rounded-xl overflow-hidden bg-[#F4F1EB]">
+                    <div className="relative w-full md:w-36 h-36 rounded-xl overflow-hidden bg-beige-350">
                       <Image
                         src={item.image}
                         alt={item.name}
@@ -100,7 +100,7 @@ export default function CartPage() {
 
                         {/* QUANTITY */}
                         <div className="flex items-center gap-4">
-                          <div className="flex items-center bg-[#F4F1EB] rounded-full overflow-hidden">
+                          <div className="flex items-center bg-beige-350 rounded-full overflow-hidden">
                             <button
                               onClick={() =>
                                 dispatch(
@@ -110,7 +110,7 @@ export default function CartPage() {
                                   }),
                                 )
                               }
-                              className="px-4 py-2 hover:bg-[#EAE4DA] transition"
+                              className="px-4 py-2 hover:bg-beige-450 transition"
                             >
                               −
                             </button>
@@ -129,7 +129,7 @@ export default function CartPage() {
                                   }),
                                 )
                               }
-                              className="px-4 py-2 hover:bg-[#EAE4DA] transition"
+                              className="px-4 py-2 hover:bg-beige-450 transition"
                             >
                               +
                             </button>
@@ -153,7 +153,7 @@ export default function CartPage() {
 
                       {/* RIGHT PRICE */}
                       <div className="text-right">
-                        <p className="text-xl font-bold text-[#2B2D6E]">
+                        <p className="text-xl font-bold text-primary-600">
                           {formatPrice(item.price * item.quantity)}
                         </p>
 
@@ -185,7 +185,7 @@ export default function CartPage() {
 
           {/* ================= SUMMARY ================= */}
 
-          <div className="bg-white rounded-2xl p-8 border top-32 sticky border-[#E9E2D8] shadow-lg">
+          <div className="bg-white rounded-2xl p-8 border top-32 sticky border-beige-500 shadow-lg">
             <h2 className="text-xl font-semibold mb-8">Order Summary</h2>
 
             <div className="flex justify-between text-sm mb-4">
@@ -205,11 +205,11 @@ export default function CartPage() {
               <span className="text-green-600 font-medium">Free</span>
             </div>
 
-            <div className="border-t border-[#E9E2D8] my-6" />
+            <div className="border-t border-beige-500 my-6" />
 
             <div className="flex justify-between items-center text-2xl font-bold">
               <span>Total</span>
-              <span className="text-[#2B2D6E]">{formatPrice(total)}</span>
+              <span className="text-primary-600">{formatPrice(total)}</span>
             </div>
 
             <p className="text-xs text-gray-400 mt-6">
@@ -218,8 +218,8 @@ export default function CartPage() {
 
             <button
               onClick={() => router.push(`/${locale}/checkout`)}
-              className="w-full mt-8 bg-[#2B2D6E] text-white py-4 rounded-xl
-                  hover:bg-[#1E204F] transition duration-300
+              className="w-full mt-8 bg-primary-600 text-white py-4 rounded-xl
+                  hover:bg-primary-700 transition duration-300
                   shadow-md hover:shadow-lg text-lg font-medium"
             >
               Proceed to Checkout
