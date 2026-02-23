@@ -1,9 +1,9 @@
-import Button from "@/components/ui/Button";
 import FinalCTA from "@/components/sections/FinalCTA";
 import ProductsSection from "@/components/sections/ProductsSection";
 import TrustStrip from "@/components/sections/TrustStrip";
 import HeroSection from "@/components/sections/HeroSection";
-import FeaturesSection from "@/components/sections/FeaturesSection";
+import CategoriesSection from "@/components/sections/CategoriesSection";
+import WhyLitmadSection from "@/components/sections/WhyLitmadSection";
 
 export default function Home() {
   return (
@@ -13,10 +13,10 @@ export default function Home() {
 
       {/* ================= TRUST STRIP ================= */}
       <TrustStrip />
-
+      <CategoriesSection />
       {/* ================= PRODUCTS SECTION ================= */}
       <ProductsSection />
-
+      <WhyLitmadSection />
       {/* ================= FINAL CTA ================= */}
       <FinalCTA />
     </div>

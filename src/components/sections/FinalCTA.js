@@ -1,18 +1,22 @@
+"use client";
+
 import Button from "../ui/Button";
 
 export default function FinalCTA() {
   return (
-    <section className="py-40 text-center bg-[#F3EEE6]">
-      <h3 className="text-5xl font-semibold">Invest in Better Sleep</h3>
+    <section className="bg-white py-28">
+      <div className="max-w-6xl mx-auto px-8 text-center">
+        <h3 className="text-4xl font-semibold mb-6">Invest in Better Sleep</h3>
 
-      <p className="mt-6 text-[#6A6A6A] max-w-xl mx-auto">
-        Discover a new standard of rest with Litmad’s precision-crafted mattress
-        collection.
-      </p>
+        <p className="text-[#6A6A6A] max-w-2xl mx-auto leading-relaxed mb-10">
+          Experience the precision, comfort, and durability that define LITMAD.
+          Your body deserves restorative sleep — every night.
+        </p>
 
-      <Button variant="gold" size="lg" className="mt-12">
-        Start Your Journey
-      </Button>
+        <Button variant="gold" size="lg">
+          Start Your Journey
+        </Button>
+      </div>
     </section>
   );
 }

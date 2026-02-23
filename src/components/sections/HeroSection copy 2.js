@@ -14,7 +14,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative pt-40 pb-40 bg-[#F3EEE6] overflow-hidden">
+    <section className="relative pt-56 pb-40 bg-[#F3EEE6] overflow-hidden">
       {/* Soft Background Accent */}
       <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-[#EADFD2] rounded-full blur-[140px] opacity-60" />
 
