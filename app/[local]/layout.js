@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${headingFont.variable} ${bodyFont.variable} antialiased bg-[#F5EFE6] text-[#1E1E1E] transition-colors duration-300`}
+        className={`${headingFont.variable} ${bodyFont.variable} antialiased bg-beige-300 text-text-primary transition-colors duration-300`}
       >
         <Providers>
           <Header />

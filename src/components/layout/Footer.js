@@ -1,86 +1,155 @@
 "use client";
 
-import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
+import {
+  FiPhone,
+  FiMail,
+  FiMapPin,
+  FiInstagram,
+  FiFacebook,
+} from "react-icons/fi";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export default function Footer() {
-  return (
-    <footer className="bg-white border-t border-[#E5DDD2] pt-20">
-      {/* ================= MAIN FOOTER GRID ================= */}
-      <div className="max-w-7xl mx-auto px-8 pb-16 grid md:grid-cols-4 gap-12">
-        {/* BRAND */}
-        <div className="space-y-5">
-          <h3 className="text-2xl font-semibold text-[#1C1C1C]">LITMAD</h3>
+  const params = useParams();
+  const locale = params?.locale || "en";
 
-          <p className="text-sm text-[#7A7A7A] leading-relaxed max-w-xs">
-            Precision-crafted mattresses designed for restorative comfort and
-            long-term durability.
+  return (
+    <footer className="relative bg-beige-300 border-t border-beige-700 pt-28 shadow-[0_-20px_60px_rgba(0,0,0,0.05)]">
+      {/* Top separator glow */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-primary-600/10" />
+
+      <div className="max-w-7xl mx-auto px-8 pb-24 grid md:grid-cols-4 gap-20">
+        {/* BRAND */}
+        <div className="space-y-7">
+          <h3 className="text-3xl font-semibold tracking-tight text-text-primary">
+            LITMAD
+          </h3>
+
+          <p className="text-sm leading-relaxed text-text-body max-w-xs">
+            Precision-crafted mattresses designed for restorative comfort,
+            structured support, and long-term durability.
           </p>
+
+          <div className="flex gap-5 pt-3">
+            <FiInstagram className="text-primary-600 hover:text-primary-500 hover:scale-110 transition duration-300 cursor-pointer" />
+            <FiFacebook className="text-primary-600 hover:text-primary-500 hover:scale-110 transition duration-300 cursor-pointer" />
+          </div>
         </div>
 
         {/* SHOP */}
         <div>
-          <h4 className="font-semibold mb-6 text-[#1C1C1C]">Shop</h4>
+          <h4 className="text-xs font-semibold uppercase tracking-[0.2em] mb-8 text-text-muted">
+            Shop
+          </h4>
 
-          <ul className="space-y-3 text-sm text-[#7A7A7A]">
+          <ul className="space-y-5 text-sm text-text-body">
             <li>
-              <Link href="en/mattresses">Mattresses</Link>
+              <Link
+                href={`/${locale}/mattresses`}
+                className="hover:text-primary-600 transition"
+              >
+                Mattresses
+              </Link>
             </li>
             <li>
-              <Link href="en#collections">Collections</Link>
+              <Link
+                href={`/${locale}#collections`}
+                className="hover:text-primary-600 transition"
+              >
+                Collections
+              </Link>
             </li>
             <li>
-              <Link href="/offers">Special Offers</Link>
+              <Link
+                href={`/${locale}/cart`}
+                className="hover:text-primary-600 transition"
+              >
+                Cart
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* COMPANY */}
         <div>
-          <h4 className="font-semibold mb-6 text-[#1C1C1C]">Company</h4>
+          <h4 className="text-xs font-semibold uppercase tracking-[0.2em] mb-8 text-text-muted">
+            Company
+          </h4>
 
-          <ul className="space-y-3 text-sm text-[#7A7A7A]">
+          <ul className="space-y-5 text-sm text-text-body">
             <li>
-              <Link href="/about">About Us</Link>
+              <Link
+                href={`/${locale}`}
+                className="hover:text-primary-600 transition"
+              >
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="en/contact">Contact</Link>
+              <Link
+                href={`/${locale}/contact`}
+                className="hover:text-primary-600 transition"
+              >
+                Contact
+              </Link>
             </li>
             <li>
-              <Link href="/delivery">Delivery</Link>
-            </li>
-            <li>
-              <Link href="/privacy">Privacy Policy</Link>
+              <Link
+                href={`/${locale}/checkout`}
+                className="hover:text-primary-600 transition"
+              >
+                Checkout
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* CONTACT */}
         <div>
-          <h4 className="font-semibold mb-6 text-[#1C1C1C]">Contact</h4>
+          <h4 className="text-xs font-semibold uppercase tracking-[0.2em] mb-8 text-text-muted">
+            Contact
+          </h4>
 
-          <div className="space-y-4 text-sm text-[#7A7A7A]">
-            <div className="flex items-center gap-3">
-              <FiPhone className="text-[#2B2D6E]" />
+          <div className="space-y-6 text-sm text-text-body">
+            <div className="flex items-center gap-4">
+              <FiPhone className="text-primary-600" />
               <span>+213 000 000 000</span>
             </div>
 
-            <div className="flex items-center gap-3">
-              <FiMail className="text-[#2B2D6E]" />
+            <div className="flex items-center gap-4">
+              <FiMail className="text-primary-600" />
               <span>contact@litmad.com</span>
             </div>
 
-            <div className="flex items-center gap-3">
-              <FiMapPin className="text-[#2B2D6E]" />
+            <div className="flex items-center gap-4">
+              <FiMapPin className="text-primary-600" />
               <span>Algiers, Algeria</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ================= BOTTOM STRIP ================= */}
-      <div className="border-t border-[#E5DDD2] py-8 text-center text-sm text-[#8A857D]">
-        © {new Date().getFullYear()} Litmad. All rights reserved.
+      {/* Bottom strip */}
+      <div className="border-t border-beige-700/60 py-12">
+        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-text-soft">
+          <p>© {new Date().getFullYear()} Litmad. All rights reserved.</p>
+
+          <div className="flex gap-10">
+            <Link
+              href={`/${locale}/privacy`}
+              className="hover:text-primary-600 transition"
+            >
+              Privacy
+            </Link>
+            <Link
+              href={`/${locale}/terms`}
+              className="hover:text-primary-600 transition"
+            >
+              Terms
+            </Link>
+          </div>
+        </div>
       </div>
     </footer>
   );
