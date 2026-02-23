@@ -37,7 +37,7 @@ export default function Pagination({ totalPages, page, dispatch }) {
             onClick={() => goToPage(pageNumber)}
             className={`w-10 h-10 rounded-full text-sm transition ${
               page === pageNumber
-                ? "bg-[#2B2D6E] text-white shadow-md"
+                ? "bg-primary-600 text-white shadow-md"
                 : "border border-[#DDD] hover:bg-[#EEE]"
             }`}
           >

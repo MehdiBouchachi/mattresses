@@ -14,24 +14,26 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative pt-40 pb-40 bg-[#F3EEE6] overflow-hidden">
+    <section className="relative pt-40 pb-40 bg-[var(--color-beige-300)] overflow-hidden">
       {/* Soft Background Accent */}
-      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-[#EADFD2] rounded-full blur-[140px] opacity-60" />
+      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-[var(--color-beige-400)] rounded-full blur-[140px] opacity-60" />
 
       <div className="relative max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-28 items-center">
         {/* LEFT CONTENT */}
         <div className="space-y-10">
-          <span className="uppercase tracking-[0.4em] text-xs text-[#C6A75E] font-medium">
+          <span className="uppercase tracking-[0.4em] text-xs text-[var(--color-accent-400)] font-medium">
             Premium Sleep Experience
           </span>
 
           <h1 className="text-6xl font-semibold leading-[1.05] tracking-tight">
             Designed for
             <br />
-            <span className="text-[#2B2D6E]">Deep, Restful Sleep</span>
+            <span className="text-[var(--color-primary-600)]">
+              Deep, Restful Sleep
+            </span>
           </h1>
 
-          <p className="text-lg text-[#5F5F5F] max-w-lg leading-relaxed">
+          <p className="text-lg text-[var(--color-text-500)] max-w-lg leading-relaxed">
             Precision-crafted mattresses engineered with breathable layers,
             adaptive support systems, and refined materials — built to restore
             your body night after night.
@@ -41,8 +43,8 @@ export default function HeroSection() {
             <Button
               size="lg"
               onClick={() => router.push(`/${locale}/mattresses`)}
-              className="bg-[#2B2D6E] text-white 
-              hover:bg-[#1E2052]
+              className="bg-[var(--color-primary-600)] text-[var(--color-primary-50)] 
+              hover:bg-[var(--color-primary-700)]
               shadow-[0_18px_40px_rgba(43,45,110,0.25)]
               px-10"
             >
@@ -53,7 +55,7 @@ export default function HeroSection() {
               variant="secondary"
               size="lg"
               onClick={handleScrollToCollection}
-              className="border-[#2B2D6E] text-[#2B2D6E]"
+              className="border-[var(--color-primary-600)] text-[var(--color-primary-600)]"
             >
               View Collection
             </Button>
@@ -71,10 +73,10 @@ export default function HeroSection() {
 
           {/* Floating Badge */}
           <div
-            className="absolute -bottom-6 -left-6 bg-white px-6 py-4 rounded-2xl 
+            className="absolute -bottom-6 -left-6 bg-[var(--color-primary-50)] px-6 py-4 rounded-2xl 
             shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
           >
-            <p className="text-sm font-semibold text-[#2B2D6E]">
+            <p className="text-sm font-semibold text-[var(--color-primary-600)]">
               Orthopedic Support
             </p>
           </div>

@@ -35,14 +35,14 @@ function ProductCard({ product }) {
       className={`group bg-white rounded-[26px] border transition-all duration-300 overflow-hidden flex flex-col
         ${
           hasDiscount
-            ? "border-[#2B2D6E]/40 shadow-lg"
-            : "border-[#E9E2D8] hover:border-[#D6CDC0]"
+            ? "border-primary-600/40 shadow-lg"
+            : "border-beige-500 hover:border-beige-800"
         }
       `}
     >
       {/* Accent bar */}
       {hasDiscount && (
-        <div className="h-[3px] w-full bg-gradient-to-r from-[#2B2D6E] to-[#4F52A3]" />
+        <div className="h-[3px] w-full bg-gradient-to-r from-primary-600 to-[#4F52A3]" />
       )}
 
       {/* IMAGE */}
@@ -56,7 +56,7 @@ function ProductCard({ product }) {
         />
 
         {hasDiscount && isAvailable && (
-          <div className="absolute top-4 right-4 bg-[#2B2D6E] text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-md">
+          <div className="absolute top-4 right-4 bg-primary-600 text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-md">
             -{discount}%
           </div>
         )}
@@ -72,7 +72,7 @@ function ProductCard({ product }) {
 
       {/* CONTENT */}
       <div className="p-8 flex flex-col flex-grow">
-        <p className="text-xs uppercase tracking-wider text-[#9A8F82] mb-3">
+        <p className="text-xs uppercase tracking-wider text-text-subtle mb-3">
           {category}
         </p>
 
@@ -80,30 +80,30 @@ function ProductCard({ product }) {
           {name}
         </h3>
 
-        <p className="text-sm text-[#6E6A64] mb-8 leading-relaxed">
+        <p className="text-sm text-text-muted mb-8 leading-relaxed">
           {description}
         </p>
 
-        <div className="border-t border-[#EEE7DC] mb-6"></div>
+        <div className="border-t border-beige-200 mb-6"></div>
 
         {/* PRICE + CTA */}
         <div className="mt-auto flex items-end justify-between gap-6">
           <div className="flex flex-col min-w-[150px]">
-            <span className="text-xs text-[#9A8F82] uppercase tracking-wider mb-1">
+            <span className="text-xs text-text-subtle uppercase tracking-wider mb-1">
               Price
             </span>
 
             {hasDiscount ? (
               <>
-                <span className="text-2xl font-bold text-[#2B2D6E] leading-tight">
+                <span className="text-2xl font-bold text-primary-600 leading-tight">
                   {formatPrice(finalPrice)}
                 </span>
-                <span className="text-sm text-[#A8A29E] line-through mt-2">
+                <span className="text-sm text-text-disabled line-through mt-2">
                   {formatPrice(oldPrice)}
                 </span>
               </>
             ) : (
-              <span className="text-xl font-semibold text-[#2B2D6E]">
+              <span className="text-xl font-semibold text-primary-600">
                 {formatPrice(basePrice)}
               </span>
             )}

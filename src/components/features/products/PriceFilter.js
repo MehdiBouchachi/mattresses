@@ -14,7 +14,7 @@ export default function PriceFilter({ state, dispatch }) {
 
   return (
     <div>
-      <h3 className="text-sm uppercase tracking-[0.25em] text-[#9A8F82] mb-8">
+      <h3 className="text-sm uppercase tracking-[0.25em] text-text-subtle mb-8">
         Price Range
       </h3>
 
@@ -30,8 +30,8 @@ export default function PriceFilter({ state, dispatch }) {
               },
             })
           }
-          className="border border-[#D9D1C6] rounded-lg px-4 py-2 w-full text-sm
-          focus:border-[#2B2D6E] focus:ring-1 focus:ring-[#2B2D6E] outline-none transition"
+          className="border border-beige-700 rounded-lg px-4 py-2 w-full text-sm
+          focus:border-primary-600 focus:ring-1 focus:ring-primary-600 outline-none transition"
         />
 
         <input
@@ -46,18 +46,18 @@ export default function PriceFilter({ state, dispatch }) {
             })
           }
           className="border border-[#D9D1C6] rounded-lg px-4 py-2 w-full text-sm
-          focus:border-[#2B2D6E] focus:ring-1 focus:ring-[#2B2D6E] outline-none transition"
+          focus:border-primary-600 focus:ring-1 focus:ring-primary-600 outline-none transition"
         />
       </div>
 
-      <div className="flex justify-between items-center text-sm text-[#555]">
+      <div className="flex justify-between items-center text-sm text-text-600">
         <span>
           {formatPrice(state.minPrice)} – {formatPrice(state.maxPrice)}
         </span>
 
         <button
           onClick={() => dispatch({ type: "RESET_PRICE" })}
-          className="text-[#2B2D6E] font-medium hover:underline"
+          className="text-primary-600 font-medium hover:underline"
         >
           Reset
         </button>

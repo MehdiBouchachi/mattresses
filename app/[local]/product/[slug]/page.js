@@ -88,32 +88,32 @@ export default function ProductPage() {
     router.push(`/${locale}/checkout`);
   };
   return (
-    <div className="bg-[#F8F6F2]">
+    <div className="bg-beige-100">
       {/* ================= PAGE HEADER ================= */}
       <section className="max-w-7xl mx-auto px-8 pt-28 pb-10">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-[#8C857A] mb-6">
+        <div className="flex items-center gap-2 text-sm text-text-soft mb-6">
           <button
             onClick={() => router.push(`/${locale}`)}
-            className="hover:text-[#2B2D6E] transition"
+            className="hover:text-primary-600 transition"
           >
             Home
           </button>
           <span>/</span>
           <button
             onClick={() => router.push(`/${locale}/mattresses`)}
-            className="hover:text-[#2B2D6E] transition"
+            className="hover:text-primary-600 transition"
           >
             Mattresses
           </button>
           <span>/</span>
-          <span className="text-[#2B2D6E] font-medium">{product.name}</span>
+          <span className="text-primary-600 font-medium">{product.name}</span>
         </div>
 
         {/* Back Button */}
         <button
           onClick={() => router.back()}
-          className="inline-flex items-center gap-2 text-sm text-[#2B2D6E] hover:underline"
+          className="inline-flex items-center gap-2 text-sm text-primary-600 hover:underline"
         >
           ← Back to products
         </button>
@@ -146,8 +146,8 @@ export default function ProductPage() {
                 onClick={() => setSelectedImage(img)}
                 className={`w-24 h-24 rounded-xl overflow-hidden border transition ${
                   selectedImage === img
-                    ? "border-[#2B2D6E]"
-                    : "border-[#E9E2D8]"
+                    ? "border-primary-600text-primary-600"
+                    : "border-beige-500"
                 }`}
               >
                 <img
@@ -161,23 +161,23 @@ export default function ProductPage() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="lg:sticky lg:top-24 self-start bg-white p-12 rounded-[40px] shadow-lg border border-[#E9E2D8]">
+        <div className="lg:sticky lg:top-24 self-start bg-white p-12 rounded-[40px] shadow-lg border border-beige-500">
           <div className="mb-6">
-            <p className="text-xs uppercase tracking-widest text-[#9A8F82] mb-4">
+            <p className="text-xs uppercase tracking-widest text-text-subtle mb-4">
               {product.category} · {product.subcategory}
             </p>
 
-            <h1 className="text-5xl font-semibold leading-tight tracking-tight text-[#1F1F1F]">
+            <h1 className="text-5xl font-semibold leading-tight tracking-tight text-text-heading">
               {product.name}
             </h1>
           </div>
 
-          <p className="text-[#6E6A64] mb-10 leading-relaxed text-lg">
+          <p className="text-text-muted mb-10 leading-relaxed text-lg">
             {product.description}
           </p>
-          <div className="w-16 h-[2px] bg-[#2B2D6E] mb-10 opacity-20"></div>
+          <div className="w-16 h-[2px] bg-primary-600 mb-10 opacity-20"></div>
           {/* PRICE */}
-          <div className="mb-10 border-b border-[#E9E2D8] pb-8">
+          <div className="mb-10 border-b border-beige-500 pb-8">
             {/* Old price */}
             {hasDiscount && (
               <p className="text-base text-gray-400 line-through mb-2">
@@ -189,17 +189,17 @@ export default function ProductPage() {
             <div className="flex items-end gap-4 flex-wrap">
               {/* If quantity = 1 → show unit price big */}
               {quantity === 1 ? (
-                <span className="text-5xl font-bold text-[#2B2D6E] tracking-tight">
+                <span className="text-5xl font-bold text-primary-600 tracking-tight">
                   {formatPrice(discountedUnitPrice)}
                 </span>
               ) : (
                 <>
                   {/* BIG TOTAL */}
-                  <span className="text-5xl font-bold text-[#2B2D6E] tracking-tight">
+                  <span className="text-5xl font-bold text-primary-600 tracking-tight">
                     {formatPrice(totalPrice)}
                   </span>
 
-                  <span className="text-sm text-[#6E6A64] pb-2">
+                  <span className="text-sm text-text-muted pb-2">
                     ({quantity} × {formatPrice(discountedUnitPrice)})
                   </span>
                 </>
@@ -207,7 +207,7 @@ export default function ProductPage() {
 
               {/* Discount badge */}
               {hasDiscount && (
-                <span className="text-xs font-medium bg-[#2B2D6E]/10 text-[#2B2D6E] px-3 py-1 rounded-full">
+                <span className="text-xs font-medium bg-primary-600/10 text-primary-600 px-3 py-1 rounded-full">
                   −{discount}%
                 </span>
               )}
@@ -215,7 +215,7 @@ export default function ProductPage() {
 
             {/* Clear unit info */}
             {quantity > 1 && (
-              <p className="text-base text-[#6E6A64] mt-3">
+              <p className="text-base text-text-muted mt-3">
                 Unit price:{" "}
                 <span className="font-medium text-black">
                   {formatPrice(discountedUnitPrice)}
@@ -228,7 +228,7 @@ export default function ProductPage() {
 
           {/* DIMENSIONS */}
           <div className="mb-10">
-            <h3 className="text-sm uppercase tracking-wider text-[#9A8F82] mb-4">
+            <h3 className="text-sm uppercase tracking-wider text-text-subtle mb-4">
               Select Size
             </h3>
 
@@ -239,8 +239,8 @@ export default function ProductPage() {
                   onClick={() => setSelectedDimension(dim)}
                   className={`px-6 py-3 rounded-xl border transition ${
                     selectedDimension.size === dim.size
-                      ? "bg-[#2B2D6E] text-white border-[#2B2D6E]"
-                      : "border-[#D9D1C6]"
+                      ? "bg-primary-600  text-white border-primary-600 "
+                      : "border-beige-700"
                   }`}
                 >
                   {dim.size}
@@ -251,7 +251,7 @@ export default function ProductPage() {
 
           {/* QUANTITY (Improved) */}
           <div className="mb-10">
-            <h3 className="text-sm uppercase tracking-wider text-[#9A8F82] mb-4">
+            <h3 className="text-sm uppercase tracking-wider text-text-subtle mb-4">
               Quantity
             </h3>
 
@@ -283,7 +283,7 @@ export default function ProductPage() {
 
             <div className="relative h-2 bg-gray-200 rounded-full">
               <div
-                className="absolute h-2 bg-[#2B2D6E] rounded-full"
+                className="absolute h-2 bg-primary-600 rounded-full"
                 style={{
                   width: `${Math.min(10, Math.max(0, firmness)) * 10}%`,
                 }}
@@ -294,7 +294,7 @@ export default function ProductPage() {
             {/* PRIMARY ACTION */}
             <button
               onClick={handleCheckout}
-              className="w-full bg-[#2B2D6E] text-white py-5 rounded-2xl text-lg font-medium transition-all duration-300 hover:bg-[#1E204F] shadow-lg hover:shadow-xl"
+              className="w-full bg-primary-600  text-white py-5 rounded-2xl text-lg font-medium transition-all duration-300 hover:bg-primary-700 shadow-lg hover:shadow-xl"
             >
               Buy Now
             </button>
@@ -313,12 +313,12 @@ export default function ProductPage() {
                   }),
                 )
               }
-              className="w-full border border-[#2B2D6E] text-[#2B2D6E] py-4 rounded-2xl transition hover:bg-[#F4F3FF]"
+              className="w-full border border-primary-600  py-4 rounded-2xl transition hover:bg-[#F4F3FF]"
             >
               Add to Cart
             </button>
 
-            <div className="pt-4 border-t border-[#E9E2D8] text-sm text-[#6E6A64] text-center">
+            <div className="pt-4 border-t border-beige-500 text-sm text-text-muted text-center">
               Free delivery • 10-year warranty • Secure checkout
             </div>
           </div>
@@ -327,7 +327,7 @@ export default function ProductPage() {
 
       {/* TECH SPECS */}
       {technicalSpecs.length > 0 && (
-        <section className="max-w-7xl mx-auto px-8 py-24 border-t border-[#E9E2D8]">
+        <section className="max-w-7xl mx-auto px-8 py-24 border-t border-beige-500">
           <h2 className="text-4xl font-semibold mb-14">
             Technical Specifications
           </h2>
@@ -339,7 +339,7 @@ export default function ProductPage() {
                 className="flex justify-between border-b pb-5 text-lg"
               >
                 <span>{spec.label}</span>
-                <span className="text-[#6E6A64]">{spec.value}</span>
+                <span className="text-text-muted">{spec.value}</span>
               </div>
             ))}
           </div>
@@ -348,7 +348,7 @@ export default function ProductPage() {
 
       {/* FAQ */}
       {faq.length > 0 && (
-        <section className="max-w-5xl mx-auto px-8 py-24 border-t border-[#E9E2D8]">
+        <section className="max-w-5xl mx-auto px-8 py-24 border-t border-beige-500">
           <h2 className="text-4xl font-semibold mb-14">
             Frequently Asked Questions
           </h2>
@@ -357,7 +357,7 @@ export default function ProductPage() {
             {faq.map((item, i) => (
               <div
                 key={i}
-                className="border border-[#E9E2D8] rounded-2xl p-8 cursor-pointer"
+                className="border border-beige-500 rounded-2xl p-8 cursor-pointer"
                 onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
               >
                 <h4 className="font-semibold text-lg mb-2">{item.question}</h4>
@@ -368,7 +368,7 @@ export default function ProductPage() {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="text-[#6E6A64]"
+                      className="text-text-muted"
                     >
                       {item.answer}
                     </motion.p>

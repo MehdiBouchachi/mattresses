@@ -7,7 +7,7 @@ import WhyLitmadSection from "@/components/sections/WhyLitmadSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#F3EEE6] text-[#1C1C1C]">
+    <div className="min-h-screen bg-[var(--color-beige-300)] text-[var(--color-text-primary)]">
       {/* ================= HERO ================= */}
       <HeroSection />
 

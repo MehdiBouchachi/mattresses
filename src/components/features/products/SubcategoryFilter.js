@@ -7,7 +7,7 @@ export default function SubcategoryFilter({ state, dispatch }) {
 
   return (
     <div>
-      <h3 className="text-sm uppercase tracking-[0.25em] text-[#9A8F82] mb-8">
+      <h3 className="text-sm uppercase tracking-[0.25em] text-text-subtle mb-8">
         Subcategory
       </h3>
 
@@ -16,8 +16,8 @@ export default function SubcategoryFilter({ state, dispatch }) {
           onClick={() => dispatch({ type: "SET_SUBCATEGORY", payload: "all" })}
           className={`w-full text-sm text-left px-4 py-2 rounded-lg transition-all duration-200 ${
             state.subcategory === "all"
-              ? "bg-[#E9E8F8] text-[#2B2D6E] font-medium"
-              : "text-[#444] hover:bg-[#F2EFE9]"
+              ? "bg-primary-50 text-primary-600 font-medium"
+              : "text-text-600 hover:bg-beige-550"
           }`}
         >
           All
@@ -29,8 +29,8 @@ export default function SubcategoryFilter({ state, dispatch }) {
             onClick={() => dispatch({ type: "SET_SUBCATEGORY", payload: sub })}
             className={`w-full text-sm text-left px-4 py-2 rounded-lg capitalize transition-all duration-200 ${
               state.subcategory === sub
-                ? "bg-[#E9E8F8] text-[#2B2D6E] font-medium"
-                : "text-[#444] hover:bg-[#F2EFE9]"
+                ? "bg-primary-50 text-primary-600 font-medium"
+                : "text-text-600 hover:bg-beige-550"
             }`}
           >
             {sub}

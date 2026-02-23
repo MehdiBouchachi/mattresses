@@ -12,11 +12,114 @@ body {
 }
 
 @theme {
-  --color-brand-primary: #2b2d6e;
-  --color-brand-beige: #f5efe6;
-  --color-brand-sand: #d6cfc7;
-  --color-brand-gold: #c6a75e;
-  --color-brand-charcoal: #1e1e1e;
+  /* ======================================================
+   LITMAD DESIGN SYSTEM
+   ====================================================== */
+
+  /* ======================================================
+   NEUTAL SCALE (WARM BEIGE)
+   ====================================================== */
+
+  --color-beige-50: #faf9f7;
+  --color-beige-100: #f8f6f2;
+  --color-beige-150: #f9f7f3;
+  --color-beige-200: #f7f3ec;
+  --color-beige-300: #f3eee6;
+  --color-beige-350: #f4f1eb;
+  --color-beige-400: #eadfd2;
+  --color-beige-500: #e9e2d8;
+  --color-beige-550: #f2efe9;
+  --color-beige-600: #e6ded3;
+  --color-beige-650: #e0dbd3;
+  --color-beige-700: #d9d1c6;
+  --color-beige-800: #d6cdc0;
+  --color-beige-900: #cfc6ba;
+
+  /* ======================================================
+     BRAND PRIMARY (INDIGO)
+     ====================================================== */
+
+  --color-primary-50: #f4f3ff;
+  --color-primary-100: #e9e8f8;
+  --color-primary-200: #dcddf5;
+  --color-primary-300: #bfc2ec;
+  --color-primary-400: #9fa4dd;
+  --color-primary-500: #4f52a3;
+  --color-primary-600: #2b2d6e;
+  --color-primary-700: #1e204f;
+  --color-primary-800: #181a40;
+  --color-primary-900: #12132f;
+
+  /* ======================================================
+     ACCENT GOLD
+     ====================================================== */
+
+  --color-accent-100: #f7e8c6;
+  --color-accent-200: #ebd9a6;
+  --color-accent-300: #d9c382;
+  --color-accent-400: #c6a75e;
+  --color-accent-500: #b8923c;
+
+  /* ======================================================
+     TEXT COLORS
+     ====================================================== */
+  --color-text-500: #5f5f5f;
+  --color-text-600: #444;
+  --color-text-primary: #1c1c1c;
+  --color-text-heading: #1f1f1f;
+  --color-text-body: #6a6a6a;
+  --color-text-muted: #6e6a64;
+  --color-text-soft: #8c857a;
+  --color-text-subtle: #9a8f82;
+  --color-text-disabled: #a8a29e;
+
+  /* ======================================================
+     STATUS COLORS
+     ====================================================== */
+
+  --color-success-50: #ecfdf5;
+  --color-success-100: #d1fae5;
+  --color-success-500: #10b981;
+  --color-success-600: #059669;
+
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #f59e0b;
+
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+
+  /* ======================================================
+     SURFACE BACKGROUNDS
+     ====================================================== */
+
+  /* ======================================================
+     BORDERS
+     ====================================================== */
+
+  /* ======================================================
+     SHADOWS
+     ====================================================== */
+
+  --shadow-primary: 0 18px 40px rgba(43, 45, 110, 0.25);
+
+  /* ======================================================
+     GRADIENTS
+     ====================================================== */
+
+  /* ======================================================
+     RADIUS SYSTEM
+     ====================================================== */
+
+  /* ======================================================
+     TRANSITIONS
+     ====================================================== */
+
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
 }
 h1,
 h2,

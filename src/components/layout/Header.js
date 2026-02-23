@@ -61,7 +61,7 @@ export default function Header() {
             {count > 0 && (
               <span
                 className="absolute -top-2 -right-2 
-                           bg-[#2B2D6E] text-white 
+                           bg-primary-600 text-primary-50 
                            text-[10px] px-2 py-[2px] 
                            rounded-full font-medium"
               >

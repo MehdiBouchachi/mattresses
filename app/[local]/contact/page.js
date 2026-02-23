@@ -5,17 +5,17 @@ import Button from "@/components/ui/Button";
 
 export default function ContactPage() {
   return (
-    <main className="bg-[#F3EEE6] min-h-screen">
+    <main className="bg-[var(--color-beige-300)] min-h-screen">
       {/* ================= HERO ================= */}
       <section className="relative pt-40 pb-20 text-center overflow-hidden">
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#EADFD2] rounded-full blur-[160px] opacity-60" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[var(--color-beige-400)] rounded-full blur-[160px] opacity-60" />
 
         <div className="relative max-w-3xl mx-auto px-8">
           <h1 className="text-4xl font-semibold tracking-tight mb-5">
             Let’s Begin the Conversation
           </h1>
 
-          <p className="text-base text-[#6A6A6A] leading-relaxed">
+          <p className="text-base text-[var(--color-text-subtle)] leading-relaxed">
             Whether you have questions about comfort, materials, or delivery —
             our team is ready to assist you.
           </p>
@@ -26,7 +26,7 @@ export default function ContactPage() {
       <section className="pb-28">
         <div className="max-w-6xl mx-auto px-8">
           <div
-            className="bg-white rounded-[48px] 
+            className="bg-[var(--color-beige-50)] rounded-[48px] 
             shadow-[0_50px_120px_rgba(0,0,0,0.06)]
             p-14 grid md:grid-cols-2 gap-16"
           >
@@ -41,7 +41,7 @@ export default function ContactPage() {
 
                 <Button
                   size="lg"
-                  className="w-full bg-[#2B2D6E] text-white 
+                  className="w-full bg-[#2B2D6E] text-[var(--color-beige-50)] 
                   hover:bg-[#1E2052] 
                   shadow-[0_18px_40px_rgba(43,45,110,0.25)]"
                 >
@@ -51,7 +51,7 @@ export default function ContactPage() {
             </div>
 
             {/* RIGHT INFO */}
-            <div className="space-y-10 border-l border-[#EFE8DF] pl-12">
+            <div className="space-y-10 border-l border-[var(--color-beige-500)] pl-12">
               <ContactItem
                 icon={<FiPhone />}
                 title="Phone"
@@ -88,12 +88,14 @@ export default function ContactPage() {
 function FormField({ label, type = "text" }) {
   return (
     <div>
-      <label className="text-sm text-[#6A6A6A] block mb-2">{label}</label>
+      <label className="text-sm text-[var(--color-text-subtle)] block mb-2">
+        {label}
+      </label>
       <input
         type={type}
-        className="w-full border border-[#E6DED3] rounded-xl px-5 py-3 text-sm 
-        focus:outline-none focus:ring-2 focus:ring-[#2B2D6E]/20 
-        focus:border-[#2B2D6E] transition"
+        className="w-full border border-[var(--color-beige-300)] rounded-xl px-5 py-3 text-sm 
+        focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-600)]/20 
+        focus:border-[var(--color-primary-600)] transition"
       />
     </div>
   );
@@ -102,12 +104,14 @@ function FormField({ label, type = "text" }) {
 function FormTextarea({ label }) {
   return (
     <div>
-      <label className="text-sm text-[#6A6A6A] block mb-2">{label}</label>
+      <label className="text-sm text-[var(--color-text-subtle)] block mb-2">
+        {label}
+      </label>
       <textarea
         rows="5"
-        className="w-full border border-[#E6DED3] rounded-xl px-5 py-3 text-sm 
-        focus:outline-none focus:ring-2 focus:ring-[#2B2D6E]/20 
-        focus:border-[#2B2D6E] transition"
+        className="w-full border border-[var(--color-beige-600)] rounded-xl px-5 py-3 text-sm 
+        focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-600)]/20 
+        focus:border-[var(--color-primary-600)] transition"
       />
     </div>
   );
@@ -119,15 +123,17 @@ function ContactItem({ icon, title, text }) {
   return (
     <div className="flex items-start gap-5">
       <div
-        className="w-11 h-11 rounded-full bg-[#2B2D6E]/10 
-        flex items-center justify-center text-[#2B2D6E] text-lg"
+        className="w-11 h-11 rounded-full bg-[var(--color-primary-100)] 
+        flex items-center justify-center text-[var(--color-primary-600)] text-lg"
       >
         {icon}
       </div>
 
       <div>
         <h3 className="font-semibold mb-1">{title}</h3>
-        <p className="text-[#6A6A6A] text-sm leading-relaxed">{text}</p>
+        <p className="text-[var(--color-text-subtle)] text-sm leading-relaxed">
+          {text}
+        </p>
       </div>
     </div>
   );

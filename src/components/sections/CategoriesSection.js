@@ -15,14 +15,14 @@ const categories = [
 
 export default function CategoriesSection({ locale = "en" }) {
   return (
-    <section className="py-36 bg-[#F9F7F3]">
+    <section className="py-36 bg-[var(--color-beige-150)]">
       <div className="max-w-7xl mx-auto px-8">
         {/* HEADER */}
         <div className="mb-24">
           <h3 className="text-4xl font-semibold tracking-tight">
             Categories We Serve
           </h3>
-          <p className="text-[#6A6A6A] mt-4 max-w-lg text-lg">
+          <p className="text-[var(--color-text-body)] mt-4 max-w-lg text-lg">
             Crafted collections designed to elevate every sleep experience.
           </p>
         </div>
@@ -61,12 +61,12 @@ export default function CategoriesSection({ locale = "en" }) {
               {/* TEXT */}
               <div className="relative z-10 h-full flex items-end p-10">
                 <div>
-                  <h4 className="text-2xl font-semibold text-white tracking-wide">
+                  <h4 className="text-2xl font-semibold text-[var(--color-primary-50)] tracking-wide">
                     {cat.title}
                   </h4>
 
                   <span
-                    className="text-white/80 text-sm mt-2 block opacity-0 
+                    className="text-[var(--color-primary-50)]/80 text-sm mt-2 block opacity-0 
                     group-hover:opacity-100 transition duration-300"
                   >
                     Discover Collection →
