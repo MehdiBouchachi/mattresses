@@ -2,14 +2,14 @@
 import { FiActivity, FiLayers, FiWind, FiMoon } from "react-icons/fi";
 export default function WhyLitmadSection() {
   return (
-    <section className="py-44 bg-[var(--color-beige-300)]">
+    <section className="py-44 bg-beige-300">
       <div className="max-w-7xl mx-auto px-8">
         {/* ===== TOP HEADLINE BLOCK ===== */}
         <div className="text-center mb-24">
           <h2 className="text-4xl font-semibold tracking-tight mb-6">
             Why Choose LITMAD?
           </h2>
-          <p className="text-[var(--color-text-body)] max-w-2xl mx-auto leading-relaxed">
+          <p className="text-text-body max-w-2xl mx-auto leading-relaxed">
             Designed with precision engineering and premium materials, LITMAD
             mattresses redefine comfort, durability, and sleep quality.
           </p>
@@ -37,29 +37,29 @@ export default function WhyLitmadSection() {
 
           {/* RIGHT STATEMENT BLOCK */}
           <div className="space-y-8">
-            <div className="border-l-4 border-[var(--color-primary-600)] pl-6">
+            <div className="border-l-4 border-primary-600 pl-6">
               <h3 className="text-xl font-semibold mb-3">
                 Engineered for Alignment
               </h3>
-              <p className="text-[var(--color-text-body)] leading-relaxed">
+              <p className="text-text-body leading-relaxed">
                 Every layer is structured to support natural spine posture while
                 maintaining adaptive comfort.
               </p>
             </div>
 
-            <div className="border-l-4 border-[var(--color-primary-600)] pl-6">
+            <div className="border-l-4 border-primary-600 pl-6">
               <h3 className="text-xl font-semibold mb-3">Built to Last</h3>
-              <p className="text-[var(--color-text-body)] leading-relaxed">
+              <p className="text-text-body leading-relaxed">
                 High-resilience foam and durable materials preserve shape,
                 performance, and structure over time.
               </p>
             </div>
 
-            <div className="border-l-4 border-[var(--color-primary-600)] pl-6">
+            <div className="border-l-4 border-primary-600 pl-6">
               <h3 className="text-xl font-semibold mb-3">
                 Refined Comfort Experience
               </h3>
-              <p className="text-[var(--color-text-body)] leading-relaxed">
+              <p className="text-text-body leading-relaxed">
                 Breathable construction ensures airflow and optimal hygiene
                 night after night.
               </p>
@@ -91,8 +91,8 @@ export default function WhyLitmadSection() {
             return (
               <div
                 key={i}
-                className="group bg-[var(--color-beige-50)] rounded-3xl p-8 
-        border border-[var(--color-beige-600)]
+                className="group bg-beige-50 rounded-3xl p-8 
+        border border-beige-600
         shadow-[0_15px_40px_rgba(0,0,0,0.04)]
         hover:shadow-[0_25px_60px_rgba(0,0,0,0.08)]
         transition duration-500
@@ -100,11 +100,11 @@ export default function WhyLitmadSection() {
               >
                 <div
                   className="w-14 h-14 mb-6 rounded-full
-                  bg-[var(--color-primary-600)]/10 
+                  bg-primary-600/10 
                   flex items-center justify-center
-                  text-[var(--color-primary-600)] text-xl
-                  group-hover:bg-[var(--color-primary-600)]
-                  group-hover:text-[var(--color-primary-50)]
+                  text-primary-600 text-xl
+                  group-hover:bg-primary-600
+                  group-hover:text-primary-50
                   transition duration-500"
                 >
                   <Icon />
@@ -117,24 +117,24 @@ export default function WhyLitmadSection() {
         </div>
 
         {/* ===== TRUST STRIP ===== */}
-        <div className="grid grid-cols-3 text-center border-t border-[var(--color-beige-650)] pt-10">
+        <div className="grid grid-cols-3 text-center border-t border-beige-650 pt-10">
           <div>
             <p className="text-3xl font-semibold">10+</p>
-            <p className="text-sm text-[var(--color-text-body)] mt-2">
+            <p className="text-sm text-text-body mt-2">
               Years of Expertise
             </p>
           </div>
 
           <div>
             <p className="text-3xl font-semibold">98%</p>
-            <p className="text-sm text-[var(--color-text-body)] mt-2">
+            <p className="text-sm text-text-body mt-2">
               Customer Satisfaction
             </p>
           </div>
 
           <div>
             <p className="text-3xl font-semibold">100%</p>
-            <p className="text-sm text-[var(--color-text-body)] mt-2">
+            <p className="text-sm text-text-body mt-2">
               Premium Materials
             </p>
           </div>

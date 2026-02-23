@@ -3,23 +3,14 @@
 import CategoryFilter from "./CategoryFilter";
 import SubcategoryFilter from "./SubcategoryFilter";
 import PriceFilter from "./PriceFilter";
-import DimensionFilter from "./DimensionFilter";
 
 export default function Filters({ state, dispatch }) {
   return (
     <section className="bg-white border-b border-beige-600">
       <div className="max-w-7xl mx-auto px-8 py-8 grid md:grid-cols-3 gap-16">
-        {/* Column 1 */}
         <CategoryFilter state={state} dispatch={dispatch} />
-
-        {/* Column 2 */}
         <SubcategoryFilter state={state} dispatch={dispatch} />
-
-        {/* Column 3 (Split vertically) */}
-        <div>
-          <PriceFilter state={state} dispatch={dispatch} />
-          <DimensionFilter state={state} dispatch={dispatch} />
-        </div>
+        <PriceFilter state={state} dispatch={dispatch} />
       </div>
     </section>
   );

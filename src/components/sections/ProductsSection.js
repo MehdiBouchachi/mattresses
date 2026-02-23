@@ -22,13 +22,13 @@ function ProductsSection() {
   ].filter(Boolean); // remove undefined if any missing
 
   return (
-    <section className="py-32 bg-[var(--color-beige-150)]" id="collections">
+    <section className="py-32 bg-beige-150" id="collections">
       <div className="max-w-7xl mx-auto px-8">
         {/* HEADER */}
         <div className="flex items-end justify-between mb-20">
           <div>
             <h3 className="text-4xl font-semibold">Our Collection</h3>
-            <p className="text-[var(--color-text-body)] mt-3">
+            <p className="text-text-body mt-3">
               Discover mattresses engineered for every sleep style.
             </p>
           </div>
