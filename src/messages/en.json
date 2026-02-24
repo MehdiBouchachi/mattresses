@@ -1,0 +1,107 @@
+{
+  "home": {
+    "hero": {
+      "badge": "Premium Sleep Experience",
+      "titleLine1": "Designed for",
+      "titleHighlight": "Deep, Restful Sleep",
+      "description": "Precision-crafted mattresses engineered with breathable layers, adaptive support systems, and refined materials — built to restore your body night after night.",
+      "shop": "Shop Mattresses",
+      "collection": "View Collection",
+      "floatingBadge": "Orthopedic Support"
+    },
+    "trust": {
+      "years": {
+        "value": "60+",
+        "label": "Years of Craftsmanship"
+      },
+      "materials": {
+        "value": "Premium",
+        "label": "Materials"
+      },
+      "tech": {
+        "value": "Advanced",
+        "label": "Breathable Technology"
+      },
+      "delivery": {
+        "value": "Nationwide",
+        "label": "Delivery"
+      }
+    },
+    "categories": {
+      "title": "Categories We Serve",
+      "desc": "Crafted collections designed to elevate every sleep experience.",
+      "discover": "Discover Collection"
+    },
+    "products": {
+      "title": "Our Collection",
+      "desc": "Discover mattresses engineered for every sleep style.",
+      "viewAll": "View All",
+      "productCard": {
+        "soldOut": "Sold Out",
+        "price": "Price",
+        "viewProduct": "View Product",
+        "unavailable": "Unavailable"
+      }
+    },
+    "whyLitmad": {
+      "title": "Why Choose LITMAD?",
+      "desc": "Designed with precision engineering and premium materials, LITMAD mattresses redefine comfort, durability, and sleep quality.",
+      "statements": [
+        {
+          "title": "Engineered for Alignment",
+          "desc": "Every layer is structured to support natural spine posture while maintaining adaptive comfort."
+        },
+        {
+          "title": "Built to Last",
+          "desc": "High-resilience foam and durable materials preserve shape, performance, and structure over time."
+        },
+        {
+          "title": "Refined Comfort Experience",
+          "desc": "Breathable construction ensures airflow and optimal hygiene night after night."
+        }
+      ],
+      "benefits": [
+        "Perfect Spine Alignment",
+        "High Resilience Foam",
+        "Breathable Structure",
+        "Motion Isolation"
+      ],
+      "trust": [
+        {
+          "value": "10+",
+          "label": "Years of Expertise"
+        },
+        {
+          "value": "98%",
+          "label": "Customer Satisfaction"
+        },
+        {
+          "value": "100%",
+          "label": "Premium Materials"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Invest in Better Sleep",
+      "desc": "Experience the precision, comfort, and durability that define LITMAD.",
+      "button": "Start Your Journey"
+    }
+  },
+  "mattressesPage": {
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Mattresses",
+    "title": "All Mattresses",
+    "description": "Explore our full product universe engineered for premium comfort.",
+    "showing": "Showing",
+    "products": "products",
+    "filters": {
+      "category": "Categories",
+      "subcategory": "Type",
+      "priceRange": "Your Budget",
+      "dimension": "Size",
+      "all": "All",
+      "allDimensions": "All Sizes",
+      "reset": "Clear"
+    }
+  }
+}

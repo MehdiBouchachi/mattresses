@@ -3,7 +3,7 @@
 import { useRouter, usePathname } from "next/navigation";
 import Button from "../ui/Button";
 
-export default function HeroSection() {
+export default function HeroSection({ translation }) {
   const router = useRouter();
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
@@ -12,6 +12,15 @@ export default function HeroSection() {
     const section = document.getElementById("collections");
     section?.scrollIntoView({ behavior: "smooth" });
   };
+  const {
+    badge,
+    titleLine1,
+    titleHighlight,
+    description,
+    shop,
+    collection,
+    floatingBadge,
+  } = translation?.home?.hero;
 
   return (
     <section className="relative pt-40 pb-40 bg-beige-300 overflow-hidden">
@@ -22,21 +31,17 @@ export default function HeroSection() {
         {/* LEFT CONTENT */}
         <div className="space-y-10">
           <span className="uppercase tracking-[0.4em] text-xs text-accent-400 font-medium">
-            Premium Sleep Experience
+            {/*  Premium Sleep Experience */} {badge}
           </span>
 
           <h1 className="text-6xl font-semibold leading-[1.05] tracking-tight">
-            Designed for
+            {titleLine1}
             <br />
-            <span className="text-primary-600">
-              Deep, Restful Sleep
-            </span>
+            <span className="text-primary-600">{titleHighlight}</span>
           </h1>
 
           <p className="text-lg text-text-500 max-w-lg leading-relaxed">
-            Precision-crafted mattresses engineered with breathable layers,
-            adaptive support systems, and refined materials — built to restore
-            your body night after night.
+            {description}
           </p>
 
           <div className="flex gap-6 pt-6">
@@ -48,7 +53,7 @@ export default function HeroSection() {
               shadow-[0_18px_40px_rgba(43,45,110,0.25)]
               px-10"
             >
-              Shop Mattresses
+              {shop}
             </Button>
 
             <Button
@@ -57,7 +62,7 @@ export default function HeroSection() {
               onClick={handleScrollToCollection}
               className="border-primary-600 text-primary-600"
             >
-              View Collection
+              {collection}
             </Button>
           </div>
         </div>
@@ -77,7 +82,7 @@ export default function HeroSection() {
             shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
           >
             <p className="text-sm font-semibold text-primary-600">
-              Orthopedic Support
+              {floatingBadge}
             </p>
           </div>
         </div>

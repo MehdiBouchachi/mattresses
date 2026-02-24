@@ -2,10 +2,11 @@ import Button from "@/components/ui/Button";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-const formatPrice = (price) =>
-  new Intl.NumberFormat("fr-DZ").format(price) + " DA";
+const formatPrice = (price, locale) =>
+  new Intl.NumberFormat("fr-DZ").format(price) +
+  (locale === "ar" ? " د.ج" : " DA");
 
-function ProductCard({ product }) {
+function ProductCard({ product, translation }) {
   const params = useParams();
   const locale = params?.local;
 
@@ -29,7 +30,7 @@ function ProductCard({ product }) {
   const finalPrice = hasDiscount
     ? Math.round(basePrice * (1 - discount / 100))
     : basePrice;
-
+  const { soldOut, price: priceLabel, viewProduct, unavailable } = translation;
   return (
     <div
       className={`group bg-white rounded-[26px] border transition-all duration-300 overflow-hidden flex flex-col
@@ -64,14 +65,14 @@ function ProductCard({ product }) {
         {!isAvailable && (
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
             <span className="bg-white text-black text-sm px-4 py-2 rounded-full font-medium">
-              Sold Out
+              {soldOut}
             </span>
           </div>
         )}
       </div>
 
       {/* CONTENT */}
-      <div className="p-8 flex flex-col flex-grow">
+      <div className="p-8 flex flex-col grow">
         <p className="text-xs uppercase tracking-wider text-text-subtle mb-3">
           {category}
         </p>
@@ -90,21 +91,21 @@ function ProductCard({ product }) {
         <div className="mt-auto flex items-end justify-between gap-6">
           <div className="flex flex-col min-w-[150px]">
             <span className="text-xs text-text-subtle uppercase tracking-wider mb-1">
-              Price
+              {priceLabel}
             </span>
 
             {hasDiscount ? (
               <>
                 <span className="text-2xl font-bold text-primary-600 leading-tight">
-                  {formatPrice(finalPrice)}
+                  {formatPrice(finalPrice, locale)}
                 </span>
                 <span className="text-sm text-text-disabled line-through mt-2">
-                  {formatPrice(oldPrice)}
+                  {formatPrice(oldPrice, locale)}
                 </span>
               </>
             ) : (
               <span className="text-xl font-semibold text-primary-600">
-                {formatPrice(basePrice)}
+                {formatPrice(basePrice, locale)}
               </span>
             )}
           </div>
@@ -112,14 +113,14 @@ function ProductCard({ product }) {
           <div className="shrink-0">
             {isAvailable ? (
               <Link href={`/${locale}/product/${slug}`}>
-                <Button size="sm">View Product</Button>
+                <Button size="sm">{viewProduct}</Button>
               </Link>
             ) : (
               <button
                 disabled
                 className="px-4 py-2 text-sm rounded-md bg-gray-300 text-gray-600 cursor-not-allowed"
               >
-                Unavailable
+                {unavailable}
               </button>
             )}
           </div>

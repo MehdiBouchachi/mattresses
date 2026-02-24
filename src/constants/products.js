@@ -1,6 +1,6 @@
 /* ================= CATEGORY STRUCTURE ================= */
 
-export const categories = [
+export const categories1 = [
   { name: "Foam", value: "foam", subcategories: ["memory", "orthopedic"] },
   { name: "Spring", value: "spring", subcategories: ["pocket", "bonnell"] },
   { name: "Hybrid", value: "hybrid", subcategories: ["luxury", "cooling"] },
@@ -11,6 +11,112 @@ export const categories = [
   },
 ];
 
+export const categories = [
+  {
+    value: "foam",
+    translations: {
+      en: "Foam",
+      fr: "Mousse",
+      ar: "مراتب إسفنجية",
+    },
+    subcategories: [
+      {
+        value: "memory",
+        translations: {
+          en: "Memory",
+          fr: "Mémoire",
+          ar: "مراتب ميموري فوم",
+        },
+      },
+      {
+        value: "orthopedic",
+        translations: {
+          en: "Orthopedic",
+          fr: "Orthopédique",
+          ar: "مراتب طبية",
+        },
+      },
+    ],
+  },
+  {
+    value: "spring",
+    translations: {
+      en: "Spring",
+      fr: "Ressort",
+      ar: "مراتب بنوابض",
+    },
+    subcategories: [
+      {
+        value: "pocket",
+        translations: {
+          en: "Pocket",
+          fr: "Ressorts ensachés",
+          ar: "نوابض منفصلة",
+        },
+      },
+      {
+        value: "bonnell",
+        translations: {
+          en: "Bonnell",
+          fr: "Bonnell",
+          ar: "نوابض متصلة",
+        },
+      },
+    ],
+  },
+  {
+    value: "hybrid",
+    translations: {
+      en: "Hybrid",
+      fr: "Hybride",
+      ar: "مراتب مختلطة",
+    },
+    subcategories: [
+      {
+        value: "luxury",
+        translations: {
+          en: "Luxury",
+          fr: "Luxe",
+          ar: "تصميم فاخر",
+        },
+      },
+      {
+        value: "cooling",
+        translations: {
+          en: "Cooling",
+          fr: "Refroidissant",
+          ar: "تقنية تبريد",
+        },
+      },
+    ],
+  },
+  {
+    value: "accessories",
+    translations: {
+      en: "Accessories",
+      fr: "Accessoires",
+      ar: "مستلزمات النوم",
+    },
+    subcategories: [
+      {
+        value: "pillow",
+        translations: {
+          en: "Pillow",
+          fr: "Oreiller",
+          ar: "وسائد",
+        },
+      },
+      {
+        value: "protector",
+        translations: {
+          en: "Protector",
+          fr: "Protège-matelas",
+          ar: "واقي المرتبة",
+        },
+      },
+    ],
+  },
+];
 /* ================= PRODUCTS ================= */
 export const products = [
   {

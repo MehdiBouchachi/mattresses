@@ -1,0 +1,107 @@
+{
+  "home": {
+    "hero": {
+      "badge": "L’Art du Sommeil Premium",
+      "titleLine1": "Pensé pour",
+      "titleHighlight": "Un Sommeil Profond et Réparateur",
+      "description": "Des matelas conçus avec exigence, intégrant des matières respirantes, un soutien adaptatif et des finitions soignées — pour accompagner votre corps nuit après nuit.",
+      "shop": "Voir les Matelas",
+      "collection": "Explorer la Collection",
+      "floatingBadge": "Maintien orthopédique"
+    },
+    "trust": {
+      "years": {
+        "value": "60+",
+        "label": "Ans d’expertise"
+      },
+      "materials": {
+        "value": "Matériaux",
+        "label": "Premium"
+      },
+      "tech": {
+        "value": "Technologie",
+        "label": "Respirante Avancée"
+      },
+      "delivery": {
+        "value": "Livraison",
+        "label": "Partout en Algérie"
+      }
+    },
+    "categories": {
+      "title": "Nos Catégories",
+      "desc": "Des collections soigneusement conçues pour sublimer chaque expérience de sommeil.",
+      "discover": "Découvrir la Collection"
+    },
+    "products": {
+      "title": "Notre Collection",
+      "desc": "Découvrez des matelas conçus pour chaque style de sommeil.",
+      "viewAll": "Voir plus",
+      "productCard": {
+        "soldOut": "Rupture de stock",
+        "price": "Prix",
+        "viewProduct": "Voir le produit",
+        "unavailable": "Indisponible"
+      }
+    },
+    "whyLitmad": {
+      "title": "Pourquoi choisir LITMAD ?",
+      "desc": "Conçus avec précision et des matériaux premium, les matelas LITMAD offrent un confort durable et une qualité de sommeil optimale.",
+      "statements": [
+        {
+          "title": "Soutien et alignement du dos",
+          "desc": "Chaque couche est pensée pour maintenir une posture naturelle du dos tout en garantissant un confort adapté."
+        },
+        {
+          "title": "Conçu pour durer",
+          "desc": "Des mousses haute résilience et des matériaux solides qui gardent leur forme et leurs performances dans le temps."
+        },
+        {
+          "title": "Confort respirant",
+          "desc": "Une structure aérée qui favorise la circulation de l’air pour plus d’hygiène et de fraîcheur chaque nuit."
+        }
+      ],
+      "benefits": [
+        "Alignement parfait du dos",
+        "Mousse haute résilience",
+        "Structure respirante",
+        "Indépendance de couchage"
+      ],
+      "trust": [
+        {
+          "value": "10+",
+          "label": "Ans d’expérience"
+        },
+        {
+          "value": "98%",
+          "label": "Clients satisfaits"
+        },
+        {
+          "value": "100%",
+          "label": "Matériaux premium"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Investissez dans un Meilleur Sommeil",
+      "desc": "Découvrez la précision, le confort et la durabilité qui définissent LITMAD.",
+      "button": "Commencer l’Expérience"
+    }
+  },
+  "mattressesPage": {
+    "breadcrumbHome": "Accueil",
+    "breadcrumbCurrent": "Matelas",
+    "title": "Tous nos matelas",
+    "description": "Découvrez toute notre collection conçue pour un confort premium.",
+    "showing": "Affichage de",
+    "products": "produits",
+    "filters": {
+      "category": "Catégories",
+      "subcategory": "Type",
+      "priceRange": "Budget",
+      "dimension": "Taille",
+      "all": "Tout",
+      "allDimensions": "Toutes tailles",
+      "reset": "Effacer"
+    }
+  }
+}

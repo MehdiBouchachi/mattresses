@@ -1,8 +1,15 @@
-import { Playfair_Display, Inter } from "next/font/google";
+import {
+  Playfair_Display,
+  Inter,
+  IBM_Plex_Sans_Arabic,
+} from "next/font/google";
+
 import "@/styles/globals.css";
 import Providers from "../providers";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+
+/* LATIN */
 
 const headingFont = Playfair_Display({
   subsets: ["latin"],
@@ -16,21 +23,33 @@ const bodyFont = Inter({
   variable: "--font-body",
 });
 
-export const metadata = {
-  title: "Litmad – Premium Comfort",
-  description: "Modern mattresses designed for better sleep.",
-};
+/* ARABIC */
 
-export default function RootLayout({ children }) {
+const arabicFont = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-arabic",
+});
+
+export default async function RootLayout({ children, params }) {
+  const { local } = await params;
+  const isArabic = local === "ar";
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={local} dir={isArabic ? "rtl" : "ltr"}>
       <body
-        className={`${headingFont.variable} ${bodyFont.variable} antialiased bg-beige-300 text-text-primary transition-colors duration-300`}
+        className={`
+          ${headingFont.variable}
+          ${bodyFont.variable}
+          ${arabicFont.variable}
+          antialiased
+          bg-beige-300
+          text-text-primary
+        `}
       >
         <Providers>
           <Header />
           {children}
-
           <Footer />
         </Providers>
       </body>

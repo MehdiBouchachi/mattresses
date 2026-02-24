@@ -1,9 +1,10 @@
 "use client";
 
-const formatPrice = (price) =>
-  new Intl.NumberFormat("fr-DZ").format(price) + " DA";
+const formatPrice = (price, locale) =>
+  new Intl.NumberFormat("fr-DZ").format(price) +
+  (locale === "ar" ? " د.ج" : " DA");
 
-export default function PriceFilter({ state, dispatch }) {
+export default function PriceFilter({ state, dispatch, translation, locale }) {
   const formatInput = (value) => {
     const numeric = value.replace(/\s/g, "");
     if (!numeric) return "";
@@ -11,11 +12,11 @@ export default function PriceFilter({ state, dispatch }) {
   };
 
   const parseInput = (value) => Number(value.replace(/\s/g, ""));
-
+  const { priceRange: priceRangeLabel, reset: resetLabel } = translation;
   return (
     <div>
       <h3 className="text-sm uppercase tracking-[0.25em] text-text-subtle mb-8">
-        Price Range
+        {priceRangeLabel}
       </h3>
 
       <div className="flex gap-4 mb-4">
@@ -52,14 +53,15 @@ export default function PriceFilter({ state, dispatch }) {
 
       <div className="flex justify-between items-center text-sm text-text-600">
         <span>
-          {formatPrice(state.minPrice)} – {formatPrice(state.maxPrice)}
+          {formatPrice(state.minPrice, locale)} –{" "}
+          {formatPrice(state.maxPrice, locale)}
         </span>
 
         <button
           onClick={() => dispatch({ type: "RESET_PRICE" })}
           className="text-primary-600 font-medium hover:underline"
         >
-          Reset
+          {resetLabel}
         </button>
       </div>
     </div>

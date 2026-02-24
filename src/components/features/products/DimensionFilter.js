@@ -2,9 +2,10 @@
 
 import { products } from "@/constants/products";
 
-export default function DimensionFilter({ state, dispatch }) {
+export default function DimensionFilter({ state, dispatch, translation }) {
+  const { dimension: dimensionLabel, allDimensions: allLabel } = translation;
   const dimensions = [
-    "all",
+    allLabel,
     ...new Set(
       products.flatMap((p) => p.details?.dimensions?.map((d) => d.size) || []),
     ),
@@ -13,7 +14,7 @@ export default function DimensionFilter({ state, dispatch }) {
   return (
     <div className="mt-10">
       <h3 className="text-sm uppercase tracking-[0.25em] text-text-subtle mb-6">
-        Dimension
+        {dimensionLabel}
       </h3>
 
       <select

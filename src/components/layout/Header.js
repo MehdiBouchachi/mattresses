@@ -4,17 +4,25 @@ import { useSelector } from "react-redux";
 import { selectCartCount } from "@/store/slices/cartSlice";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FiShoppingCart } from "react-icons/fi";
+import { FiShoppingCart, FiChevronDown } from "react-icons/fi";
+import Image from "next/image";
 import Button from "../ui/Button";
+
+const languages = [
+  { code: "en", label: "English" },
+  { code: "fr", label: "Français" },
+  { code: "ar", label: "العربية" },
+];
 
 export default function Header() {
   const count = useSelector(selectCartCount);
   const router = useRouter();
   const pathname = usePathname();
 
-  const [scrolled, setScrolled] = useState(false);
+  const locale = pathname.split("/")[1] || "en";
 
-  const locale = pathname.split("/")[1];
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,23 +33,76 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const switchLanguage = (newLocale) => {
+    const segments = pathname.split("/");
+    segments[1] = newLocale;
+    router.push(segments.join("/"));
+    setOpen(false);
+  };
+
+  const currentLanguage =
+    languages.find((lng) => lng.code === locale)?.label || "English";
+
   return (
     <header
+      dir="ltr"
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/80 backdrop-blur-md shadow-sm" : "bg-transparent"
+        scrolled ? "bg-white/90 backdrop-blur-lg shadow-sm" : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
         {/* LOGO */}
-        <h1
+        <div
           onClick={() => router.push(`/${locale}`)}
-          className="text-3xl font-semibold tracking-[0.12em] cursor-pointer"
+          className="cursor-pointer flex items-center"
         >
-          LITMAD
-        </h1>
+          <Image
+            src="/images/logo.webp"
+            alt="Litmad"
+            width={150}
+            height={45}
+            priority
+            className="object-contain"
+          />
+        </div>
 
-        {/* NAV */}
-        <div className="flex items-center gap-5">
+        {/* RIGHT SIDE */}
+        <div className="flex items-center gap-8 relative">
+          {/* LANGUAGE DROPDOWN */}
+          <div className="relative">
+            <Button
+              variant="secondary"
+              onClick={() => setOpen(!open)}
+              className="flex items-center gap-2 text-sm font-medium 
+                         border transition
+                         "
+            >
+              {currentLanguage}
+              <FiChevronDown
+                className={`transition-transform ${open ? "rotate-180" : ""}`}
+              />
+            </Button>
+
+            {open && (
+              <div className="absolute right-0 mt-2 w-40 bg-white border border-beige-600 rounded-xl shadow-lg overflow-hidden">
+                {languages.map((lng) => (
+                  <button
+                    key={lng.code}
+                    onClick={() => switchLanguage(lng.code)}
+                    className={`w-full text-left px-4 py-3 text-sm hover:bg-beige-300 transition ${
+                      locale === lng.code
+                        ? "bg-primary-50 text-primary-600 font-medium"
+                        : ""
+                    }`}
+                  >
+                    {lng.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* SHOP BUTTON */}
           <Button
             variant="primary"
             size="md"

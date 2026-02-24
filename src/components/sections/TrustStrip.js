@@ -1,41 +1,47 @@
-export default function TrustStrip() {
+export default function TrustStrip({ translation }) {
+  const {
+    years: { value: valueYears, label: labelYears },
+    materials: { value: valueMaterials, label: labelMaterials },
+    tech: { value: valueTech, label: labelTech },
+    delivery: { value: valueDelivery, label: labelDelivery },
+  } = translation.home.trust;
   return (
     <section className="bg-beige-50 border-y border-beige-600">
       <div className="max-w-6xl mx-auto px-8 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 text-center divide-x divide-beige-600">
           <div className="px-6 space-y-3">
             <div className="text-3xl font-semibold text-primary-600">
-              60+
+              {valueYears}
             </div>
             <div className="text-sm tracking-wide text-text-body">
-              Years Craftsmanship
+              {labelYears}
             </div>
           </div>
 
           <div className="px-6 space-y-3">
             <div className="text-3xl font-semibold text-primary-600">
-              Premium
+              {valueMaterials}
             </div>
             <div className="text-sm tracking-wide text-text-body">
-              Materials
+              {labelMaterials}
             </div>
           </div>
 
           <div className="px-6 space-y-3">
             <div className="text-3xl font-semibold text-primary-600">
-              Advanced
+              {valueTech}
             </div>
             <div className="text-sm tracking-wide text-text-body">
-              Breathable Technology
+              {labelTech}
             </div>
           </div>
 
           <div className="px-6 space-y-3">
             <div className="text-3xl font-semibold text-primary-600">
-              Nationwide
+              {valueDelivery}
             </div>
             <div className="text-sm tracking-wide text-text-body">
-              Delivery
+              {labelDelivery}
             </div>
           </div>
         </div>
