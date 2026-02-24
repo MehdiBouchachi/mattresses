@@ -1,4 +1,7 @@
 {
+  "header": {
+    "shopNow": "Acheter"
+  },
   "home": {
     "hero": {
       "badge": "L’Art du Sommeil Premium",

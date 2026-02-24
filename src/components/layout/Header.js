@@ -14,7 +14,7 @@ const languages = [
   { code: "ar", label: "العربية" },
 ];
 
-export default function Header() {
+export default function Header({ translation }) {
   const count = useSelector(selectCartCount);
   const router = useRouter();
   const pathname = usePathname();
@@ -43,6 +43,9 @@ export default function Header() {
   const currentLanguage =
     languages.find((lng) => lng.code === locale)?.label || "English";
 
+  const {
+    header: { shopNow },
+  } = translation || {};
   return (
     <header
       dir="ltr"
@@ -108,7 +111,7 @@ export default function Header() {
             size="md"
             onClick={() => router.push(`/${locale}/mattresses`)}
           >
-            Shop Now
+            {shopNow}
           </Button>
 
           {/* CART */}

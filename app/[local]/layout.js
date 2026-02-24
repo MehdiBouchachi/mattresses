@@ -8,7 +8,7 @@ import "@/styles/globals.css";
 import Providers from "../providers";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-
+import { getTranslations } from "@/lib/i18n";
 /* LATIN */
 
 const headingFont = Playfair_Display({
@@ -34,6 +34,7 @@ const arabicFont = IBM_Plex_Sans_Arabic({
 export default async function RootLayout({ children, params }) {
   const { local } = await params;
   const isArabic = local === "ar";
+  const translation = getTranslations(local);
 
   return (
     <html lang={local} dir={isArabic ? "rtl" : "ltr"}>
@@ -48,7 +49,7 @@ export default async function RootLayout({ children, params }) {
         `}
       >
         <Providers>
-          <Header />
+          <Header translation={translation} />
           {children}
           <Footer />
         </Providers>

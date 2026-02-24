@@ -1,4 +1,8 @@
 {
+  "header": {
+    "shopNow": "Shop Now"
+  },
+
   "home": {
     "hero": {
       "badge": "Premium Sleep Experience",
