@@ -20,15 +20,25 @@ export default function SubcategoryFilter({
 
   return (
     <div dir={isRTL ? "rtl" : "ltr"}>
-      <h3 className="text-xs sm:text-sm uppercase tracking-[0.25em] text-text-subtle mb-4 sm:mb-6">
+      <h3
+        className={`
+          text-xs sm:text-sm
+          mb-4 sm:mb-6
+          text-text-subtle
+          ${isRTL ? "text-right tracking-normal" : "uppercase tracking-[0.25em] text-left"}
+        `}
+      >
         {subcategory}
       </h3>
 
-      <div className="grid grid-cols-2 sm:grid-cols-1 gap-2">
+      <div
+        className={`grid grid-cols-2 sm:grid-cols-1 gap-2   ${isRTL ? "text-right" : ""}`}
+      >
         {/* ALL */}
         <FilterItem
           active={state.subcategory === "all"}
           onClick={() => dispatch({ type: "SET_SUBCATEGORY", payload: "all" })}
+          isRTL={isRTL}
         >
           {all}
         </FilterItem>
@@ -43,6 +53,7 @@ export default function SubcategoryFilter({
                 payload: sub.value,
               })
             }
+            isRTL={isRTL}
           >
             {sub.translations?.[locale] ?? sub.translations?.en ?? sub.value}
           </FilterItem>
@@ -54,7 +65,7 @@ export default function SubcategoryFilter({
 
 /* ================= REUSABLE ITEM ================= */
 
-function FilterItem({ children, active, onClick }) {
+function FilterItem({ children, active, onClick, isRTL }) {
   return (
     <button
       onClick={onClick}
@@ -64,6 +75,7 @@ function FilterItem({ children, active, onClick }) {
         px-4 py-2.5
         rounded-lg
         transition-all duration-200
+        ${isRTL ? "text-right" : "text-left"}
         ${
           active
             ? "bg-primary-50 text-primary-600 font-medium"

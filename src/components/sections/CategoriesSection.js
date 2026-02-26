@@ -70,7 +70,7 @@ export default function CategoriesSection({ locale = "en", translation }) {
     <section className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-beige-50 to-beige-150">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* HEADER */}
-        <div className="mb-12 sm:mb-16 lg:mb-24 text-center lg:text-left">
+        <div className="mb-12 sm:mb-16 lg:mb-24 text-center lg:text-start">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight">
             {title}
           </h3>

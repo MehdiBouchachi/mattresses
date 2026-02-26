@@ -27,9 +27,9 @@ export default function HeroSection({ translation }) {
       {/* Background Accent */}
       <div className="absolute -top-32 -left-32 w-[400px] sm:w-[500px] lg:w-[600px] h-[400px] sm:h-[500px] lg:h-[600px] bg-primary-200 rounded-full blur-[120px] lg:blur-[160px] opacity-30" />
 
-      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 grid md:grid-cols-2 gap-16 lg:gap-28 items-center">
+    <div className="relative max-w-7xl mx-auto px-6 sm:px-8 grid md:grid-cols-2 gap-16 lg:gap-28 items-center">
         {/* ================= LEFT CONTENT ================= */}
-        <div className="space-y-6 sm:space-y-8 lg:space-y-10 text-center md:text-start">
+        <div className="space-y-6 sm:space-y-8 lg:space-y-10 text-center lg:text-left">
           <span className="uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[10px] sm:text-xs text-accent-400 font-medium">
             {badge}
           </span>

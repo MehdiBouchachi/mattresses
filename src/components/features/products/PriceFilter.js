@@ -69,17 +69,8 @@ function PriceInput({ value, onChange }) {
       inputMode="numeric"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="
-        w-full
-        border border-beige-700
-        rounded-xl
-        px-4 sm:px-5
-        py-3 sm:py-3.5
-        text-sm sm:text-base
-        bg-white
-        text-text-600
-         focus:border-primary-600 focus:ring-1 focus:ring-primary-600 outline-none
-        transition
+      className="border border-beige-700 rounded-lg px-4 py-2 w-full text-sm
+          focus:border-primary-600 focus:ring-1 focus:ring-primary-600 outline-none transition
       "
     />
   );

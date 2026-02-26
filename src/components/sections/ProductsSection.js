@@ -34,7 +34,7 @@ function ProductsSection({ translation }) {
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* HEADER */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 sm:mb-14 lg:mb-20">
-          <div className="text-center sm:text-left">
+          <div className="text-center sm:text-start">
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
               {title}
             </h3>
