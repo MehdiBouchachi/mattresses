@@ -13,7 +13,8 @@ import { useParams } from "next/navigation";
 
 export default function Footer({ translation }) {
   const params = useParams();
-  const locale = params?.local || "en";
+  const locale = params?.locale || "en";
+
   const {
     footer: {
       brandDescription,
@@ -23,149 +24,77 @@ export default function Footer({ translation }) {
       bottom: bottomInfo,
     },
   } = translation;
+
   return (
     <footer className="bg-white border-t border-beige-400">
-      {/* ================= MAIN GRID ================= */}
-      <div className="max-w-7xl mx-auto px-8 py-24">
-        <div className="grid gap-16 lg:grid-cols-4 md:grid-cols-2">
+      {/* ================= MAIN ================= */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-14 sm:py-20 lg:py-24">
+        <div className="grid gap-12 sm:gap-14 md:grid-cols-2 lg:grid-cols-4">
           {/* ===== BRAND ===== */}
-          <div className="flex flex-col justify-between space-y-8">
-            <div className="space-y-6">
-              <Image
-                src="/images/logo.webp"
-                alt="LITMAD Logo"
-                width={170}
-                height={70}
-                className="object-contain"
-              />
+          <div className="space-y-6">
+            <Image
+              src="/images/logo.webp"
+              alt="LITMAD Logo"
+              width={150}
+              height={60}
+              className="object-contain"
+            />
 
-              <p className="text-text-body leading-relaxed max-w-sm">
-                {brandDescription}
-              </p>
-            </div>
+            <p className="text-sm sm:text-base text-text-body leading-relaxed">
+              {brandDescription}
+            </p>
 
-            {/* Social */}
-            <div className="flex items-center gap-6 pt-2">
-              <a
-                className="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center 
-              text-primary-600 hover:bg-primary-600 hover:text-white 
-              transition duration-300"
-              >
+            <div className="flex items-center gap-4 pt-2">
+              <SocialIcon>
                 <FiInstagram size={18} />
-              </a>
-
-              <a
-                className="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center 
-              text-primary-600 hover:bg-primary-600 hover:text-white 
-              transition duration-300"
-              >
+              </SocialIcon>
+              <SocialIcon>
                 <FiFacebook size={18} />
-              </a>
+              </SocialIcon>
             </div>
           </div>
 
           {/* ===== SHOP ===== */}
-          <div>
-            <h4 className="text-sm font-semibold mb-8 text-text-heading tracking-wide">
-              {shopLinks.title}
-            </h4>
-
-            <ul className="space-y-4 text-text-body">
-              <li>
-                <Link
-                  href={`/${locale}/mattresses`}
-                  className="hover:text-primary-600 transition"
-                >
-                  {shopLinks.allMattresses}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}#collections`}
-                  className="hover:text-primary-600 transition"
-                >
-                  {shopLinks.collections}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/track-order`}
-                  className="hover:text-primary-600 transition"
-                >
-                  {shopLinks.trackOrder}
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <FooterColumn title={shopLinks.title}>
+            <FooterLink href={`/${locale}/mattresses`}>
+              {shopLinks.allMattresses}
+            </FooterLink>
+            <FooterLink href={`/${locale}#collections`}>
+              {shopLinks.collections}
+            </FooterLink>
+            <FooterLink href={`/${locale}/track-order`}>
+              {shopLinks.trackOrder}
+            </FooterLink>
+          </FooterColumn>
 
           {/* ===== COMPANY ===== */}
-          <div>
-            <h4 className="text-sm font-semibold mb-8 text-text-heading tracking-wide">
-              {companyLinks.title}
-            </h4>
-
-            <ul className="space-y-4 text-text-body">
-              <li>
-                <Link
-                  href={`/${locale}`}
-                  className="hover:text-primary-600 transition"
-                >
-                  {companyLinks.home}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/about`}
-                  className="hover:text-primary-600 transition"
-                >
-                  {companyLinks.about}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/contact`}
-                  className="hover:text-primary-600 transition"
-                >
-                  {companyLinks.contact}
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <FooterColumn title={companyLinks.title}>
+            <FooterLink href={`/${locale}`}>{companyLinks.home}</FooterLink>
+            <FooterLink href={`/${locale}/about`}>
+              {companyLinks.about}
+            </FooterLink>
+            <FooterLink href={`/${locale}/contact`}>
+              {companyLinks.contact}
+            </FooterLink>
+          </FooterColumn>
 
           {/* ===== CONTACT ===== */}
-          <div>
-            <h4 className="text-sm font-semibold mb-8 text-text-heading tracking-wide">
-              {contactInfo.title}
-            </h4>
-
-            <div className="space-y-5 text-text-body">
-              <div className="flex items-start gap-4">
-                <FiPhone className="text-primary-600 mt-1" />
-                <span>{contactInfo.phone}</span>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <FiMail className="text-primary-600 mt-1" />
-                <span>{contactInfo.email}</span>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <FiMapPin className="text-primary-600 mt-1" />
-                <span>{contactInfo.location}</span>
-              </div>
-            </div>
-          </div>
+          <FooterColumn title={contactInfo.title}>
+            <ContactItem icon={<FiPhone />} text={contactInfo.phone} />
+            <ContactItem icon={<FiMail />} text={contactInfo.email} />
+            <ContactItem icon={<FiMapPin />} text={contactInfo.location} />
+          </FooterColumn>
         </div>
       </div>
 
       {/* ================= BOTTOM STRIP ================= */}
       <div className="bg-primary-600 text-white">
-        <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-5 sm:py-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs sm:text-sm">
           <p className="text-white/80 text-center md:text-left">
             © {new Date().getFullYear()} LITMAD. {bottomInfo.copyright}
           </p>
 
-          <div className="flex gap-8">
+          <div className="flex flex-wrap justify-center gap-6">
             <Link href={`/${locale}/privacy`} className="hover:underline">
               {bottomInfo.privacy}
             </Link>
@@ -176,5 +105,57 @@ export default function Footer({ translation }) {
         </div>
       </div>
     </footer>
+  );
+}
+
+/* ================= SUB COMPONENTS ================= */
+
+function FooterColumn({ title, children }) {
+  return (
+    <div>
+      <h4 className="text-xs sm:text-sm font-semibold mb-5 sm:mb-6 tracking-wide text-text-heading">
+        {title}
+      </h4>
+      <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base text-text-body">
+        {children}
+      </ul>
+    </div>
+  );
+}
+
+function FooterLink({ href, children }) {
+  return (
+    <li>
+      <Link href={href} className="hover:text-primary-600 transition">
+        {children}
+      </Link>
+    </li>
+  );
+}
+
+function ContactItem({ icon, text }) {
+  return (
+    <div className="flex items-start gap-3 text-sm sm:text-base">
+      <span className="text-primary-600 mt-1">{icon}</span>
+      <span>{text}</span>
+    </div>
+  );
+}
+
+function SocialIcon({ children }) {
+  return (
+    <a
+      className="
+        w-9 h-9 sm:w-10 sm:h-10
+        rounded-full
+        bg-primary-50
+        flex items-center justify-center
+        text-primary-600
+        hover:bg-primary-600 hover:text-white
+        transition duration-300
+      "
+    >
+      {children}
+    </a>
   );
 }

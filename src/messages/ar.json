@@ -1,6 +1,21 @@
 {
   "header": {
-    "shopNow": "تسوّق الآن"
+    "shopNow": "تسوق الآن",
+    "menu": "القائمة",
+    "navigation": {
+      "home": "الرئيسية",
+      "collection": "المجموعة",
+      "about": "من نحن",
+      "contact": "اتصل بنا",
+      "trackOrder": "تتبع الطلب"
+    },
+    "language": "اللغة",
+    "bottomNav": {
+      "home": "الرئيسية",
+      "shop": "المتجر",
+      "track": "تتبع",
+      "cart": "السلة"
+    }
   },
   "home": {
     "hero": {

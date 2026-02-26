@@ -1,8 +1,22 @@
 {
   "header": {
-    "shopNow": "Shop Now"
+    "shopNow": "Shop Now",
+    "menu": "Menu",
+    "navigation": {
+      "home": "Home",
+      "collection": "Collection",
+      "about": "About",
+      "contact": "Contact",
+      "trackOrder": "Track Order"
+    },
+    "language": "Language",
+    "bottomNav": {
+      "home": "Home",
+      "shop": "Shop",
+      "track": "Track",
+      "cart": "Cart"
+    }
   },
-
   "home": {
     "hero": {
       "badge": "Premium Sleep Experience",

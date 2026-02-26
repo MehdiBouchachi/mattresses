@@ -11,7 +11,6 @@ import {
   FiX,
   FiHome,
   FiGrid,
-  FiTruck,
 } from "react-icons/fi";
 import Image from "next/image";
 import Button from "../ui/Button";
@@ -53,12 +52,9 @@ export default function Header({ translation }) {
 
   const isActive = (path) => pathname.includes(path);
 
-  /* =========================================================
-     HEADER
-  ========================================================= */
-
   return (
     <>
+      {/* ================= HEADER ================= */}
       <header
         dir={isRTL ? "rtl" : "ltr"}
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -82,14 +78,6 @@ export default function Header({ translation }) {
 
           {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center gap-6">
-            {/* Track Order (new) */}
-            <button
-              onClick={() => router.push(`/${locale}/track-order`)}
-              className="text-sm text-text-body hover:text-primary-600 transition"
-            >
-              Track Order
-            </button>
-
             {/* Language */}
             <div className="relative">
               <button
@@ -110,7 +98,7 @@ export default function Header({ translation }) {
                     <button
                       key={lng.code}
                       onClick={() => switchLanguage(lng.code)}
-                      className={`w-full px-4 py-3 text-sm text-left ${
+                      className={`w-full px-4 py-3 text-sm transition text-left ${
                         locale === lng.code
                           ? "bg-primary-50 text-primary-600 font-medium"
                           : "hover:bg-beige-100"
@@ -153,15 +141,14 @@ export default function Header({ translation }) {
         </div>
       </header>
 
-      {/* =========================================================
-         MOBILE DRAWER
-      ========================================================= */}
-
+      {/* ================= MOBILE DRAWER ================= */}
       <div
-        className={`fixed inset-0 z-50 ${openMenu ? "visible" : "invisible"}`}
+        className={`fixed inset-0 z-50 transition ${
+          openMenu ? "visible" : "invisible"
+        }`}
       >
         <div
-          className={`absolute inset-0 bg-black/40 ${
+          className={`absolute inset-0 bg-black/40 transition-opacity ${
             openMenu ? "opacity-100" : "opacity-0"
           }`}
           onClick={() => setOpenMenu(false)}
@@ -216,15 +203,8 @@ export default function Header({ translation }) {
             >
               {navigation.contact}
             </DrawerItem>
-            <DrawerItem
-              active={pathname.includes("track-order")}
-              onClick={() => router.push(`/${locale}/track-order`)}
-            >
-              {navigation.trackOrder}
-            </DrawerItem>
           </nav>
 
-          {/* Language */}
           <div className="mt-auto pt-6 border-t border-beige-400">
             <p className="text-xs mb-4 text-text-subtle">{language}</p>
 
@@ -233,11 +213,11 @@ export default function Header({ translation }) {
                 <button
                   key={lng.code}
                   onClick={() => switchLanguage(lng.code)}
-                  className={`text-sm px-3 py-2 rounded-lg ${
+                  className={`text-sm px-3 py-2 rounded-lg transition ${
                     locale === lng.code
                       ? "bg-primary-50 text-primary-600 font-medium"
                       : "hover:bg-beige-100"
-                  }`}
+                  } ${isRTL ? "text-right" : "text-left"}`}
                 >
                   {lng.label}
                 </button>
@@ -247,91 +227,97 @@ export default function Header({ translation }) {
         </div>
       </div>
 
-      {/* =========================================================
-         IMPROVED BOTTOM NAV
-      ========================================================= */}
-
+      {/* ================= BOTTOM NAV ================= */}
       <div
         dir={isRTL ? "rtl" : "ltr"}
         className="fixed bottom-0 left-0 w-full bg-white border-t border-beige-500 md:hidden z-40"
       >
-        <div className="flex justify-around py-2">
-          <NavItem
-            active={pathname === `/${locale}`}
-            icon={<FiHome />}
-            label={bottomNav.home}
-            onClick={() => router.push(`/${locale}`)}
-          />
+        <div className="flex justify-around py-3">
+          {isRTL ? (
+            <>
+              <NavItem
+                active={isActive("cart")}
+                icon={<FiShoppingCart />}
+                label={bottomNav.cart}
+                onClick={() => router.push(`/${locale}/cart`)}
+                badge={count}
+              />
 
-          <NavItem
-            active={isActive("mattresses")}
-            icon={<FiGrid />}
-            label={bottomNav.shop}
-            onClick={() => router.push(`/${locale}/mattresses`)}
-          />
+              <NavItem
+                active={isActive("mattresses")}
+                icon={<FiGrid />}
+                label={bottomNav.shop}
+                onClick={() => router.push(`/${locale}/mattresses`)}
+              />
 
-          <NavItem
-            active={isActive("track-order")}
-            icon={<FiTruck />}
-            label={bottomNav.track}
-            onClick={() => router.push(`/${locale}/track-order`)}
-          />
+              <NavItem
+                active={pathname === `/${locale}`}
+                icon={<FiHome />}
+                label={bottomNav.home}
+                onClick={() => router.push(`/${locale}`)}
+              />
+            </>
+          ) : (
+            <>
+              <NavItem
+                active={pathname === `/${locale}`}
+                icon={<FiHome />}
+                label={bottomNav.home}
+                onClick={() => router.push(`/${locale}`)}
+              />
 
-          <NavItem
-            active={isActive("cart")}
-            icon={<FiShoppingCart />}
-            label={bottomNav.cart}
-            onClick={() => router.push(`/${locale}/cart`)}
-            badge={count}
-          />
+              <NavItem
+                active={isActive("mattresses")}
+                icon={<FiGrid />}
+                label={bottomNav.shop}
+                onClick={() => router.push(`/${locale}/mattresses`)}
+              />
+
+              <NavItem
+                active={isActive("cart")}
+                icon={<FiShoppingCart />}
+                label={bottomNav.cart}
+                onClick={() => router.push(`/${locale}/cart`)}
+                badge={count}
+              />
+            </>
+          )}
         </div>
       </div>
     </>
   );
 }
 
-/* =========================================================
-   IMPROVED NAV ITEM
-========================================================= */
+/* ================= NAV ITEM ================= */
 
 function NavItem({ icon, label, onClick, badge, active }) {
   return (
     <button
       onClick={onClick}
-      className="flex flex-col items-center text-xs relative"
+      className={`flex flex-col items-center text-xs relative transition ${
+        active ? "text-primary-600" : "text-text-muted"
+      }`}
     >
-      <div
-        className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all ${
-          active ? "bg-primary-600 text-white shadow-md" : "text-text-muted"
-        }`}
-      >
+      <div className="relative text-lg">
         {icon}
-
         {badge > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] px-1.5 rounded-full">
+          <span className="absolute -top-2 -right-3 bg-primary-600 text-white text-[9px] px-1.5 rounded-full">
             {badge}
           </span>
         )}
       </div>
-
-      <span
-        className={`mt-1 ${
-          active ? "text-primary-600 font-medium" : "text-text-muted"
-        }`}
-      >
-        {label}
-      </span>
+      <span className="mt-1">{label}</span>
     </button>
   );
 }
 
-function DrawerItem({ children, onClick, active }) {
+function DrawerItem({ children, onClick, active, isRTL }) {
   return (
     <button
       onClick={onClick}
-      className={`text-base ${
+      className={`text-base transition ${
         active ? "text-primary-600 font-medium" : "text-text-body"
-      }`}
+      } ${isRTL ? "text-right" : "text-left"}`}
     >
       {children}
     </button>

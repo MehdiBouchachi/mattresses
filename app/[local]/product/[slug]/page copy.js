@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useParams } from "next/navigation";
+import { useParams, notFound } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import RelatedSection from "../RelatedSection";
 import { useDispatch } from "react-redux";
@@ -14,20 +14,18 @@ export default function ProductPage() {
   const params = useParams();
   const locale = params?.locale || "en";
   const { slug } = params;
-
   const dispatch = useDispatch();
   const router = useRouter();
-
+  // ✅ Real product by slug
   const product = useMemo(() => {
     return products.find((p) => p.slug === slug);
   }, [slug]);
 
-  const images = product.images?.length > 0 ? product.images : [product.image];
-
-  const dimensions =
-    product.details?.dimensions?.length > 0
-      ? product.details.dimensions
-      : [{ size: "Default", price: product.price }];
+  // ✅ Safe fallbacks without changing UI
+  const images = product.images?.length ? product.images : [product.image];
+  const dimensions = product.details?.dimensions?.length
+    ? product.details.dimensions
+    : [{ size: "Default", price: product.price }];
 
   const firmness = product.details?.firmness ?? 0;
   const technicalSpecs = product.details?.technicalSpecs ?? [];
@@ -50,9 +48,8 @@ export default function ProductPage() {
 
   const totalPrice = discountedUnitPrice * quantity;
 
+  // Zoom logic (same)
   const handleMouseMove = (e) => {
-    if (window.innerWidth < 1024) return; // disable zoom on mobile
-
     const { left, top, width, height } =
       e.currentTarget.getBoundingClientRect();
 
@@ -75,7 +72,6 @@ export default function ProductPage() {
   const relatedProducts = products.filter(
     (p) => p.slug !== product.slug && p.category === product.category,
   );
-
   const handleCheckout = () => {
     dispatch(
       addToCart({
@@ -90,14 +86,12 @@ export default function ProductPage() {
 
     router.push(`/${locale}/checkout`);
   };
-  if (!product) return null;
-
   return (
-    <div className="bg-beige-100 min-h-screen">
-      {/* ================= HEADER ================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-8">
+    <div className="bg-beige-100">
+      {/* ================= PAGE HEADER ================= */}
+      <section className="max-w-7xl mx-auto px-8 pt-28 pb-10">
         {/* Breadcrumb */}
-        <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-text-soft mb-4">
+        <div className="flex items-center gap-2 text-sm text-text-soft mb-6">
           <button
             onClick={() => router.push(`/${locale}`)}
             className="hover:text-primary-600 transition"
@@ -112,27 +106,25 @@ export default function ProductPage() {
             Mattresses
           </button>
           <span>/</span>
-          <span className="text-primary-600 font-medium truncate max-w-[150px]">
-            {product.name}
-          </span>
+          <span className="text-primary-600 font-medium">{product.name}</span>
         </div>
 
+        {/* Back Button */}
         <button
           onClick={() => router.back()}
-          className="text-xs sm:text-sm text-primary-600 hover:underline"
+          className="inline-flex items-center gap-2 text-sm text-primary-600 hover:underline"
         >
           ← Back to products
         </button>
       </section>
-
       {/* ================= HERO ================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 grid lg:grid-cols-2 gap-10 lg:gap-24 items-start">
+      <section className="max-w-7xl mx-auto px-8 pb-28 grid lg:grid-cols-2 gap-24 items-start">
         {/* LEFT SIDE */}
         <div>
           <div
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="bg-white rounded-3xl lg:rounded-[48px] shadow-lg overflow-hidden mb-4 cursor-zoom-in"
+            className="bg-white rounded-[48px] shadow-lg overflow-hidden mb-6 relative cursor-zoom-in"
           >
             <motion.img
               key={selectedImage}
@@ -142,19 +134,18 @@ export default function ProductPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="w-full h-[320px] sm:h-[450px] lg:h-[600px] object-cover transition-transform duration-300"
+              className="w-full h-[600px] object-cover transition-transform duration-300 ease-out"
             />
           </div>
 
-          {/* Thumbnails */}
-          <div className="flex gap-3 overflow-x-auto pb-2">
+          <div className="flex gap-4">
             {images.map((img, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(img)}
-                className={`min-w-[70px] h-[70px] sm:w-24 sm:h-24 rounded-xl overflow-hidden border transition ${
+                className={`w-24 h-24 rounded-xl overflow-hidden border transition ${
                   selectedImage === img
-                    ? "border-primary-600"
+                    ? "border-primary-600text-primary-600"
                     : "border-beige-500"
                 }`}
               >
@@ -169,57 +160,85 @@ export default function ProductPage() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="bg-white p-6 sm:p-8 lg:p-12 rounded-3xl lg:rounded-[40px] shadow-lg border border-beige-500">
-          <p className="text-xs uppercase tracking-widest text-text-subtle mb-2">
-            {product.category} · {product.subcategory}
-          </p>
+        <div className="lg:sticky lg:top-24 self-start bg-white p-12 rounded-[40px] shadow-lg border border-beige-500">
+          <div className="mb-6">
+            <p className="text-xs uppercase tracking-widest text-text-subtle mb-4">
+              {product.category} · {product.subcategory}
+            </p>
 
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-4">
-            {product.name}
-          </h1>
+            <h1 className="text-5xl font-semibold leading-tight tracking-tight text-text-heading">
+              {product.name}
+            </h1>
+          </div>
 
-          <p className="text-text-muted mb-6 text-sm sm:text-base">
+          <p className="text-text-muted mb-10 leading-relaxed text-lg">
             {product.description}
           </p>
-
+          <div className="w-16 h-[2px] bg-primary-600 mb-10 opacity-20"></div>
           {/* PRICE */}
-          <div className="mb-8 border-b border-beige-500 pb-6">
+          <div className="mb-10 border-b border-beige-500 pb-8">
+            {/* Old price */}
             {hasDiscount && (
-              <p className="text-sm text-gray-400 line-through mb-2">
+              <p className="text-base text-gray-400 line-through mb-2">
                 {formatPrice(unitBasePrice)}
               </p>
             )}
 
-            <div className="flex items-end gap-3 flex-wrap">
-              <span className="text-3xl sm:text-5xl font-bold text-primary-600">
-                {formatPrice(quantity === 1 ? discountedUnitPrice : totalPrice)}
-              </span>
-
-              {quantity > 1 && (
-                <span className="text-xs sm:text-sm text-text-muted">
-                  ({quantity} × {formatPrice(discountedUnitPrice)})
+            {/* MAIN PRICE DISPLAY */}
+            <div className="flex items-end gap-4 flex-wrap">
+              {/* If quantity = 1 → show unit price big */}
+              {quantity === 1 ? (
+                <span className="text-5xl font-bold text-primary-600 tracking-tight">
+                  {formatPrice(discountedUnitPrice)}
                 </span>
+              ) : (
+                <>
+                  {/* BIG TOTAL */}
+                  <span className="text-5xl font-bold text-primary-600 tracking-tight">
+                    {formatPrice(totalPrice)}
+                  </span>
+
+                  <span className="text-sm text-text-muted pb-2">
+                    ({quantity} × {formatPrice(discountedUnitPrice)})
+                  </span>
+                </>
               )}
 
+              {/* Discount badge */}
               {hasDiscount && (
-                <span className="text-xs bg-primary-600/10 text-primary-600 px-2 py-1 rounded-full">
+                <span className="text-xs font-medium bg-primary-600/10 text-primary-600 px-3 py-1 rounded-full">
                   −{discount}%
                 </span>
               )}
             </div>
+
+            {/* Clear unit info */}
+            {quantity > 1 && (
+              <p className="text-base text-text-muted mt-3">
+                Unit price:{" "}
+                <span className="font-medium text-black">
+                  {formatPrice(discountedUnitPrice)}
+                </span>
+              </p>
+            )}
+
+            {/* Savings */}
           </div>
 
-          {/* SIZE */}
-          <div className="mb-8">
-            <h3 className="text-xs uppercase mb-3">Select Size</h3>
-            <div className="grid grid-cols-2 gap-3">
+          {/* DIMENSIONS */}
+          <div className="mb-10">
+            <h3 className="text-sm uppercase tracking-wider text-text-subtle mb-4">
+              Select Size
+            </h3>
+
+            <div className="grid grid-cols-2 gap-4">
               {dimensions.map((dim) => (
                 <button
                   key={dim.size}
                   onClick={() => setSelectedDimension(dim)}
-                  className={`py-2 sm:py-3 rounded-xl border text-sm ${
+                  className={`px-6 py-3 rounded-xl border transition ${
                     selectedDimension.size === dim.size
-                      ? "bg-primary-600 text-white border-primary-600"
+                      ? "bg-primary-600  text-white border-primary-600 "
                       : "border-beige-700"
                   }`}
                 >
@@ -229,23 +248,25 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/* QUANTITY */}
-          <div className="mb-8">
-            <h3 className="text-xs uppercase mb-3">Quantity</h3>
+          {/* QUANTITY (Improved) */}
+          <div className="mb-10">
+            <h3 className="text-sm uppercase tracking-wider text-text-subtle mb-4">
+              Quantity
+            </h3>
 
             <div className="flex items-center border rounded-full w-fit overflow-hidden">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="px-4 py-2 hover:bg-gray-100"
+                className="px-5 py-3 hover:bg-gray-100 transition"
               >
                 −
               </button>
 
-              <div className="px-4 text-base">{quantity}</div>
+              <div className="px-6 text-lg font-medium">{quantity}</div>
 
               <button
                 onClick={() => setQuantity(quantity + 1)}
-                className="px-4 py-2 hover:bg-gray-100"
+                className="px-5 py-3 hover:bg-gray-100 transition"
               >
                 +
               </button>
@@ -253,8 +274,8 @@ export default function ProductPage() {
           </div>
 
           {/* FIRMNESS */}
-          <div className="mb-8">
-            <div className="flex justify-between text-xs mb-2">
+          <div className="mb-10">
+            <div className="flex justify-between text-sm mb-2">
               <span>Soft</span>
               <span>Firm</span>
             </div>
@@ -268,16 +289,16 @@ export default function ProductPage() {
               />
             </div>
           </div>
-
-          {/* ACTIONS */}
-          <div className="space-y-4">
+          <div className="mt-10 space-y-6">
+            {/* PRIMARY ACTION */}
             <button
               onClick={handleCheckout}
-              className="w-full bg-primary-600 text-white py-3 sm:py-4 rounded-2xl text-base sm:text-lg font-medium hover:bg-primary-700 transition"
+              className="w-full bg-primary-600  text-white py-5 rounded-2xl text-lg font-medium transition-all duration-300 hover:bg-primary-700 shadow-lg hover:shadow-xl"
             >
               Buy Now
             </button>
 
+            {/* SECONDARY ACTION */}
             <button
               onClick={() =>
                 dispatch(
@@ -291,12 +312,12 @@ export default function ProductPage() {
                   }),
                 )
               }
-              className="w-full border border-primary-600 py-3 rounded-2xl hover:bg-primary-50 transition"
+              className="w-full border border-primary-600  py-4 rounded-2xl transition hover:bg-[#F4F3FF]"
             >
               Add to Cart
             </button>
 
-            <div className="pt-4 border-t border-beige-500 text-xs sm:text-sm text-text-muted text-center">
+            <div className="pt-4 border-t border-beige-500 text-sm text-text-muted text-center">
               Free delivery • 10-year warranty • Secure checkout
             </div>
           </div>
@@ -305,16 +326,16 @@ export default function ProductPage() {
 
       {/* TECH SPECS */}
       {technicalSpecs.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-beige-500">
-          <h2 className="text-2xl sm:text-4xl font-semibold mb-8">
+        <section className="max-w-7xl mx-auto px-8 py-24 border-t border-beige-500">
+          <h2 className="text-4xl font-semibold mb-14">
             Technical Specifications
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-12">
             {technicalSpecs.map((spec) => (
               <div
                 key={spec.label}
-                className="flex justify-between border-b pb-4 text-sm sm:text-base"
+                className="flex justify-between border-b pb-5 text-lg"
               >
                 <span>{spec.label}</span>
                 <span className="text-text-muted">{spec.value}</span>
@@ -326,38 +347,27 @@ export default function ProductPage() {
 
       {/* FAQ */}
       {faq.length > 0 && (
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-beige-500">
-          <h2 className="text-2xl sm:text-4xl font-semibold mb-8">
+        <section className="max-w-5xl mx-auto px-8 py-24 border-t border-beige-500">
+          <h2 className="text-4xl font-semibold mb-14">
             Frequently Asked Questions
           </h2>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {faq.map((item, i) => (
               <div
                 key={i}
-                className="border border-beige-500 rounded-xl p-5 cursor-pointer"
+                className="border border-beige-500 rounded-2xl p-8 cursor-pointer"
                 onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
               >
-                <h4 className="font-semibold text-sm sm:text-base">
-                  {item.question}
-                </h4>
+                <h4 className="font-semibold text-lg mb-2">{item.question}</h4>
 
                 <AnimatePresence>
                   {openFAQ === i && (
                     <motion.p
-                      initial={{
-                        opacity: 0,
-                        height: 0,
-                      }}
-                      animate={{
-                        opacity: 1,
-                        height: "auto",
-                      }}
-                      exit={{
-                        opacity: 0,
-                        height: 0,
-                      }}
-                      className="text-text-muted mt-2 text-sm"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="text-text-muted"
                     >
                       {item.answer}
                     </motion.p>
@@ -369,6 +379,7 @@ export default function ProductPage() {
         </section>
       )}
 
+      {/* RELATED PRODUCTS (same place, same design) */}
       <RelatedSection currentProduct={product} allProducts={relatedProducts} />
     </div>
   );

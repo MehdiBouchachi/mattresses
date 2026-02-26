@@ -46,6 +46,7 @@ export default async function RootLayout({ children, params }) {
           antialiased
           bg-beige-300
           text-text-primary
+          pb-19 md:pb-0
         `}
       >
         <Providers>

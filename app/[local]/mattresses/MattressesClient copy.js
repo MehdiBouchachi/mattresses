@@ -4,14 +4,11 @@ import useProducts from "@/components/features/products/useProducts";
 import Filters from "@/components/features/products/Filters";
 import ProductGrid from "@/components/features/products/ProductGrid";
 import Pagination from "@/components/features/products/Pagination";
-import Breadcrumb from "@/components/ui/Breadcrumb";
-
-/* ======================================================
-   MAIN PAGE
-====================================================== */
+import { useRouter } from "next/navigation";
 
 export default function MattressesClient({ locale, translation }) {
   const { state, dispatch, paginatedProducts, totalPages } = useProducts();
+  const router = useRouter();
 
   const {
     mattressesPage: {
@@ -30,15 +27,28 @@ export default function MattressesClient({ locale, translation }) {
 
   return (
     <div className="min-h-screen bg-beige-100">
-      <PageHeader
-        locale={locale}
-        title={title}
-        description={description}
-        breadcrumbItems={[
-          { label: breadcrumbHome, href: `/${locale}` },
-          { label: breadcrumbCurrent },
-        ]}
-      />
+      {/* ================= PAGE HEADER ================= */}
+      <section className="max-w-7xl mx-auto px-8 pt-40 pb-16">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-sm text-text-soft mb-6">
+          <button
+            onClick={() => router.push(`/${locale}`)}
+            className="hover:text-primary-600 transition"
+          >
+            {breadcrumbHome}
+          </button>
+
+          <span>/</span>
+
+          <span className="text-primary-600 font-medium">
+            {breadcrumbCurrent}
+          </span>
+        </div>
+
+        <h1 className="text-5xl font-semibold tracking-tight mb-6">{title}</h1>
+
+        <p className="text-text-muted max-w-xl text-lg">{description}</p>
+      </section>
 
       {/* ================= FILTERS ================= */}
       <Filters
@@ -49,9 +59,10 @@ export default function MattressesClient({ locale, translation }) {
       />
 
       {/* ================= PRODUCTS ================= */}
-      <section className="py-8 sm:py-10 border-t border-beige-500">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8">
-          <div className="mb-6 sm:mb-8 text-xs sm:text-sm text-text-soft">
+      <section className="py-10 border-t border-beige-500">
+        <div className="max-w-7xl mx-auto px-8">
+          {/* Product Count */}
+          <div className="mb-10 text-sm text-text-soft">
             {showing} {paginatedProducts.length} {productsLabel}
           </div>
 
@@ -61,7 +72,7 @@ export default function MattressesClient({ locale, translation }) {
             locale={locale}
           />
 
-          <div className="mt-10 sm:mt-14 lg:mt-16">
+          <div className="mt-16">
             <Pagination
               totalPages={totalPages}
               page={state.page}
@@ -73,27 +84,3 @@ export default function MattressesClient({ locale, translation }) {
     </div>
   );
 }
-
-/* ======================================================
-   PAGE HEADER (Reusable Pattern)
-====================================================== */
-
-function PageHeader({ locale, title, description, breadcrumbItems }) {
-  return (
-    <section className="max-w-7xl mx-auto px-6 sm:px-8 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-14 lg:pb-16">
-      <Breadcrumb items={breadcrumbItems} />
-
-      <h1 className="text-2xl sm:text-3xl lg:text-5xl font-semibold tracking-tight mb-4 sm:mb-6">
-        {title}
-      </h1>
-
-      <p className="text-sm sm:text-base lg:text-lg text-text-muted max-w-xl">
-        {description}
-      </p>
-    </section>
-  );
-}
-
-/* ======================================================
-   REUSABLE BREADCRUMB
-====================================================== */

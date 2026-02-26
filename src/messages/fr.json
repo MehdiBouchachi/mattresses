@@ -1,6 +1,21 @@
 {
   "header": {
-    "shopNow": "Acheter"
+    "shopNow": "Acheter",
+    "menu": "Menu",
+    "navigation": {
+      "home": "Accueil",
+      "collection": "Collection",
+      "about": "À propos",
+      "contact": "Contact",
+      "trackOrder": "Suivi de commande"
+    },
+    "language": "Langue",
+    "bottomNav": {
+      "home": "Accueil",
+      "shop": "Boutique",
+      "track": "Suivi",
+      "cart": "Panier"
+    }
   },
   "home": {
     "hero": {

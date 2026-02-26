@@ -14,49 +14,98 @@ export default function Pagination({ totalPages, page, dispatch }) {
     });
   };
 
+  /* ================= SMART PAGE RANGE ================= */
+
+  const getVisiblePages = () => {
+    const delta = 2;
+    const pages = [];
+
+    for (
+      let i = Math.max(1, page - delta);
+      i <= Math.min(totalPages, page + delta);
+      i++
+    ) {
+      pages.push(i);
+    }
+
+    if (pages[0] > 1) pages.unshift("...");
+    if (pages[pages.length - 1] < totalPages) pages.push("...");
+
+    if (pages[0] === "...") pages.unshift(1);
+    if (pages[pages.length - 1] === "...") pages.push(totalPages);
+
+    return pages;
+  };
+
+  const visiblePages = getVisiblePages();
+
   return (
-    <div className="flex justify-center items-center gap-3 mt-16">
-      <button
-        onClick={() => goToPage(page - 1)}
+    <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mt-8 sm:mt-12 lg:mt-16">
+      {/* PREV */}
+      <PaginationButton
         disabled={page === 1}
-        className={`px-4 h-10 rounded-full text-sm transition ${
-          page === 1
-            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-            : "border border-[#DDD] hover:bg-[#EEE]"
-        }`}
+        onClick={() => goToPage(page - 1)}
       >
         Prev
-      </button>
+      </PaginationButton>
 
-      {Array.from({ length: totalPages }).map((_, i) => {
-        const pageNumber = i + 1;
-
-        return (
-          <button
-            key={pageNumber}
-            onClick={() => goToPage(pageNumber)}
-            className={`w-10 h-10 rounded-full text-sm transition ${
-              page === pageNumber
-                ? "bg-primary-600 text-white shadow-md"
-                : "border border-[#DDD] hover:bg-[#EEE]"
-            }`}
+      {/* PAGE NUMBERS */}
+      {visiblePages.map((p, i) =>
+        p === "..." ? (
+          <span key={i} className="px-2 text-text-soft text-sm">
+            ...
+          </span>
+        ) : (
+          <PaginationButton
+            key={p}
+            active={page === p}
+            onClick={() => goToPage(p)}
           >
-            {pageNumber}
-          </button>
-        );
-      })}
+            {p}
+          </PaginationButton>
+        ),
+      )}
 
-      <button
-        onClick={() => goToPage(page + 1)}
+      {/* NEXT */}
+      <PaginationButton
         disabled={page === totalPages}
-        className={`px-4 h-10 rounded-full text-sm transition ${
-          page === totalPages
-            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-            : "border border-[#DDD] hover:bg-[#EEE]"
-        }`}
+        onClick={() => goToPage(page + 1)}
       >
         Next
-      </button>
+      </PaginationButton>
     </div>
+  );
+}
+
+/* ================= REUSABLE BUTTON ================= */
+
+function PaginationButton({
+  children,
+  onClick,
+  disabled = false,
+  active = false,
+}) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`
+        min-w-[40px]
+        h-9 sm:h-10
+        px-3 sm:px-4
+        rounded-full
+        text-xs sm:text-sm
+        transition-all duration-200
+        ${
+          active
+            ? "bg-primary-600 text-white shadow-md"
+            : disabled
+              ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+              : "border border-beige-700 hover:bg-beige-550"
+        }
+      `}
+    >
+      {children}
+    </button>
   );
 }

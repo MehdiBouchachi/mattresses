@@ -7,10 +7,7 @@ function CategoryCard({ cat, locale, discover, index }) {
     <Link
       href={`/${locale}/mattresses?category=${cat.slug}`}
       className={`
-        group relative 
-        h-72 sm:h-80 lg:h-[420px]
-        rounded-3xl lg:rounded-4xl
-        overflow-hidden
+        group relative h-105 rounded-4xl overflow-hidden
         transition-all duration-500
         ${index === 1 || index === 3 ? "lg:translate-y-10" : ""}
       `}
@@ -27,20 +24,23 @@ function CategoryCard({ cat, locale, discover, index }) {
       {/* OVERLAY */}
       <div
         className="absolute inset-0 bg-gradient-to-t 
-        from-black/60 via-black/20 to-transparent 
-        transition-all duration-500"
+        from-black/50 via-black/10 to-transparent 
+        group-hover:from-black/60 transition-all duration-500"
       />
 
-      {/* CONTENT */}
-      <div className="relative z-10 h-full flex items-end p-6 sm:p-8 lg:p-10">
+      {/* SHADOW */}
+      <div className="absolute inset-0 shadow-[0_25px_50px_rgba(0,0,0,0.12)] rounded-[32px]" />
+
+      {/* TEXT */}
+      <div className="relative z-10 h-full flex items-end p-10">
         <div>
-          <h4 className="text-lg sm:text-xl lg:text-2xl font-semibold text-primary-50 tracking-wide">
+          <h4 className="text-2xl font-semibold text-primary-50 tracking-wide">
             {cat.title}
           </h4>
 
           <span
-            className="text-primary-50/80 text-xs sm:text-sm mt-2 block opacity-0 
-            group-hover:opacity-100 transition duration-300"
+            className="text-primary-50/80 text-sm mt-2 block opacity-0 
+  group-hover:opacity-100 transition duration-300"
           >
             {locale === "ar" ? discover + " ←" : discover + " →"}
           </span>
@@ -67,20 +67,16 @@ export default function CategoriesSection({ locale = "en", translation }) {
   const { title, desc, discover } = translation.home.categories;
 
   return (
-    <section className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-beige-50 to-beige-150">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section className="py-30 bg-gradient-to-b from-beige-50 to-beige-150">
+      <div className="max-w-7xl mx-auto px-8">
         {/* HEADER */}
-        <div className="mb-12 sm:mb-16 lg:mb-24 text-center lg:text-left">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight">
-            {title}
-          </h3>
-          <p className="text-text-body mt-3 sm:mt-4 max-w-md mx-auto lg:mx-0 text-sm sm:text-base">
-            {desc}
-          </p>
+        <div className="mb-24">
+          <h3 className="text-4xl font-semibold tracking-tight">{title}</h3>
+          <p className="text-text-body mt-4 max-w-lg">{desc}</p>
         </div>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-14">
           {categories.map((cat, index) => (
             <CategoryCard
               key={index}

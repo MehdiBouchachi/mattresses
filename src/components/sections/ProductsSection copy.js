@@ -10,54 +10,42 @@ function ProductsSection({ translation }) {
 
   // 🎯 CURATED PRODUCTS
   const normalProduct = products.find((p) => p.available && !p.oldPrice);
+
   const discountedProduct = products.find((p) => p.available && p.oldPrice);
+
   const soldOutProduct = products.find((p) => !p.available);
 
   const featuredProducts = [
     normalProduct,
     discountedProduct,
     soldOutProduct,
-  ].filter(Boolean);
-
+  ].filter(Boolean); // remove undefined if any missing
   const {
     title,
     desc,
     viewAll,
     productCard: productCardTranslation,
   } = translation.home.products;
-
   return (
     <section
-      className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-beige-50 to-beige-150"
+      className="py-30 bg-gradient-to-b from-beige-50 to-beige-150"
       id="collections"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+      <div className="max-w-7xl mx-auto px-8">
         {/* HEADER */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 sm:mb-14 lg:mb-20">
-          <div className="text-center sm:text-left">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
-              {title}
-            </h3>
-            <p className="text-text-body mt-2 sm:mt-3 text-sm sm:text-base max-w-md mx-auto sm:mx-0">
-              {desc}
-            </p>
+        <div className="flex items-end justify-between mb-20">
+          <div>
+            <h3 className="text-4xl font-semibold">{title}</h3>
+            <p className="text-text-body mt-3">{desc}</p>
           </div>
 
-          <div className="w-full sm:w-auto">
-            <Button
-              href={`/${locale}/mattresses`}
-              variant="secondary"
-              size="md"
-              fullWidth
-              className="sm:w-auto"
-            >
-              {viewAll}
-            </Button>
-          </div>
+          <Button href={`/${locale}/mattresses`} variant="secondary" size="md">
+            {viewAll}
+          </Button>
         </div>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+        <div className="grid md:grid-cols-3 gap-10">
           {featuredProducts.map((product) => (
             <ProductCard
               key={product.id}

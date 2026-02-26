@@ -53,7 +53,6 @@ const STATUS_STYLES = {
 
 export default function OrderTrackingClient({ locale, translation }) {
   const t = translation.orderTrackingPage;
-
   const [orderId, setOrderId] = useState("");
   const [order, setOrder] = useState(null);
   const [error, setError] = useState("");
@@ -79,8 +78,8 @@ export default function OrderTrackingClient({ locale, translation }) {
     : -1;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-beige-200 to-beige-100 pt-20 pb-28 px-4 sm:px-6">
-      <div className="max-w-4xl mx-auto space-y-10 sm:space-y-14">
+    <div className="min-h-screen bg-beige-100 px-4 sm:px-6 py-16 sm:py-20 lg:py-24">
+      <div className="max-w-3xl mx-auto space-y-12 sm:space-y-16">
         <TrackingHeader header={t.header} />
 
         <TrackingSearch
@@ -111,11 +110,11 @@ export default function OrderTrackingClient({ locale, translation }) {
 
 function TrackingHeader({ header }) {
   return (
-    <div className="text-center space-y-4">
+    <div className="text-center">
       <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
         {header.title}
       </h1>
-      <p className="text-sm sm:text-base text-text-muted max-w-xl mx-auto">
+      <p className="mt-3 sm:mt-4 text-sm sm:text-base text-text-muted">
         {header.description}
       </p>
     </div>
@@ -128,21 +127,22 @@ function TrackingHeader({ header }) {
 
 function TrackingSearch({ t, orderId, setOrderId, onTrack, error }) {
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-beige-500">
+    <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-beige-500">
       <div className="flex flex-col sm:flex-row gap-4">
         <Input
           name="orderId"
           placeholder={t.search.placeholder}
           value={orderId}
           onChange={(e) => setOrderId(e.target.value)}
-          className="flex-1"
         />
 
         <Button
           variant="cta"
           size="md"
           onClick={onTrack}
-          className="w-full sm:w-auto sm:min-w-[160px]"
+          className=" w-full sm:w-auto
+    sm:min-w-[140px]
+  "
         >
           {t.search.button}
         </Button>
@@ -159,7 +159,7 @@ function TrackingSearch({ t, orderId, setOrderId, onTrack, error }) {
 
 function TrackingResult({ order, t, locale, currentIndex, isRTL }) {
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-beige-500 space-y-10">
+    <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-beige-500 space-y-10">
       <OrderInfo order={order} t={t} locale={locale} />
 
       <TrackingProgress
@@ -188,9 +188,17 @@ function OrderInfo({ order, t, locale }) {
       />
 
       <span
-        className={`inline-flex items-center justify-center px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap self-start ${
-          STATUS_STYLES[order.status]
-        }`}
+        className={`
+    inline-flex items-center justify-center
+    px-3 sm:px-4
+    py-1.5
+    rounded-full
+    text-[11px] sm:text-sm
+    font-medium
+    whitespace-nowrap
+    self-start
+    ${STATUS_STYLES[order.status]}
+  `}
       >
         {t.status[order.status]}
       </span>
@@ -210,13 +218,12 @@ function InfoBlock({ label, value }) {
 /* =========================================================
    PROGRESS
 ========================================================= */
-
 function TrackingProgress({ steps, currentIndex, isRTL }) {
   const entries = Object.entries(steps);
 
   return (
     <>
-      {/* DESKTOP */}
+      {/* ================= DESKTOP (Horizontal) ================= */}
       <div className="hidden sm:block relative">
         <div className="flex justify-between items-center">
           {entries.map(([key, label], index) => {
@@ -254,29 +261,32 @@ function TrackingProgress({ steps, currentIndex, isRTL }) {
         </div>
       </div>
 
-      {/* MOBILE */}
+      {/* ================= MOBILE (Vertical Timeline) ================= */}
       <div className="sm:hidden space-y-6 relative">
         {entries.map(([key, label], index) => {
           const active = index <= currentIndex;
 
           return (
             <div key={key} className="flex items-start gap-4 relative">
+              {/* Line */}
               {index !== entries.length - 1 && (
                 <div
                   className={`absolute ${
-                    isRTL ? "right-[11px]" : "left-[11px]"
+                    isRTL ? "right-3" : "left-3"
                   } top-6 w-[2px] h-full ${
                     active ? "bg-primary-600" : "bg-beige-400"
                   }`}
                 />
               )}
 
+              {/* Circle */}
               <div
                 className={`w-6 h-6 rounded-full mt-1 z-10 ${
                   active ? "bg-primary-600" : "bg-beige-400"
                 }`}
               />
 
+              {/* Label */}
               <p
                 className={`text-xs ${
                   active ? "text-text-primary" : "text-text-muted"
