@@ -122,6 +122,26 @@
       "reset": "Clear"
     }
   },
+  "productPage": {
+    "breadcrumb": {
+      "home": "Home",
+      "collection": "Mattresses",
+      "back": "Back to products"
+    },
+    "size": "Select Size",
+    "quantity": "Quantity",
+    "firmness": {
+      "soft": "Soft",
+      "firm": "Firm"
+    },
+    "actions": {
+      "buyNow": "Buy Now",
+      "addToCart": "Add to Cart"
+    },
+    "features": "Technical Specifications",
+    "faq": "Frequently Asked Questions",
+    "guarantees": "Free delivery • 10-year warranty • Secure checkout"
+  },
   "cartPage": {
     "empty": {
       "title": "Your Cart is Empty",

@@ -60,7 +60,7 @@ export default function Header({ translation }) {
   return (
     <>
       <header
-        dir={isRTL ? "rtl" : "ltr"}
+        dir="ltr"
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           scrolled ? "bg-white/80 backdrop-blur-xl shadow-sm" : "bg-transparent"
         }`}
@@ -87,7 +87,7 @@ export default function Header({ translation }) {
               onClick={() => router.push(`/${locale}/track-order`)}
               className="text-sm text-text-body hover:text-primary-600 transition"
             >
-              Track Order
+              {navigation.trackOrder}
             </button>
 
             {/* Language */}
@@ -130,17 +130,24 @@ export default function Header({ translation }) {
               {shopNow}
             </Button>
 
-            <button
+            <Button
+              variant="secondary"
+              className="relative p-3"
               onClick={() => router.push(`/${locale}/cart`)}
-              className="relative w-10 h-10 rounded-xl border border-beige-600 flex items-center justify-center hover:bg-beige-100 transition"
             >
-              <FiShoppingCart size={18} />
+              <FiShoppingCart className="text-lg" />
+
               {count > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-primary-600 text-white text-[10px] px-1.5 py-[1px] rounded-full shadow">
+                <span
+                  className="absolute -top-2 -right-2 
+                                     bg-primary-600 text-primary-50 
+                                     text-[10px] px-2 py-[2px] 
+                                     rounded-full font-medium"
+                >
                   {count}
                 </span>
               )}
-            </button>
+            </Button>
           </div>
 
           {/* MOBILE MENU BUTTON */}

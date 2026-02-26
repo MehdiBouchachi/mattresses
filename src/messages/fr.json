@@ -122,6 +122,26 @@
       "reset": "Effacer"
     }
   },
+  "productPage": {
+    "breadcrumb": {
+      "home": "Accueil",
+      "collection": "Matelas",
+      "back": "Retour aux produits"
+    },
+    "size": "Choisir la taille",
+    "quantity": "Quantité",
+    "firmness": {
+      "soft": "Souple",
+      "firm": "Ferme"
+    },
+    "actions": {
+      "buyNow": "Acheter",
+      "addToCart": "Ajouter au panier"
+    },
+    "features": "Spécifications techniques",
+    "faq": "Questions fréquentes",
+    "guarantees": "Livraison gratuite • Garantie 10 ans • Paiement sécurisé"
+  },
   "cartPage": {
     "empty": {
       "title": "Votre panier est vide",
