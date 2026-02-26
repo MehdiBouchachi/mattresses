@@ -1,8 +1,6 @@
 "use client";
 
-const formatPrice = (price, locale) =>
-  new Intl.NumberFormat("fr-DZ").format(price) +
-  (locale === "ar" ? " د.ج" : " DA");
+import { formatPrice } from "@/utils/helpers";
 
 export default function PriceFilter({ state, dispatch, translation, locale }) {
   const formatInput = (value) => {

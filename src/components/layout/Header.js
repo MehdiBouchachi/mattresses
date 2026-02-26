@@ -61,7 +61,7 @@ export default function Header({ translation }) {
         >
           <Image
             src="/images/logo.webp"
-            alt="Litmad"
+            alt="Litmad logo"
             width={150}
             height={45}
             priority

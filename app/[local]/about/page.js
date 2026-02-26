@@ -1,7 +1,10 @@
-"use client";
+import { getTranslations } from "@/lib/i18n";
 import { FiNavigation, FiMapPin, FiExternalLink } from "react-icons/fi";
 
-export default function AboutPage() {
+export default async function AboutPage({ params }) {
+  const { local = "en" } = await params;
+  const { aboutPage } = getTranslations(local);
+  const { hero, frame, editorial, scale, commitment, locations } = aboutPage;
   return (
     <div className="bg-beige-100 overflow-hidden">
       {/* ================= HERO ================= */}
@@ -15,16 +18,15 @@ export default function AboutPage() {
 
         <div className="relative max-w-xl sm:max-w-2xl md:max-w-3xl">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.4em] sm:tracking-[0.5em] text-text-soft mb-4 sm:mb-6">
-            Our Philosophy
+            {hero.badge}
           </p>
 
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary leading-snug">
-            Comfort Is Structured Silence.
+            {hero.title}
           </h1>
 
           <p className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg text-text-muted leading-relaxed">
-            It is the invisible architecture that supports the body — night
-            after night.
+            {hero.description}
           </p>
         </div>
       </section>
@@ -41,12 +43,11 @@ export default function AboutPage() {
 
         <div className="absolute bottom-10 sm:bottom-16 md:bottom-24 left-1/2 -translate-x-1/2 text-center text-white max-w-xs sm:max-w-md md:max-w-2xl px-4 sm:px-6">
           <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-snug">
-            Every Layer Carries Intention.
+            {frame.title}
           </h2>
 
           <p className="mt-4 sm:mt-6 text-xs sm:text-sm md:text-base lg:text-lg opacity-90 leading-relaxed">
-            What feels effortless is shaped through calibration, discipline, and
-            repetition.
+            {frame.description}
           </p>
         </div>
       </section>
@@ -57,21 +58,19 @@ export default function AboutPage() {
           {/* TEXT */}
           <div className="space-y-6 sm:space-y-8 max-w-lg mx-auto md:mx-0">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-text-primary leading-snug">
-              Engineering Beyond Surface Softness
+              {editorial.title}
             </h3>
 
             <p className="text-text-primary text-base sm:text-lg leading-relaxed">
-              Softness is immediate. Structure is lasting.
+              {editorial.lead}
             </p>
 
             <p className="text-sm sm:text-base text-text-body leading-relaxed">
-              Our mattresses are engineered to maintain alignment, distribute
-              pressure evenly, and regulate airflow — without losing integrity
-              over time.
+              {editorial.paragraph1}
             </p>
 
             <p className="text-sm sm:text-base text-text-muted leading-relaxed">
-              Comfort is not padding. It is layered architecture.
+              {editorial.paragraph2}
             </p>
           </div>
 
@@ -106,21 +105,17 @@ export default function AboutPage() {
             {/* TEXT */}
             <div className="space-y-6 sm:space-y-8 order-1 md:order-2">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-text-primary leading-snug">
-                Built to Scale.
+                {scale.titleLine1}
                 <br className="hidden sm:block" />
-                Designed to Endure.
+                {scale.titleLine2}
               </h3>
 
               <div className="space-y-4 sm:space-y-6 text-sm sm:text-base text-text-body leading-relaxed">
-                <p className="text-text-primary">
-                  As infrastructure expanded, precision remained constant.
-                </p>
+                <p className="text-text-primary">{scale.paragraph1}</p>
 
-                <p>Production evolved. Standards did not.</p>
+                <p>{scale.paragraph2}</p>
 
-                <p className="text-text-muted">
-                  Growth strengthened discipline — it never replaced it.
-                </p>
+                <p className="text-text-muted">{scale.paragraph3}</p>
               </div>
             </div>
           </div>
@@ -130,49 +125,50 @@ export default function AboutPage() {
       {/* ================= COMMITMENT ================= */}
       <section className="relative py-24 sm:py-32 md:py-44 bg-beige-300 overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="text-[80px] sm:text-[120px] md:text-[200px] font-semibold text-text-primary opacity-[0.02]">
-            REST
+          <span className="text-[80px] sm:text-[120px] md:text-[200px] font-semibold text-text-primary opacity-[0.04]">
+            {commitment.rest}
           </span>
         </div>
 
         <div className="relative max-w-xl sm:max-w-2xl md:max-w-3xl mx-auto text-center px-6 md:px-8 space-y-8 sm:space-y-12">
           <h3 className="text-xl sm:text-2xl md:text-4xl font-semibold text-text-primary">
-            The Commitment
+            {commitment.title}
           </h3>
 
           <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed">
-            We do not manufacture comfort. We construct foundations that support
-            life — quietly, consistently, and without compromise.
+            {commitment.paragraph1}
           </p>
 
           <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed">
-            Because rest should never feel temporary. It should feel certain.
+            {commitment.paragraph2}
           </p>
         </div>
       </section>
       {/* ================= WHERE WE ARE ================= */}
-      <WhereWeAre />
+      <WhereWeAre translation={locations} />
     </div>
   );
 }
 
-function WhereWeAre() {
+function WhereWeAre({ translation }) {
   return (
-    <section className="relative py-24 sm:py-32 md:py-40 bg-white border-t border-beige-500">
+    <section
+      className="relative py-24 sm:py-32 md:py-40 bg-white border-t border-beige-500"
+      id="locations"
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         {/* ================= HEADER ================= */}
         <div className="text-center max-w-2xl mx-auto mb-20 space-y-6">
           <p className="text-xs uppercase tracking-[0.4em] text-text-soft">
-            Where We Are
+            {translation.title}
           </p>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-text-primary">
-            Visit Litmad
+            {translation.subtitle}
           </h2>
 
           <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed">
-            Experience our craftsmanship in Constantine or explore our showroom
-            in Algiers.
+            {translation.description}
           </p>
         </div>
 
@@ -188,16 +184,16 @@ function WhereWeAre() {
               <div className="flex items-center gap-2 text-primary-600">
                 <FiMapPin size={18} />
                 <span className="text-sm font-medium uppercase tracking-wide">
-                  Production Facility
+                  {translation.production.label}
                 </span>
               </div>
 
               <h3 className="text-xl sm:text-2xl font-semibold text-text-primary">
-                Litmad – Constantine
+                {translation.production.title}
               </h3>
 
               <p className="text-text-muted text-sm sm:text-base">
-                Our operations and manufacturing center.
+                {translation.production.description}
               </p>
             </div>
 
@@ -219,7 +215,7 @@ function WhereWeAre() {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition"
               >
                 <FiNavigation size={16} />
-                Guide Me
+                {translation.production.guideMe}
               </a>
 
               <a
@@ -229,7 +225,7 @@ function WhereWeAre() {
                 className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-beige-600 text-text-primary text-sm font-medium hover:bg-beige-200 transition"
               >
                 <FiExternalLink size={16} />
-                Open in Maps
+                {translation.production.open}
               </a>
             </div>
           </div>
@@ -244,16 +240,16 @@ function WhereWeAre() {
               <div className="flex items-center gap-2 text-primary-600">
                 <FiMapPin size={18} />
                 <span className="text-sm font-medium uppercase tracking-wide">
-                  Showroom
+                  {translation.showroom.label}
                 </span>
               </div>
 
               <h3 className="text-xl sm:text-2xl font-semibold text-text-primary">
-                Litmad Showroom – Algiers
+                {translation.showroom.title}
               </h3>
 
               <p className="text-text-muted text-sm sm:text-base">
-                Discover our collections in a refined environment.
+                {translation.showroom.description}
               </p>
             </div>
 
@@ -275,7 +271,7 @@ function WhereWeAre() {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition"
               >
                 <FiNavigation size={16} />
-                Guide Me
+                {translation.showroom.guideMe}
               </a>
 
               <a
@@ -285,7 +281,7 @@ function WhereWeAre() {
                 className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-beige-600 text-text-primary text-sm font-medium hover:bg-beige-200 transition"
               >
                 <FiExternalLink size={16} />
-                Open in Maps
+                {translation.showroom.open}
               </a>
             </div>
           </div>

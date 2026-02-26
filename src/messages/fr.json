@@ -106,5 +106,244 @@
       "allDimensions": "Toutes tailles",
       "reset": "Effacer"
     }
+  },
+  "cartPage": {
+    "empty": {
+      "title": "Votre panier est vide",
+      "description": "Vous n’avez encore ajouté aucun produit.",
+      "continue": "Continuer vos achats"
+    },
+
+    "header": {
+      "title": "Votre panier",
+      "continue": "Continuer vos achats"
+    },
+
+    "item": {
+      "size": "Taille",
+      "remove": "Supprimer",
+      "each": "l’unité",
+      "save": "Économie"
+    },
+
+    "summary": {
+      "title": "Récapitulatif de commande",
+      "items": "Articles",
+      "totalSavings": "Économies totales",
+      "delivery": "Livraison",
+      "free": "Gratuite",
+      "total": "Total",
+      "secure": "Paiement sécurisé. Taxes incluses.",
+      "checkout": "Passer au paiement"
+    }
+  },
+  "checkoutPage": {
+    "header": {
+      "back": "Retour au panier",
+      "title": "Paiement sécurisé"
+    },
+
+    "contact": {
+      "title": "Informations de contact",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Adresse e-mail",
+      "phone": "Numéro de téléphone"
+    },
+
+    "shipping": {
+      "title": "Adresse de livraison",
+      "wilaya": "Wilaya",
+      "city": "Ville",
+      "street": "Adresse",
+      "mapLink": "Lien Google Maps (optionnel)"
+    },
+
+    "payment": {
+      "title": "Mode de paiement",
+      "method": "Paiement à la livraison",
+      "description": "Payez en toute sécurité à la réception de votre commande."
+    },
+
+    "button": {
+      "submit": "Finaliser la commande",
+      "processing": "Traitement..."
+    },
+
+    "summary": {
+      "title": "Récapitulatif de commande",
+      "subtotal": "Sous-total",
+      "total": "Total",
+      "secure1": "✓ Traitement sécurisé de la commande",
+      "secure2": "✓ Confirmation téléphonique avant livraison",
+      "secure3": "✓ Garantie matelas 10 ans"
+    },
+
+    "validation": {
+      "required": "Veuillez remplir tous les champs obligatoires."
+    }
+  },
+  "orderSuccessPage": {
+    "header": {
+      "title": "Commande confirmée",
+      "description": "Votre commande a été enregistrée avec succès."
+    },
+    "details": {
+      "orderNumber": "Numéro de commande",
+      "total": "Total"
+    },
+    "infoBox": {
+      "line1": "Nous vous contacterons prochainement pour confirmer la livraison.",
+      "payment": "Mode de paiement :",
+      "paymentMethod": "Paiement à la livraison"
+    },
+    "button": "Continuer vos achats"
+  },
+  "orderTrackingPage": {
+    "header": {
+      "title": "Suivez votre commande",
+      "description": "Entrez votre numéro de commande pour vérifier l'état actuel de la livraison."
+    },
+
+    "search": {
+      "placeholder": "Exemple : LIT-10003",
+      "button": "Suivre la commande",
+      "error": "Commande introuvable. Veuillez vérifier votre numéro."
+    },
+
+    "details": {
+      "orderId": "Numéro de commande",
+      "customer": "Client",
+      "total": "Total"
+    },
+
+    "status": {
+      "unconfirmed": "Non confirmée",
+      "confirmed": "Confirmée",
+      "in_delivery": "En livraison",
+      "delivered": "Livrée"
+    },
+
+    "steps": {
+      "placed": "Commande reçue",
+      "confirmed": "Confirmée",
+      "inDelivery": "En livraison",
+      "delivered": "Livrée"
+    },
+
+    "messages": {
+      "unconfirmed": "Votre commande a été reçue et est en attente de confirmation.",
+      "confirmed": "Votre commande a été confirmée et est en préparation.",
+      "in_delivery": "Votre matelas est actuellement en cours de livraison.",
+      "delivered": "Votre commande a été livrée avec succès."
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "title": "Commençons la conversation",
+      "description": "Que ce soit pour des questions sur le confort, les matériaux ou la livraison — notre équipe est à votre écoute."
+    },
+
+    "form": {
+      "title": "Envoyez-nous un message",
+      "fullName": "Nom complet",
+      "email": "Adresse e-mail",
+      "message": "Message",
+      "button": "Envoyer la demande"
+    },
+
+    "info": {
+      "phone": "Téléphone",
+      "email": "E-mail",
+      "location": "Localisation",
+      "hours": "Horaires d'ouverture",
+      "hoursValue": "Samedi – Jeudi | 9h00 – 18h00"
+    }
+  },
+  "aboutPage": {
+    "hero": {
+      "badge": "Notre Philosophie",
+      "title": "Le confort est un silence structuré.",
+      "description": "C’est une architecture invisible qui soutient le corps — nuit après nuit."
+    },
+
+    "frame": {
+      "title": "Chaque couche porte une intention.",
+      "description": "Ce qui paraît naturel est façonné par précision, discipline et répétition."
+    },
+
+    "editorial": {
+      "title": "Une ingénierie au-delà de la douceur",
+      "lead": "La douceur est immédiate. La structure est durable.",
+      "paragraph1": "Nos matelas sont conçus pour maintenir l’alignement, répartir la pression uniformément et réguler la circulation de l’air — sans perdre leur intégrité au fil du temps.",
+      "paragraph2": "Le confort n’est pas un simple rembourrage. C’est une architecture en couches."
+    },
+
+    "scale": {
+      "titleLine1": "Construit pour évoluer.",
+      "titleLine2": "Conçu pour durer.",
+      "lead": "À mesure que l’infrastructure s’est développée, la précision est restée constante.",
+      "paragraph1": "La production a évolué. Les standards, eux, non.",
+      "paragraph2": "La croissance a renforcé la discipline — elle ne l’a jamais remplacée."
+    },
+
+    "commitment": {
+      "rest": "REPOS",
+      "title": "Notre Engagement",
+      "paragraph1": "Nous ne fabriquons pas simplement du confort. Nous construisons des fondations qui soutiennent la vie — discrètement, durablement et sans compromis.",
+      "paragraph2": "Car le repos ne devrait jamais sembler temporaire. Il devrait être certain."
+    },
+
+    "locations": {
+      "badge": "Où Nous Trouver",
+      "title": "Visitez Litmad",
+      "description": "Découvrez notre savoir-faire à Constantine ou explorez notre showroom à Alger.",
+
+      "production": {
+        "label": "Site de Production",
+        "title": "Litmad – Constantine",
+        "description": "Notre centre d’opérations et de fabrication.",
+        "guideMe": "Itinéraire",
+        "open": "Ouvrir dans Maps"
+      },
+
+      "showroom": {
+        "label": "Showroom",
+        "title": "Showroom Litmad – Alger",
+        "description": "Découvrez nos collections dans un environnement raffiné.",
+        "guideMe": "Itinéraire",
+        "open": "Ouvrir dans Maps"
+      }
+    }
+  },
+  "footer": {
+    "brandDescription": "Fabrication de matelas haut de gamme axée sur la durabilité, la précision et un confort longue durée conçu pour un sommeil réparateur.",
+
+    "shop": {
+      "title": "Boutique",
+      "allMattresses": "Tous les matelas",
+      "collections": "Collections",
+      "trackOrder": "Suivi de commande"
+    },
+
+    "company": {
+      "title": "Entreprise",
+      "home": "Accueil",
+      "about": "À propos",
+      "contact": "Contact"
+    },
+
+    "contact": {
+      "title": "Contact",
+      "phone": "+213 000 000 000",
+      "email": "contact@litmad.com",
+      "location": "Alger, Algérie"
+    },
+
+    "bottom": {
+      "copyright": "Tous droits réservés.",
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions générales"
+    }
   }
 }

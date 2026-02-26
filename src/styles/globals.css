@@ -25,15 +25,73 @@ html[dir="rtl"] h3,
 html[dir="rtl"] h4 {
   font-family: var(--font-arabic);
 }
+
+/* @theme {
+  --color-beige-50: #ffffff;
+  --color-beige-100: #f9fbfd;
+  --color-beige-150: #f4f7fa;
+  --color-beige-200: #eef3f8;
+  --color-beige-300: #e6edf5;
+  --color-beige-350: #dde6f0;
+
+  --color-beige-400: #d3deea;
+  --color-beige-450: #ccd8e6;
+  --color-beige-500: #c3d0e0;
+  --color-beige-550: #f2f6fb;
+  --color-beige-600: #b2c2d6;
+  --color-beige-650: #a8b9cf;
+  --color-beige-700: #95a9c2;
+  --color-beige-800: #8299b4;
+  --color-beige-900: #6d859f;
+
+  --color-primary-50: #e6f0fa;
+  --color-primary-100: #cce1f5;
+  --color-primary-200: #99c3eb;
+  --color-primary-300: #66a6e0;
+  --color-primary-400: #3388d6;
+  --color-primary-500: #005ab6;
+  --color-primary-600: #004b98;
+  --color-primary-700: #003d7d;
+  --color-primary-800: #002f61;
+  --color-primary-900: #002247;
+
+  --color-accent-100: #f7efe3;
+  --color-accent-200: #ead9bd;
+  --color-accent-300: #d7be8f;
+  --color-accent-400: #c4a467;
+  --color-accent-500: #a8893e;
+
+  --color-text-500: #5b6b7a;
+  --color-text-600: #3e4b57;
+  --color-text-primary: #0e1620;
+  --color-text-heading: #0b1118;
+  --color-text-body: #556372;
+  --color-text-muted: #6f7d8a;
+  --color-text-soft: #8b98a4;
+  --color-text-subtle: #a4afba;
+  --color-text-disabled: #c2cbd3;
+  --color-success-50: #e7f6f2;
+  --color-success-100: #c9ece3;
+  --color-success-500: #1e9d7a;
+  --color-success-600: #157a5f;
+
+  --color-warning-50: #fdf6e8;
+  --color-warning-100: #f8e6c4;
+  --color-warning-500: #c2882d;
+
+  --color-error-50: #fdeaea;
+  --color-error-100: #f7cccc;
+  --color-error-500: #c84242;
+  --color-error-600: #a83232;
+
+  --shadow-primary: 0 18px 40px rgba(43, 45, 110, 0.25);
+
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+} */
+
 @theme {
-  /* ======================================================
-   LITMAD DESIGN SYSTEM
-   ====================================================== */
-
-  /* ======================================================
-   NEUTAL SCALE (WARM BEIGE)
-   ====================================================== */
-
   --color-beige-50: #faf9f7;
   --color-beige-100: #f8f6f2;
   --color-beige-150: #f9f7f3;
@@ -51,10 +109,6 @@ html[dir="rtl"] h4 {
   --color-beige-800: #d6cdc0;
   --color-beige-900: #cfc6ba;
 
-  /* ======================================================
-     BRAND PRIMARY (INDIGO)
-     ====================================================== */
-
   --color-primary-50: #f4f3ff;
   --color-primary-100: #e9e8f8;
   --color-primary-200: #dcddf5;
@@ -66,19 +120,12 @@ html[dir="rtl"] h4 {
   --color-primary-800: #181a40;
   --color-primary-900: #12132f;
 
-  /* ======================================================
-     ACCENT GOLD
-     ====================================================== */
-
   --color-accent-100: #f7e8c6;
   --color-accent-200: #ebd9a6;
   --color-accent-300: #d9c382;
   --color-accent-400: #c6a75e;
   --color-accent-500: #b8923c;
 
-  /* ======================================================
-     TEXT COLORS
-     ====================================================== */
   --color-text-500: #5f5f5f;
   --color-text-600: #444;
   --color-text-primary: #1c1c1c;
@@ -88,10 +135,6 @@ html[dir="rtl"] h4 {
   --color-text-soft: #8c857a;
   --color-text-subtle: #9a8f82;
   --color-text-disabled: #a8a29e;
-
-  /* ======================================================
-     STATUS COLORS
-     ====================================================== */
 
   --color-success-50: #ecfdf5;
   --color-success-100: #d1fae5;
@@ -107,36 +150,13 @@ html[dir="rtl"] h4 {
   --color-error-500: #ef4444;
   --color-error-600: #dc2626;
 
-  /* ======================================================
-     SURFACE BACKGROUNDS
-     ====================================================== */
-
-  /* ======================================================
-     BORDERS
-     ====================================================== */
-
-  /* ======================================================
-     SHADOWS
-     ====================================================== */
-
   --shadow-primary: 0 18px 40px rgba(43, 45, 110, 0.25);
-
-  /* ======================================================
-     GRADIENTS
-     ====================================================== */
-
-  /* ======================================================
-     RADIUS SYSTEM
-     ====================================================== */
-
-  /* ======================================================
-     TRANSITIONS
-     ====================================================== */
 
   --transition-fast: 150ms ease;
   --transition-base: 300ms ease;
   --transition-slow: 500ms ease;
 }
+
 h1,
 h2,
 h3,
@@ -166,3 +186,69 @@ html[dir="rtl"] h4 {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* @theme {
+  --color-beige-50: #ffffff;
+  --color-beige-100: #fbfbfc;
+  --color-beige-150: #f6f7f9;
+  --color-beige-200: #f1f3f6;
+  --color-beige-300: #eceff3;
+  --color-beige-350: #e6eaf0;
+
+  --color-beige-400: #dce2ea;
+  --color-beige-450: #d5dce6;
+  --color-beige-500: #cbd3de;
+  --color-beige-550: #f5f7fa;
+  --color-beige-600: #bcc6d3;
+  --color-beige-650: #b2bcc9;
+  --color-beige-700: #9ea9b8;
+  --color-beige-800: #8d99a8;
+  --color-beige-900: #7a8696;
+
+  --color-primary-50: #e8f1f9;
+  --color-primary-100: #cfe2f3;
+  --color-primary-200: #a8cbe7;
+  --color-primary-300: #74abd8;
+  --color-primary-400: #3f87c5;
+  --color-primary-500: #1f6fb2;
+  --color-primary-600: #175a92;
+  --color-primary-700: #124a77;
+  --color-primary-800: #0d395b;
+  --color-primary-900: #08273f;
+
+  --color-accent-100: #f6efe1;
+  --color-accent-200: #ead8b8;
+  --color-accent-300: #d9bc87;
+  --color-accent-400: #c6a75e;
+  --color-accent-500: #a88b3f;
+
+  --color-text-500: #5c6773;
+  --color-text-600: #3d4752;
+  --color-text-primary: #0f1720;
+  --color-text-heading: #0b1117;
+  --color-text-body: #5f6b77;
+  --color-text-muted: #7b8793;
+  --color-text-soft: #9aa4ae;
+  --color-text-subtle: #a8b2bd;
+  --color-text-disabled: #c1c8cf;
+
+  --color-success-50: #ecfdf5;
+  --color-success-100: #d1fae5;
+  --color-success-500: #10b981;
+  --color-success-600: #059669;
+
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #f59e0b;
+
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+
+  --shadow-primary: 0 18px 40px rgba(43, 45, 110, 0.25);
+
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+} */

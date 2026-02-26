@@ -8,8 +8,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/slices/cartSlice";
 import { products } from "@/constants/products";
 import { useRouter } from "next/navigation";
-const formatPrice = (price) =>
-  new Intl.NumberFormat("fr-DZ").format(price) + " DA";
+import { formatPrice } from "@/utils/helpers";
 
 export default function ProductPage() {
   const params = useParams();

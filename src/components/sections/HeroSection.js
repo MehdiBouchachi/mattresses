@@ -23,10 +23,12 @@ export default function HeroSection({ translation }) {
   } = translation?.home?.hero;
 
   return (
-    <section className="relative pt-40 pb-40 bg-beige-300 overflow-hidden">
+    <section className="relative pt-40 pb-40 bg-gradient-to-b from-beige-50 to-beige-200 overflow-hidden">
       {/* Soft Background Accent */}
-      <div className="absolute -top-40 -left-40 w-150 h-150 bg-beige-400 rounded-full blur-[140px] opacity-60" />
-
+      <div
+        className="absolute -top-40 -left-40 w-[600px] h-[600px] 
+bg-primary-200 rounded-full blur-[160px] opacity-30"
+      />
       <div className="relative max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-28 items-center">
         {/* LEFT CONTENT */}
         <div className="space-y-10">
@@ -86,6 +88,10 @@ export default function HeroSection({ translation }) {
             </p>
           </div>
         </div>
+        <div
+          className="absolute -right-40 top-20 w-[500px] h-[500px] 
+bg-primary-100 rounded-full blur-[140px] opacity-20 -z-10"
+        />
       </div>
     </section>
   );

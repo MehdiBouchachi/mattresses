@@ -96,7 +96,16 @@ export default function WhyLitmadSection({ translation, locale }) {
     translation.home.whyLitmad;
 
   return (
-    <section className="py-44 bg-beige-300">
+    <section className="relative py-30 bg-gradient-to-b from-beige-50 via-beige-150 to-beige-200 overflow-hidden">
+      <div
+        className="absolute -top-32 -right-32 w-[500px] h-[500px] 
+bg-primary-200 rounded-full blur-[140px] opacity-20"
+      />
+
+      <div
+        className="absolute bottom-0 -left-40 w-[600px] h-[600px] 
+bg-primary-100 rounded-full blur-[160px] opacity-15"
+      />
       <div className="max-w-7xl mx-auto px-8">
         <HeadlineBlock title={title} desc={desc} />
 

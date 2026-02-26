@@ -107,5 +107,245 @@
       "allDimensions": "All Sizes",
       "reset": "Clear"
     }
+  },
+  "cartPage": {
+    "empty": {
+      "title": "Your Cart is Empty",
+      "description": "Looks like you haven’t added anything yet.",
+      "continue": "Continue Shopping"
+    },
+
+    "header": {
+      "title": "Your Cart",
+      "continue": "Continue Shopping"
+    },
+
+    "item": {
+      "size": "Size",
+      "remove": "Remove",
+      "each": "each",
+      "save": "Save"
+    },
+
+    "summary": {
+      "title": "Order Summary",
+      "items": "Items",
+      "totalSavings": "Total Savings",
+      "delivery": "Delivery",
+      "free": "Free",
+      "total": "Total",
+      "secure": "Secure checkout. Taxes included.",
+      "checkout": "Proceed to Checkout"
+    }
+  },
+  "checkoutPage": {
+    "header": {
+      "back": "Back to Cart",
+      "title": "Secure Checkout"
+    },
+
+    "contact": {
+      "title": "Contact Information",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number"
+    },
+
+    "shipping": {
+      "title": "Shipping Address",
+      "wilaya": "Wilaya",
+      "city": "City",
+      "street": "Street Address",
+      "mapLink": "Google Maps Link (optional)"
+    },
+
+    "payment": {
+      "title": "Payment Method",
+      "method": "Cash on Delivery",
+      "description": "Pay securely when your order is delivered."
+    },
+
+    "button": {
+      "submit": "Complete Order",
+      "processing": "Processing..."
+    },
+
+    "summary": {
+      "title": "Order Summary",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "secure1": "✓ Secure order processing",
+      "secure2": "✓ Phone confirmation before delivery",
+      "secure3": "✓ 10-year mattress warranty"
+    },
+
+    "validation": {
+      "required": "Please fill all required fields."
+    }
+  },
+  "orderSuccessPage": {
+    "header": {
+      "title": "Order Confirmed",
+      "description": "Your order has been placed successfully."
+    },
+    "details": {
+      "orderNumber": "Order Number",
+      "total": "Total"
+    },
+    "infoBox": {
+      "line1": "We will contact you shortly to confirm delivery.",
+      "payment": "Payment method:",
+      "paymentMethod": "Cash on Delivery"
+    },
+    "button": "Continue Shopping"
+  },
+  "orderTrackingPage": {
+    "header": {
+      "title": "Track Your Order",
+      "description": "Enter your order number to check the current delivery status."
+    },
+
+    "search": {
+      "placeholder": "Example: LIT-10003",
+      "button": "Track Order",
+      "error": "Order not found. Please verify your ID."
+    },
+
+    "details": {
+      "orderId": "Order ID",
+      "customer": "Customer",
+      "total": "Total"
+    },
+
+    "status": {
+      "unconfirmed": "Unconfirmed",
+      "confirmed": "Confirmed",
+      "in_delivery": "In Delivery",
+      "delivered": "Delivered"
+    },
+
+    "steps": {
+      "placed": "Order Placed",
+      "confirmed": "Confirmed",
+      "inDelivery": "In Delivery",
+      "delivered": "Delivered"
+    },
+
+    "messages": {
+      "unconfirmed": "Your order has been received and is awaiting confirmation.",
+      "confirmed": "Your order has been confirmed and is being prepared.",
+      "in_delivery": "Your mattress is currently out for delivery.",
+      "delivered": "Your order has been successfully delivered."
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "title": "Let’s Begin the Conversation",
+      "description": "Whether you have questions about comfort, materials, or delivery — our team is ready to assist you."
+    },
+
+    "form": {
+      "title": "Send Us a Message",
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "message": "Message",
+      "button": "Submit Inquiry"
+    },
+
+    "info": {
+      "phone": "Phone",
+      "email": "Email",
+      "location": "Location",
+      "hours": "Working Hours",
+      "hoursValue": "Saturday – Thursday | 9:00 AM – 6:00 PM"
+    }
+  },
+
+  "aboutPage": {
+    "hero": {
+      "badge": "Our Philosophy",
+      "title": "Comfort Is Structured Silence.",
+      "description": "It is the invisible architecture that supports the body — night after night."
+    },
+
+    "frame": {
+      "title": "Every Layer Carries Intention.",
+      "description": "What feels effortless is shaped through calibration, discipline, and repetition."
+    },
+
+    "editorial": {
+      "title": "Engineering Beyond Surface Softness",
+      "lead": "Softness is immediate. Structure is lasting.",
+      "paragraph1": "Our mattresses are engineered to maintain alignment, distribute pressure evenly, and regulate airflow — without losing integrity over time.",
+      "paragraph2": "Comfort is not padding. It is layered architecture."
+    },
+
+    "scale": {
+      "titleLine1": "Built to Scale.",
+      "titleLine2": "Designed to Endure.",
+      "lead": "As infrastructure expanded, precision remained constant.",
+      "paragraph1": "Production evolved. Standards did not.",
+      "paragraph2": "Growth strengthened discipline — it never replaced it."
+    },
+
+    "commitment": {
+      "rest": "REST",
+      "title": "The Commitment",
+      "paragraph1": "We do not manufacture comfort. We construct foundations that support life — quietly, consistently, and without compromise.",
+      "paragraph2": "Because rest should never feel temporary. It should feel certain."
+    },
+
+    "locations": {
+      "badge": "Where We Are",
+      "title": "Visit Litmad",
+      "description": "Experience our craftsmanship in Constantine or explore our showroom in Algiers.",
+
+      "production": {
+        "label": "Production Facility",
+        "title": "Litmad – Constantine",
+        "description": "Our operations and manufacturing center.",
+        "guideMe": "Guide Me",
+        "open": "Open in Maps"
+      },
+
+      "showroom": {
+        "label": "Showroom",
+        "title": "Litmad Showroom – Algiers",
+        "description": "Discover our collections in a refined environment.",
+        "guideMe": "Guide Me",
+        "open": "Open in Maps"
+      }
+    }
+  },
+  "footer": {
+    "brandDescription": "Premium mattress manufacturing focused on durability, precision, and long-term comfort engineered for restorative sleep.",
+
+    "shop": {
+      "title": "Shop",
+      "allMattresses": "All Mattresses",
+      "collections": "Collections",
+      "trackOrder": "Track Order"
+    },
+
+    "company": {
+      "title": "Company",
+      "home": "Home",
+      "about": "About Us",
+      "contact": "Contact"
+    },
+
+    "contact": {
+      "title": "Contact",
+      "phone": "+213 000 000 000",
+      "email": "contact@litmad.com",
+      "location": "Algiers, Algeria"
+    },
+
+    "bottom": {
+      "copyright": "All rights reserved.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions"
+    }
   }
 }

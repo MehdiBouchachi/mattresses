@@ -8,145 +8,169 @@ import {
   FiFacebook,
 } from "react-icons/fi";
 import Link from "next/link";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 
-export default function Footer() {
+export default function Footer({ translation }) {
   const params = useParams();
-  const locale = params?.locale || "en";
-
+  const locale = params?.local || "en";
+  const {
+    footer: {
+      brandDescription,
+      shop: shopLinks,
+      company: companyLinks,
+      contact: contactInfo,
+      bottom: bottomInfo,
+    },
+  } = translation;
   return (
-    <footer className="relative bg-beige-300 border-t border-beige-700 pt-28 shadow-[0_-20px_60px_rgba(0,0,0,0.05)]">
-      {/* Top separator glow */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-primary-600/10" />
+    <footer className="bg-white border-t border-beige-400">
+      {/* ================= MAIN GRID ================= */}
+      <div className="max-w-7xl mx-auto px-8 py-24">
+        <div className="grid gap-16 lg:grid-cols-4 md:grid-cols-2">
+          {/* ===== BRAND ===== */}
+          <div className="flex flex-col justify-between space-y-8">
+            <div className="space-y-6">
+              <Image
+                src="/images/logo.webp"
+                alt="LITMAD Logo"
+                width={170}
+                height={70}
+                className="object-contain"
+              />
 
-      <div className="max-w-7xl mx-auto px-8 pb-24 grid md:grid-cols-4 gap-20">
-        {/* BRAND */}
-        <div className="space-y-7">
-          <h3 className="text-3xl font-semibold tracking-tight text-text-primary">
-            LITMAD
-          </h3>
+              <p className="text-text-body leading-relaxed max-w-sm">
+                {brandDescription}
+              </p>
+            </div>
 
-          <p className="text-sm leading-relaxed text-text-body max-w-xs">
-            Precision-crafted mattresses designed for restorative comfort,
-            structured support, and long-term durability.
-          </p>
+            {/* Social */}
+            <div className="flex items-center gap-6 pt-2">
+              <a
+                className="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center 
+              text-primary-600 hover:bg-primary-600 hover:text-white 
+              transition duration-300"
+              >
+                <FiInstagram size={18} />
+              </a>
 
-          <div className="flex gap-5 pt-3">
-            <FiInstagram className="text-primary-600 hover:text-primary-500 hover:scale-110 transition duration-300 cursor-pointer" />
-            <FiFacebook className="text-primary-600 hover:text-primary-500 hover:scale-110 transition duration-300 cursor-pointer" />
+              <a
+                className="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center 
+              text-primary-600 hover:bg-primary-600 hover:text-white 
+              transition duration-300"
+              >
+                <FiFacebook size={18} />
+              </a>
+            </div>
           </div>
-        </div>
 
-        {/* SHOP */}
-        <div>
-          <h4 className="text-xs font-semibold uppercase tracking-[0.2em] mb-8 text-text-muted">
-            Shop
-          </h4>
+          {/* ===== SHOP ===== */}
+          <div>
+            <h4 className="text-sm font-semibold mb-8 text-text-heading tracking-wide">
+              {shopLinks.title}
+            </h4>
 
-          <ul className="space-y-5 text-sm text-text-body">
-            <li>
-              <Link
-                href={`/${locale}/mattresses`}
-                className="hover:text-primary-600 transition"
-              >
-                Mattresses
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}#collections`}
-                className="hover:text-primary-600 transition"
-              >
-                Collections
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/cart`}
-                className="hover:text-primary-600 transition"
-              >
-                Cart
-              </Link>
-            </li>
-          </ul>
-        </div>
+            <ul className="space-y-4 text-text-body">
+              <li>
+                <Link
+                  href={`/${locale}/mattresses`}
+                  className="hover:text-primary-600 transition"
+                >
+                  {shopLinks.allMattresses}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${locale}#collections`}
+                  className="hover:text-primary-600 transition"
+                >
+                  {shopLinks.collections}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${locale}/track-order`}
+                  className="hover:text-primary-600 transition"
+                >
+                  {shopLinks.trackOrder}
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-        {/* COMPANY */}
-        <div>
-          <h4 className="text-xs font-semibold uppercase tracking-[0.2em] mb-8 text-text-muted">
-            Company
-          </h4>
+          {/* ===== COMPANY ===== */}
+          <div>
+            <h4 className="text-sm font-semibold mb-8 text-text-heading tracking-wide">
+              {companyLinks.title}
+            </h4>
 
-          <ul className="space-y-5 text-sm text-text-body">
-            <li>
-              <Link
-                href={`/${locale}`}
-                className="hover:text-primary-600 transition"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/contact`}
-                className="hover:text-primary-600 transition"
-              >
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/checkout`}
-                className="hover:text-primary-600 transition"
-              >
-                Checkout
-              </Link>
-            </li>
-          </ul>
-        </div>
+            <ul className="space-y-4 text-text-body">
+              <li>
+                <Link
+                  href={`/${locale}`}
+                  className="hover:text-primary-600 transition"
+                >
+                  {companyLinks.home}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${locale}/about`}
+                  className="hover:text-primary-600 transition"
+                >
+                  {companyLinks.about}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${locale}/contact`}
+                  className="hover:text-primary-600 transition"
+                >
+                  {companyLinks.contact}
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-        {/* CONTACT */}
-        <div>
-          <h4 className="text-xs font-semibold uppercase tracking-[0.2em] mb-8 text-text-muted">
-            Contact
-          </h4>
+          {/* ===== CONTACT ===== */}
+          <div>
+            <h4 className="text-sm font-semibold mb-8 text-text-heading tracking-wide">
+              {contactInfo.title}
+            </h4>
 
-          <div className="space-y-6 text-sm text-text-body">
-            <div className="flex items-center gap-4">
-              <FiPhone className="text-primary-600" />
-              <span>+213 000 000 000</span>
-            </div>
+            <div className="space-y-5 text-text-body">
+              <div className="flex items-start gap-4">
+                <FiPhone className="text-primary-600 mt-1" />
+                <span>{contactInfo.phone}</span>
+              </div>
 
-            <div className="flex items-center gap-4">
-              <FiMail className="text-primary-600" />
-              <span>contact@litmad.com</span>
-            </div>
+              <div className="flex items-start gap-4">
+                <FiMail className="text-primary-600 mt-1" />
+                <span>{contactInfo.email}</span>
+              </div>
 
-            <div className="flex items-center gap-4">
-              <FiMapPin className="text-primary-600" />
-              <span>Algiers, Algeria</span>
+              <div className="flex items-start gap-4">
+                <FiMapPin className="text-primary-600 mt-1" />
+                <span>{contactInfo.location}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom strip */}
-      <div className="border-t border-beige-700/60 py-12">
-        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-text-soft">
-          <p>© {new Date().getFullYear()} Litmad. All rights reserved.</p>
+      {/* ================= BOTTOM STRIP ================= */}
+      <div className="bg-primary-600 text-white">
+        <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+          <p className="text-white/80 text-center md:text-left">
+            © {new Date().getFullYear()} LITMAD. {bottomInfo.copyright}
+          </p>
 
-          <div className="flex gap-10">
-            <Link
-              href={`/${locale}/privacy`}
-              className="hover:text-primary-600 transition"
-            >
-              Privacy
+          <div className="flex gap-8">
+            <Link href={`/${locale}/privacy`} className="hover:underline">
+              {bottomInfo.privacy}
             </Link>
-            <Link
-              href={`/${locale}/terms`}
-              className="hover:text-primary-600 transition"
-            >
-              Terms
+            <Link href={`/${locale}/terms`} className="hover:underline">
+              {bottomInfo.terms}
             </Link>
           </div>
         </div>

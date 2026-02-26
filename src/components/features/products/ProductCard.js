@@ -1,10 +1,7 @@
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-
-const formatPrice = (price, locale) =>
-  new Intl.NumberFormat("fr-DZ").format(price) +
-  (locale === "ar" ? " د.ج" : " DA");
+import { formatPrice } from "@/utils/helpers";
 
 function ProductCard({ product, translation }) {
   const params = useParams();

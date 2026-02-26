@@ -1,9 +1,12 @@
-"use client";
-
 import { FiPhone, FiMail, FiMapPin, FiClock } from "react-icons/fi";
 import Button from "@/components/ui/Button";
+import { getTranslations } from "@/lib/i18n";
 
-export default function ContactPage() {
+export default async function ContactPage({ params }) {
+  const { local } = await params;
+  const {
+    contactPage: { hero, form, info },
+  } = getTranslations(local);
   return (
     <main className="bg-beige-300 min-h-screen">
       {/* ================= HERO ================= */}
@@ -12,12 +15,11 @@ export default function ContactPage() {
 
         <div className="relative max-w-3xl mx-auto px-8">
           <h1 className="text-4xl font-semibold tracking-tight mb-5">
-            Let’s Begin the Conversation
+            {hero.title}
           </h1>
 
           <p className="text-base text-text-muted leading-relaxed">
-            Whether you have questions about comfort, materials, or delivery —
-            our team is ready to assist you.
+            {hero.description}
           </p>
         </div>
       </section>
@@ -32,12 +34,12 @@ export default function ContactPage() {
           >
             {/* LEFT FORM */}
             <div>
-              <h2 className="text-2xl font-semibold mb-8">Send Us a Message</h2>
+              <h2 className="text-2xl font-semibold mb-8">{form.title}</h2>
 
               <form className="space-y-7">
-                <FormField label="Full Name" />
-                <FormField label="Email Address" type="email" />
-                <FormTextarea label="Message" />
+                <FormField label={form.fullName} />
+                <FormField label={form.email} type="email" />
+                <FormTextarea label={form.message} />
 
                 <Button
                   size="lg"
@@ -45,35 +47,37 @@ export default function ContactPage() {
                   hover:bg-primary-700 
                   shadow-[0_18px_40px_rgba(43,45,110,0.25)]"
                 >
-                  Submit Inquiry
+                  {form.button}
                 </Button>
               </form>
             </div>
 
             {/* RIGHT INFO */}
-            <div className="space-y-10 border-l border-beige-900 pl-12">
+            <div
+              className={`space-y-10  border-beige-900 ${local !== "ar" ? "pl-12 border-l" : "pr-12 border-r"}`}
+            >
               <ContactItem
                 icon={<FiPhone />}
-                title="Phone"
+                title={info.phone}
                 text="+213 000 000 000"
               />
 
               <ContactItem
                 icon={<FiMail />}
-                title="Email"
+                title={info.email}
                 text="contact@litmad.com"
               />
 
               <ContactItem
                 icon={<FiMapPin />}
-                title="Location"
-                text="Algiers, Algeria"
+                title={info.location}
+                text={info.locationValue}
               />
 
               <ContactItem
                 icon={<FiClock />}
-                title="Working Hours"
-                text="Saturday – Thursday | 9:00 AM – 6:00 PM"
+                title={info.hours}
+                text={info.hoursValue}
               />
             </div>
           </div>

@@ -67,7 +67,7 @@ export default function CategoriesSection({ locale = "en", translation }) {
   const { title, desc, discover } = translation.home.categories;
 
   return (
-    <section className="py-36 bg-beige-150">
+    <section className="py-30 bg-gradient-to-b from-beige-50 to-beige-150">
       <div className="max-w-7xl mx-auto px-8">
         {/* HEADER */}
         <div className="mb-24">

@@ -20,8 +20,9 @@ export default function Button({
   };
 
   const variants = {
-    primary: "bg-[#2B2D6E] text-white shadow-md hover:shadow-xl",
-    secondary: "border border-[#2B2D6E]/30 text-[#2B2D6E] hover:bg-[#2B2D6E]/5",
+    primary: "bg-primary-600 text-white shadow-md hover:shadow-xl",
+    secondary:
+      "border border-primary-600/30 text-primary-600 hover:bg-primary-600/5",
     gold: "bg-[#C6A75E] text-white shadow-md hover:shadow-xl",
   };
 

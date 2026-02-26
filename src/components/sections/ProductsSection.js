@@ -27,7 +27,10 @@ function ProductsSection({ translation }) {
     productCard: productCardTranslation,
   } = translation.home.products;
   return (
-    <section className="py-32 bg-beige-150" id="collections">
+    <section
+      className="py-30 bg-gradient-to-b from-beige-50 to-beige-150"
+      id="collections"
+    >
       <div className="max-w-7xl mx-auto px-8">
         {/* HEADER */}
         <div className="flex items-end justify-between mb-20">
