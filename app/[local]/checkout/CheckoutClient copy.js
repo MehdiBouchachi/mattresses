@@ -1,22 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectCartItems,
   selectCartTotal,
   clearCart,
 } from "@/store/slices/cartSlice";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { formatPrice } from "@/utils/helpers";
 
-const formatPrice = (price) =>
-  new Intl.NumberFormat("fr-DZ").format(price) + " DA";
-
-export default function CheckoutPage() {
+export default function CheckoutClient({ locale, translation }) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const params = useParams();
-  const locale = params?.locale || "en";
+
   const items = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
 
@@ -67,6 +64,7 @@ export default function CheckoutPage() {
     }, 800);
   };
 
+  const { header, contact, shipping, payment, button, summary } = translation;
   return (
     <div className="bg-beige-100 min-h-screen">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20">
@@ -76,111 +74,84 @@ export default function CheckoutPage() {
             onClick={() => router.back()}
             className="text-sm text-primary-600 hover:underline mb-4"
           >
-            ← Back to Cart
+            {locale === "ar" ? header.back + " ←" : header.back + " →"}
           </button>
 
           <h1 className="text-4xl font-semibold tracking-tight">
-            Secure Checkout
+            {header.title}
           </h1>
         </div>
 
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-start">
           {/* ================= LEFT SIDE ================= */}
+
           <div className="space-y-12">
             {/* CONTACT */}
             <section className="space-y-5">
-              <h2 className="text-lg font-semibold">Contact Information</h2>
+              <h2 className="text-lg font-semibold">{contact.title}</h2>
 
               <div className="grid sm:grid-cols-2 gap-4">
-                <input
+                <Input
                   name="firstName"
-                  placeholder="First Name"
+                  placeholder={contact.firstName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
-                  focus:border-primary-600 focus:ring-1 focus:ring-primary-600
-                  outline-none transition"
                 />
-
-                <input
+                <Input
                   name="lastName"
-                  placeholder="Last Name"
+                  placeholder={contact.lastName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
-                  focus:border-primary-600 focus:ring-1 focus:ring-primary-600
-                  outline-none transition"
                 />
               </div>
 
-              <input
+              <Input
                 name="email"
-                placeholder="Email Address"
+                placeholder={contact.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
-                focus:border-primary-600 focus:ring-1 focus:ring-primary-600
-                outline-none transition"
               />
-
-              <input
+              <Input
                 name="phone"
-                placeholder="Phone Number"
+                placeholder={contact.phone}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
-                focus:border-primary-600 focus:ring-1 focus:ring-primary-600
-                outline-none transition"
               />
             </section>
 
             {/* SHIPPING */}
             <section className="space-y-5">
-              <h2 className="text-lg font-semibold">Shipping Address</h2>
+              <h2 className="text-lg font-semibold">{shipping.title}</h2>
 
               <div className="grid sm:grid-cols-2 gap-4">
-                <input
+                <Input
                   name="wilaya"
-                  placeholder="Wilaya"
+                  placeholder={shipping.wilaya}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
-                  focus:border-primary-600 focus:ring-1 focus:ring-primary-600
-                  outline-none transition"
                 />
-
-                <input
+                <Input
                   name="city"
-                  placeholder="City"
+                  placeholder={shipping.city}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
-                  focus:border-primary-600 focus:ring-1 focus:ring-primary-600
-                  outline-none transition"
                 />
               </div>
 
-              <input
+              <Input
                 name="street"
-                placeholder="Street Address"
+                placeholder={shipping.street}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
-                focus:border-primary-600 focus:ring-1 focus:ring-primary-600
-                outline-none transition"
               />
-
-              <input
+              <Input
                 name="mapLink"
-                placeholder="Google Maps Link (optional)"
+                placeholder={shipping.mapLink}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
-                focus:border-primary-600 focus:ring-1 focus:ring-primary-600
-                outline-none transition"
               />
             </section>
 
             {/* PAYMENT */}
             <section className="space-y-4">
-              <h2 className="text-lg font-semibold">Payment Method</h2>
+              <h2 className="text-lg font-semibold">{payment.title}</h2>
 
               <div className="border border-beige-500 rounded-xl p-6 bg-white">
-                <p className="font-medium">Cash on Delivery</p>
+                <p className="font-medium">{payment.method}</p>
                 <p className="text-sm text-text-muted mt-1">
-                  Pay securely when your order is delivered.
+                  {payment.description}
                 </p>
               </div>
             </section>
@@ -193,18 +164,19 @@ export default function CheckoutPage() {
               hover:bg-primary-700 transition duration-300
               shadow-md hover:shadow-lg disabled:opacity-60"
             >
-              {isSubmitting ? "Processing..." : "Complete Order"}
+              {isSubmitting ? button.processing : button.submit}
             </button>
           </div>
 
-          {/* ================= RIGHT SIDE (STICKY) ================= */}
+          {/* ================= RIGHT SIDE ================= */}
+
           <div
             className="bg-white rounded-[36px] p-12 h-fit sticky top-28
           shadow-[0_30px_80px_rgba(0,0,0,0.07)]
           border border-beige-500"
           >
             <h2 className="text-xl font-semibold mb-12 tracking-tight">
-              Order Summary
+              {summary.title}
             </h2>
 
             <div className="space-y-10">
@@ -214,24 +186,24 @@ export default function CheckoutPage() {
                   className="pb-8 border-b border-beige-500 last:border-none last:pb-0"
                 >
                   <div className="flex justify-between items-start gap-6">
-                    <div className="flex flex-col gap-3">
+                    <div>
                       <p className="font-semibold text-base leading-tight">
                         {item.name}
                       </p>
 
-                      <div className="flex items-center gap-3">
-                        <span className="text-sm text-gray-500">
+                      <div className="flex items-center gap-3 mt-2">
+                        <span className="text-sm text-text-muted">
                           {item.size}
                         </span>
 
-                        <span className="px-3 py-1 rounded-full bg-primary-600/10 text-primary-600 text-[11px] font-semibold tracking-wide">
+                        <span className="px-3 py-1 rounded-full bg-primary-600/10 text-primary-600 text-[11px] font-semibold">
                           × {item.quantity}
                         </span>
                       </div>
                     </div>
 
                     <p className="font-semibold text-base whitespace-nowrap">
-                      {formatPrice(item.price * item.quantity)}
+                      {formatPrice(item.price * item.quantity, locale)}
                     </p>
                   </div>
                 </div>
@@ -239,27 +211,43 @@ export default function CheckoutPage() {
             </div>
 
             <div className="mt-12 pt-8 border-t border-beige-500 space-y-5">
-              <div className="flex justify-between text-gray-500 text-sm">
-                <span>Subtotal</span>
-                <span>{formatPrice(total)}</span>
+              <div className="flex justify-between text-text-muted text-sm">
+                <span>{summary.subtotal}</span>
+                <span>{formatPrice(total, locale)}</span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-xl font-semibold">Total</span>
+                <span className="text-xl font-semibold">{summary.total}</span>
 
                 <span className="text-2xl font-bold text-primary-600">
-                  {formatPrice(total)}
+                  {formatPrice(total, locale)}
                 </span>
               </div>
+
               <div className="mt-6 pt-6 border-t border-beige-500 text-sm text-text-muted space-y-2">
-                <p>✓ Secure order processing</p>
-                <p>✓ Phone confirmation before delivery</p>
-                <p>✓ 10-year mattress warranty</p>
+                <p>{summary.secure1}</p>
+                <p>{summary.secure2}</p>
+                <p>{summary.secure3}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+/* ================= Reusable Input ================= */
+
+function Input({ name, placeholder, onChange }) {
+  return (
+    <input
+      name={name}
+      placeholder={placeholder}
+      onChange={onChange}
+      className="w-full px-4 py-3 rounded-xl border border-beige-500 bg-white
+      focus:border-primary-600 focus:ring-1 focus:ring-primary-600
+      outline-none transition"
+    />
   );
 }

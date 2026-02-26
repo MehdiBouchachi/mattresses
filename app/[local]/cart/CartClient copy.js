@@ -9,16 +9,12 @@ import {
   decreaseQuantity,
   removeFromCart,
 } from "@/store/slices/cartSlice";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { formatPrice } from "@/utils/helpers";
 
-const formatPrice = (price) =>
-  new Intl.NumberFormat("fr-DZ").format(price || 0) + " DA";
-
-export default function CartPage() {
+export default function CartClient({ locale, translation }) {
   const dispatch = useDispatch();
   const router = useRouter();
-  const pathname = usePathname();
-  const locale = pathname.split("/")[1];
 
   const items = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
@@ -32,22 +28,28 @@ export default function CartPage() {
     return acc;
   }, 0);
 
+  const { empty, header, item: itemTranslation, summary } = translation || {};
+
+  /* ================= EMPTY STATE ================= */
+
   if (!items.length) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-beige-100">
-        <h1 className="text-3xl font-semibold mb-4">Your Cart is Empty</h1>
-        <p className="text-gray-500 mb-8">
-          Looks like you haven’t added anything yet.
-        </p>
+        <h1 className="text-3xl font-semibold mb-4">{empty?.title}</h1>
+
+        <p className="text-text-muted mb-8">{empty?.description}</p>
+
         <button
           onClick={() => router.back()}
           className="text-primary-600 font-medium hover:underline"
         >
-          ← Continue Shopping
+          {locale === "ar" ? empty.continue + " ←" : empty.continue + " →"}
         </button>
       </div>
     );
   }
+
+  /* ================= MAIN CART ================= */
 
   return (
     <div className="bg-beige-100 min-h-screen">
@@ -58,14 +60,17 @@ export default function CartPage() {
             onClick={() => router.back()}
             className="text-sm text-primary-600 hover:underline mb-5"
           >
-            ← Continue Shopping
+            {locale === "ar" ? header.continue + " ←" : header.continue + " →"}
           </button>
 
-          <h1 className="text-4xl font-semibold tracking-tight">Your Cart</h1>
+          <h1 className="text-4xl font-semibold tracking-tight">
+            {header?.title}
+          </h1>
         </div>
 
         <div className="grid lg:grid-cols-[1.45fr_0.55fr] gap-20 items-start">
           {/* ================= LEFT SIDE ================= */}
+
           <div className="space-y-8">
             {items.map((item) => {
               const hasDiscount = item.oldPrice && item.oldPrice > item.price;
@@ -94,8 +99,8 @@ export default function CartPage() {
                           {item.name}
                         </h3>
 
-                        <p className="text-sm text-gray-500 mb-6">
-                          Size: {item.size}
+                        <p className="text-sm text-text-muted mb-6">
+                          {itemTranslation?.size}: {item.size}
                         </p>
 
                         {/* QUANTITY */}
@@ -144,9 +149,9 @@ export default function CartPage() {
                                 }),
                               )
                             }
-                            className="text-red-500 text-sm hover:underline"
+                            className="text-error-500 text-sm hover:underline"
                           >
-                            Remove
+                            {itemTranslation?.remove || "Remove"}
                           </button>
                         </div>
                       </div>
@@ -154,26 +159,31 @@ export default function CartPage() {
                       {/* RIGHT PRICE */}
                       <div className="text-right">
                         <p className="text-xl font-bold text-primary-600">
-                          {formatPrice(item.price * item.quantity)}
+                          {formatPrice(item.price * item.quantity, locale)}
                         </p>
 
                         {hasDiscount && (
                           <>
-                            <p className="text-sm text-gray-400 line-through mt-1">
-                              {formatPrice(item.oldPrice * item.quantity)}
+                            <p className="text-sm text-text-disabled line-through mt-1">
+                              {formatPrice(
+                                item.oldPrice * item.quantity,
+                                locale,
+                              )}
                             </p>
 
-                            <p className="text-xs text-green-600 mt-1 font-medium">
-                              Save{" "}
+                            <p className="text-xs text-success-600 mt-1 font-medium">
+                              {itemTranslation?.save || "Save"}{" "}
                               {formatPrice(
                                 (item.oldPrice - item.price) * item.quantity,
+                                locale,
                               )}
                             </p>
                           </>
                         )}
 
-                        <p className="text-sm text-gray-500 mt-2">
-                          {formatPrice(item.price)} each
+                        <p className="text-sm text-text-muted mt-2">
+                          {formatPrice(item.price, locale)}{" "}
+                          {itemTranslation?.each || "each"}
                         </p>
                       </div>
                     </div>
@@ -185,44 +195,52 @@ export default function CartPage() {
 
           {/* ================= SUMMARY ================= */}
 
-          <div className="bg-white rounded-2xl p-8 border top-32 sticky border-beige-500 shadow-lg">
-            <h2 className="text-xl font-semibold mb-8">Order Summary</h2>
+          <div className="bg-white rounded-2xl p-8 border border-beige-500 shadow-lg sticky top-32">
+            <h2 className="text-xl font-semibold mb-8">
+              {summary?.title || "Order Summary"}
+            </h2>
 
             <div className="flex justify-between text-sm mb-4">
-              <span className="text-gray-600">Items ({totalQuantity})</span>
-              <span>{formatPrice(total)}</span>
+              <span className="text-text-muted">
+                {summary?.items || "Items"} ({totalQuantity})
+              </span>
+              <span>{formatPrice(total, locale)}</span>
             </div>
 
             {totalSavings > 0 && (
-              <div className="flex justify-between text-sm mb-4 text-green-600 font-medium">
-                <span>Total Savings</span>
-                <span>- {formatPrice(totalSavings)}</span>
+              <div className="flex justify-between text-sm mb-4 text-success-600 font-medium">
+                <span>{summary?.totalSavings || "Total Savings"}</span>
+                <span>- {formatPrice(totalSavings, locale)}</span>
               </div>
             )}
 
-            <div className="flex justify-between text-sm text-gray-600 mb-6">
-              <span>Delivery</span>
-              <span className="text-green-600 font-medium">Free</span>
+            <div className="flex justify-between text-sm text-text-muted mb-6">
+              <span>{summary?.delivery || "Delivery"}</span>
+              <span className="text-success-600 font-medium">
+                {summary?.free || "Free"}
+              </span>
             </div>
 
             <div className="border-t border-beige-500 my-6" />
 
             <div className="flex justify-between items-center text-2xl font-bold">
-              <span>Total</span>
-              <span className="text-primary-600">{formatPrice(total)}</span>
+              <span>{summary?.total || "Total"}</span>
+              <span className="text-primary-600">
+                {formatPrice(total, locale)}
+              </span>
             </div>
 
-            <p className="text-xs text-gray-400 mt-6">
-              Secure checkout. Taxes included.
+            <p className="text-xs text-text-disabled mt-6">
+              {summary?.secure || "Secure checkout. Taxes included."}
             </p>
 
             <button
               onClick={() => router.push(`/${locale}/checkout`)}
               className="w-full mt-8 bg-primary-600 text-white py-4 rounded-xl
-                  hover:bg-primary-700 transition duration-300
-                  shadow-md hover:shadow-lg text-lg font-medium"
+              hover:bg-primary-700 transition duration-300
+              shadow-md hover:shadow-lg text-lg font-medium"
             >
-              Proceed to Checkout
+              {summary?.checkout || "Proceed to Checkout"}
             </button>
           </div>
         </div>
