@@ -7,12 +7,12 @@ function CheckoutForm({ data, actions, i18n }) {
   const { contact, shipping, payment, button } = i18n;
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8 sm:space-y-10 lg:space-y-12">
       {/* CONTACT */}
-      <section className="space-y-5">
-        <h2 className="text-lg font-semibold">{contact.title}</h2>
+      <section className="space-y-4 sm:space-y-5">
+        <h2 className="text-base sm:text-lg font-semibold">{contact.title}</h2>
 
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <Input
             name="firstName"
             placeholder={contact.firstName}
@@ -30,10 +30,10 @@ function CheckoutForm({ data, actions, i18n }) {
       </section>
 
       {/* SHIPPING */}
-      <section className="space-y-5">
-        <h2 className="text-lg font-semibold">{shipping.title}</h2>
+      <section className="space-y-4 sm:space-y-5">
+        <h2 className="text-base sm:text-lg font-semibold">{shipping.title}</h2>
 
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <Input
             name="wilaya"
             placeholder={shipping.wilaya}
@@ -51,26 +51,38 @@ function CheckoutForm({ data, actions, i18n }) {
       </section>
 
       {/* PAYMENT */}
-      <section className="space-y-4">
-        <h2 className="text-lg font-semibold">{payment.title}</h2>
+      <section className="space-y-3 sm:space-y-4">
+        <h2 className="text-base sm:text-lg font-semibold">{payment.title}</h2>
 
-        <div className="border border-beige-500 rounded-xl p-6 bg-white">
-          <p className="font-medium">{payment.method}</p>
-          <p className="text-sm text-text-muted mt-1">{payment.description}</p>
+        <div
+          className="
+            border border-beige-500
+            rounded-lg sm:rounded-xl
+            p-4 sm:p-5 lg:p-6
+            bg-white
+          "
+        >
+          <p className="font-medium text-sm sm:text-base">{payment.method}</p>
+
+          <p className="text-xs sm:text-sm text-text-muted mt-1">
+            {payment.description}
+          </p>
+        </div>
+        <div className="pt-4 sm:pt-6">
+          <Button
+            variant="cta"
+            size="lg"
+            fullWidth
+            loading={isSubmitting}
+            loadingLabel={button.processing}
+            onClick={submit}
+          >
+            {button.submit}
+          </Button>
         </div>
       </section>
 
       {/* SUBMIT */}
-      <Button
-        variant="cta"
-        size="lg"
-        fullWidth
-        loading={isSubmitting}
-        loadingLabel={button.processing}
-        onClick={submit}
-      >
-        {button.submit}
-      </Button>
     </div>
   );
 }

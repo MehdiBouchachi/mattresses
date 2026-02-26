@@ -34,7 +34,7 @@ export default function CheckoutClient({ locale, translation = {} }) {
 
   const { header, contact, shipping, payment, button, summary } = translation;
 
-  /* DATA */
+  /* ================= DATA ================= */
 
   const data = {
     locale,
@@ -44,7 +44,7 @@ export default function CheckoutClient({ locale, translation = {} }) {
     isSubmitting,
   };
 
-  /* ACTIONS */
+  /* ================= ACTIONS ================= */
 
   const actions = {
     change: (e) =>
@@ -84,7 +84,15 @@ export default function CheckoutClient({ locale, translation = {} }) {
 
   return (
     <div className="bg-beige-100 min-h-screen">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20">
+      <div
+        className="
+          max-w-7xl mx-auto
+          px-4 sm:px-6 lg:px-8
+          pt-20 sm:pt-24 lg:pt-32
+          pb-16 sm:pb-20
+        "
+      >
+        {/* Header */}
         <BackTitle
           locale={locale}
           onBack={actions.back}
@@ -92,14 +100,29 @@ export default function CheckoutClient({ locale, translation = {} }) {
           backLabel={header.back}
         />
 
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-start">
-          <CheckoutForm
-            data={data}
-            actions={actions}
-            i18n={{ contact, shipping, payment, button }}
-          />
+        {/* Layout */}
+        <div
+          className="
+            grid
+            grid-cols-1
+            lg:grid-cols-[1.1fr_0.9fr]
+            gap-10 sm:gap-12 lg:gap-16
+            items-start
+          "
+        >
+          {/* LEFT — FORM */}
+          <div className="order-2 lg:order-1">
+            <CheckoutForm
+              data={data}
+              actions={actions}
+              i18n={{ contact, shipping, payment, button }}
+            />
+          </div>
 
-          <OrderSummary data={data} i18n={summary} />
+          {/* RIGHT — SUMMARY */}
+          <div className="order-1 lg:order-2">
+            <OrderSummary data={data} i18n={summary} />
+          </div>
         </div>
       </div>
     </div>

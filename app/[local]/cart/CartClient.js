@@ -1,4 +1,5 @@
 "use client";
+
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectCartItems,
@@ -22,7 +23,9 @@ export default function CartClient({ locale, translation = {} }) {
 
   const { empty, header, item: itemI18n, summary } = translation;
 
-  /* ================= DATA ================= */
+  const isRTL = locale === "ar";
+
+  /*  DATA  */
 
   const data = {
     items,
@@ -36,7 +39,7 @@ export default function CartClient({ locale, translation = {} }) {
     }, 0),
   };
 
-  /* ================= ACTIONS ================= */
+  /*  ACTIONS  */
 
   const actions = {
     increase: (id, size, qty) =>
@@ -63,7 +66,14 @@ export default function CartClient({ locale, translation = {} }) {
 
   return (
     <div className="bg-beige-100 min-h-screen">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-24">
+      <div
+        className="
+          max-w-7xl mx-auto
+          px-4 sm:px-6 lg:px-8
+          pt-20 sm:pt-24 lg:pt-32
+          pb-16 sm:pb-20 lg:pb-24
+        "
+      >
         {/* HEADER */}
         <BackTitle
           locale={locale}
@@ -72,9 +82,12 @@ export default function CartClient({ locale, translation = {} }) {
           backLabel={header.continue}
         />
 
-        <div className="grid lg:grid-cols-[1.45fr_0.55fr] gap-20 items-start">
+        {/* GRID */}
+        <div className="grid gap-8 sm:gap-10 lg:gap-20 items-start lg:grid-cols-[1.45fr_0.55fr]">
           {/* ITEMS */}
-          <div className="space-y-8">
+          <div
+            className={`space-y-6 sm:space-y-8 ${isRTL ? "lg:order-2" : ""}`}
+          >
             {data.items.map((product) => (
               <CartItemCard
                 key={product.id + product.size}
@@ -87,12 +100,14 @@ export default function CartClient({ locale, translation = {} }) {
           </div>
 
           {/* SUMMARY */}
-          <CartSummary
-            data={data}
-            actions={{ checkout: actions.checkout }}
-            i18n={summary}
-            locale={locale}
-          />
+          <div className={isRTL ? "lg:order-1" : ""}>
+            <CartSummary
+              data={data}
+              actions={{ checkout: actions.checkout }}
+              i18n={summary}
+              locale={locale}
+            />
+          </div>
         </div>
       </div>
     </div>
