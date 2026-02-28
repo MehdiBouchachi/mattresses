@@ -29,16 +29,38 @@ export default function Header({ translation }) {
   const locale = pathname.split("/")[1] || "en";
   const isRTL = locale === "ar";
 
-  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [openLang, setOpenLang] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Always show header at very top
+      if (currentScrollY <= 10) {
+        setHidden(false);
+        return;
+      }
+
+      // Scrolling DOWN
+      if (currentScrollY > lastScrollY) {
+        setHidden(true);
+      }
+
+      // Scrolling UP
+      if (currentScrollY < lastScrollY) {
+        setHidden(false);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   const switchLanguage = (newLocale) => {
     const segments = pathname.split("/");
     segments[1] = newLocale;
@@ -60,32 +82,29 @@ export default function Header({ translation }) {
   return (
     <>
       <header
-        dir="ltr"
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? "bg-white/80 backdrop-blur-xl shadow-sm" : "bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 w-full z-50 
+  bg-white/90 backdrop-blur-xl border-b border-beige-400
+  transition-transform duration-300 ease-in-out
+  ${hidden ? "-translate-y-full" : "translate-y-0"}`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-3 flex items-center justify-between">
           {/* LOGO */}
-
           <div
             onClick={() => router.push(`/${locale}`)}
-            className="cursor-pointer flex items-center"
+            className="cursor-pointer h-14 lg:h-16 flex items-center transition-transform duration-300 hover:scale-105"
           >
-            <div className="h-16 lg:h-20 flex items-center">
-              <Image
-                src="/images/logo.webp"
-                alt="Empreinte Flex"
-                width={260}
-                height={100}
-                className="h-full w-auto object-contain"
-                priority
-              />
-            </div>
+            <Image
+              src="/images/logo.webp"
+              alt="Empreinte Flex"
+              width={220}
+              height={90}
+              className="h-full w-auto object-contain"
+              priority
+            />
           </div>
+
           {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center gap-6">
-            {/* Track Order (new) */}
             <button
               onClick={() => router.push(`/${locale}/track-order`)}
               className="text-sm text-text-body hover:text-primary-600 transition"
@@ -113,7 +132,7 @@ export default function Header({ translation }) {
                     <button
                       key={lng.code}
                       onClick={() => switchLanguage(lng.code)}
-                      className={`w-full px-4 py-3 text-sm text-left ${
+                      className={`w-full px-4 py-3 text-sm text-start ${
                         locale === lng.code
                           ? "bg-primary-50 text-primary-600 font-medium"
                           : "hover:bg-beige-100"
@@ -141,12 +160,7 @@ export default function Header({ translation }) {
               <FiShoppingCart className="text-lg" />
 
               {count > 0 && (
-                <span
-                  className="absolute -top-2 -right-2 
-                                     bg-primary-600 text-primary-50 
-                                     text-[10px] px-2 py-[2px] 
-                                     rounded-full font-medium"
-                >
+                <span className="absolute -top-2 -right-2 bg-primary-600 text-primary-50 text-[10px] px-2 py-[2px] rounded-full font-medium">
                   {count}
                 </span>
               )}
