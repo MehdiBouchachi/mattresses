@@ -149,6 +149,7 @@ export default function Header({ translation }) {
             </div>
 
             <Button
+              size="sm"
               variant="primary"
               onClick={() => router.push(`/${locale}/mattresses`)}
             >
@@ -156,6 +157,7 @@ export default function Header({ translation }) {
             </Button>
 
             <Button
+              size="sm"
               variant="secondary"
               className="relative p-3"
               onClick={() => router.push(`/${locale}/cart`)}

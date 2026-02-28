@@ -7,7 +7,6 @@ export default async function AboutPage({ params }) {
   const { hero, frame, editorial, scale, commitment, locations } = aboutPage;
   return (
     <div className="bg-beige-100 overflow-hidden">
-      {/* ================= HERO ================= */}
       <section className="relative min-h-[70vh] md:min-h-[75vh] flex items-center justify-center text-center px-6 md:px-8">
         {/* Ghost branding */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -30,7 +29,6 @@ export default async function AboutPage({ params }) {
         </div>
       </section>
 
-      {/* ================= FULL BLEED FRAME ================= */}
       <section className="relative h-[60vh] sm:h-[70vh] md:h-[85vh]">
         <img
           src="/images/about-1.jpg"
@@ -51,7 +49,6 @@ export default async function AboutPage({ params }) {
         </div>
       </section>
 
-      {/* ================= EDITORIAL BLOCK ================= */}
       <section className="max-w-6xl mx-auto px-6 md:px-8 py-20 sm:py-28 md:py-40">
         <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-center">
           {/* TEXT */}
@@ -86,7 +83,6 @@ export default async function AboutPage({ params }) {
         </div>
       </section>
 
-      {/* ================= SCALE SECTION ================= */}
       <section className="relative py-20 sm:py-28 md:py-40 bg-white">
         <div className="max-w-6xl mx-auto px-6 md:px-8">
           <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-center">
@@ -121,7 +117,6 @@ export default async function AboutPage({ params }) {
         </div>
       </section>
 
-      {/* ================= COMMITMENT ================= */}
       <section className="relative py-24 sm:py-32 md:py-44 bg-beige-300 overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <span className="text-[80px] sm:text-[120px] md:text-[200px] font-semibold text-text-primary opacity-[0.04]">
@@ -143,7 +138,6 @@ export default async function AboutPage({ params }) {
           </p>
         </div>
       </section>
-      {/* ================= WHERE WE ARE ================= */}
       <WhereWeAre translation={locations} />
     </div>
   );
@@ -156,7 +150,6 @@ function WhereWeAre({ translation }) {
       id="locations"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        {/* ================= HEADER ================= */}
         <div className="text-center max-w-2xl mx-auto mb-20 space-y-6">
           <p className="text-xs uppercase tracking-[0.4em] text-text-soft">
             {translation.title}
@@ -171,11 +164,8 @@ function WhereWeAre({ translation }) {
           </p>
         </div>
 
-        {/* ================= LOCATIONS GRID ================= */}
         <div className="grid md:grid-cols-2 gap-16">
-          {/* ============================================= */}
           {/* CONSTANTINE */}
-          {/* ============================================= */}
 
           <div className="group bg-beige-50 border border-beige-500 rounded-2xl p-8 space-y-8 transition hover:shadow-md">
             {/* Title */}
@@ -229,9 +219,7 @@ function WhereWeAre({ translation }) {
             </div>
           </div>
 
-          {/* ============================================= */}
           {/* ALGIERS SHOWROOM */}
-          {/* ============================================= */}
 
           <div className="group bg-beige-50 border border-beige-500 rounded-2xl p-8 space-y-8 transition hover:shadow-md">
             {/* Title */}
