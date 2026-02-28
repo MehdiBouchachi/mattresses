@@ -28,7 +28,7 @@ export default function Header({ translation }) {
   const pathname = usePathname();
   const locale = pathname.split("/")[1] || "en";
   const isRTL = locale === "ar";
-
+  const [isAtTop, setIsAtTop] = useState(true);
   const [hidden, setHidden] = useState(false);
   const [openLang, setOpenLang] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -37,25 +37,29 @@ export default function Header({ translation }) {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      const current = window.scrollY;
 
-      // Always show header at very top
-      if (currentScrollY <= 10) {
+      // Transparent zone (hero area)
+      setIsAtTop(current < 80);
+
+      // Always show at very top
+      if (current <= 10) {
         setHidden(false);
+        lastScrollY = current;
         return;
       }
 
-      // Scrolling DOWN
-      if (currentScrollY > lastScrollY) {
+      // Hide when scrolling down
+      if (current > lastScrollY) {
         setHidden(true);
       }
 
-      // Scrolling UP
-      if (currentScrollY < lastScrollY) {
+      // Show when scrolling up
+      if (current < lastScrollY) {
         setHidden(false);
       }
 
-      lastScrollY = currentScrollY;
+      lastScrollY = current;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -82,10 +86,16 @@ export default function Header({ translation }) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 
-  bg-white/90 backdrop-blur-xl border-b border-beige-400
-  transition-transform duration-300 ease-in-out
-  ${hidden ? "-translate-y-full" : "translate-y-0"}`}
+        className={`
+    fixed top-0 left-0 w-full z-50
+    transition-all duration-300 ease-in-out
+    ${hidden ? "-translate-y-full" : "translate-y-0"}
+    ${
+      isAtTop
+        ? "bg-transparent border-transparent"
+        : "bg-white/90 backdrop-blur-xl border-b border-beige-400 shadow-sm"
+    }
+  `}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-3 flex items-center justify-between">
           {/* LOGO */}
