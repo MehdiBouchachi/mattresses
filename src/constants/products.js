@@ -1,254 +1,110 @@
 /* ================= CATEGORY STRUCTURE ================= */
 
-export const categories1 = [
-  { name: "Foam", value: "foam", subcategories: ["memory", "orthopedic"] },
-  { name: "Spring", value: "spring", subcategories: ["pocket", "bonnell"] },
-  { name: "Hybrid", value: "hybrid", subcategories: ["luxury", "cooling"] },
-  {
-    name: "Accessories",
-    value: "accessories",
-    subcategories: ["pillow", "protector"],
-  },
-];
-
 export const categories = [
   {
     value: "foam",
     translations: {
-      en: "Foam",
-      fr: "Mousse",
+      en: "Foam Mattresses",
+      fr: "Matelas en mousse",
       ar: "مراتب إسفنجية",
     },
     subcategories: [
       {
-        value: "memory",
+        value: "classic",
         translations: {
-          en: "Memory",
-          fr: "Mémoire",
-          ar: "مراتب ميموري فوم",
+          en: "Firm Foam",
+          fr: "Mousse ferme",
+          ar: "مرتبة إسفنجية صلبة",
         },
       },
       {
-        value: "orthopedic",
+        value: "hr",
         translations: {
-          en: "Orthopedic",
-          fr: "Orthopédique",
-          ar: "مراتب طبية",
+          en: "Orthopedic Foam",
+          fr: "Mousse orthopédique",
+          ar: "مرتبة طبية للظهر",
         },
       },
     ],
   },
+
+  {
+    value: "hybrid",
+    translations: {
+      en: "Multi-Layer Mattresses",
+      fr: "Matelas multicouches",
+      ar: "مراتب متعددة الطبقات",
+    },
+    subcategories: [
+      {
+        value: "visco",
+        translations: {
+          en: "Memory Foam Comfort",
+          fr: "Confort mémoire de forme",
+          ar: "مرتبة ميموري فوم مريحة",
+        },
+      },
+      {
+        value: "visco-plus",
+        translations: {
+          en: "Premium Comfort",
+          fr: "Confort premium",
+          ar: "مرتبة فاخرة متعددة الطبقات",
+        },
+      },
+    ],
+  },
+
   {
     value: "spring",
     translations: {
-      en: "Spring",
-      fr: "Ressort",
+      en: "Spring Mattresses",
+      fr: "Matelas à ressorts",
       ar: "مراتب بنوابض",
     },
     subcategories: [
       {
-        value: "pocket",
+        value: "confort",
         translations: {
-          en: "Pocket",
-          fr: "Ressorts ensachés",
-          ar: "نوابض منفصلة",
+          en: "Standard Spring",
+          fr: "Ressort standard",
+          ar: "مرتبة بنوابض عادية",
         },
       },
       {
-        value: "bonnell",
+        value: "premium",
         translations: {
-          en: "Bonnell",
-          fr: "Bonnell",
-          ar: "نوابض متصلة",
-        },
-      },
-    ],
-  },
-  {
-    value: "hybrid",
-    translations: {
-      en: "Hybrid",
-      fr: "Hybride",
-      ar: "مراتب مختلطة",
-    },
-    subcategories: [
-      {
-        value: "luxury",
-        translations: {
-          en: "Luxury",
-          fr: "Luxe",
-          ar: "تصميم فاخر",
+          en: "Reinforced Spring",
+          fr: "Ressort renforcé",
+          ar: "مرتبة بنوابض قوية",
         },
       },
       {
-        value: "cooling",
+        value: "prestige",
         translations: {
-          en: "Cooling",
-          fr: "Refroidissant",
-          ar: "تقنية تبريد",
-        },
-      },
-    ],
-  },
-  {
-    value: "accessories",
-    translations: {
-      en: "Accessories",
-      fr: "Accessoires",
-      ar: "مستلزمات النوم",
-    },
-    subcategories: [
-      {
-        value: "pillow",
-        translations: {
-          en: "Pillow",
-          fr: "Oreiller",
-          ar: "وسائد",
-        },
-      },
-      {
-        value: "protector",
-        translations: {
-          en: "Protector",
-          fr: "Protège-matelas",
-          ar: "واقي المرتبة",
+          en: "Luxury Spring",
+          fr: "Ressort luxe",
+          ar: "مرتبة بنوابض فاخرة",
         },
       },
     ],
   },
 ];
-/* ================= PRODUCTS ================= */
+
 export const products = [
   {
     id: 1,
-    slug: "memory-foam-deluxe",
-    name: "Memory Foam Deluxe",
+    slug: "firm-foam-classic",
+    name: "Firm Foam Classic",
     description:
-      "Pressure-relief memory foam with breathable comfort and orthopedic support designed for optimal spinal alignment.",
+      "Solid and durable foam mattress designed for everyday comfort at an affordable price.",
 
     category: "foam",
-    subcategory: "memory",
-    available: true,
-    featured: true,
-
-    basePrice: 115000,
-    oldPrice: null,
-    discount: 0,
-
-    images: ["/images/mattresses.png", "/images/mattresses.png"],
-
-    details: {
-      thickness: 25,
-      firmness: 7,
-      dimensions: [
-        { size: "90 x 190", price: 115000 },
-        { size: "140 x 190", price: 145000 },
-        { size: "160 x 200", price: 165000 },
-      ],
-      technicalSpecs: [
-        { label: "Technology", value: "Memory foam core" },
-        { label: "Density", value: "D30 orthopedic support" },
-        { label: "Fabric", value: "Breathable stretch textile" },
-        { label: "Warranty", value: "10 years" },
-      ],
-      advantages: [
-        "Balanced pressure relief",
-        "Breathable structure",
-        "Ideal for daily comfort",
-      ],
-      faq: [],
-    },
-  },
-
-  {
-    id: 2,
-    slug: "orthopedic-foam-pro",
-    name: "Orthopedic Foam Pro",
-    description:
-      "Firm support engineered for spinal alignment and posture correction.",
-
-    category: "foam",
-    subcategory: "orthopedic",
+    subcategory: "classic",
     available: true,
     featured: false,
 
-    basePrice: 128000,
-    oldPrice: null,
-    discount: 0,
-
-    images: ["/images/mattresses.png"],
-
-    details: {
-      thickness: 23,
-      firmness: 9,
-      dimensions: [
-        { size: "90 x 190", price: 128000 },
-        { size: "140 x 190", price: 158000 },
-        { size: "160 x 200", price: 178000 },
-      ],
-      technicalSpecs: [
-        { label: "Technology", value: "High-density orthopedic foam" },
-        { label: "Density", value: "D35 firm support" },
-        { label: "Warranty", value: "8 years" },
-      ],
-      advantages: [
-        "Extra firm support",
-        "Recommended for back pain",
-        "Long durability",
-      ],
-      faq: [],
-    },
-  },
-
-  {
-    id: 3,
-    slug: "pocket-spring-elite",
-    name: "Pocket Spring Elite",
-    description:
-      "Individual pocket coils for motion isolation and advanced airflow.",
-
-    category: "spring",
-    subcategory: "pocket",
-    available: true,
-    featured: true,
-
-    basePrice: 149000,
-    oldPrice: 179000,
-    discount: 17,
-
-    images: ["/images/mattresses.png"],
-
-    details: {
-      thickness: 28,
-      firmness: 6,
-      dimensions: [
-        { size: "90 x 190", price: 149000 },
-        { size: "140 x 190", price: 179000 },
-        { size: "160 x 200", price: 199000 },
-      ],
-      technicalSpecs: [
-        { label: "Technology", value: "Pocket coil suspension" },
-        { label: "Ventilation", value: "Airflow core system" },
-        { label: "Warranty", value: "10 years" },
-      ],
-      advantages: ["Motion isolation", "Balanced support", "Enhanced airflow"],
-      faq: [],
-    },
-  },
-
-  {
-    id: 4,
-    slug: "bonnell-classic",
-    name: "Bonnell Classic",
-    description:
-      "Traditional Bonnell spring structure with consistent durability.",
-
-    category: "spring",
-    subcategory: "bonnell",
-    available: false,
-    featured: false,
-
-    basePrice: 99000,
+    basePrice: 105000,
     oldPrice: null,
     discount: 0,
 
@@ -256,31 +112,117 @@ export const products = [
 
     details: {
       thickness: 22,
-      firmness: 6,
+      firmness: 8,
       dimensions: [
-        { size: "90 x 190", price: 99000 },
-        { size: "140 x 190", price: 119000 },
+        { size: "90 x 190", price: 105000 },
+        { size: "140 x 190", price: 135000 },
+        { size: "160 x 200", price: 155000 },
       ],
       technicalSpecs: [
-        { label: "Technology", value: "Bonnell spring system" },
+        { label: "Core", value: "High-density foam" },
+        { label: "Support", value: "Firm support structure" },
         { label: "Warranty", value: "5 years" },
       ],
-      advantages: ["Durable construction", "Affordable comfort"],
+      advantages: [
+        "Firm and stable support",
+        "Budget friendly",
+        "Good durability",
+      ],
       faq: [],
     },
   },
 
   {
-    id: 5,
-    slug: "luxury-hybrid-max",
-    name: "Luxury Hybrid Max",
+    id: 2,
+    slug: "orthopedic-foam-support",
+    name: "Orthopedic Foam Support",
     description:
-      "Premium hybrid combining foam and pocket coils for refined comfort.",
+      "Firm mattress specially designed to support the back and maintain proper spine alignment.",
 
-    category: "hybrid",
-    subcategory: "luxury",
+    category: "foam",
+    subcategory: "hr",
     available: true,
     featured: true,
+
+    basePrice: 125000,
+    oldPrice: null,
+    discount: 0,
+
+    images: ["/images/mattresses.png"],
+
+    details: {
+      thickness: 24,
+      firmness: 9,
+      dimensions: [
+        { size: "90 x 190", price: 125000 },
+        { size: "140 x 190", price: 155000 },
+        { size: "160 x 200", price: 175000 },
+      ],
+      technicalSpecs: [
+        { label: "Core", value: "High-resilience foam" },
+        { label: "Support", value: "Orthopedic structure" },
+        { label: "Warranty", value: "8 years" },
+      ],
+      advantages: [
+        "Extra firm support",
+        "Recommended for back pain",
+        "Long-lasting shape retention",
+      ],
+      faq: [],
+    },
+  },
+
+  {
+    id: 3,
+    slug: "memory-comfort",
+    name: "Memory Comfort",
+    description:
+      "Comfortable mattress that adapts to your body shape and reduces pressure while sleeping.",
+
+    category: "hybrid",
+    subcategory: "visco",
+    available: true,
+    featured: true,
+
+    basePrice: 145000,
+    oldPrice: 165000,
+    discount: 12,
+
+    images: ["/images/mattresses.png"],
+
+    details: {
+      thickness: 26,
+      firmness: 6,
+      dimensions: [
+        { size: "90 x 190", price: 145000 },
+        { size: "140 x 190", price: 175000 },
+        { size: "160 x 200", price: 195000 },
+      ],
+      technicalSpecs: [
+        { label: "Top Layer", value: "Memory comfort layer" },
+        { label: "Base", value: "Support foam core" },
+        { label: "Warranty", value: "10 years" },
+      ],
+      advantages: [
+        "Adapts to body shape",
+        "Balanced comfort",
+        "Reduced pressure points",
+      ],
+      faq: [],
+    },
+  },
+
+  {
+    id: 4,
+    slug: "premium-multilayer",
+    name: "Premium Multi-Layer",
+    description:
+      "High-end mattress combining multiple comfort layers for a refined and supportive sleep experience.",
+
+    category: "hybrid",
+    subcategory: "visco-plus",
+    available: true,
+    featured: false,
 
     basePrice: 175000,
     oldPrice: null,
@@ -296,112 +238,158 @@ export const products = [
         { size: "160 x 200", price: 205000 },
       ],
       technicalSpecs: [
-        { label: "Technology", value: "Hybrid foam + coils" },
-        { label: "Comfort Layer", value: "Memory foam top layer" },
+        { label: "Structure", value: "Multi-layer comfort system" },
+        { label: "Support", value: "Reinforced base layer" },
         { label: "Warranty", value: "12 years" },
       ],
-      advantages: ["Premium finish", "Luxury feel", "Long-term durability"],
+      advantages: [
+        "Premium comfort feel",
+        "Strong body support",
+        "Long durability",
+      ],
+      faq: [],
+    },
+  },
+
+  {
+    id: 5,
+    slug: "spring-standard",
+    name: "Spring Standard",
+    description:
+      "Traditional spring mattress offering reliable support and good airflow.",
+
+    category: "spring",
+    subcategory: "confort",
+    available: true,
+    featured: false,
+
+    basePrice: 99000,
+    oldPrice: null,
+    discount: 0,
+
+    images: ["/images/mattresses.png"],
+
+    details: {
+      thickness: 22,
+      firmness: 7,
+      dimensions: [
+        { size: "90 x 190", price: 99000 },
+        { size: "140 x 190", price: 119000 },
+      ],
+      technicalSpecs: [
+        { label: "Structure", value: "Classic spring system" },
+        { label: "Warranty", value: "5 years" },
+      ],
+      advantages: ["Good ventilation", "Affordable option", "Reliable support"],
       faq: [],
     },
   },
 
   {
     id: 6,
-    slug: "cooling-hybrid-breeze",
-    name: "Cooling Hybrid Breeze",
+    slug: "spring-strong",
+    name: "Spring Strong Support",
     description:
-      "Temperature-regulated hybrid mattress designed for hot sleepers.",
+      "Reinforced spring mattress providing stronger support and improved durability.",
 
-    category: "hybrid",
-    subcategory: "cooling",
+    category: "spring",
+    subcategory: "premium",
     available: true,
-    featured: false,
+    featured: true,
 
-    basePrice: 162000,
+    basePrice: 145000,
     oldPrice: null,
     discount: 0,
 
     images: ["/images/mattresses.png"],
 
     details: {
-      thickness: 27,
-      firmness: 6,
+      thickness: 26,
+      firmness: 8,
       dimensions: [
-        { size: "140 x 190", price: 162000 },
-        { size: "160 x 200", price: 189000 },
+        { size: "90 x 190", price: 145000 },
+        { size: "140 x 190", price: 175000 },
+        { size: "160 x 200", price: 195000 },
       ],
       technicalSpecs: [
-        { label: "Cooling Layer", value: "Gel-infused memory foam" },
-        { label: "Airflow", value: "Ventilated coil structure" },
+        { label: "Structure", value: "Reinforced spring system" },
+        { label: "Support", value: "Stronger coil density" },
+        { label: "Warranty", value: "8 years" },
       ],
-      advantages: ["Cooling performance", "Balanced comfort"],
+      advantages: ["Strong support", "Better durability", "Good airflow"],
       faq: [],
     },
   },
 
   {
     id: 7,
-    slug: "luxury-pillow",
-    name: "Luxury Pillow",
-    description: "Ergonomic pillow designed for neck alignment and comfort.",
+    slug: "spring-luxury",
+    name: "Spring Luxury",
+    description:
+      "Premium spring mattress designed for maximum comfort and long-term performance.",
 
-    category: "accessories",
-    subcategory: "pillow",
+    category: "spring",
+    subcategory: "prestige",
     available: true,
     featured: false,
 
-    basePrice: 9000,
+    basePrice: 175000,
     oldPrice: null,
     discount: 0,
 
     images: ["/images/mattresses.png"],
 
     details: {
-      thickness: 12,
-      firmness: 5,
-      dimensions: [{ size: "Standard", price: 9000 }],
-      technicalSpecs: [
-        { label: "Material", value: "High-resilience foam" },
-        { label: "Cover", value: "Breathable fabric" },
+      thickness: 28,
+      firmness: 7,
+      dimensions: [
+        { size: "140 x 190", price: 175000 },
+        { size: "160 x 200", price: 205000 },
       ],
-      advantages: ["Neck support", "Soft breathable cover"],
+      technicalSpecs: [
+        { label: "Structure", value: "Premium spring system" },
+        { label: "Comfort", value: "Enhanced top padding" },
+        { label: "Warranty", value: "10 years" },
+      ],
+      advantages: ["Luxury comfort", "Balanced support", "High durability"],
       faq: [],
     },
   },
-
   {
     id: 8,
-    slug: "mattress-protector",
-    name: "Mattress Protector",
+    slug: "spring-standard-bonnell",
+    name: "Spring Standard Bonnell",
     description:
-      "Waterproof breathable protection layer for long mattress life.",
+      "Traditional spring mattress offering reliable support and good ventilation at an affordable price.",
 
-    category: "accessories",
-    subcategory: "protector",
-    available: true,
+    category: "spring",
+    subcategory: "confort",
+    available: false,
     featured: false,
 
-    basePrice: 6500,
+    basePrice: 99000,
     oldPrice: null,
     discount: 0,
 
     images: ["/images/mattresses.png"],
 
     details: {
-      thickness: 2,
-      firmness: 1,
+      thickness: 22,
+      firmness: 7,
       dimensions: [
-        { size: "90 x 190", price: 6500 },
-        { size: "140 x 190", price: 8500 },
+        { size: "90 x 190", price: 99000 },
+        { size: "140 x 190", price: 119000 },
       ],
       technicalSpecs: [
-        { label: "Material", value: "Waterproof breathable layer" },
-        { label: "Protection", value: "Anti-liquid barrier" },
+        { label: "Structure", value: "Standard Bonnell spring system" },
+        { label: "Warranty", value: "5 years" },
       ],
-      advantages: ["Extends mattress lifespan", "Easy to clean"],
+      advantages: ["Good airflow", "Affordable price", "Reliable support"],
       faq: [],
     },
   },
 ];
+
+/* ================= PRODUCTS ================= */
 
 export const itemsPerPage = 6;

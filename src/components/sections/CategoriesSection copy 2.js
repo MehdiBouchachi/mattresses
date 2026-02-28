@@ -1,47 +1,48 @@
-import { categories } from "@/constants/products";
 import Link from "next/link";
 
 /* ================= CATEGORY CARD ================= */
 
 function CategoryCard({ cat, locale, discover, index }) {
-  const title = cat.translations[locale] || cat.translations.en;
-
   return (
     <Link
-      href={`/${locale}/mattresses?category=${cat.value}`}
+      href={`/${locale}/mattresses?category=${cat.slug}`}
       className={`
         group relative 
-        h-64 sm:h-72 lg:h-[420px]
-        rounded-3xl
+        h-72 sm:h-80 lg:h-[420px]
+        rounded-3xl lg:rounded-4xl
         overflow-hidden
         transition-all duration-500
-        ${index % 2 !== 0 ? "lg:translate-y-10" : ""}
+        ${index === 1 || index === 3 ? "lg:translate-y-10" : ""}
       `}
     >
       {/* IMAGE */}
       <img
-        src="/images/mattresses.png"
-        alt={title}
+        src={cat.image}
+        alt={cat.title}
         className="absolute inset-0 w-full h-full object-cover
         transition-transform duration-[1200ms] ease-out
         group-hover:scale-110"
       />
 
       {/* OVERLAY */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+      <div
+        className="absolute inset-0 bg-gradient-to-t 
+        from-black/60 via-black/20 to-transparent 
+        transition-all duration-500"
+      />
 
       {/* CONTENT */}
       <div className="relative z-10 h-full flex items-end p-6 sm:p-8 lg:p-10">
         <div>
-          <h4 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white tracking-wide">
-            {title}
+          <h4 className="text-lg sm:text-xl lg:text-2xl font-semibold text-primary-50 tracking-wide">
+            {cat.title}
           </h4>
 
           <span
-            className="text-white/80 text-xs sm:text-sm mt-2 block opacity-0 
+            className="text-primary-50/80 text-xs sm:text-sm mt-2 block opacity-0 
             group-hover:opacity-100 transition duration-300"
           >
-            {locale === "ar" ? `← ${discover}` : `${discover} →`}
+            {locale === "ar" ? discover + " ←" : discover + " →"}
           </span>
         </div>
       </div>
@@ -50,6 +51,19 @@ function CategoryCard({ cat, locale, discover, index }) {
 }
 
 /* ================= MAIN SECTION ================= */
+
+
+
+const categories = [
+  { title: "Foam", image: "/images/mattresses.png", slug: "foam" },
+  { title: "Spring", image: "/images/mattresses.png", slug: "spring" },
+  { title: "Hybrid", image: "/images/mattresses.png", slug: "hybrid" },
+  {
+    title: "Accessories",
+    image: "/images/mattresses.png",
+    slug: "accessories",
+  },
+];
 
 export default function CategoriesSection({ locale = "en", translation }) {
   const { title, desc, discover } = translation.home.categories;
@@ -68,10 +82,10 @@ export default function CategoriesSection({ locale = "en", translation }) {
         </div>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-14">
           {categories.map((cat, index) => (
             <CategoryCard
-              key={cat.value}
+              key={index}
               cat={cat}
               locale={locale}
               discover={discover}
