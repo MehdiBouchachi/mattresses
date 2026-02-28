@@ -67,19 +67,18 @@ export default function Header({ translation }) {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
           {/* LOGO */}
+
           <div
             onClick={() => router.push(`/${locale}`)}
-            className="cursor-pointer h-10 flex items-center"
+            className="cursor-pointer flex items-center"
           >
-            <div
-              onClick={() => router.push(`/${locale}`)}
-              className="cursor-pointer flex items-center"
-            >
+            <div className="h-16 lg:h-20 flex items-center">
               <Image
                 src="/images/logo.webp"
                 alt="Empreinte Flex"
-                width={100}
-                height={45}
+                width={260}
+                height={100}
+                className="h-full w-auto object-contain"
                 priority
               />
             </div>
