@@ -62,8 +62,8 @@
       }
     },
     "whyLitmad": {
-      "title": "Pourquoi choisir LITMAD ?",
-      "desc": "Conçus avec précision et des matériaux premium, les matelas LITMAD offrent un confort durable et une qualité de sommeil optimale.",
+      "title": "Pourquoi choisir Empreinte Flex ?",
+      "desc": "Conçus avec précision et des matériaux premium, les matelas Empreinte flex offrent un confort durable et une qualité de sommeil optimale.",
       "statements": [
         {
           "title": "Soutien et alignement du dos",
@@ -101,7 +101,7 @@
     },
     "cta": {
       "title": "Investissez dans un Meilleur Sommeil",
-      "desc": "Découvrez la précision, le confort et la durabilité qui définissent LITMAD.",
+      "desc": "Découvrez la précision, le confort et la durabilité qui définissent Empreinte flex.",
       "button": "Commencer l’Expérience"
     }
   },
@@ -331,12 +331,12 @@
 
     "locations": {
       "badge": "Où Nous Trouver",
-      "title": "Visitez Litmad",
+      "title": "Visitez Empreinte flex",
       "description": "Découvrez notre savoir-faire à Constantine ou explorez notre showroom à Alger.",
 
       "production": {
         "label": "Site de Production",
-        "title": "Litmad – Constantine",
+        "title": "Empreinte flex – Constantine",
         "description": "Notre centre d’opérations et de fabrication.",
         "guideMe": "Itinéraire",
         "open": "Ouvrir dans Maps"
@@ -344,7 +344,7 @@
 
       "showroom": {
         "label": "Showroom",
-        "title": "Showroom Litmad – Alger",
+        "title": "Showroom Empreinte flex – Alger",
         "description": "Découvrez nos collections dans un environnement raffiné.",
         "guideMe": "Itinéraire",
         "open": "Ouvrir dans Maps"

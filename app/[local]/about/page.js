@@ -11,11 +11,10 @@ export default async function AboutPage({ params }) {
       <section className="relative min-h-[70vh] md:min-h-[75vh] flex items-center justify-center text-center px-6 md:px-8">
         {/* Ghost branding */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="text-[90px] sm:text-[120px] md:text-[180px] lg:text-[220px] font-semibold text-text-primary opacity-[0.025] tracking-tight">
-            LITMAD
+          <span className="text-[70px] sm:text-[90px] md:text-[130px] lg:text-[160px] font-semibold text-text-primary opacity-[0.04] tracking-tight whitespace-nowrap">
+            Empreinte Flex
           </span>
         </div>
-
         <div className="relative max-w-xl sm:max-w-2xl md:max-w-3xl">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.4em] sm:tracking-[0.5em] text-text-soft mb-4 sm:mb-6">
             {hero.badge}

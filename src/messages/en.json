@@ -62,8 +62,8 @@
       }
     },
     "whyLitmad": {
-      "title": "Why Choose LITMAD?",
-      "desc": "Designed with precision engineering and premium materials, LITMAD mattresses redefine comfort, durability, and sleep quality.",
+      "title": "Why Choose Empreinte Flex?",
+      "desc": "Designed with precision engineering and premium materials, Empreinte flex mattresses redefine comfort, durability, and sleep quality.",
       "statements": [
         {
           "title": "Engineered for Alignment",
@@ -101,7 +101,7 @@
     },
     "cta": {
       "title": "Invest in Better Sleep",
-      "desc": "Experience the precision, comfort, and durability that define LITMAD.",
+      "desc": "Experience the precision, comfort, and durability that define Empreinte flex.",
       "button": "Start Your Journey"
     }
   },
@@ -332,12 +332,12 @@
 
     "locations": {
       "badge": "Where We Are",
-      "title": "Visit Litmad",
+      "title": "Visit Empreinte flex",
       "description": "Experience our craftsmanship in Constantine or explore our showroom in Algiers.",
 
       "production": {
         "label": "Production Facility",
-        "title": "Litmad – Constantine",
+        "title": "Empreinte flex – Constantine",
         "description": "Our operations and manufacturing center.",
         "guideMe": "Guide Me",
         "open": "Open in Maps"
@@ -345,7 +345,7 @@
 
       "showroom": {
         "label": "Showroom",
-        "title": "Litmad Showroom – Algiers",
+        "title": "Empreinte flex Showroom – Algiers",
         "description": "Discover our collections in a refined environment.",
         "guideMe": "Guide Me",
         "open": "Open in Maps"
