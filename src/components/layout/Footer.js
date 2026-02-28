@@ -32,16 +32,18 @@ export default function Footer({ translation }) {
         <div className="grid gap-12 sm:gap-14 md:grid-cols-2 lg:grid-cols-4">
           {/* ===== BRAND ===== */}
           <div
-            className="space-y-6 cursor-pointer"
+            className="space-y-7 cursor-pointer"
             onClick={() => router.push(`/${locale}`)}
           >
-            <Image
-              src="/images/logo.webp"
-              alt="Empreinte Flex"
-              width={180}
-              height={60}
-              className="object-contain"
-            />
+            <div className="h-16 sm:h-18 lg:h-20 flex items-center">
+              <Image
+                src="/images/logo.webp"
+                alt="Empreinte Flex"
+                width={240}
+                height={100}
+                className="h-full w-auto object-contain opacity-95"
+              />
+            </div>
 
             <p className="text-sm sm:text-base text-text-body leading-relaxed">
               {brandDescription}
