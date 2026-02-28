@@ -23,7 +23,7 @@ export default function HeroSection({ translation }) {
   } = translation?.home?.hero;
 
   return (
-    <section className="relative pt-28 sm:pt-32 lg:pt-40 pb-20 sm:pb-28 lg:pb-40 bg-gradient-to-b from-beige-50 to-beige-200 overflow-hidden">
+    <section className="relative pt-28 sm:pt-32 lg:pt-32 pb-20 sm:pb-28 lg:pb-40 bg-gradient-to-b from-beige-50 to-beige-200 overflow-hidden">
       {/* Background Accent */}
       <div className="absolute -top-32 -left-32 w-[400px] sm:w-[500px] lg:w-[600px] h-[400px] sm:h-[500px] lg:h-[600px] bg-primary-200 rounded-full blur-[120px] lg:blur-[160px] opacity-30" />
 
