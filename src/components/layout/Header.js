@@ -29,7 +29,6 @@ export default function Header({ translation }) {
   const locale = pathname.split("/")[1] || "en";
   const isRTL = locale === "ar";
   const [isAtTop, setIsAtTop] = useState(true);
-  const [hidden, setHidden] = useState(false);
   const [openLang, setOpenLang] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -44,20 +43,13 @@ export default function Header({ translation }) {
 
       // Always show at very top
       if (current <= 10) {
-        setHidden(false);
         lastScrollY = current;
         return;
       }
 
       // Hide when scrolling down
-      if (current > lastScrollY) {
-        setHidden(true);
-      }
 
       // Show when scrolling up
-      if (current < lastScrollY) {
-        setHidden(false);
-      }
 
       lastScrollY = current;
     };
@@ -89,7 +81,7 @@ export default function Header({ translation }) {
         className={`
     fixed top-0 left-0 w-full z-50
     transition-all duration-300 ease-in-out
-    ${hidden ? "-translate-y-full" : "translate-y-0"}
+  
     ${
       isAtTop
         ? "bg-transparent border-transparent"
