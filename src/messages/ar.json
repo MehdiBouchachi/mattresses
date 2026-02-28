@@ -123,25 +123,25 @@
     }
   },
   "productPage": {
-  "breadcrumb": {
-    "home": "الرئيسية",
-    "collection": "المراتب",
-    "back": "العودة إلى المنتجات"
+    "breadcrumb": {
+      "home": "الرئيسية",
+      "collection": "المراتب",
+      "back": "العودة إلى المنتجات"
+    },
+    "size": "اختر المقاس",
+    "quantity": "الكمية",
+    "firmness": {
+      "soft": "ناعم",
+      "firm": "صلب"
+    },
+    "actions": {
+      "buyNow": "اشتري الآن",
+      "addToCart": "أضف إلى السلة"
+    },
+    "features": "المواصفات التقنية",
+    "faq": "الأسئلة الشائعة",
+    "guarantees": "توصيل مجاني • ضمان 10 سنوات • دفع آمن"
   },
-  "size": "اختر المقاس",
-  "quantity": "الكمية",
-  "firmness": {
-    "soft": "ناعم",
-    "firm": "صلب"
-  },
-  "actions": {
-    "buyNow": "اشتري الآن",
-    "addToCart": "أضف إلى السلة"
-  },
-  "features": "المواصفات التقنية",
-  "faq": "الأسئلة الشائعة",
-  "guarantees": "توصيل مجاني • ضمان 10 سنوات • دفع آمن"
-},
   "cartPage": {
     "empty": {
       "title": "سلة المشتريات فارغة",
@@ -372,7 +372,7 @@
     "contact": {
       "title": "تواصل معنا",
       "phone": "+213 000 000 000",
-      "email": "contact@litmad.com",
+      "email": "contact@empreinteflex.com",
       "location": "الجزائر، الجزائر"
     },
 

@@ -69,17 +69,21 @@ export default function Header({ translation }) {
           {/* LOGO */}
           <div
             onClick={() => router.push(`/${locale}`)}
-            className="cursor-pointer"
+            className="cursor-pointer h-10 flex items-center"
           >
-            <Image
-              src="/images/logo.webp"
-              alt="Litmad"
-              width={130}
-              height={40}
-              priority
-            />
+            <div
+              onClick={() => router.push(`/${locale}`)}
+              className="cursor-pointer flex items-center"
+            >
+              <Image
+                src="/images/logo.webp"
+                alt="Empreinte Flex"
+                width={100}
+                height={45}
+                priority
+              />
+            </div>
           </div>
-
           {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center gap-6">
             {/* Track Order (new) */}

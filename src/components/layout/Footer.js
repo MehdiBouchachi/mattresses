@@ -9,12 +9,12 @@ import {
 } from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export default function Footer({ translation }) {
   const params = useParams();
-  const locale = params?.locale || "en";
-
+  const locale = params?.local || "en";
+  const router = useRouter();
   const {
     footer: {
       brandDescription,
@@ -31,11 +31,14 @@ export default function Footer({ translation }) {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 py-14 sm:py-20 lg:py-24">
         <div className="grid gap-12 sm:gap-14 md:grid-cols-2 lg:grid-cols-4">
           {/* ===== BRAND ===== */}
-          <div className="space-y-6">
+          <div
+            className="space-y-6 cursor-pointer"
+            onClick={() => router.push(`/${locale}`)}
+          >
             <Image
               src="/images/logo.webp"
-              alt="LITMAD Logo"
-              width={150}
+              alt="Empreinte Flex"
+              width={180}
               height={60}
               className="object-contain"
             />
@@ -91,7 +94,7 @@ export default function Footer({ translation }) {
       <div className="bg-primary-600 text-white">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 py-5 sm:py-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs sm:text-sm">
           <p className="text-white/80 text-center md:text-left">
-            © {new Date().getFullYear()} LITMAD. {bottomInfo.copyright}
+            © {new Date().getFullYear()} Empreinte Flex. {bottomInfo.copyright}
           </p>
 
           <div className="flex flex-wrap justify-center gap-6">
