@@ -11,9 +11,8 @@ export default async function ContactPage({ params }) {
   } = getTranslations(local);
 
   return (
-    <main className="bg-beige-300 min-h-screen">
+    <main className="bg-white min-h-screen">
       <ContactHero hero={hero} />
-
       <ContactSection locale={local} form={form} info={info} />
     </main>
   );
@@ -25,15 +24,16 @@ export default async function ContactPage({ params }) {
 
 function ContactHero({ hero }) {
   return (
-    <section className="relative pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-20 text-center overflow-hidden">
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-72 sm:w-96 lg:w-[700px] h-72 sm:h-96 lg:h-[700px] bg-beige-400 rounded-full blur-[160px] opacity-60" />
+    <section className="relative pt-28 sm:pt-36 lg:pt-44 pb-20 text-center overflow-hidden">
+      {/* Soft Blue Glow */}
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-175 h-175 bg-blue-100 rounded-full blur-[180px] opacity-40" />
 
-      <div className="relative max-w-2xl lg:max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-4 sm:mb-5">
+      <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight mb-6 text-blue-950">
           {hero.title}
         </h1>
 
-        <p className="text-sm sm:text-base text-text-muted leading-relaxed">
+        <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
           {hero.description}
         </p>
       </div>
@@ -49,18 +49,20 @@ function ContactSection({ locale, form, info }) {
   const isRTL = locale === "ar";
 
   return (
-    <section className="pb-16 sm:pb-24 lg:pb-28">
+    <section className="pb-20 sm:pb-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
+          dir={isRTL ? "rtl" : "ltr"}
           className="
             bg-white
-            rounded-2xl sm:rounded-[36px] lg:rounded-[48px]
-            shadow-[0_30px_80px_rgba(0,0,0,0.06)]
-            p-6 sm:p-8 lg:p-14
+            rounded-3xl
+            shadow-[0_30px_70px_rgba(0,0,0,0.05)]
+            border border-blue-100
+            p-6 sm:p-10 lg:p-14
             grid
             grid-cols-1
             md:grid-cols-2
-            gap-10 sm:gap-12 lg:gap-16
+            gap-12
           "
         >
           <ContactForm form={form} />
@@ -79,11 +81,11 @@ function ContactSection({ locale, form, info }) {
 function ContactForm({ form }) {
   return (
     <div>
-      <h2 className="text-xl sm:text-2xl font-semibold mb-6 sm:mb-8">
+      <h2 className="text-2xl font-semibold mb-8 text-blue-950">
         {form.title}
       </h2>
 
-      <form className="space-y-6 sm:space-y-7">
+      <form className="space-y-7">
         <Input name="fullName" placeholder={form.fullName} />
         <Input name="email" type="email" placeholder={form.email} />
 
@@ -98,7 +100,7 @@ function ContactForm({ form }) {
 }
 
 /* =========================================================
-   TEXTAREA (Using same design system as Input)
+   TEXTAREA
 ========================================================= */
 
 function Textarea({ placeholder }) {
@@ -109,12 +111,12 @@ function Textarea({ placeholder }) {
       className="
         w-full
         rounded-xl
-        border border-beige-500
+        border border-blue-100
         bg-white
         px-4 py-3
-        text-sm sm:text-base
-        focus:border-primary-600
-        focus:ring-1 focus:ring-primary-600
+        text-base
+        focus:border-blue-800
+        focus:ring-1 focus:ring-blue-800
         outline-none
         transition
       "
@@ -130,10 +132,10 @@ function ContactInfo({ locale, info, isRTL }) {
   return (
     <div
       className={`
-        space-y-8 sm:space-y-10
+        space-y-10
         pt-6 md:pt-0
-        ${!isRTL ? "md:pl-10 lg:pl-12 md:border-l" : "md:pr-10 lg:pr-12 md:border-r"}
-        md:border-beige-500
+        ${!isRTL ? "md:pl-12 md:border-l" : "md:pr-12 md:border-r"}
+        md:border-blue-100
       `}
     >
       <ContactItem
@@ -141,16 +143,19 @@ function ContactInfo({ locale, info, isRTL }) {
         title={info.phone}
         text="+213 000 000 000"
       />
+
       <ContactItem
         icon={<FiMail />}
         title={info.email}
-        text="contact@litmad.com"
+        text="contact@emprienteflex.com"
       />
+
       <ContactItem
         icon={<FiMapPin />}
         title={info.location}
         text={info.locationValue}
       />
+
       <ContactItem
         icon={<FiClock />}
         title={info.hours}
@@ -166,26 +171,24 @@ function ContactInfo({ locale, info, isRTL }) {
 
 function ContactItem({ icon, title, text }) {
   return (
-    <div className="flex items-start gap-4 sm:gap-5">
+    <div className="flex items-start gap-5">
       <div
         className="
-          w-10 h-10 sm:w-11 sm:h-11
+          w-11 h-11
           rounded-full
-          bg-primary-100
+          bg-blue-50
           flex items-center justify-center
-          text-primary-600
-          text-base sm:text-lg
+          text-blue-950
+          text-lg
         "
       >
         {icon}
       </div>
 
       <div>
-        <h3 className="font-semibold mb-1 text-sm sm:text-base">{title}</h3>
+        <h3 className="font-semibold mb-1 text-base text-blue-950">{title}</h3>
 
-        <p className="text-text-muted text-xs sm:text-sm leading-relaxed">
-          {text}
-        </p>
+        <p className="text-slate-600 text-sm leading-relaxed">{text}</p>
       </div>
     </div>
   );

@@ -6,12 +6,13 @@ function QuantitySelector({ data, actions, i18n = {}, locale }) {
   const isRTL = locale === "ar";
 
   return (
-    <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+    <div className="flex items-center gap-4 flex-wrap">
       {/* Quantity Control */}
       <div
         className="
           flex items-center
-          bg-beige-350
+          bg-blue-50
+          border border-blue-100
           rounded-full
           overflow-hidden
         "
@@ -19,10 +20,10 @@ function QuantitySelector({ data, actions, i18n = {}, locale }) {
         <button
           onClick={decrease}
           className="
-            px-3 sm:px-4
-            py-1.5 sm:py-2
-            text-sm sm:text-base
-            hover:bg-beige-450
+            px-4 py-2
+            text-base
+            text-blue-900
+            hover:bg-blue-100
             transition
           "
         >
@@ -31,9 +32,11 @@ function QuantitySelector({ data, actions, i18n = {}, locale }) {
 
         <div
           className="
-            px-4 sm:px-6
-            text-sm sm:text-base
-            font-medium
+            px-6
+            text-base
+            font-semibold
+            text-blue-900
+            select-none
           "
         >
           {quantity}
@@ -42,10 +45,10 @@ function QuantitySelector({ data, actions, i18n = {}, locale }) {
         <button
           onClick={increase}
           className="
-            px-3 sm:px-4
-            py-1.5 sm:py-2
-            text-sm sm:text-base
-            hover:bg-beige-450
+            px-4 py-2
+            text-base
+            text-blue-900
+            hover:bg-blue-100
             transition
           "
         >
@@ -57,8 +60,9 @@ function QuantitySelector({ data, actions, i18n = {}, locale }) {
       <button
         onClick={remove}
         className="
-          text-error-500
-          text-xs sm:text-sm
+          text-red-600
+          text-sm
+          font-medium
           hover:underline
           transition
         "

@@ -16,7 +16,7 @@ export default function CategoryFilter({
         className={`
           text-xs sm:text-sm
           mb-4 sm:mb-6
-          text-text-subtle
+          text-slate-500
           ${isRTL ? "text-right tracking-normal" : "uppercase tracking-[0.25em] text-left"}
         `}
       >
@@ -70,8 +70,8 @@ function FilterItem({ children, active, onClick, isRTL }) {
         ${isRTL ? "text-right" : "text-left"}
         ${
           active
-            ? "bg-primary-50 text-primary-600 font-medium"
-            : "text-text-600 hover:bg-beige-550"
+            ? "bg-blue-50 text-blue-900 font-medium"
+            : "text-slate-600 hover:bg-blue-50/60 hover:text-blue-900"
         }
       `}
     >

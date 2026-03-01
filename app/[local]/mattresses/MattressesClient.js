@@ -29,7 +29,7 @@ export default function MattressesClient({ locale, translation }) {
   } = translation;
 
   return (
-    <div className="min-h-screen bg-beige-100">
+    <div className="min-h-screen bg-white">
       <PageHeader
         locale={locale}
         title={title}
@@ -49,9 +49,9 @@ export default function MattressesClient({ locale, translation }) {
       />
 
       {/* ================= PRODUCTS ================= */}
-      <section className="py-8 sm:py-10 border-t border-beige-500">
+      <section className="py-8 sm:py-10 border-t border-blue-100">
         <div className="max-w-7xl mx-auto px-6 sm:px-8">
-          <div className="mb-6 sm:mb-8 text-xs sm:text-sm text-text-soft">
+          <div className="mb-6 sm:mb-8 text-xs sm:text-sm text-slate-500">
             {showing} {paginatedProducts.length} {productsLabel}
           </div>
 
@@ -75,7 +75,7 @@ export default function MattressesClient({ locale, translation }) {
 }
 
 /* ======================================================
-   PAGE HEADER (Reusable Pattern)
+   PAGE HEADER
 ====================================================== */
 
 function PageHeader({ locale, title, description, breadcrumbItems }) {
@@ -83,17 +83,13 @@ function PageHeader({ locale, title, description, breadcrumbItems }) {
     <section className="max-w-7xl mx-auto px-6 sm:px-8 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-14 lg:pb-16">
       <Breadcrumb items={breadcrumbItems} />
 
-      <h1 className="text-2xl sm:text-3xl lg:text-5xl font-semibold tracking-tight mb-4 sm:mb-6">
+      <h1 className="text-2xl sm:text-3xl lg:text-5xl font-semibold tracking-tight mb-4 sm:mb-6 text-blue-950">
         {title}
       </h1>
 
-      <p className="text-sm sm:text-base lg:text-lg text-text-muted max-w-xl">
+      <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-xl">
         {description}
       </p>
     </section>
   );
 }
-
-/* ======================================================
-   REUSABLE BREADCRUMB
-====================================================== */

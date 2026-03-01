@@ -4,41 +4,43 @@ export default function EmptyCart({ data, actions, i18n = {} }) {
 
   const { title, description, continue: continueText } = i18n;
 
-  const arrow = locale === "ar" ? "←" : "→";
+  const isRTL = locale === "ar";
+  const arrow = isRTL ? "←" : "→";
 
   return (
-    <div
-      className="
-        min-h-screen
-        flex flex-col
-        items-center
-        justify-center
-        text-center
-        px-4 sm:px-6
-        py-16 sm:py-20
-        bg-beige-100
-      "
-    >
-      <div className="max-w-md sm:max-w-lg">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-5">
+    <div className="relative min-h-screen flex items-center justify-center bg-white px-6 py-20 text-center">
+      {/* Soft Blue Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-100 blur-[200px] opacity-40 pointer-events-none" />
+
+      <div className="relative max-w-lg">
+        <h1 className="text-3xl sm:text-4xl font-semibold mb-6 text-blue-950">
           {title}
         </h1>
 
-        <p className="text-sm sm:text-base text-text-muted mb-6 sm:mb-8">
+        <p className="text-base text-slate-600 mb-10 leading-relaxed">
           {description}
         </p>
 
         <button
           onClick={back}
           className="
-            text-primary-600
-            font-medium
-            text-sm sm:text-base
-            hover:underline
+            inline-flex items-center gap-2
+            text-blue-950
+            font-semibold
+            text-base
+            hover:text-blue-600
             transition
           "
         >
-          {`${continueText} ${arrow}`}
+          {isRTL ? (
+            <>
+              {arrow} {continueText}
+            </>
+          ) : (
+            <>
+              {continueText} {arrow}
+            </>
+          )}
         </button>
       </div>
     </div>

@@ -86,7 +86,7 @@ export default function Header({ translation }) {
     ${
       isAtTop
         ? "bg-transparent border-transparent"
-        : "bg-white/90 backdrop-blur-xl border-b border-beige-400 shadow-sm"
+        : "bg-white/90 backdrop-blur-xl border-b border-blue-100 shadow-sm"
     }
   `}
       >
@@ -110,7 +110,7 @@ export default function Header({ translation }) {
           <div className="hidden md:flex items-center gap-6">
             <button
               onClick={() => router.push(`/${locale}/track-order`)}
-              className="text-sm text-text-body hover:text-primary-600 transition"
+              className="text-sm text-slate-600 hover:text-blue-950 transition"
             >
               {navigation.trackOrder}
             </button>
@@ -119,7 +119,7 @@ export default function Header({ translation }) {
             <div className="relative">
               <button
                 onClick={() => setOpenLang(!openLang)}
-                className="flex items-center gap-2 text-sm px-4 py-2 rounded-xl border border-beige-600 hover:bg-beige-100 transition"
+                className="flex items-center gap-2 text-sm px-4 py-2 rounded-xl border border-blue-100 hover:bg-blue-50 transition"
               >
                 {languages.find((l) => l.code === locale)?.label}
                 <FiChevronDown
@@ -130,15 +130,15 @@ export default function Header({ translation }) {
               </button>
 
               {openLang && (
-                <div className="absolute right-0 mt-2 w-44 bg-white border border-beige-500 rounded-xl shadow-lg overflow-hidden">
+                <div className="absolute right-0 mt-2 w-44 bg-white border border-blue-100 rounded-xl shadow-lg overflow-hidden">
                   {languages.map((lng) => (
                     <button
                       key={lng.code}
                       onClick={() => switchLanguage(lng.code)}
                       className={`w-full px-4 py-3 text-sm text-start ${
                         locale === lng.code
-                          ? "bg-primary-50 text-primary-600 font-medium"
-                          : "hover:bg-beige-100"
+                          ? "bg-blue-50 text-blue-900 font-medium"
+                          : "hover:bg-blue-100"
                       }`}
                     >
                       {lng.label}
@@ -165,7 +165,7 @@ export default function Header({ translation }) {
               <FiShoppingCart className="text-lg" />
 
               {count > 0 && (
-                <span className="absolute -top-2 -right-2 bg-primary-600 text-primary-50 text-[10px] px-2 py-[2px] rounded-full font-medium">
+                <span className="absolute -top-2 -right-2 bg-blue-900 text-blue-50 text-[10px] px-2 py-0.5 rounded-full font-medium">
                   {count}
                 </span>
               )}
@@ -174,7 +174,7 @@ export default function Header({ translation }) {
 
           {/* MOBILE MENU BUTTON */}
           <button
-            className="md:hidden w-10 h-10 rounded-xl border border-beige-600 flex items-center justify-center"
+            className="md:hidden w-10 h-10 rounded-xl border border-blue-100 flex items-center justify-center"
             onClick={() => setOpenMenu(true)}
           >
             <FiMenu size={20} />
@@ -254,8 +254,8 @@ export default function Header({ translation }) {
           </nav>
 
           {/* Language */}
-          <div className="mt-auto pt-6 border-t border-beige-400">
-            <p className="text-xs mb-4 text-text-subtle">{language}</p>
+          <div className="mt-auto pt-6 border-t border-blue-100">
+            <p className="text-xs mb-4 text-slate-500">{language}</p>
 
             <div className="flex flex-col gap-3">
               {languages.map((lng) => (
@@ -264,8 +264,8 @@ export default function Header({ translation }) {
                   onClick={() => switchLanguage(lng.code)}
                   className={`text-sm px-3 py-2 rounded-lg ${
                     locale === lng.code
-                      ? "bg-primary-50 text-primary-600 font-medium"
-                      : "hover:bg-beige-100"
+                      ? "bg-blue-50 text-blue-900 font-medium"
+                      : "hover:bg-blue-100"
                   }`}
                 >
                   {lng.label}
@@ -282,7 +282,7 @@ export default function Header({ translation }) {
 
       <div
         dir={isRTL ? "rtl" : "ltr"}
-        className="fixed bottom-0 left-0 w-full bg-white border-t border-beige-500 md:hidden z-40"
+        className="fixed bottom-0 left-0 w-full bg-white border-t border-blue-100 md:hidden z-40"
       >
         <div className="flex justify-around py-2">
           <NavItem
@@ -331,7 +331,7 @@ function NavItem({ icon, label, onClick, badge, active }) {
     >
       <div
         className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all ${
-          active ? "bg-primary-600 text-white shadow-md" : "text-text-muted"
+          active ? "bg-blue-900 text-blue-50 shadow-md" : "text-slate-600"
         }`}
       >
         {icon}
@@ -345,7 +345,7 @@ function NavItem({ icon, label, onClick, badge, active }) {
 
       <span
         className={`mt-1 ${
-          active ? "text-primary-600 font-medium" : "text-text-muted"
+          active ? "text-blue-900 font-medium" : "text-slate-600"
         }`}
       >
         {label}
@@ -359,7 +359,7 @@ function DrawerItem({ children, onClick, active }) {
     <button
       onClick={onClick}
       className={`text-base ${
-        active ? "text-primary-600 font-medium" : "text-text-body"
+        active ? "text-blue-900 font-medium" : "text-slate-600"
       }`}
     >
       {children}

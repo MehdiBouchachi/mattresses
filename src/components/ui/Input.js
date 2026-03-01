@@ -30,9 +30,9 @@ export default function Input({
         ${
           error
             ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-            : "border-beige-500 focus:border-primary-600 focus:ring-1 focus:ring-primary-600"
+            : "border-blue-100 focus:border-blue-800 focus:ring-1 focus:ring-blue-800"
         }
-        ${disabled ? "opacity-60 cursor-not-allowed bg-beige-200" : ""}
+        ${disabled ? "opacity-60 cursor-not-allowed bg-blue-200" : ""}
         ${className}
       `}
       {...props}

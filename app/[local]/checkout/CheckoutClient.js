@@ -83,13 +83,16 @@ export default function CheckoutClient({ locale, translation = {} }) {
   };
 
   return (
-    <div className="bg-beige-100 min-h-screen">
+    <div className="relative min-h-screen bg-white">
+      {/* Soft Blue Background Glow */}
+
       <div
         className="
+          relative
           max-w-7xl mx-auto
           px-4 sm:px-6 lg:px-8
-          pt-20 sm:pt-24 lg:pt-32
-          pb-16 sm:pb-20
+          pt-24 sm:pt-28 lg:pt-36
+          pb-20 sm:pb-24
         "
       >
         {/* Header */}
@@ -106,7 +109,7 @@ export default function CheckoutClient({ locale, translation = {} }) {
             grid
             grid-cols-1
             lg:grid-cols-[1.1fr_0.9fr]
-            gap-10 sm:gap-12 lg:gap-16
+            gap-12 lg:gap-20
             items-start
           "
         >

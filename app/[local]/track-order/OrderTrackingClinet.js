@@ -79,7 +79,7 @@ export default function OrderTrackingClient({ locale, translation }) {
     : -1;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-beige-200 to-beige-100 pt-20 pb-28 px-4 sm:px-6">
+    <div className="min-h-screen bg-white pt-25 pb-28 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto space-y-10 sm:space-y-14">
         <TrackingHeader header={t.header} />
 
@@ -115,7 +115,7 @@ function TrackingHeader({ header }) {
       <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
         {header.title}
       </h1>
-      <p className="text-sm sm:text-base text-text-muted max-w-xl mx-auto">
+      <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
         {header.description}
       </p>
     </div>
@@ -128,7 +128,7 @@ function TrackingHeader({ header }) {
 
 function TrackingSearch({ t, orderId, setOrderId, onTrack, error }) {
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-beige-500">
+    <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-blue-100">
       <div className="flex flex-col sm:flex-row gap-4">
         <Input
           name="orderId"
@@ -159,7 +159,7 @@ function TrackingSearch({ t, orderId, setOrderId, onTrack, error }) {
 
 function TrackingResult({ order, t, locale, currentIndex, isRTL }) {
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-beige-500 space-y-10">
+    <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-blue-100 space-y-10">
       <OrderInfo order={order} t={t} locale={locale} />
 
       <TrackingProgress
@@ -201,7 +201,7 @@ function OrderInfo({ order, t, locale }) {
 function InfoBlock({ label, value }) {
   return (
     <div>
-      <p className="text-xs text-text-muted">{label}</p>
+      <p className="text-xs text-slate-600">{label}</p>
       <p className="font-medium text-sm sm:text-base mt-1">{value}</p>
     </div>
   );
@@ -230,20 +230,20 @@ function TrackingProgress({ steps, currentIndex, isRTL }) {
                 {index !== 0 && (
                   <div
                     className={`absolute top-3 w-full h-[2px] ${
-                      active ? "bg-primary-600" : "bg-beige-400"
+                      active ? "bg-blue-900" : "bg-blue-50"
                     } ${isRTL ? "-right-1/2" : "-left-1/2"}`}
                   />
                 )}
 
                 <div
                   className={`w-6 h-6 rounded-full z-10 ${
-                    active ? "bg-primary-600" : "bg-beige-400"
+                    active ? "bg-blue-900" : "bg-blue-50"
                   }`}
                 />
 
                 <p
                   className={`mt-3 text-xs text-center ${
-                    active ? "text-text-primary" : "text-text-muted"
+                    active ? "text-text-primary" : "text-slate-600"
                   }`}
                 >
                   {label}
@@ -266,20 +266,20 @@ function TrackingProgress({ steps, currentIndex, isRTL }) {
                   className={`absolute ${
                     isRTL ? "right-[11px]" : "left-[11px]"
                   } top-6 w-[2px] h-full ${
-                    active ? "bg-primary-600" : "bg-beige-400"
+                    active ? "bg-blue-900" : "bg-blue-50"
                   }`}
                 />
               )}
 
               <div
                 className={`w-6 h-6 rounded-full mt-1 z-10 ${
-                  active ? "bg-primary-600" : "bg-beige-400"
+                  active ? "bg-blue-900" : "bg-blue-50"
                 }`}
               />
 
               <p
                 className={`text-xs ${
-                  active ? "text-text-primary" : "text-text-muted"
+                  active ? "text-slate-900" : "text-slate-600"
                 }`}
               >
                 {label}
@@ -297,5 +297,5 @@ function TrackingProgress({ steps, currentIndex, isRTL }) {
 ========================================================= */
 
 function StatusMessage({ message }) {
-  return <div className="text-center text-sm text-text-primary">{message}</div>;
+  return <div className="text-center text-sm text-slate-900">{message}</div>;
 }

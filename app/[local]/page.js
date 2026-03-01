@@ -10,7 +10,7 @@ export default async function Home({ params }) {
   const { local = "en" } = await params;
   const translation = getTranslations(local);
   return (
-    <div className="min-h-screen bg-beige-300 text-text-primary">
+    <div className="min-h-screen bg-white text-slate-900">
       {/* ================= HERO ================= */}
       <HeroSection translation={translation} />
 

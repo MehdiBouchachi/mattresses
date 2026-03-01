@@ -15,7 +15,7 @@ export default function PriceFilter({ state, dispatch, translation, locale }) {
 
   return (
     <div>
-      <h3 className="text-xs sm:text-sm uppercase tracking-[0.25em] text-text-subtle mb-4 sm:mb-6">
+      <h3 className="text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-500 mb-4 sm:mb-6">
         {priceRangeLabel}
       </h3>
 
@@ -43,15 +43,15 @@ export default function PriceFilter({ state, dispatch, translation, locale }) {
       </div>
 
       {/* RANGE SUMMARY */}
-      <div className="flex justify-between items-center text-xs sm:text-sm text-text-600">
-        <span className="font-medium">
+      <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600">
+        <span className="font-medium text-blue-900">
           {formatPrice(state.minPrice, locale)} –{" "}
           {formatPrice(state.maxPrice, locale)}
         </span>
 
         <button
           onClick={() => dispatch({ type: "RESET_PRICE" })}
-          className="text-primary-600 font-medium hover:opacity-80 transition"
+          className="text-blue-700 font-medium hover:text-blue-900 transition"
         >
           {resetLabel}
         </button>
@@ -69,8 +69,19 @@ function PriceInput({ value, onChange }) {
       inputMode="numeric"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="border border-beige-700 rounded-lg px-4 py-2 w-full text-sm
-          focus:border-primary-600 focus:ring-1 focus:ring-primary-600 outline-none transition
+      className="
+        w-full
+        rounded-lg
+        border border-blue-100
+        bg-white
+        px-4 py-2
+        text-sm
+        text-slate-700
+        transition
+        focus:border-blue-800
+        focus:ring-1
+        focus:ring-blue-800
+        outline-none
       "
     />
   );

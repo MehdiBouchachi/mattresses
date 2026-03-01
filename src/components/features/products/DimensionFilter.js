@@ -14,7 +14,7 @@ export default function DimensionFilter({ state, dispatch, translation }) {
 
   return (
     <div className="mt-6 sm:mt-8 lg:mt-10">
-      <h3 className="text-xs sm:text-sm uppercase tracking-[0.25em] text-text-subtle mb-3 sm:mb-5">
+      <h3 className="text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-500 mb-3 sm:mb-5">
         {dimensionLabel}
       </h3>
 
@@ -23,14 +23,24 @@ export default function DimensionFilter({ state, dispatch, translation }) {
         onChange={(e) =>
           dispatch({ type: "SET_DIMENSION", payload: e.target.value })
         }
-        className="w-full border border-beige-700 rounded-lg px-4 py-3 text-sm
-        bg-white text-text-600
-        focus:border-primary-600 focus:ring-1 focus:ring-primary-600
-        outline-none transition"
+        className="
+          w-full
+          border border-blue-100
+          rounded-lg
+          px-4 py-3
+          text-sm
+          bg-white
+          text-slate-700
+          focus:border-blue-600
+          focus:ring-1
+          focus:ring-blue-600
+          outline-none
+          transition
+        "
       >
         {dimensions.map((dim) => (
           <option key={dim} value={dim}>
-            {dim === "all" ? "All Dimensions" : dim}
+            {dim === "all" ? allLabel : dim}
           </option>
         ))}
       </select>

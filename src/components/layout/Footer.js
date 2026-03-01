@@ -26,7 +26,7 @@ export default function Footer({ translation }) {
   } = translation;
 
   return (
-    <footer className="bg-white border-t border-beige-400">
+    <footer className="bg-white border-t border-blue-100">
       {/* ================= MAIN ================= */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 py-14 sm:py-20 lg:py-24">
         <div className="grid gap-12 sm:gap-14 md:grid-cols-2 lg:grid-cols-4">
@@ -45,7 +45,7 @@ export default function Footer({ translation }) {
               />
             </div>
 
-            <p className="text-sm sm:text-base text-text-body leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
               {brandDescription}
             </p>
 
@@ -93,7 +93,7 @@ export default function Footer({ translation }) {
       </div>
 
       {/* ================= BOTTOM STRIP ================= */}
-      <div className="bg-primary-600 text-white">
+      <div className="bg-blue-900 text-white">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 py-5 sm:py-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs sm:text-sm">
           <p className="text-white/80 text-center md:text-left">
             © {new Date().getFullYear()} Empreinte Flex. {bottomInfo.copyright}
@@ -118,10 +118,10 @@ export default function Footer({ translation }) {
 function FooterColumn({ title, children }) {
   return (
     <div>
-      <h4 className="text-xs sm:text-sm font-semibold mb-5 sm:mb-6 tracking-wide text-text-heading">
+      <h4 className="text-xs sm:text-sm font-semibold mb-5 sm:mb-6 tracking-wide text-slate-800">
         {title}
       </h4>
-      <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base text-text-body">
+      <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base text-slate-600">
         {children}
       </ul>
     </div>
@@ -131,7 +131,7 @@ function FooterColumn({ title, children }) {
 function FooterLink({ href, children }) {
   return (
     <li>
-      <Link href={href} className="hover:text-primary-600 transition">
+      <Link href={href} className="hover:text-blue-800 transition">
         {children}
       </Link>
     </li>
@@ -141,7 +141,7 @@ function FooterLink({ href, children }) {
 function ContactItem({ icon, text }) {
   return (
     <div className="flex items-start gap-3 text-sm sm:text-base">
-      <span className="text-primary-600 mt-1">{icon}</span>
+      <span className="text-blue-800 mt-1">{icon}</span>
       <span>{text}</span>
     </div>
   );
@@ -153,10 +153,10 @@ function SocialIcon({ children }) {
       className="
         w-9 h-9 sm:w-10 sm:h-10
         rounded-full
-        bg-primary-50
+        bg-blue-50
         flex items-center justify-center
-        text-primary-600
-        hover:bg-primary-600 hover:text-white
+        text-blue-800
+        hover:bg-blue-800 hover:text-white
         transition duration-300
       "
     >

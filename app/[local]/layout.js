@@ -44,8 +44,9 @@ export default async function RootLayout({ children, params }) {
           ${bodyFont.variable}
           ${arabicFont.variable}
           antialiased
-          bg-beige-300
-          text-text-primary
+          bg-white
+          text-blue-950
+          
           pb-19 md:pb-0
         `}
       >

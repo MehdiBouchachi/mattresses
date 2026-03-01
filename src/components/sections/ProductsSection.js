@@ -27,18 +27,16 @@ function ProductsSection({ translation }) {
   } = translation.home.products;
 
   return (
-    <section
-      className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-beige-50 to-beige-150"
-      id="collections"
-    >
+    <section className="py-16 sm:py-20 lg:py-28 bg-white" id="collections">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* HEADER */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 sm:mb-14 lg:mb-20">
           <div className="text-center sm:text-start">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-blue-950">
               {title}
             </h3>
-            <p className="text-text-body mt-2 sm:mt-3 text-sm sm:text-base max-w-md mx-auto sm:mx-0">
+
+            <p className="text-slate-600 mt-2 sm:mt-3 text-sm sm:text-base max-w-md mx-auto sm:mx-0">
               {desc}
             </p>
           </div>

@@ -52,7 +52,7 @@ export default function Pagination({ totalPages, page, dispatch }) {
       {/* PAGE NUMBERS */}
       {visiblePages.map((p, i) =>
         p === "..." ? (
-          <span key={i} className="px-2 text-text-soft text-sm">
+          <span key={i} className="px-2 text-slate-400 text-sm">
             ...
           </span>
         ) : (
@@ -98,10 +98,10 @@ function PaginationButton({
         transition-all duration-200
         ${
           active
-            ? "bg-primary-600 text-white shadow-md"
+            ? "bg-blue-900 text-white shadow-md"
             : disabled
-              ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-              : "border border-beige-700 hover:bg-beige-550"
+              ? "bg-slate-200 text-slate-400 cursor-not-allowed"
+              : "bg-white border border-blue-100 text-slate-700 hover:bg-blue-50 hover:border-blue-300"
         }
       `}
     >

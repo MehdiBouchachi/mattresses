@@ -6,24 +6,25 @@ export default async function AboutPage({ params }) {
   const { aboutPage } = getTranslations(local);
   const { hero, frame, editorial, scale, commitment, locations } = aboutPage;
   return (
-    <div className="bg-beige-100 overflow-hidden">
-      <section className="relative min-h-[70vh] md:min-h-[75vh] flex items-center justify-center text-center px-6 md:px-8">
-        {/* Ghost branding */}
+    <div className="bg-white overflow-hidden">
+      <section className="relative min-h-[75vh] flex items-center justify-center text-center px-6 md:px-8">
+        {/* Ghost Branding */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="text-[70px] sm:text-[90px] md:text-[130px] lg:text-[160px] font-semibold text-text-primary opacity-[0.04] tracking-tight whitespace-nowrap">
+          <span className="text-[90px] md:text-[140px] lg:text-[170px] font-semibold text-blue-950 opacity-[0.03] tracking-tight whitespace-nowrap">
             Empreinte Flex
           </span>
         </div>
-        <div className="relative max-w-xl sm:max-w-2xl md:max-w-3xl">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.4em] sm:tracking-[0.5em] text-text-soft mb-4 sm:mb-6">
+
+        <div className="relative max-w-3xl">
+          <p className="text-xs uppercase tracking-[0.5em] text-blue-700 mb-6">
             {hero.badge}
           </p>
 
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary leading-snug">
+          <h1 className="text-3xl md:text-5xl font-semibold text-blue-950 leading-tight">
             {hero.title}
           </h1>
 
-          <p className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg text-text-muted leading-relaxed">
+          <p className="mt-8 text-lg text-slate-600 leading-relaxed">
             {hero.description}
           </p>
         </div>
@@ -53,19 +54,19 @@ export default async function AboutPage({ params }) {
         <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-center">
           {/* TEXT */}
           <div className="space-y-6 sm:space-y-8 max-w-lg mx-auto md:mx-0">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-text-primary leading-snug">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-blue-950 leading-snug">
               {editorial.title}
             </h3>
 
-            <p className="text-text-primary text-base sm:text-lg leading-relaxed">
+            <p className="text-blue-950 text-base sm:text-lg leading-relaxed">
               {editorial.lead}
             </p>
 
-            <p className="text-sm sm:text-base text-text-body leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
               {editorial.paragraph1}
             </p>
 
-            <p className="text-sm sm:text-base text-text-muted leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
               {editorial.paragraph2}
             </p>
           </div>
@@ -99,46 +100,46 @@ export default async function AboutPage({ params }) {
 
             {/* TEXT */}
             <div className="space-y-6 sm:space-y-8 order-1 md:order-2">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-text-primary leading-snug">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-blue-950 leading-snug">
                 {scale.titleLine1}
                 <br className="hidden sm:block" />
                 {scale.titleLine2}
               </h3>
 
-              <div className="space-y-4 sm:space-y-6 text-sm sm:text-base text-text-body leading-relaxed">
-                <p className="text-text-primary">{scale.paragraph1}</p>
+              <div className="space-y-4 sm:space-y-6 text-sm sm:text-base text-slate-600 leading-relaxed">
+                <p className="text-blue-950">{scale.paragraph1}</p>
 
                 <p>{scale.paragraph2}</p>
 
-                <p className="text-text-muted">{scale.paragraph3}</p>
+                <p className="text-slate-500">{scale.paragraph3}</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative py-24 sm:py-32 md:py-44 bg-beige-300 overflow-hidden">
+      <section className="relative py-24 sm:py-32 md:py-44 bg-blue-50/40 overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="text-[80px] sm:text-[120px] md:text-[200px] font-semibold text-text-primary opacity-[0.04]">
+          <span className="text-[80px] sm:text-[120px] md:text-[200px] font-semibold text-blue-950 opacity-[0.04]">
             {commitment.rest}
           </span>
         </div>
 
         <div className="relative max-w-xl sm:max-w-2xl md:max-w-3xl mx-auto text-center px-6 md:px-8 space-y-8 sm:space-y-12">
-          <h3 className="text-xl sm:text-2xl md:text-4xl font-semibold text-text-primary">
+          <h3 className="text-xl sm:text-2xl md:text-4xl font-semibold text-blue-950">
             {commitment.title}
           </h3>
 
-          <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-slate-500 leading-relaxed">
             {commitment.paragraph1}
           </p>
 
-          <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-slate-500 leading-relaxed">
             {commitment.paragraph2}
           </p>
         </div>
       </section>
-      <WhereWeAre translation={locations} />
+      {/* <WhereWeAre translation={locations} /> */}
     </div>
   );
 }
@@ -146,20 +147,20 @@ export default async function AboutPage({ params }) {
 function WhereWeAre({ translation }) {
   return (
     <section
-      className="relative py-24 sm:py-32 md:py-40 bg-white border-t border-beige-500"
+      className="relative py-24 sm:py-32 md:py-40 bg-white border-t border-blue-100"
       id="locations"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="text-center max-w-2xl mx-auto mb-20 space-y-6">
-          <p className="text-xs uppercase tracking-[0.4em] text-text-soft">
+          <p className="text-xs uppercase tracking-[0.4em] text-slate-500">
             {translation.title}
           </p>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-text-primary">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-blue-950">
             {translation.subtitle}
           </h2>
 
-          <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-slate-500 leading-relaxed">
             {translation.description}
           </p>
         </div>
@@ -167,7 +168,7 @@ function WhereWeAre({ translation }) {
         <div className="grid md:grid-cols-2 gap-16">
           {/* CONSTANTINE */}
 
-          <div className="group bg-beige-50 border border-beige-500 rounded-2xl p-8 space-y-8 transition hover:shadow-md">
+          <div className="group bg-beige-50 border border-blue-100 rounded-2xl p-8 space-y-8 transition hover:shadow-md">
             {/* Title */}
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-primary-600">
@@ -177,11 +178,11 @@ function WhereWeAre({ translation }) {
                 </span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-semibold text-text-primary">
+              <h3 className="text-xl sm:text-2xl font-semibold text-blue-950">
                 {translation.production.title}
               </h3>
 
-              <p className="text-text-muted text-sm sm:text-base">
+              <p className="text-slate-500 text-sm sm:text-base">
                 {translation.production.description}
               </p>
             </div>
@@ -211,7 +212,7 @@ function WhereWeAre({ translation }) {
                 href="https://www.google.com/maps/search/?api=1&query=36.3388842,6.6484648"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-beige-600 text-text-primary text-sm font-medium hover:bg-beige-200 transition"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-beige-600 text-blue-950 text-sm font-medium hover:bg-beige-200 transition"
               >
                 <FiExternalLink size={16} />
                 {translation.production.open}
@@ -221,7 +222,7 @@ function WhereWeAre({ translation }) {
 
           {/* ALGIERS SHOWROOM */}
 
-          <div className="group bg-beige-50 border border-beige-500 rounded-2xl p-8 space-y-8 transition hover:shadow-md">
+          <div className="group bg-beige-50 border border-blue-100 rounded-2xl p-8 space-y-8 transition hover:shadow-md">
             {/* Title */}
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-primary-600">
@@ -231,11 +232,11 @@ function WhereWeAre({ translation }) {
                 </span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-semibold text-text-primary">
+              <h3 className="text-xl sm:text-2xl font-semibold text-blue-950">
                 {translation.showroom.title}
               </h3>
 
-              <p className="text-text-muted text-sm sm:text-base">
+              <p className="text-slate-500 text-sm sm:text-base">
                 {translation.showroom.description}
               </p>
             </div>
@@ -265,7 +266,7 @@ function WhereWeAre({ translation }) {
                 href="https://www.google.com/maps/search/?api=1&query=36.7577311,2.9560227"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-beige-600 text-text-primary text-sm font-medium hover:bg-beige-200 transition"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-beige-600 text-blue-950 text-sm font-medium hover:bg-beige-200 transition"
               >
                 <FiExternalLink size={16} />
                 {translation.showroom.open}

@@ -21,48 +21,54 @@ function CartSummary({ data, actions, i18n = {}, locale }) {
     <div
       className="
         bg-white
-        rounded-xl sm:rounded-2xl
-        p-5 sm:p-6 lg:p-8
-        border border-beige-500
-        shadow-md sm:shadow-lg
+        rounded-2xl
+        p-6 sm:p-8
+        border border-blue-100
+        shadow-[0_20px_50px_rgba(0,0,0,0.05)]
         lg:sticky lg:top-32
       "
     >
-      <h2 className="text-lg sm:text-xl font-semibold mb-6 sm:mb-8">{title}</h2>
+      <h2 className="text-xl font-semibold mb-8 text-blue-950">{title}</h2>
 
-      {/* Items Row */}
-      <div className="flex justify-between text-xs sm:text-sm mb-3 sm:mb-4">
-        <span className="text-text-muted">
+      {/* ITEMS */}
+      <div className="flex justify-between text-sm mb-4">
+        <span className="text-slate-500">
           {items} ({totalQuantity})
         </span>
-        <span>{formatPrice(total, locale)}</span>
+
+        <span className="text-blue-950 font-medium">
+          {formatPrice(total, locale)}
+        </span>
       </div>
 
-      {/* Savings */}
+      {/* SAVINGS */}
       {totalSavings > 0 && (
-        <div className="flex justify-between text-xs sm:text-sm mb-3 sm:mb-4 text-success-600 font-medium">
+        <div className="flex justify-between text-sm mb-4 text-red-600 font-semibold">
           <span>{savingsLabel}</span>
           <span>- {formatPrice(totalSavings, locale)}</span>
         </div>
       )}
 
-      {/* Delivery */}
-      <div className="flex justify-between text-xs sm:text-sm text-text-muted mb-5 sm:mb-6">
+      {/* DELIVERY */}
+      <div className="flex justify-between text-sm text-slate-500 mb-6">
         <span>{delivery}</span>
-        <span className="text-success-600 font-medium">{free}</span>
+        <span className="text-blue-950 font-medium">{free}</span>
       </div>
 
-      <div className="border-t border-beige-500 my-5 sm:my-6" />
+      <div className="border-t border-blue-100 my-6" />
 
-      {/* Total */}
-      <div className="flex justify-between items-center text-lg sm:text-xl lg:text-2xl font-bold">
-        <span>{totalLabel}</span>
-        <span className="text-primary-600">{formatPrice(total, locale)}</span>
+      {/* TOTAL */}
+      <div className="flex justify-between items-center text-xl font-bold">
+        <span className="text-blue-950">{totalLabel}</span>
+
+        <span className="text-2xl text-blue-900">
+          {formatPrice(total, locale)}
+        </span>
       </div>
 
       {/* CTA */}
       <Button
-        className="mt-6 sm:mt-8"
+        className="mt-8"
         variant="cta"
         size="lg"
         fullWidth

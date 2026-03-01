@@ -113,13 +113,13 @@ export default function ProductClient({
   /* ================= UI ================= */
 
   return (
-    <div className="bg-beige-100 min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* ================= HEADER ================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-8">
-        <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-text-soft mb-4">
+        <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-500 mb-4">
           <button
             onClick={() => router.push(`/${locale}`)}
-            className="hover:text-primary-600 transition"
+            className="hover:text-blue-700 transition"
           >
             {breadcrumb.home}
           </button>
@@ -128,21 +128,21 @@ export default function ProductClient({
 
           <button
             onClick={() => router.push(`/${locale}/mattresses`)}
-            className="hover:text-primary-600 transition"
+            className="hover:text-blue-700 transition"
           >
             {breadcrumb.collection}
           </button>
 
           <span>/</span>
 
-          <span className="text-primary-600 font-medium truncate max-w-[150px]">
+          <span className="text-blue-900 font-medium truncate max-w-[150px]">
             {product.name}
           </span>
         </div>
 
         <button
           onClick={() => router.back()}
-          className="text-xs sm:text-sm text-primary-600 hover:underline"
+          className="text-xs sm:text-sm text-blue-900 hover:underline"
         >
           ← {breadcrumb.back}
         </button>
@@ -175,9 +175,7 @@ export default function ProductClient({
                 key={i}
                 onClick={() => setSelectedImage(img)}
                 className={`min-w-[70px] h-[70px] sm:w-24 sm:h-24 rounded-xl overflow-hidden border transition ${
-                  selectedImage === img
-                    ? "border-primary-600"
-                    : "border-beige-500"
+                  selectedImage === img ? "border-blue-600" : "border-blue-100"
                 }`}
               >
                 <img
@@ -191,8 +189,8 @@ export default function ProductClient({
         </div>
 
         {/* RIGHT */}
-        <div className="bg-white p-6 sm:p-8 lg:p-12 rounded-3xl lg:rounded-[40px] shadow-lg border border-beige-500">
-          <p className="text-xs uppercase tracking-widest text-text-subtle mb-2">
+        <div className="bg-white p-6 sm:p-8 lg:p-12 rounded-3xl lg:rounded-[40px] shadow-lg border border-blue-100">
+          <p className="text-xs uppercase tracking-widest text-slate-500 mb-2">
             {product.category} · {product.subcategory}
           </p>
 
@@ -200,12 +198,12 @@ export default function ProductClient({
             {product.name}
           </h1>
 
-          <p className="text-text-muted mb-6 text-sm sm:text-base">
+          <p className="text-slate-600 mb-6 text-sm sm:text-base">
             {product.description}
           </p>
 
           {/* PRICE */}
-          <div className="mb-8 border-b border-beige-500 pb-6">
+          <div className="mb-8 border-b border-blue-100 pb-6">
             {hasDiscount && (
               <p className="text-sm text-gray-400 line-through mb-2">
                 {formatPrice(unitBasePrice)}
@@ -213,18 +211,18 @@ export default function ProductClient({
             )}
 
             <div className="flex items-end gap-3 flex-wrap">
-              <span className="text-3xl sm:text-5xl font-bold text-primary-600">
+              <span className="text-3xl sm:text-5xl font-bold text-blue-900">
                 {formatPrice(quantity === 1 ? discountedUnitPrice : totalPrice)}
               </span>
 
               {quantity > 1 && (
-                <span className="text-xs sm:text-sm text-text-muted">
+                <span className="text-xs sm:text-sm text-slate-600">
                   ({quantity} × {formatPrice(discountedUnitPrice)})
                 </span>
               )}
 
               {hasDiscount && (
-                <span className="text-xs bg-primary-600/10 text-primary-600 px-2 py-1 rounded-full">
+                <span className="text-xs bg-blue-900/10 text-blue-900 px-2 py-1 rounded-full">
                   −{discount}%
                 </span>
               )}
@@ -242,8 +240,8 @@ export default function ProductClient({
                   onClick={() => setSelectedDimension(dim)}
                   className={`py-2 sm:py-3 rounded-xl border text-sm ${
                     selectedDimension.size === dim.size
-                      ? "bg-primary-600 text-white border-primary-600"
-                      : "border-beige-700"
+                      ? "bg-blue-900 text-white border-blue-900"
+                      : "border-blue-800 hover:border-blue-900 hover:bg-blue-100 transition"
                   }`}
                 >
                   {dim.size}
@@ -284,7 +282,7 @@ export default function ProductClient({
 
             <div className="relative h-2 bg-gray-200 rounded-full">
               <div
-                className="absolute h-2 bg-primary-600 rounded-full"
+                className="absolute h-2 bg-blue-900 rounded-full"
                 style={{
                   width: `${Math.min(10, Math.max(0, firmness)) * 10}%`,
                 }}
@@ -296,7 +294,7 @@ export default function ProductClient({
           <div className="space-y-4">
             <button
               onClick={handleCheckout}
-              className="w-full bg-primary-600 text-white py-3 sm:py-4 rounded-2xl text-base sm:text-lg font-medium hover:bg-primary-700 transition"
+              className="w-full bg-blue-900 text-white py-3 sm:py-4 rounded-2xl text-base sm:text-lg font-medium hover:bg-blue-950 transition"
             >
               {actionTranslation.buyNow}
             </button>
@@ -314,12 +312,12 @@ export default function ProductClient({
                   }),
                 )
               }
-              className="w-full border border-primary-600 py-3 rounded-2xl hover:bg-primary-50 transition"
+              className="w-full border border-blue-900 py-3 rounded-2xl hover:bg-blue-50 transition"
             >
               {actionTranslation.addToCart}
             </button>
 
-            <div className="pt-4 border-t border-beige-500 text-xs sm:text-sm text-text-muted text-center">
+            <div className="pt-4 border-t border-blue-100 text-xs sm:text-sm text-slate-600 text-center">
               {guaranteesTranslation}
             </div>
           </div>
@@ -328,8 +326,8 @@ export default function ProductClient({
 
       {/* TECH SPECS */}
       {technicalSpecs.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-beige-500">
-          <h2 className="text-2xl sm:text-4xl font-semibold mb-8">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-blue-100">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-blue-950 font-semibold mb-8">
             {featuresTranslation}
           </h2>
 
@@ -340,7 +338,7 @@ export default function ProductClient({
                 className="flex justify-between border-b pb-4 text-sm sm:text-base"
               >
                 <span>{spec.label}</span>
-                <span className="text-text-muted">{spec.value}</span>
+                <span className="text-slate-600">{spec.value}</span>
               </div>
             ))}
           </div>
@@ -349,8 +347,8 @@ export default function ProductClient({
 
       {/* FAQ */}
       {faq.length > 0 && (
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-beige-500">
-          <h2 className="text-2xl sm:text-4xl font-semibold mb-8">
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-blue-100">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-blue-950 font-semibold mb-8">
             {faqTranslation}
           </h2>
 
@@ -358,7 +356,7 @@ export default function ProductClient({
             {faq.map((item, i) => (
               <div
                 key={i}
-                className="border border-beige-500 rounded-xl p-5 cursor-pointer"
+                className="border border-blue-100 rounded-xl p-5 cursor-pointer"
                 onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
               >
                 <h4 className="font-semibold text-sm sm:text-base">
@@ -380,7 +378,7 @@ export default function ProductClient({
                         opacity: 0,
                         height: 0,
                       }}
-                      className="text-text-muted mt-2 text-sm"
+                      className="text-slate-600 mt-2 text-sm"
                     >
                       {item.answer}
                     </motion.p>

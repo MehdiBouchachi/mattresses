@@ -25,7 +25,7 @@ export default function CartClient({ locale, translation = {} }) {
 
   const isRTL = locale === "ar";
 
-  /*  DATA  */
+  /* ================= DATA ================= */
 
   const data = {
     items,
@@ -39,7 +39,7 @@ export default function CartClient({ locale, translation = {} }) {
     }, 0),
   };
 
-  /*  ACTIONS  */
+  /* ================= ACTIONS ================= */
 
   const actions = {
     increase: (id, size, qty) =>
@@ -65,13 +65,16 @@ export default function CartClient({ locale, translation = {} }) {
   }
 
   return (
-    <div className="bg-beige-100 min-h-screen">
+    <div className="relative min-h-screen bg-white">
+      {/* Soft Blue Glow Background */}
+
       <div
         className="
+          relative
           max-w-7xl mx-auto
           px-4 sm:px-6 lg:px-8
-          pt-20 sm:pt-24 lg:pt-32
-          pb-16 sm:pb-20 lg:pb-24
+          pt-24 sm:pt-28 lg:pt-36
+          pb-20 sm:pb-24
         "
       >
         {/* HEADER */}
@@ -83,11 +86,9 @@ export default function CartClient({ locale, translation = {} }) {
         />
 
         {/* GRID */}
-        <div className="grid gap-8 sm:gap-10 lg:gap-20 items-start lg:grid-cols-[1.45fr_0.55fr]">
+        <div className="grid gap-12 lg:gap-20 items-start lg:grid-cols-[1.45fr_0.55fr]">
           {/* ITEMS */}
-          <div
-            className={`space-y-6 sm:space-y-8 ${isRTL ? "lg:order-2" : ""}`}
-          >
+          <div className={`space-y-8 ${isRTL ? "lg:order-2" : ""}`}>
             {data.items.map((product) => (
               <CartItemCard
                 key={product.id + product.size}

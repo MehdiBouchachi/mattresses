@@ -15,25 +15,31 @@ export default function Button({
   ...props
 }) {
   const base =
-    "inline-flex items-center justify-center rounded-full font-medium transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed";
+    "cursor-pointer inline-flex items-center justify-center font-medium transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed";
 
   const sizes = {
-    sm: "px-5 py-2 text-xs sm:text-sm",
-    md: "px-6 py-3 text-sm sm:text-base",
-    lg: "px-8 py-4 text-base sm:text-lg",
+    sm: "px-5 py-2 text-xs sm:text-sm rounded-full",
+    md: "px-6 py-3 text-sm sm:text-base rounded-full",
+    lg: "px-8 py-4 text-base sm:text-lg rounded-full",
   };
 
   const variants = {
+    // 🔵 PRIMARY (Main Brand Button)
     primary:
-      "bg-primary-600 text-white shadow-md hover:shadow-xl hover:bg-primary-700",
+      "bg-blue-900 text-white shadow-lg shadow-blue-50 hover:bg-blue-900 hover:shadow-black-50",
 
-    secondary:
-      "border border-primary-600/30 text-primary-600 hover:bg-primary-600/5",
+    // ⚪ SECONDARY (Outline Clean)
+    secondary: "border border-blue-600/30 text-blue-800 hover:bg-blue-50",
 
-    gold: "bg-[#C6A75E] text-white shadow-md hover:shadow-xl",
+    // 🟡 GOLD (If you still need it)
+    gold: "bg-amber-500 text-white shadow-md hover:bg-amber-600",
 
-    // 🔥 NEW CHECKOUT / CTA VARIANT
-    cta: "bg-primary-600 text-white shadow-lg hover:shadow-2xl hover:bg-primary-700 rounded-xl",
+    // 🔴 ACCENT CTA (Use only when needed)
+    accent: "bg-red-600 text-white shadow-lg shadow-red-200 hover:bg-red-700",
+    cta: "bg-blue-900  text-white shadow-lg hover:shadow-2xl hover:bg-blue-950 rounded-xl",
+
+    // 💎 SOFT BLUE (Optional Premium Style)
+    soft: "bg-blue-50 text-blue-700 hover:bg-blue-100",
   };
 
   const widthClass = fullWidth ? "w-full" : "";

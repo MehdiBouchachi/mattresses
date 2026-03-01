@@ -27,8 +27,8 @@ function CategoryCard({ cat, locale, discover, index }) {
         group-hover:scale-110"
       />
 
-      {/* OVERLAY */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+      {/* BLUE OVERLAY */}
+      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 via-blue-900/30 to-transparent" />
 
       {/* CONTENT */}
       <div className="relative z-10 h-full flex items-end p-6 sm:p-8 lg:p-10">
@@ -55,14 +55,15 @@ export default function CategoriesSection({ locale = "en", translation }) {
   const { title, desc, discover } = translation.home.categories;
 
   return (
-    <section className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-beige-50 to-beige-150">
+    <section className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-white to-blue-50">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* HEADER */}
         <div className="mb-12 sm:mb-16 lg:mb-24 text-center lg:text-start">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-blue-950">
             {title}
           </h3>
-          <p className="text-text-body mt-3 sm:mt-4 max-w-md mx-auto lg:mx-0 text-sm sm:text-base">
+
+          <p className="text-slate-600 mt-3 sm:mt-4 max-w-md mx-auto lg:mx-0 text-sm sm:text-base">
             {desc}
           </p>
         </div>

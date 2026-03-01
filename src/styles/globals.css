@@ -186,7 +186,37 @@ html[dir="rtl"] h4 {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+@keyframes slowFloat {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-20px) translateX(15px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
 
+@keyframes slowFloatReverse {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(20px) translateX(-15px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+.animate-slowFloat {
+  animation: slowFloat 12s ease-in-out infinite;
+}
+
+.animate-slowFloatReverse {
+  animation: slowFloatReverse 14s ease-in-out infinite;
+}
 /* @theme {
   --color-beige-50: #ffffff;
   --color-beige-100: #fbfbfc;

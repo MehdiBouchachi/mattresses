@@ -31,18 +31,17 @@ function ProductCard({ product, translation }) {
 
   return (
     <div
-      className={`group bg-white rounded-2xl sm:rounded-[26px] border transition-all duration-300 overflow-hidden flex flex-col
+      className={`
+        group bg-white rounded-3xl border transition-all duration-300 overflow-hidden flex flex-col
         ${
           hasDiscount
-            ? "border-primary-600/40 shadow-md sm:shadow-lg"
-            : "border-beige-500 hover:border-beige-800"
+            ? "border-blue-300 shadow-md"
+            : "border-blue-100 hover:border-blue-300"
         }
       `}
     >
-      {/* Accent bar */}
-      {hasDiscount && (
-        <div className="h-[3px] w-full bg-gradient-to-r from-primary-600 to-[#4F52A3]" />
-      )}
+      {/* Top Accent Bar */}
+      {hasDiscount && <div className="h-[3px] w-full bg-blue-900" />}
 
       {/* IMAGE */}
       <div className="relative overflow-hidden">
@@ -54,15 +53,17 @@ function ProductCard({ product, translation }) {
           }`}
         />
 
+        {/* Discount Badge */}
         {hasDiscount && isAvailable && (
-          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-primary-600 text-white text-[10px] sm:text-xs font-semibold px-3 sm:px-4 py-1 rounded-full shadow-md">
+          <div className="absolute top-4 right-4 bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
             -{discount}%
           </div>
         )}
 
+        {/* Sold Out Overlay */}
         {!isAvailable && (
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <span className="bg-white text-black text-xs sm:text-sm px-3 sm:px-4 py-1.5 rounded-full font-medium">
+          <div className="absolute inset-0 bg-blue-900/40 flex items-center justify-center">
+            <span className="bg-white text-blue-900 text-xs sm:text-sm px-4 py-1.5 rounded-full font-medium">
               {soldOut}
             </span>
           </div>
@@ -70,40 +71,40 @@ function ProductCard({ product, translation }) {
       </div>
 
       {/* CONTENT */}
-      <div className="p-5 sm:p-6 lg:p-8 flex flex-col grow">
-        <p className="text-[10px] sm:text-xs uppercase tracking-wider text-text-subtle mb-2 sm:mb-3">
+      <div className="p-6 flex flex-col grow">
+        <p className="text-xs uppercase tracking-wider text-slate-500 mb-2">
           {category}
         </p>
 
-        <h3 className="text-base sm:text-lg lg:text-[20px] font-semibold leading-snug mb-2 sm:mb-3 text-[#1E1E1E]">
+        <h3 className="text-lg font-semibold leading-snug mb-2 text-blue-900">
           {name}
         </h3>
 
-        <p className="text-xs sm:text-sm text-text-muted mb-5 sm:mb-6 leading-relaxed line-clamp-3">
+        <p className="text-sm text-slate-600 mb-6 leading-relaxed line-clamp-3">
           {description}
         </p>
 
-        <div className="border-t border-beige-200 mb-4 sm:mb-6"></div>
+        <div className="border-t border-blue-100 mb-6"></div>
 
         {/* PRICE + CTA */}
-        <div className="mt-auto flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 sm:gap-6">
+        <div className="mt-auto flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           {/* PRICE BLOCK */}
           <div className="flex flex-col">
-            <span className="text-[10px] sm:text-xs text-text-subtle uppercase tracking-wider mb-1">
+            <span className="text-xs text-slate-500 uppercase tracking-wider mb-1">
               {priceLabel}
             </span>
 
             {hasDiscount ? (
               <>
-                <span className="text-lg sm:text-xl lg:text-2xl font-bold text-primary-600 leading-tight">
+                <span className="text-xl font-bold text-blue-900">
                   {formatPrice(finalPrice, locale)}
                 </span>
-                <span className="text-xs sm:text-sm text-text-disabled line-through mt-1 sm:mt-2">
+                <span className="text-sm text-slate-400 line-through mt-1">
                   {formatPrice(oldPrice, locale)}
                 </span>
               </>
             ) : (
-              <span className="text-lg sm:text-xl font-semibold text-primary-600">
+              <span className="text-xl font-semibold text-blue-900">
                 {formatPrice(basePrice, locale)}
               </span>
             )}
@@ -120,7 +121,7 @@ function ProductCard({ product, translation }) {
             ) : (
               <button
                 disabled
-                className="w-full sm:w-auto px-4 py-2 text-xs sm:text-sm rounded-md bg-gray-300 text-gray-600 cursor-not-allowed"
+                className="w-full sm:w-auto px-4 py-2 text-sm rounded-full bg-slate-200 text-slate-400 cursor-not-allowed"
               >
                 {unavailable}
               </button>
