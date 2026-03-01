@@ -18,8 +18,6 @@ function ProductCard({ product, translation }) {
     slug,
     dynamicPrice,
     priceRange,
-    oldPrice,
-    details,
   } = product;
 
   const image = images?.[0];
@@ -27,42 +25,7 @@ function ProductCard({ product, translation }) {
 
   const { soldOut, price: priceLabel, viewProduct, unavailable } = translation;
 
-  /* =========================================================
-     1️⃣ COMPUTE FINAL PRICE (exact > range > fallback)
-  ========================================================== */
-
-  let computedRange = null;
-
-  if (!dynamicPrice && !priceRange && details?.dimensions) {
-    const allPrices =
-      details.dimensions.flatMap((d) => d.options?.map((o) => o.price)) || [];
-
-    if (allPrices.length > 0) {
-      computedRange = {
-        min: Math.min(...allPrices),
-        max: Math.max(...allPrices),
-      };
-    }
-  }
-
-  const finalRange = priceRange || computedRange;
-
-  const finalPrice = dynamicPrice
-    ? dynamicPrice
-    : finalRange
-      ? finalRange.min
-      : null;
-
-  const isExact = Boolean(dynamicPrice);
-  const isRange = !dynamicPrice && finalRange;
-
-  /* =========================================================
-     2️⃣ DISCOUNT LOGIC
-  ========================================================== */
-
-  const hasDiscount = oldPrice && finalPrice && oldPrice > finalPrice;
-
-  /* ========================================================= */
+  const isRange = !dynamicPrice && priceRange;
 
   return (
     <div
@@ -108,25 +71,17 @@ function ProductCard({ product, translation }) {
 
         <div className="border-t border-blue-100 mb-4"></div>
 
-        {/* ===== EXACT PRICE → INLINE ===== */}
-        {isExact && (
+        {/* ===== EXACT PRICE → INLINE LAYOUT ===== */}
+        {dynamicPrice && (
           <div className="mt-auto flex items-end justify-between gap-4">
             <div className="flex flex-col">
               <span className="text-xs text-slate-500 uppercase tracking-wider mb-1">
                 {priceLabel}
               </span>
 
-              <div className="flex flex-col">
-                {hasDiscount && (
-                  <span className="text-sm text-slate-400 line-through">
-                    {formatPrice(oldPrice, locale)}
-                  </span>
-                )}
-
-                <span className="text-base sm:text-lg font-medium text-blue-900 whitespace-nowrap">
-                  {formatPrice(finalPrice, locale)}
-                </span>
-              </div>
+              <span className="text-base sm:text-lg font-medium text-blue-900 whitespace-nowrap">
+                {formatPrice(dynamicPrice, locale)}
+              </span>
             </div>
 
             <div className="shrink-0">
@@ -146,7 +101,7 @@ function ProductCard({ product, translation }) {
           </div>
         )}
 
-        {/* ===== RANGE PRICE → BUTTON BOTTOM ===== */}
+        {/* ===== RANGE PRICE → BUTTON AT BOTTOM ===== */}
         {isRange && (
           <div className="mt-auto">
             <div className="mb-4">
@@ -155,9 +110,9 @@ function ProductCard({ product, translation }) {
               </span>
 
               <span className="text-base sm:text-lg font-medium text-blue-900 whitespace-nowrap">
-                {formatPrice(finalRange.min, locale)}
-                {finalRange.min !== finalRange.max &&
-                  ` – ${formatPrice(finalRange.max, locale)}`}
+                {formatPrice(priceRange.min, locale)}
+                {priceRange.min !== priceRange.max &&
+                  ` – ${formatPrice(priceRange.max, locale)}`}
               </span>
             </div>
 
@@ -178,8 +133,8 @@ function ProductCard({ product, translation }) {
           </div>
         )}
 
-        {/* ===== NO PRICE AT ALL ===== */}
-        {!isExact && !isRange && (
+        {/* ===== FALLBACK ===== */}
+        {!dynamicPrice && !priceRange && (
           <div className="mt-auto">
             <span className="text-sm text-slate-400">{unavailable}</span>
           </div>

@@ -882,7 +882,7 @@ export const products = [
 
     basePrice: 125000,
     oldPrice: null,
-    discount: 0,
+    discount: 10,
 
     images: ["/images/mattresses.png"],
 
