@@ -18,7 +18,23 @@ function ProductsSection({ translation }) {
     discountedProduct,
     soldOutProduct,
   ].filter(Boolean);
+  /* ================= ENHANCE PRODUCTS WITH PRICE ================= */
 
+  const enhancedProducts = featuredProducts.map((p) => {
+    const allPrices =
+      p.details?.dimensions?.flatMap((d) => d.options?.map((o) => o.price)) ||
+      [];
+
+    if (allPrices.length === 0) return p;
+
+    const min = Math.min(...allPrices);
+    const max = Math.max(...allPrices);
+
+    return {
+      ...p,
+      priceRange: { min, max },
+    };
+  });
   const {
     title,
     desc,
@@ -56,7 +72,7 @@ function ProductsSection({ translation }) {
 
         {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-          {featuredProducts.map((product) => (
+          {enhancedProducts.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
