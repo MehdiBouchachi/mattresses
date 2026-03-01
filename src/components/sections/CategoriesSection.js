@@ -55,7 +55,7 @@ export default function CategoriesSection({ locale = "en", translation }) {
   const { title, desc, discover } = translation.home.categories;
 
   return (
-    <section className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-white to-blue-50">
+    <section className="py-16 sm:py-20 lg:py-28  bg-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* HEADER */}
         <div className="mb-12 sm:mb-16 lg:mb-24 text-center lg:text-start">
