@@ -14,7 +14,7 @@ export default function Pagination({ totalPages, page, dispatch }) {
     });
   };
 
-  /* ================= SMART PAGE RANGE ================= */
+  /*  SMART PAGE RANGE  */
 
   const getVisiblePages = () => {
     const delta = 2;

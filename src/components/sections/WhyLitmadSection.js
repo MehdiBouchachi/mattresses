@@ -1,7 +1,7 @@
 "use client";
 import { FiActivity, FiLayers, FiWind, FiMoon } from "react-icons/fi";
 
-/* ================= HEADLINE ================= */
+/*  HEADLINE  */
 
 function HeadlineBlock({ title, desc }) {
   return (
@@ -16,7 +16,7 @@ function HeadlineBlock({ title, desc }) {
   );
 }
 
-/* ================= STATEMENTS ================= */
+/*  STATEMENTS  */
 
 function StatementsBlock({ statements, locale }) {
   return (
@@ -42,7 +42,7 @@ function StatementsBlock({ statements, locale }) {
   );
 }
 
-/* ================= BENEFITS ================= */
+/*  BENEFITS  */
 
 function BenefitsGrid({ benefits }) {
   const icons = [FiActivity, FiLayers, FiWind, FiMoon];
@@ -65,8 +65,8 @@ function BenefitsGrid({ benefits }) {
               className="w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-6 rounded-full
               bg-blue-600/10 
               flex items-center justify-center
-              text-blue-600 text-lg sm:text-xl
-              group-hover:bg-blue-600
+              text-blue-800 text-lg sm:text-xl
+              group-hover:bg-blue-800
               group-hover:text-white
               transition duration-500"
             >
@@ -83,7 +83,7 @@ function BenefitsGrid({ benefits }) {
   );
 }
 
-/* ================= TRUST STRIP ================= */
+/*  TRUST STRIP  */
 
 function TrustStrip({ trust }) {
   return (
@@ -102,7 +102,7 @@ function TrustStrip({ trust }) {
   );
 }
 
-/* ================= MAIN SECTION ================= */
+/*  MAIN SECTION  */
 
 export default function WhyLitmadSection({ translation, locale }) {
   const { title, desc, statements, benefits, trust } =
