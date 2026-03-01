@@ -1,5 +1,3 @@
-"use client";
-
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -12,38 +10,39 @@ function ProductCard({ product, translation }) {
   const {
     name,
     description,
+    basePrice,
+    oldPrice = null,
     images,
     available = true,
     category,
     slug,
-    details,
+    discount = 0,
   } = product;
 
   const image = images?.[0];
+  const hasDiscount = discount > 0 && oldPrice;
   const isAvailable = Boolean(available);
+
+  const finalPrice = hasDiscount
+    ? Math.round(basePrice * (1 - discount / 100))
+    : basePrice;
 
   const { soldOut, price: priceLabel, viewProduct, unavailable } = translation;
 
-  /* ================= PRICE RANGE CALCULATION ================= */
-
-  const allPrices =
-    details?.dimensions?.flatMap((dim) =>
-      dim.options?.map((opt) => opt.price),
-    ) || [];
-
-  const minPrice = Math.min(...allPrices);
-  const maxPrice = Math.max(...allPrices);
-
-  const hasRange = minPrice !== maxPrice;
-
   return (
     <div
-      className="
-        group bg-white rounded-3xl border border-blue-100
-        hover:border-blue-300 transition-all duration-300
-        overflow-hidden flex flex-col
-      "
+      className={`
+        group bg-white rounded-3xl border transition-all duration-300 overflow-hidden flex flex-col
+        ${
+          hasDiscount
+            ? "border-blue-300 shadow-md"
+            : "border-blue-100 hover:border-blue-300"
+        }
+      `}
     >
+      {/* Top Accent Bar */}
+      {hasDiscount && <div className="h-[3px] w-full bg-blue-900" />}
+
       {/* IMAGE */}
       <div className="relative overflow-hidden">
         <img
@@ -54,6 +53,14 @@ function ProductCard({ product, translation }) {
           }`}
         />
 
+        {/* Discount Badge */}
+        {hasDiscount && isAvailable && (
+          <div className="absolute top-4 right-4 bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+            -{discount}%
+          </div>
+        )}
+
+        {/* Sold Out Overlay */}
         {!isAvailable && (
           <div className="absolute inset-0 bg-blue-900/40 flex items-center justify-center">
             <span className="bg-white text-blue-900 text-xs sm:text-sm px-4 py-1.5 rounded-full font-medium">
@@ -87,19 +94,19 @@ function ProductCard({ product, translation }) {
               {priceLabel}
             </span>
 
-            {allPrices.length > 0 ? (
-              hasRange ? (
-                <span className="text-xl font-semibold text-blue-900">
-                  {formatPrice(minPrice, locale)} –{" "}
-                  {formatPrice(maxPrice, locale)}
+            {hasDiscount ? (
+              <>
+                <span className="text-xl font-bold text-blue-900">
+                  {formatPrice(finalPrice, locale)}
                 </span>
-              ) : (
-                <span className="text-xl font-semibold text-blue-900">
-                  {formatPrice(minPrice, locale)}
+                <span className="text-sm text-slate-400 line-through mt-1">
+                  {formatPrice(oldPrice, locale)}
                 </span>
-              )
+              </>
             ) : (
-              <span className="text-sm text-slate-400">{unavailable}</span>
+              <span className="text-xl font-semibold text-blue-900">
+                {formatPrice(basePrice, locale)}
+              </span>
             )}
           </div>
 

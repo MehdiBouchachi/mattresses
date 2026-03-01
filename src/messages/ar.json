@@ -117,6 +117,7 @@
       "subcategory": "النوع",
       "priceRange": "ميزانيتك",
       "dimension": "المقاس",
+      "thickness": "السماكة",
       "all": "الكل",
       "allDimensions": "كل المقاسات",
       "reset": "مسح"

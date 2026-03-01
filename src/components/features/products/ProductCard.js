@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -10,39 +12,30 @@ function ProductCard({ product, translation }) {
   const {
     name,
     description,
-    basePrice,
-    oldPrice = null,
     images,
     available = true,
     category,
     slug,
-    discount = 0,
+    dynamicPrice,
+    priceRange,
   } = product;
 
   const image = images?.[0];
-  const hasDiscount = discount > 0 && oldPrice;
   const isAvailable = Boolean(available);
-
-  const finalPrice = hasDiscount
-    ? Math.round(basePrice * (1 - discount / 100))
-    : basePrice;
 
   const { soldOut, price: priceLabel, viewProduct, unavailable } = translation;
 
+  const isRange = !dynamicPrice && priceRange;
+
   return (
     <div
-      className={`
-        group bg-white rounded-3xl border transition-all duration-300 overflow-hidden flex flex-col
-        ${
-          hasDiscount
-            ? "border-blue-300 shadow-md"
-            : "border-blue-100 hover:border-blue-300"
-        }
-      `}
+      className="
+        group bg-white rounded-3xl border border-blue-100
+        hover:border-blue-300 hover:shadow-md
+        transition-all duration-300
+        overflow-hidden flex flex-col
+      "
     >
-      {/* Top Accent Bar */}
-      {hasDiscount && <div className="h-[3px] w-full bg-blue-900" />}
-
       {/* IMAGE */}
       <div className="relative overflow-hidden">
         <img
@@ -53,14 +46,6 @@ function ProductCard({ product, translation }) {
           }`}
         />
 
-        {/* Discount Badge */}
-        {hasDiscount && isAvailable && (
-          <div className="absolute top-4 right-4 bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-            -{discount}%
-          </div>
-        )}
-
-        {/* Sold Out Overlay */}
         {!isAvailable && (
           <div className="absolute inset-0 bg-blue-900/40 flex items-center justify-center">
             <span className="bg-white text-blue-900 text-xs sm:text-sm px-4 py-1.5 rounded-full font-medium">
@@ -80,54 +65,80 @@ function ProductCard({ product, translation }) {
           {name}
         </h3>
 
-        <p className="text-sm text-slate-600 mb-6 leading-relaxed line-clamp-3">
+        <p className="text-sm text-slate-600 mb-4 leading-relaxed line-clamp-3">
           {description}
         </p>
 
-        <div className="border-t border-blue-100 mb-6"></div>
+        <div className="border-t border-blue-100 mb-4"></div>
 
-        {/* PRICE + CTA */}
-        <div className="mt-auto flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          {/* PRICE BLOCK */}
-          <div className="flex flex-col">
-            <span className="text-xs text-slate-500 uppercase tracking-wider mb-1">
-              {priceLabel}
-            </span>
-
-            {hasDiscount ? (
-              <>
-                <span className="text-xl font-bold text-blue-900">
-                  {formatPrice(finalPrice, locale)}
-                </span>
-                <span className="text-sm text-slate-400 line-through mt-1">
-                  {formatPrice(oldPrice, locale)}
-                </span>
-              </>
-            ) : (
-              <span className="text-xl font-semibold text-blue-900">
-                {formatPrice(basePrice, locale)}
+        {/* ===== EXACT PRICE → INLINE LAYOUT ===== */}
+        {dynamicPrice && (
+          <div className="mt-auto flex items-end justify-between gap-4">
+            <div className="flex flex-col">
+              <span className="text-xs text-slate-500 uppercase tracking-wider mb-1">
+                {priceLabel}
               </span>
-            )}
-          </div>
 
-          {/* CTA */}
-          <div className="w-full sm:w-auto">
+              <span className="text-base sm:text-lg font-medium text-blue-900 whitespace-nowrap">
+                {formatPrice(dynamicPrice, locale)}
+              </span>
+            </div>
+
+            <div className="shrink-0">
+              {isAvailable ? (
+                <Link href={`/${locale}/product/${slug}`}>
+                  <Button size="sm">{viewProduct}</Button>
+                </Link>
+              ) : (
+                <button
+                  disabled
+                  className="px-4 py-2 text-sm rounded-full bg-slate-200 text-slate-400 cursor-not-allowed"
+                >
+                  {unavailable}
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ===== RANGE PRICE → BUTTON AT BOTTOM ===== */}
+        {isRange && (
+          <div className="mt-auto">
+            <div className="mb-4">
+              <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">
+                {priceLabel}
+              </span>
+
+              <span className="text-base sm:text-lg font-medium text-blue-900 whitespace-nowrap">
+                {formatPrice(priceRange.min, locale)}
+                {priceRange.min !== priceRange.max &&
+                  ` – ${formatPrice(priceRange.max, locale)}`}
+              </span>
+            </div>
+
             {isAvailable ? (
               <Link href={`/${locale}/product/${slug}`} className="block">
-                <Button size="sm" fullWidth className="sm:w-auto">
+                <Button size="sm" fullWidth>
                   {viewProduct}
                 </Button>
               </Link>
             ) : (
               <button
                 disabled
-                className="w-full sm:w-auto px-4 py-2 text-sm rounded-full bg-slate-200 text-slate-400 cursor-not-allowed"
+                className="w-full px-4 py-2 text-sm rounded-full bg-slate-200 text-slate-400 cursor-not-allowed"
               >
                 {unavailable}
               </button>
             )}
           </div>
-        </div>
+        )}
+
+        {/* ===== FALLBACK ===== */}
+        {!dynamicPrice && !priceRange && (
+          <div className="mt-auto">
+            <span className="text-sm text-slate-400">{unavailable}</span>
+          </div>
+        )}
       </div>
     </div>
   );
