@@ -20,7 +20,7 @@ export default function TrustStrip({ translation }) {
           {items.map((item, index) => (
             <div key={index} className="px-4 sm:px-6 space-y-2 sm:space-y-3">
               {/* Value */}
-              <div className="text-2xl sm:text-3xl font-bold text-blue-800">
+              <div className="text-2xl sm:text-3xl font-bold text-blue-900">
                 {item.value}
               </div>
 

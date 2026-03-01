@@ -86,7 +86,7 @@ export default function HeroSection({ translation }) {
 
           {/* Floating Badge */}
           <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 bg-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-blue-100">
-            <p className="text-sm font-semibold text-blue-800">
+            <p className="text-sm font-semibold text-blue-900">
               {floatingBadge}
             </p>
           </div>
