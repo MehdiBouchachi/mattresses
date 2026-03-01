@@ -29,7 +29,7 @@
     },
     "trust": {
       "years": {
-        "value": "60+",
+        "value": "15+",
         "label": "Years of Craftsmanship"
       },
       "materials": {
@@ -86,7 +86,7 @@
       ],
       "trust": [
         {
-          "value": "10+",
+          "value": "15+",
           "label": "Years of Expertise"
         },
         {
