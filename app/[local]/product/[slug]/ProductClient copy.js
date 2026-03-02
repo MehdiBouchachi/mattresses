@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import RelatedSection from "../RelatedSection";
 import { useDispatch } from "react-redux";
@@ -27,12 +27,14 @@ export default function ProductClient({
     faq: faqTranslation,
     guarantees: guaranteesTranslation,
   } = translation;
-
   /* ================= DERIVED DATA ================= */
 
-  const images = product.images?.length > 0 ? product.images : [];
+  const images = product.images?.length > 0 ? product.images : [product.image];
 
-  const dimensions = product.details?.dimensions ?? [];
+  const dimensions =
+    product.details?.dimensions?.length > 0
+      ? product.details.dimensions
+      : [{ size: "Default", price: product.price }];
 
   const firmness = product.details?.firmness ?? 0;
   const technicalSpecs = product.details?.technicalSpecs ?? [];
@@ -41,37 +43,14 @@ export default function ProductClient({
   /* ================= STATE ================= */
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
-  const [selectedDimension, setSelectedDimension] = useState(
-    dimensions[0] || null,
-  );
-  const [selectedThickness, setSelectedThickness] = useState(
-    dimensions[0]?.options
-      ? [...dimensions[0].options].sort((a, b) => a.thickness - b.thickness)[0]
-      : null,
-  );
+  const [selectedDimension, setSelectedDimension] = useState(dimensions[0]);
   const [quantity, setQuantity] = useState(1);
   const [openFAQ, setOpenFAQ] = useState(null);
   const [zoomStyle, setZoomStyle] = useState({});
 
-  /* =========================================================
-     AUTO-SELECT SMALLEST THICKNESS WHEN SIZE CHANGES
-  ========================================================== */
-
-  useEffect(() => {
-    if (selectedDimension?.options?.length > 0) {
-      const sorted = [...selectedDimension.options].sort(
-        (a, b) => a.thickness - b.thickness,
-      );
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSelectedThickness(sorted[0]);
-    } else {
-      setSelectedThickness(null);
-    }
-  }, [selectedDimension]);
-
   /* ================= PRICING ================= */
 
-  const unitBasePrice = selectedThickness?.price ?? 0;
+  const unitBasePrice = selectedDimension.price ?? product.basePrice ?? 0;
 
   const discount = product.discount ?? 0;
   const hasDiscount = discount > 0;
@@ -82,7 +61,7 @@ export default function ProductClient({
 
   const totalPrice = discountedUnitPrice * quantity;
 
-  /* ================= IMAGE ZOOM ================= */
+  /* ================= ZOOM ================= */
 
   const handleMouseMove = (e) => {
     if (window.innerWidth < 1024) return;
@@ -114,22 +93,18 @@ export default function ProductClient({
 
   /* ================= ACTIONS ================= */
 
-  const handleAddToCart = () => {
+  const handleCheckout = () => {
     dispatch(
       addToCart({
         id: product.id,
         name: product.name,
         image: selectedImage,
         price: discountedUnitPrice,
-        size: selectedDimension?.size,
-        thickness: selectedThickness?.thickness,
+        size: selectedDimension.size,
         quantity,
       }),
     );
-  };
 
-  const handleCheckout = () => {
-    handleAddToCart();
     router.push(`/${locale}/checkout`);
   };
 
@@ -140,7 +115,7 @@ export default function ProductClient({
   return (
     <div className="bg-white min-h-screen">
       {/* ================= HEADER ================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-8">
         <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-500 mb-4">
           <button
             onClick={() => router.push(`/${locale}`)}
@@ -180,7 +155,7 @@ export default function ProductClient({
           <div
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="bg-white rounded-3xl shadow-lg overflow-hidden mb-4 cursor-zoom-in"
+            className="bg-white rounded-3xl lg:rounded-[48px] shadow-lg overflow-hidden mb-4 cursor-zoom-in"
           >
             <motion.img
               key={selectedImage}
@@ -190,7 +165,7 @@ export default function ProductClient({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="w-full h-[450px] object-cover transition-transform duration-300"
+              className="w-full h-[320px] sm:h-[450px] lg:h-[600px] object-cover transition-transform duration-300"
             />
           </div>
 
@@ -199,8 +174,8 @@ export default function ProductClient({
               <button
                 key={i}
                 onClick={() => setSelectedImage(img)}
-                className={`min-w-[80px] h-[80px] rounded-xl overflow-hidden border ${
-                  selectedImage === img ? "border-blue-900" : "border-blue-100"
+                className={`min-w-[70px] h-[70px] sm:w-24 sm:h-24 rounded-xl overflow-hidden border transition ${
+                  selectedImage === img ? "border-blue-600" : "border-blue-100"
                 }`}
               >
                 <img
@@ -214,14 +189,18 @@ export default function ProductClient({
         </div>
 
         {/* RIGHT */}
-        <div className="bg-white p-8 rounded-3xl shadow-lg border border-blue-100">
+        <div className="bg-white p-6 sm:p-8 lg:p-12 rounded-3xl lg:rounded-[40px] shadow-lg border border-blue-100">
           <p className="text-xs uppercase tracking-widest text-slate-500 mb-2">
             {product.category} · {product.subcategory}
           </p>
 
-          <h1 className="text-3xl font-semibold mb-4">{product.name}</h1>
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-4">
+            {product.name}
+          </h1>
 
-          <p className="text-slate-600 mb-6">{product.description}</p>
+          <p className="text-slate-600 mb-6 text-sm sm:text-base">
+            {product.description}
+          </p>
 
           {/* PRICE */}
           <div className="mb-8 border-b border-blue-100 pb-6">
@@ -232,16 +211,13 @@ export default function ProductClient({
             )}
 
             <div className="flex items-end gap-3 flex-wrap">
-              <span className="text-4xl font-bold text-blue-900">
-                {formatPrice(
-                  quantity === 1 ? discountedUnitPrice : totalPrice,
-                  locale,
-                )}
+              <span className="text-3xl sm:text-5xl font-bold text-blue-900">
+                {formatPrice(quantity === 1 ? discountedUnitPrice : totalPrice)}
               </span>
 
               {quantity > 1 && (
-                <span className="text-xs text-slate-600">
-                  ({quantity} × {formatPrice(discountedUnitPrice, locale)})
+                <span className="text-xs sm:text-sm text-slate-600">
+                  ({quantity} × {formatPrice(discountedUnitPrice)})
                 </span>
               )}
 
@@ -260,46 +236,19 @@ export default function ProductClient({
             <div className="grid grid-cols-2 gap-3">
               {dimensions.map((dim) => (
                 <button
-                  dir="ltr"
                   key={dim.size}
                   onClick={() => setSelectedDimension(dim)}
-                  className={`py-3 rounded-xl border ${
-                    selectedDimension?.size === dim.size
-                      ? "bg-blue-900 text-white"
-                      : "border-blue-100 hover:bg-blue-50"
+                  className={`py-2 sm:py-3 rounded-xl border text-sm ${
+                    selectedDimension.size === dim.size
+                      ? "bg-blue-900 text-white border-blue-900"
+                      : "border-blue-800 hover:border-blue-900 hover:bg-blue-100 transition"
                   }`}
                 >
-                  {dim.size} cm
+                  {dim.size}
                 </button>
               ))}
             </div>
           </div>
-
-          {/* THICKNESS */}
-          {selectedDimension?.options?.length > 0 && (
-            <div className="mb-8">
-              <h3 className="text-xs uppercase mb-3">Thickness</h3>
-
-              <div className="grid grid-cols-3 gap-3">
-                {selectedDimension.options
-                  .sort((a, b) => a.thickness - b.thickness)
-                  .map((opt) => (
-                    <button
-                      dir="ltr"
-                      key={opt.thickness}
-                      onClick={() => setSelectedThickness(opt)}
-                      className={`py-3 rounded-xl border ${
-                        selectedThickness?.thickness === opt.thickness
-                          ? "bg-blue-900 text-white"
-                          : "border-blue-100 hover:bg-blue-50"
-                      }`}
-                    >
-                      {opt.thickness} cm
-                    </button>
-                  ))}
-              </div>
-            </div>
-          )}
 
           {/* QUANTITY */}
           <div className="mb-8">
@@ -313,7 +262,7 @@ export default function ProductClient({
                 −
               </button>
 
-              <div className="px-4">{quantity}</div>
+              <div className="px-4 text-base">{quantity}</div>
 
               <button
                 onClick={() => setQuantity(quantity + 1)}
@@ -321,6 +270,23 @@ export default function ProductClient({
               >
                 +
               </button>
+            </div>
+          </div>
+
+          {/* FIRMNESS */}
+          <div className="mb-8">
+            <div className="flex justify-between text-xs mb-2">
+              <span>{firmnessTranslation.soft}</span>
+              <span>{firmnessTranslation.firm}</span>
+            </div>
+
+            <div className="relative h-2 bg-gray-200 rounded-full">
+              <div
+                className="absolute h-2 bg-blue-900 rounded-full"
+                style={{
+                  width: `${Math.min(10, Math.max(0, firmness)) * 10}%`,
+                }}
+              />
             </div>
           </div>
 
@@ -334,13 +300,24 @@ export default function ProductClient({
             </button>
 
             <button
-              onClick={handleAddToCart}
+              onClick={() =>
+                dispatch(
+                  addToCart({
+                    id: product.id,
+                    name: product.name,
+                    image: selectedImage,
+                    price: discountedUnitPrice,
+                    size: selectedDimension.size,
+                    quantity,
+                  }),
+                )
+              }
               className="w-full border border-blue-900 py-3 rounded-2xl hover:bg-blue-50 transition"
             >
               {actionTranslation.addToCart}
             </button>
 
-            <div className="pt-4 border-t border-blue-100 text-sm text-center text-slate-600">
+            <div className="pt-4 border-t border-blue-100 text-xs sm:text-sm text-slate-600 text-center">
               {guaranteesTranslation}
             </div>
           </div>
@@ -350,7 +327,7 @@ export default function ProductClient({
       {/* TECH SPECS */}
       {technicalSpecs.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-blue-100">
-          <h2 className="text-3xl font-semibold mb-8 text-blue-950">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-blue-950 font-semibold mb-8">
             {featuresTranslation}
           </h2>
 
@@ -358,7 +335,7 @@ export default function ProductClient({
             {technicalSpecs.map((spec) => (
               <div
                 key={spec.label}
-                className="flex justify-between border-b pb-4"
+                className="flex justify-between border-b pb-4 text-sm sm:text-base"
               >
                 <span>{spec.label}</span>
                 <span className="text-slate-600">{spec.value}</span>
@@ -371,7 +348,7 @@ export default function ProductClient({
       {/* FAQ */}
       {faq.length > 0 && (
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-blue-100">
-          <h2 className="text-3xl font-semibold mb-8 text-blue-950">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-blue-950 font-semibold mb-8">
             {faqTranslation}
           </h2>
 
@@ -382,14 +359,25 @@ export default function ProductClient({
                 className="border border-blue-100 rounded-xl p-5 cursor-pointer"
                 onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
               >
-                <h4 className="font-semibold">{item.question}</h4>
+                <h4 className="font-semibold text-sm sm:text-base">
+                  {item.question}
+                </h4>
 
                 <AnimatePresence>
                   {openFAQ === i && (
                     <motion.p
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
+                      initial={{
+                        opacity: 0,
+                        height: 0,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        height: "auto",
+                      }}
+                      exit={{
+                        opacity: 0,
+                        height: 0,
+                      }}
                       className="text-slate-600 mt-2 text-sm"
                     >
                       {item.answer}

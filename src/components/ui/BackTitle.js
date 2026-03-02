@@ -8,7 +8,7 @@ export default function BackTitle({ locale, onBack, title, backLabel }) {
         onClick={onBack}
         className="
           text-xs sm:text-sm 
-          text-primary-600 
+         text-blue-900
           hover:underline 
           mb-3 sm:mb-4
           transition-colors

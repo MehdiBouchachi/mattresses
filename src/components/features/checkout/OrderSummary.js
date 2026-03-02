@@ -60,20 +60,14 @@ function SummaryItem({ item, locale }) {
             {name}
           </p>
 
-          <div className="flex items-center gap-3 mt-3">
-            <span className="text-sm text-slate-500">{size}</span>
+          <div className="flex items-center gap-3 mt-2">
+            <span className="text-sm text-slate-500">
+              {item.size}
+              {item.thickness && ` × ${item.thickness} cm`}
+            </span>
 
-            <span
-              className="
-                px-3 py-1
-                rounded-full
-                bg-blue-50
-                text-blue-950
-                text-xs
-                font-semibold
-              "
-            >
-              × {quantity}
+            <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-950 text-xs font-semibold">
+              × {item.quantity}
             </span>
           </div>
         </div>

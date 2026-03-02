@@ -3,16 +3,9 @@ import Image from "next/image";
 import QuantitySelector from "./QuantitySelector";
 
 function CartItemCard({ data, actions, i18n = {}, locale }) {
-  const { id, size, thickness, name, image, price, oldPrice, quantity } = data;
-
+  const { id, size, name, image, price, oldPrice, quantity } = data;
   const { increase, decrease, remove: removeAction } = actions;
-  const {
-    size: sizeLabel,
-    thickness: thicknessLabel,
-    save,
-    each,
-    remove,
-  } = i18n;
+  const { size: sizeLabel, save, each, remove } = i18n;
 
   const isRTL = locale === "ar";
   const hasDiscount = oldPrice && oldPrice > price;
@@ -49,27 +42,16 @@ function CartItemCard({ data, actions, i18n = {}, locale }) {
           <div>
             <h3 className="text-lg font-semibold text-blue-950 mb-2">{name}</h3>
 
-            {/* SIZE + THICKNESS */}
-            <div className="text-sm text-slate-500 mb-6 space-y-1">
-              <p>
-                {sizeLabel}: <span dir="ltr">{size}</span>
-                {isRTL ? " سم" : " cm"}
-              </p>
-
-              {thickness && (
-                <p>
-                  {thicknessLabel}: <span dir="ltr">{thickness}</span>{" "}
-                  {isRTL ? " سم" : " cm"}
-                </p>
-              )}
-            </div>
+            <p className="text-sm text-slate-500 mb-6">
+              {sizeLabel}: {size}
+            </p>
 
             <QuantitySelector
               data={{ quantity }}
               actions={{
-                increase: () => increase(id, size, thickness, quantity),
-                decrease: () => decrease(id, size, thickness),
-                remove: () => removeAction(id, size, thickness),
+                increase: () => increase(id, size, quantity),
+                decrease: () => decrease(id, size),
+                remove: () => removeAction(id, size),
               }}
               i18n={{ remove }}
             />

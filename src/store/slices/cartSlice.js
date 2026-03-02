@@ -9,11 +9,14 @@ const cartSlice = createSlice({
   initialState,
 
   reducers: {
+    /* ================= ADD ================= */
+
     addToCart: (state, action) => {
-      const { id, size } = action.payload;
+      const { id, size, thickness } = action.payload;
 
       const existing = state.items.find(
-        (item) => item.id === id && item.size === size,
+        (item) =>
+          item.id === id && item.size === size && item.thickness === thickness,
       );
 
       if (existing) {
@@ -26,19 +29,29 @@ const cartSlice = createSlice({
       }
     },
 
+    /* ================= REMOVE ================= */
+
     removeFromCart: (state, action) => {
-      const { id, size } = action.payload;
+      const { id, size, thickness } = action.payload;
 
       state.items = state.items.filter(
-        (item) => !(item.id === id && item.size === size),
+        (item) =>
+          !(
+            item.id === id &&
+            item.size === size &&
+            item.thickness === thickness
+          ),
       );
     },
 
+    /* ================= UPDATE ================= */
+
     updateQuantity: (state, action) => {
-      const { id, size, quantity } = action.payload;
+      const { id, size, thickness, quantity } = action.payload;
 
       const item = state.items.find(
-        (item) => item.id === id && item.size === size,
+        (item) =>
+          item.id === id && item.size === size && item.thickness === thickness,
       );
 
       if (item && quantity > 0) {
@@ -46,11 +59,14 @@ const cartSlice = createSlice({
       }
     },
 
+    /* ================= DECREASE ================= */
+
     decreaseQuantity: (state, action) => {
-      const { id, size } = action.payload;
+      const { id, size, thickness } = action.payload;
 
       const item = state.items.find(
-        (item) => item.id === id && item.size === size,
+        (item) =>
+          item.id === id && item.size === size && item.thickness === thickness,
       );
 
       if (item) {
@@ -58,11 +74,14 @@ const cartSlice = createSlice({
           item.quantity -= 1;
         } else {
           state.items = state.items.filter(
-            (i) => !(i.id === id && i.size === size),
+            (i) =>
+              !(i.id === id && i.size === size && i.thickness === thickness),
           );
         }
       }
     },
+
+    /* ================= CLEAR ================= */
 
     clearCart: (state) => {
       state.items = [];

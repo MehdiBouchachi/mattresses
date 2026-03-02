@@ -42,35 +42,15 @@ export default function CartClient({ locale, translation = {} }) {
   /* ================= ACTIONS ================= */
 
   const actions = {
-    increase: (id, size, thickness, qty) =>
-      dispatch(
-        updateQuantity({
-          id,
-          size,
-          thickness,
-          quantity: qty + 1,
-        }),
-      ),
+    increase: (id, size, qty) =>
+      dispatch(updateQuantity({ id, size, quantity: qty + 1 })),
 
-    decrease: (id, size, thickness) =>
-      dispatch(
-        decreaseQuantity({
-          id,
-          size,
-          thickness,
-        }),
-      ),
+    decrease: (id, size) => dispatch(decreaseQuantity({ id, size })),
 
-    remove: (id, size, thickness) =>
-      dispatch(
-        removeFromCart({
-          id,
-          size,
-          thickness,
-        }),
-      ),
+    remove: (id, size) => dispatch(removeFromCart({ id, size })),
 
     checkout: () => router.push(`/${locale}/checkout`),
+
     back: () => router.back(),
   };
 
@@ -85,7 +65,9 @@ export default function CartClient({ locale, translation = {} }) {
   }
 
   return (
-    <div className="relative min-h-screen bg-white" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="relative min-h-screen bg-white">
+      {/* Soft Blue Glow Background */}
+
       <div
         className="
           relative
@@ -95,6 +77,7 @@ export default function CartClient({ locale, translation = {} }) {
           pb-20 sm:pb-24
         "
       >
+        {/* HEADER */}
         <BackTitle
           locale={locale}
           onBack={actions.back}
@@ -102,16 +85,13 @@ export default function CartClient({ locale, translation = {} }) {
           backLabel={header.continue}
         />
 
-        <div
-          className={`
-    grid gap-12 lg:gap-20 items-start
-    ${isRTL ? "lg:grid-cols-[0.55fr_1.45fr]" : "lg:grid-cols-[1.45fr_0.55fr]"}
-  `}
-        >
+        {/* GRID */}
+        <div className="grid gap-12 lg:gap-20 items-start lg:grid-cols-[1.45fr_0.55fr]">
+          {/* ITEMS */}
           <div className={`space-y-8 ${isRTL ? "lg:order-2" : ""}`}>
             {data.items.map((product) => (
               <CartItemCard
-                key={`${product.id}-${product.size}-${product.thickness}`}
+                key={product.id + product.size}
                 data={product}
                 actions={actions}
                 i18n={itemI18n}
@@ -120,6 +100,7 @@ export default function CartClient({ locale, translation = {} }) {
             ))}
           </div>
 
+          {/* SUMMARY */}
           <div className={isRTL ? "lg:order-1" : ""}>
             <CartSummary
               data={data}
