@@ -29,7 +29,7 @@ export default function HeroSection({ translation }) {
 
       <div className="relative max-w-7xl mx-auto px-6 sm:px-8 grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
         {/* ================= LEFT CONTENT ================= */}
-        <div className="space-y-8 text-center md:text-left">
+        <div className="space-y-8 text-center md:text-start">
           {/* Badge */}
           <span className="uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[10px] sm:text-xs text-blue-600 font-semibold">
             {badge}

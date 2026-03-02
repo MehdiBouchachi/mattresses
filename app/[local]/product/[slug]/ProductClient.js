@@ -22,13 +22,14 @@ export default function ProductClient({
     size: sizeTranslation,
     quantity: quantityTranslation,
     firmness: firmnessTranslation,
+    thickness: thicknessTranslation,
     actions: actionTranslation,
     features: featuresTranslation,
     faq: faqTranslation,
     guarantees: guaranteesTranslation,
   } = translation;
 
-  /* ================= DERIVED DATA ================= */
+  /*  DERIVED DATA  */
 
   const images = product.images?.length > 0 ? product.images : [];
 
@@ -38,7 +39,7 @@ export default function ProductClient({
   const technicalSpecs = product.details?.technicalSpecs ?? [];
   const faq = product.details?.faq ?? [];
 
-  /* ================= STATE ================= */
+  /*  STATE  */
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
   const [selectedDimension, setSelectedDimension] = useState(
@@ -53,9 +54,9 @@ export default function ProductClient({
   const [openFAQ, setOpenFAQ] = useState(null);
   const [zoomStyle, setZoomStyle] = useState({});
 
-  /* =========================================================
+  /* ======
      AUTO-SELECT SMALLEST THICKNESS WHEN SIZE CHANGES
-  ========================================================== */
+  ======= */
 
   useEffect(() => {
     if (selectedDimension?.options?.length > 0) {
@@ -69,7 +70,7 @@ export default function ProductClient({
     }
   }, [selectedDimension]);
 
-  /* ================= PRICING ================= */
+  /*  PRICING  */
 
   const unitBasePrice = selectedThickness?.price ?? 0;
 
@@ -82,7 +83,7 @@ export default function ProductClient({
 
   const totalPrice = discountedUnitPrice * quantity;
 
-  /* ================= IMAGE ZOOM ================= */
+  /*  IMAGE ZOOM  */
 
   const handleMouseMove = (e) => {
     if (window.innerWidth < 1024) return;
@@ -106,13 +107,13 @@ export default function ProductClient({
     });
   };
 
-  /* ================= RELATED ================= */
+  /*  RELATED  */
 
   const relatedProducts = allProducts.filter(
     (p) => p.slug !== product.slug && p.category === product.category,
   );
 
-  /* ================= ACTIONS ================= */
+  /*  ACTIONS  */
 
   const handleAddToCart = () => {
     dispatch(
@@ -135,11 +136,11 @@ export default function ProductClient({
 
   if (!product) return null;
 
-  /* ================= UI ================= */
+  /*  UI  */
 
   return (
     <div className="bg-white min-h-screen">
-      {/* ================= HEADER ================= */}
+      {/*  HEADER  */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
         <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-500 mb-4">
           <button
@@ -173,7 +174,7 @@ export default function ProductClient({
         </button>
       </section>
 
-      {/* ================= HERO ================= */}
+      {/*  HERO  */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 grid lg:grid-cols-2 gap-10 lg:gap-24 items-start">
         {/* LEFT */}
         <div>
@@ -278,7 +279,7 @@ export default function ProductClient({
           {/* THICKNESS */}
           {selectedDimension?.options?.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-xs uppercase mb-3">Thickness</h3>
+              <h3 className="text-xs uppercase mb-3">{thicknessTranslation}</h3>
 
               <div className="grid grid-cols-3 gap-3">
                 {selectedDimension.options

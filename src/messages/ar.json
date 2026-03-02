@@ -131,6 +131,7 @@
     },
     "size": "اختر المقاس",
     "quantity": "الكمية",
+    "thickness": "السماكة",
     "firmness": {
       "soft": "ناعم",
       "firm": "صلب"

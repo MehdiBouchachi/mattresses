@@ -100,7 +100,7 @@ export default function DimensionFilter({ state, dispatch, translation }) {
         {/* SIZE */}
         <div className="flex flex-col">
           <label className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">
-            {sizeLabel}
+            <h3 className="text-xs sm:text-sm">{sizeLabel}</h3>
           </label>
 
           <select
@@ -123,7 +123,7 @@ export default function DimensionFilter({ state, dispatch, translation }) {
         {/* THICKNESS */}
         <div className="flex flex-col">
           <label className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">
-            {thicknessLabel}
+            <h3 className="text-xs sm:text-sm">{thicknessLabel}</h3>
           </label>
 
           <select

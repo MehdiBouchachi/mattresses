@@ -5,9 +5,9 @@ import { formatPrice } from "@/utils/helpers";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
-/* =========================================================
+/* 
    MOCK DATA
-========================================================= */
+ */
 
 const MOCK_ORDERS = [
   {
@@ -47,9 +47,9 @@ const STATUS_STYLES = {
   delivered: "bg-green-100 text-green-700",
 };
 
-/* =========================================================
+/* 
    MAIN
-========================================================= */
+ */
 
 export default function OrderTrackingClient({ locale, translation }) {
   const t = translation.orderTrackingPage;
@@ -105,9 +105,9 @@ export default function OrderTrackingClient({ locale, translation }) {
   );
 }
 
-/* =========================================================
+/* 
    HEADER
-========================================================= */
+ */
 
 function TrackingHeader({ header }) {
   return (
@@ -122,9 +122,9 @@ function TrackingHeader({ header }) {
   );
 }
 
-/* =========================================================
+/* 
    SEARCH
-========================================================= */
+ */
 
 function TrackingSearch({ t, orderId, setOrderId, onTrack, error }) {
   return (
@@ -153,9 +153,9 @@ function TrackingSearch({ t, orderId, setOrderId, onTrack, error }) {
   );
 }
 
-/* =========================================================
+/* 
    RESULT
-========================================================= */
+ */
 
 function TrackingResult({ order, t, locale, currentIndex, isRTL }) {
   return (
@@ -173,9 +173,9 @@ function TrackingResult({ order, t, locale, currentIndex, isRTL }) {
   );
 }
 
-/* =========================================================
+/* 
    ORDER INFO
-========================================================= */
+ */
 
 function OrderInfo({ order, t, locale }) {
   return (
@@ -207,9 +207,9 @@ function InfoBlock({ label, value }) {
   );
 }
 
-/* =========================================================
+/* 
    PROGRESS
-========================================================= */
+ */
 
 function TrackingProgress({ steps, currentIndex, isRTL }) {
   const entries = Object.entries(steps);
@@ -292,9 +292,9 @@ function TrackingProgress({ steps, currentIndex, isRTL }) {
   );
 }
 
-/* =========================================================
+/* 
    STATUS MESSAGE
-========================================================= */
+ */
 
 function StatusMessage({ message }) {
   return <div className="text-center text-sm text-slate-900">{message}</div>;

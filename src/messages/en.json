@@ -131,6 +131,7 @@
     },
     "size": "Select Size",
     "quantity": "Quantity",
+    "thickness": "Thickness",
     "firmness": {
       "soft": "Soft",
       "firm": "Firm"

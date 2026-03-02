@@ -131,6 +131,7 @@
     },
     "size": "Choisir la taille",
     "quantity": "Quantité",
+    "thickness": "Épaisseur",
     "firmness": {
       "soft": "Souple",
       "firm": "Ferme"

@@ -14,7 +14,7 @@ export default function RelatedSection({ currentProduct, allProducts }) {
 
   const [recentlyViewed, setRecentlyViewed] = useState([]);
 
-  /* ================= RELATED LOGIC ================= */
+  /*  RELATED LOGIC  */
 
   const related = allProducts.filter(
     (p) =>
@@ -27,7 +27,7 @@ export default function RelatedSection({ currentProduct, allProducts }) {
       p.subcategory === currentProduct.subcategory,
   );
 
-  /* ================= RECENTLY VIEWED ================= */
+  /*  RECENTLY VIEWED  */
 
   useEffect(() => {
     if (!currentProduct?.slug) return;
@@ -49,7 +49,7 @@ export default function RelatedSection({ currentProduct, allProducts }) {
     setRecentlyViewed(hydrated);
   }, [currentProduct, allProducts]);
 
-  /* ================= REUSABLE SECTION ================= */
+  /*  REUSABLE SECTION  */
 
   const Section = ({ title, products }) => {
     const scrollRef = useRef(null);
@@ -174,12 +174,12 @@ export default function RelatedSection({ currentProduct, allProducts }) {
                             {formatPrice(finalPrice, locale)}
                           </p>
                           <p className="text-xs text-slate-400 line-through">
-                            {formatPrice(basePrice,locale)}
+                            {formatPrice(basePrice, locale)}
                           </p>
                         </>
                       ) : (
                         <p className="text-blue-900 font-bold text-base">
-                          {formatPrice(basePrice,locale)}
+                          {formatPrice(basePrice, locale)}
                         </p>
                       )}
                     </div>
