@@ -54,21 +54,27 @@ export default function Filters({
       <AnimatePresence>
         {!hideButton && buttonVisible && (
           <motion.button
-            initial={{ scale: 0.85, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 18 }}
+            initial={{ scale: 0.92, y: 10, opacity: 0 }}
+            animate={{ scale: 1, y: 0, opacity: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{
+              duration: 0.35,
+              ease: [0.22, 1, 0.36, 1], // smooth cubic-bezier
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
             onClick={() => setOpen(true)}
             className="
-              fixed bottom-20 right-4 md:bottom-8 md:right-8
-              z-40
-              bg-blue-900 text-white
-              px-6 py-3
-              rounded-full
-              shadow-xl
-              text-sm font-medium
-              hover:bg-blue-950 transition
-            "
+        fixed bottom-20 right-4 md:bottom-8 md:right-8 cursor-pointer
+        z-40
+        bg-blue-900 text-white
+        px-6 py-3
+        rounded-full
+        shadow-xl
+        text-sm font-medium
+        hover:bg-blue-950
+        transition-colors
+      "
           >
             {locale === "ar" ? "الفلاتر" : "Filters"}
           </motion.button>
