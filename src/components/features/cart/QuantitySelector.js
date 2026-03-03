@@ -6,7 +6,7 @@ function QuantitySelector({ data, actions, i18n = {}, locale }) {
   const isRTL = locale === "ar";
 
   return (
-    <div className="flex items-center gap-4 flex-wrap">
+    <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
       {/* Quantity Control */}
       <div
         className="
@@ -20,10 +20,12 @@ function QuantitySelector({ data, actions, i18n = {}, locale }) {
         <button
           onClick={decrease}
           className="
-            px-4 py-2
-            text-base
+            px-3 sm:px-4
+            py-1.5 sm:py-2
+            text-sm sm:text-base
             text-blue-900
             hover:bg-blue-100
+            active:scale-95
             transition
           "
         >
@@ -32,11 +34,13 @@ function QuantitySelector({ data, actions, i18n = {}, locale }) {
 
         <div
           className="
-            px-6
-            text-base
+            px-4 sm:px-6
+            text-sm sm:text-base
             font-semibold
             text-blue-900
             select-none
+            min-w-[32px] sm:min-w-[40px]
+            text-center
           "
         >
           {quantity}
@@ -45,10 +49,12 @@ function QuantitySelector({ data, actions, i18n = {}, locale }) {
         <button
           onClick={increase}
           className="
-            px-4 py-2
-            text-base
+            px-3 sm:px-4
+            py-1.5 sm:py-2
+            text-sm sm:text-base
             text-blue-900
             hover:bg-blue-100
+            active:scale-95
             transition
           "
         >
@@ -60,10 +66,11 @@ function QuantitySelector({ data, actions, i18n = {}, locale }) {
       <button
         onClick={remove}
         className="
+          text-xs sm:text-sm
           text-red-600
-          text-sm
           font-medium
           hover:underline
+          hover:text-red-700
           transition
         "
       >

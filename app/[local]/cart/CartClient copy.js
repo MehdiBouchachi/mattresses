@@ -88,33 +88,27 @@ export default function CartClient({ locale, translation = {} }) {
     <div className="relative min-h-screen bg-white" dir={isRTL ? "rtl" : "ltr"}>
       <div
         className="
-        relative
-        max-w-6xl mx-auto
-        px-4 sm:px-6 lg:px-8
-        pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-14 lg:pb-16
-      "
+          relative
+          max-w-7xl mx-auto
+          px-4 sm:px-6 lg:px-8
+          pt-24 sm:pt-28 lg:pt-36
+          pb-20 sm:pb-24
+        "
       >
-        {/* HEADER */}
-        <div className="mb-8 sm:mb-10 lg:mb-14">
-          <BackTitle
-            locale={locale}
-            onBack={actions.back}
-            title={header.title}
-            backLabel={header.continue}
-          />
-        </div>
+        <BackTitle
+          locale={locale}
+          onBack={actions.back}
+          title={header.title}
+          backLabel={header.continue}
+        />
 
-        {/* MAIN GRID */}
         <div
           className={`
-          grid gap-8 sm:gap-10 lg:gap-16 items-start
-          ${isRTL ? "lg:grid-cols-[0.6fr_1.4fr]" : "lg:grid-cols-[1.4fr_0.6fr]"}
-        `}
+    grid gap-12 lg:gap-20 items-start
+    ${isRTL ? "lg:grid-cols-[0.55fr_1.45fr]" : "lg:grid-cols-[1.45fr_0.55fr]"}
+  `}
         >
-          {/* ================= CART ITEMS ================= */}
-          <div
-            className={`space-y-6 sm:space-y-8 ${isRTL ? "lg:order-2" : ""}`}
-          >
+          <div className={`space-y-8 ${isRTL ? "lg:order-2" : ""}`}>
             {data.items.map((product) => (
               <CartItemCard
                 key={`${product.id}-${product.size}-${product.thickness}`}
@@ -126,13 +120,7 @@ export default function CartClient({ locale, translation = {} }) {
             ))}
           </div>
 
-          {/* ================= SUMMARY ================= */}
-          <div
-            className={`
-            mt-6 sm:mt-8 lg:mt-0
-            ${isRTL ? "lg:order-1" : ""}
-          `}
-          >
+          <div className={isRTL ? "lg:order-1" : ""}>
             <CartSummary
               data={data}
               actions={{ checkout: actions.checkout }}

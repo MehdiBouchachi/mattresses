@@ -81,19 +81,15 @@ export default function CheckoutClient({ locale, translation = {} }) {
 
     back: () => router.back(),
   };
-
   return (
     <div className="relative min-h-screen bg-white">
-      {/* Soft Blue Background Glow */}
-
       <div
         className="
-          relative
-          max-w-7xl mx-auto
-          px-4 sm:px-6 lg:px-8
-          pt-24 sm:pt-28 lg:pt-36
-          pb-20 sm:pb-24
-        "
+        relative
+        max-w-7xl mx-auto
+        px-4 sm:px-6 lg:px-8
+        pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-14 lg:pb-16
+      "
       >
         {/* Header */}
         <BackTitle
@@ -106,12 +102,13 @@ export default function CheckoutClient({ locale, translation = {} }) {
         {/* Layout */}
         <div
           className="
-            grid
-            grid-cols-1
-            lg:grid-cols-[1.1fr_0.9fr]
-            gap-12 lg:gap-20
-            items-start
-          "
+          grid
+          grid-cols-1
+          lg:grid-cols-[1.15fr_0.85fr]
+          gap-8 sm:gap-10 lg:gap-16
+          items-start
+          mt-6 sm:mt-8
+        "
         >
           {/* LEFT — FORM */}
           <div className="order-2 lg:order-1">
@@ -123,7 +120,7 @@ export default function CheckoutClient({ locale, translation = {} }) {
           </div>
 
           {/* RIGHT — SUMMARY */}
-          <div className="order-1 lg:order-2">
+          <div className="order-1 lg:order-2 lg:sticky lg:top-24">
             <OrderSummary data={data} i18n={summary} />
           </div>
         </div>
