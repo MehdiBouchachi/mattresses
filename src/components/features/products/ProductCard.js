@@ -160,7 +160,7 @@ overflow-hidden flex flex-col
             <div className="shrink-0">
               {isAvailable ? (
                 <Link href={`/${locale}/product/${slug}`}>
-                  <Button size="md">{viewProduct}</Button>
+                  <Button size="sm">{viewProduct}</Button>
                 </Link>
               ) : (
                 <button
