@@ -67,13 +67,10 @@ function ProductCard({ product, translation }) {
   return (
     <div
       className="
-       group bg-white 
-rounded-2xl  lg:rounded-3xl
-border border-blue-100
-hover:border-blue-200
-shadow-sm sm:shadow-sm lg:hover:shadow-md
-transition-all duration-300
-overflow-hidden flex flex-col
+        group bg-white rounded-3xl border border-blue-100
+        hover:border-blue-300 hover:shadow-md
+        transition-all duration-300
+        overflow-hidden flex flex-col
       "
     >
       {/* IMAGE */}
@@ -81,14 +78,9 @@ overflow-hidden flex flex-col
         <img
           src={image}
           alt={name}
-          className={`w-full 
-            h-40        /* mobile smaller */
-            sm:h-44     /* small tablet */
-            md:h-48     /* ipad */
-            lg:h-[240px] /* desktop */
-            object-cover transition duration-700 ${
-              isAvailable ? "group-hover:scale-105" : "grayscale"
-            }`}
+          className={`w-full h-52 sm:h-60 lg:h-[260px] object-cover transition duration-700 ${
+            isAvailable ? "group-hover:scale-105" : "grayscale"
+          }`}
         />
 
         {!isAvailable && (
@@ -101,60 +93,40 @@ overflow-hidden flex flex-col
       </div>
 
       {/* CONTENT */}
-      <div className="p-4 sm:p-5 md:p-5 lg:p-6 flex flex-col grow">
-        <p className="text-[10px] sm:text-xs uppercase tracking-wider text-slate-500 mb-1">
+      <div className="p-6 flex flex-col grow">
+        <p className="text-xs uppercase tracking-wider text-slate-500 mb-2">
           {category}
         </p>
 
-        <h3
-          className=" text-sm 
-          sm:text-base 
-          md:text-base 
-          lg:text-lg 
-          font-semibold leading-snug mb-2 text-blue-900"
-        >
+        <h3 className="text-lg font-semibold leading-snug mb-2 text-blue-900">
           {name}
         </h3>
 
-        <p
-          className="  sm:block 
-          text-xs 
-          md:text-sm 
-          text-slate-600 
-          mb-3 
-          leading-relaxed 
-          line-clamp-2"
-        >
+        <p className="text-sm text-slate-600 mb-4 leading-relaxed line-clamp-3">
           {description}
         </p>
 
-        <div className="border-t border-blue-100 mb-3"></div>
+        <div className="border-t border-blue-100 mb-4"></div>
 
         {/* ===== EXACT PRICE → INLINE ===== */}
         {isExact && (
-          <div className="mt-auto flex items-end justify-between gap-3">
+          <div className="mt-auto flex items-end justify-between gap-4">
             <div className="flex flex-col">
-              <span className="text-[10px] sm:text-xs text-slate-500 uppercase tracking-wider mb-1">
+              <span className="text-xs text-slate-500 uppercase tracking-wider mb-1">
                 {priceLabel}
               </span>
 
-              {hasDiscount && (
-                <span className="text-[11px] sm:text-xs text-slate-400 line-through">
-                  {formatPrice(oldPrice, locale)}
-                </span>
-              )}
+              <div className="flex flex-col">
+                {hasDiscount && (
+                  <span className="text-sm text-slate-400 line-through">
+                    {formatPrice(oldPrice, locale)}
+                  </span>
+                )}
 
-              <span
-                className="
-                text-sm 
-                sm:text-base 
-                md:text-base 
-                lg:text-lg 
-                font-medium text-blue-900 whitespace-nowrap
-              "
-              >
-                {formatPrice(finalPrice, locale)}
-              </span>
+                <span className="text-base sm:text-lg font-medium text-blue-900 whitespace-nowrap">
+                  {formatPrice(finalPrice, locale)}
+                </span>
+              </div>
             </div>
 
             <div className="shrink-0">
@@ -165,7 +137,7 @@ overflow-hidden flex flex-col
               ) : (
                 <button
                   disabled
-                  className="px-3 py-1.5 text-xs rounded-full bg-slate-200 text-slate-400 cursor-not-allowed"
+                  className="px-4 py-2 text-sm rounded-full bg-slate-200 text-slate-400 cursor-not-allowed"
                 >
                   {unavailable}
                 </button>
@@ -174,23 +146,15 @@ overflow-hidden flex flex-col
           </div>
         )}
 
-        {/* RANGE PRICE */}
+        {/* ===== RANGE PRICE → BUTTON BOTTOM ===== */}
         {isRange && (
           <div className="mt-auto">
-            <div className="mb-3">
-              <span className="text-[10px] sm:text-xs text-slate-500 uppercase tracking-wider block mb-1">
+            <div className="mb-4">
+              <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">
                 {priceLabel}
               </span>
 
-              <span
-                className="
-                text-sm 
-                sm:text-base 
-                md:text-base 
-                lg:text-lg 
-                font-medium text-blue-900 whitespace-nowrap
-              "
-              >
+              <span className="text-base sm:text-lg font-medium text-blue-900 whitespace-nowrap">
                 {formatPrice(finalRange.min, locale)}
                 {finalRange.min !== finalRange.max &&
                   ` – ${formatPrice(finalRange.max, locale)}`}
@@ -206,7 +170,7 @@ overflow-hidden flex flex-col
             ) : (
               <button
                 disabled
-                className="w-full px-3 py-1.5 text-xs rounded-full bg-slate-200 text-slate-400 cursor-not-allowed"
+                className="w-full px-4 py-2 text-sm rounded-full bg-slate-200 text-slate-400 cursor-not-allowed"
               >
                 {unavailable}
               </button>
@@ -214,9 +178,10 @@ overflow-hidden flex flex-col
           </div>
         )}
 
+        {/* ===== NO PRICE AT ALL ===== */}
         {!isExact && !isRange && (
           <div className="mt-auto">
-            <span className="text-xs text-slate-400">{unavailable}</span>
+            <span className="text-sm text-slate-400">{unavailable}</span>
           </div>
         )}
       </div>

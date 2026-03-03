@@ -15,30 +15,51 @@ export default function Button({
   ...props
 }) {
   const base =
-    "cursor-pointer inline-flex items-center justify-center font-medium transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center font-medium transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98]";
+
+  /* =========================
+     RESPONSIVE SIZE SYSTEM
+  ========================== */
 
   const sizes = {
-    sm: "px-5 py-2 text-xs sm:text-sm rounded-full",
-    md: "px-6 py-3 text-sm sm:text-base rounded-full",
-    lg: "px-8 py-4 text-base sm:text-lg rounded-full",
+    sm: `
+      px-3 py-1.5
+      text-[11px]
+      sm:px-4 sm:py-2 sm:text-xs
+      md:px-5 md:py-2 md:text-sm
+      rounded-full
+    `,
+    md: `
+      px-4 py-2
+      text-xs
+      sm:px-5 sm:py-2.5 sm:text-sm
+      md:px-6 md:py-3 md:text-base
+      rounded-full
+    `,
+    lg: `
+      px-5 py-2.5
+      text-sm
+      sm:px-7 sm:py-3 sm:text-base
+      md:px-8 md:py-4 md:text-lg
+      rounded-full
+    `,
   };
 
-  const variants = {
-    // 🔵 PRIMARY (Main Brand Button)
-    primary:
-      "bg-blue-900 text-white shadow-lg shadow-blue-50 hover:bg-blue-900 hover:shadow-black-50",
+  /* =========================
+     VARIANTS (unchanged design)
+  ========================== */
 
-    // ⚪ SECONDARY (Outline Clean)
+  const variants = {
+    primary: "bg-blue-900 text-white shadow-md hover:bg-blue-950",
+
     secondary: "border border-blue-600/30 text-blue-800 hover:bg-blue-50",
 
-    // 🟡 GOLD (If you still need it)
     gold: "bg-amber-500 text-white shadow-md hover:bg-amber-600",
 
-    // 🔴 ACCENT CTA (Use only when needed)
-    accent: "bg-red-600 text-white shadow-lg shadow-red-200 hover:bg-red-700",
-    cta: "bg-blue-900  text-white shadow-lg hover:shadow-2xl hover:bg-blue-950 rounded-xl",
+    accent: "bg-red-600 text-white shadow-md hover:bg-red-700",
 
-    // 💎 SOFT BLUE (Optional Premium Style)
+    cta: "bg-blue-900 text-white shadow-lg hover:bg-blue-950 rounded-xl",
+
     soft: "bg-blue-50 text-blue-700 hover:bg-blue-100",
   };
 
