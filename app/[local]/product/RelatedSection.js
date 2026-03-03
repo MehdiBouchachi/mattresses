@@ -73,9 +73,9 @@ export default function RelatedSection({ currentProduct, allProducts }) {
     const showArrows = products.length > 1;
 
     return (
-      <section className="py-16 sm:py-20 lg:py-24 border-t border-blue-100 relative">
+      <section className="py-10 sm:py-14 lg:py-20 border-t border-blue-100 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-blue-950 mb-10">
+          <h2 className="text-lg sm:text-2xl lg:text-3xl font-semibold text-blue-950 mb-6 sm:mb-8">
             {title}
           </h2>
 
@@ -116,7 +116,7 @@ export default function RelatedSection({ currentProduct, allProducts }) {
           <div
             ref={scrollRef}
             dir={isRTL ? "rtl" : "ltr"}
-            className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar pb-4"
+            className="flex gap-3 sm:gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar pb-4"
           >
             {products.map((item) => {
               const image = item.images?.[0] ?? item.image;
@@ -135,19 +135,17 @@ export default function RelatedSection({ currentProduct, allProducts }) {
                   key={item.slug}
                   whileHover={{ y: -6 }}
                   className="
-                    snap-start min-w-[240px] sm:min-w-[280px] lg:min-w-[300px]
-                    bg-white rounded-3xl
-                    border border-blue-100
-                    shadow-sm hover:shadow-lg
+                    snap-start min-w-[190px] sm:min-w-[240px] lg:min-w-[280px]
+                    bg-white rounded-xl sm:rounded-2xl border border-blue-100 shadow-sm hover:shadow-md
                     transition
                   "
                 >
                   {/* IMAGE */}
-                  <div className="overflow-hidden rounded-t-3xl relative">
+                  <div className="overflow-hidden rounded-t-xl relative">
                     <img
                       src={image}
                       alt={item.name}
-                      className="w-full h-[220px] object-cover transition duration-500 hover:scale-105"
+                      className="w-full h-[150px] sm:h-[190px] lg:h-[220px] object-cover transition duration-500 hover:scale-105"
                     />
 
                     {hasDiscount && (
@@ -158,7 +156,7 @@ export default function RelatedSection({ currentProduct, allProducts }) {
                   </div>
 
                   {/* CONTENT */}
-                  <div className="p-5">
+                  <div className="p-3 sm:p-4">
                     <p className="text-xs uppercase tracking-wider text-slate-500 mb-2">
                       {item.category}
                     </p>
