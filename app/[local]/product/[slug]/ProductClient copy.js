@@ -175,7 +175,7 @@ export default function ProductClient({
       </section>
 
       {/*  HERO  */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-14 lg:pb-20 grid lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-24 items-start">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 grid lg:grid-cols-2 gap-10 lg:gap-24 items-start">
         {/* LEFT */}
         <div>
           <div
@@ -191,7 +191,7 @@ export default function ProductClient({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="w-full h-[280px] sm:h-[360px] lg:h-[450px] object-cover transition-transform duration-300"
+              className="w-full h-[450px] object-cover transition-transform duration-300"
             />
           </div>
 
@@ -200,7 +200,7 @@ export default function ProductClient({
               <button
                 key={i}
                 onClick={() => setSelectedImage(img)}
-                className={`min-w-[65px] h-[65px] sm:min-w-[75px] sm:h-[75px] rounded-lg sm:rounded-xl overflow-hidden border ${
+                className={`min-w-[80px] h-[80px] rounded-xl overflow-hidden border ${
                   selectedImage === img ? "border-blue-900" : "border-blue-100"
                 }`}
               >
@@ -215,21 +215,17 @@ export default function ProductClient({
         </div>
 
         {/* RIGHT */}
-        <div className="bg-white p-5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl shadow-md sm:shadow-lg border border-blue-100">
+        <div className="bg-white p-8 rounded-3xl shadow-lg border border-blue-100">
           <p className="text-xs uppercase tracking-widest text-slate-500 mb-2">
             {product.category} · {product.subcategory}
           </p>
 
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-3 sm:mb-4">
-            {product.name}
-          </h1>
+          <h1 className="text-3xl font-semibold mb-4">{product.name}</h1>
 
-          <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 leading-relaxed">
-            {product.description}
-          </p>
+          <p className="text-slate-600 mb-6">{product.description}</p>
 
           {/* PRICE */}
-          <div className="mb-6 sm:mb-8 border-b border-blue-100 pb-6">
+          <div className="mb-8 border-b border-blue-100 pb-6">
             {hasDiscount && (
               <p className="text-sm text-gray-400 line-through mb-2">
                 {formatPrice(unitBasePrice)}
@@ -237,7 +233,7 @@ export default function ProductClient({
             )}
 
             <div className="flex items-end gap-3 flex-wrap">
-              <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900">
+              <span className="text-4xl font-bold text-blue-900">
                 {formatPrice(
                   quantity === 1 ? discountedUnitPrice : totalPrice,
                   locale,
@@ -259,7 +255,7 @@ export default function ProductClient({
           </div>
 
           {/* SIZE */}
-          <div className="mb-6 sm:mb-8">
+          <div className="mb-8">
             <h3 className="text-xs uppercase mb-3">{sizeTranslation}</h3>
 
             <div className="grid grid-cols-2 gap-3">
@@ -268,7 +264,7 @@ export default function ProductClient({
                   dir="ltr"
                   key={dim.size}
                   onClick={() => setSelectedDimension(dim)}
-                  className={`py-2.5 sm:py-3 text-sm sm:text-base rounded-lg sm:rounded-xl border ${
+                  className={`py-3 rounded-xl border ${
                     selectedDimension?.size === dim.size
                       ? "bg-blue-900 text-white"
                       : "border-blue-100 hover:bg-blue-50"
@@ -282,7 +278,7 @@ export default function ProductClient({
 
           {/* THICKNESS */}
           {selectedDimension?.options?.length > 0 && (
-            <div className="mb-6 sm:mb-8">
+            <div className="mb-8">
               <h3 className="text-xs uppercase mb-3">{thicknessTranslation}</h3>
 
               <div className="grid grid-cols-3 gap-3">
@@ -293,7 +289,7 @@ export default function ProductClient({
                       dir="ltr"
                       key={opt.thickness}
                       onClick={() => setSelectedThickness(opt)}
-                      className={`py-2.5 sm:py-3 text-sm sm:text-base rounded-lg sm:rounded-xl border ${
+                      className={`py-3 rounded-xl border ${
                         selectedThickness?.thickness === opt.thickness
                           ? "bg-blue-900 text-white"
                           : "border-blue-100 hover:bg-blue-50"
@@ -307,13 +303,13 @@ export default function ProductClient({
           )}
 
           {/* QUANTITY */}
-          <div className="mb-6 sm:mb-8">
+          <div className="mb-8">
             <h3 className="text-xs uppercase mb-3">{quantityTranslation}</h3>
 
-            <div className="flex items-center border rounded-full w-fit overflow-hidden text-sm sm:text-base">
+            <div className="flex items-center border rounded-full w-fit overflow-hidden">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-gray-100"
+                className="px-4 py-2 hover:bg-gray-100"
               >
                 −
               </button>
@@ -333,14 +329,14 @@ export default function ProductClient({
           <div className="space-y-4">
             <button
               onClick={handleCheckout}
-              className="w-full bg-blue-900 text-white py-2.5 sm:py-3 lg:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base lg:text-lg font-medium hover:bg-blue-950 transition"
+              className="w-full bg-blue-900 text-white py-3 sm:py-4 rounded-2xl text-base sm:text-lg font-medium hover:bg-blue-950 transition"
             >
               {actionTranslation.buyNow}
             </button>
 
             <button
               onClick={handleAddToCart}
-              className="w-full border border-blue-900 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-sm sm:text-base hover:bg-blue-50 transition"
+              className="w-full border border-blue-900 py-3 rounded-2xl hover:bg-blue-50 transition"
             >
               {actionTranslation.addToCart}
             </button>
@@ -355,7 +351,7 @@ export default function ProductClient({
       {/* TECH SPECS */}
       {technicalSpecs.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-blue-100">
-          <h2 className="text-3xl font-semibold mb-6 sm:mb-8 text-blue-950">
+          <h2 className="text-3xl font-semibold mb-8 text-blue-950">
             {featuresTranslation}
           </h2>
 
@@ -376,7 +372,7 @@ export default function ProductClient({
       {/* FAQ */}
       {faq.length > 0 && (
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-blue-100">
-          <h2 className="text-3xl font-semibold mb-6 sm:mb-8 text-blue-950">
+          <h2 className="text-3xl font-semibold mb-8 text-blue-950">
             {faqTranslation}
           </h2>
 
