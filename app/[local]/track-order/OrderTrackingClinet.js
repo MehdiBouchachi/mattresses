@@ -79,7 +79,10 @@ export default function OrderTrackingClient({ locale, translation }) {
     : -1;
 
   return (
-    <div className="min-h-screen bg-white pt-25 pb-28 px-4 sm:px-6">
+    <div
+      className="min-h-screen bg-white pt-24 sm:pt-24 pb-20 px-4 sm:px-6"
+      dir={isRTL ? "rtl" : "ltr"}
+    >
       <div className="max-w-4xl mx-auto space-y-10 sm:space-y-14">
         <TrackingHeader header={t.header} />
 
@@ -128,7 +131,7 @@ function TrackingHeader({ header }) {
 
 function TrackingSearch({ t, orderId, setOrderId, onTrack, error }) {
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-blue-100">
+    <div className="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 shadow-md border border-blue-100">
       <div className="flex flex-col sm:flex-row gap-4">
         <Input
           name="orderId"
@@ -159,8 +162,8 @@ function TrackingSearch({ t, orderId, setOrderId, onTrack, error }) {
 
 function TrackingResult({ order, t, locale, currentIndex, isRTL }) {
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-blue-100 space-y-10">
-      <OrderInfo order={order} t={t} locale={locale} />
+    <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-md border border-blue-100 space-y-8">
+      <OrderInfo order={order} t={t} locale={locale} isRTL={isRTL} />
 
       <TrackingProgress
         steps={t.steps}
@@ -177,9 +180,9 @@ function TrackingResult({ order, t, locale, currentIndex, isRTL }) {
    ORDER INFO
  */
 
-function OrderInfo({ order, t, locale }) {
+function OrderInfo({ order, t, locale, isRTL }) {
   return (
-    <div className="flex flex-col sm:flex-row sm:justify-between gap-6 flex-wrap">
+    <div className="flex flex-col sm:flex-row sm:justify-between gap-5 flex-wrap items-start">
       <InfoBlock label={t.details.orderId} value={order.id} />
       <InfoBlock label={t.details.customer} value={order.customer} />
       <InfoBlock
@@ -188,7 +191,7 @@ function OrderInfo({ order, t, locale }) {
       />
 
       <span
-        className={`inline-flex items-center justify-center px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap self-start ${
+        className={`inline-flex items-center justify-center px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap self-start ${isRTL ? "self-end sm:self-start" : ""} ${
           STATUS_STYLES[order.status]
         }`}
       >
@@ -217,33 +220,40 @@ function TrackingProgress({ steps, currentIndex, isRTL }) {
   return (
     <>
       {/* DESKTOP */}
-      <div className="hidden sm:block relative">
-        <div className="flex justify-between items-center">
+      <div className="hidden sm:block">
+        <div className="relative flex items-center">
+          {/* Line */}
+          <div className="absolute top-3 left-0 right-0 h-0.5 bg-blue-50" />
+
+          <div
+            className="absolute top-3 h-0.5 bg-blue-900 transition-all"
+            style={{
+              width:
+                currentIndex >= 0
+                  ? `${(currentIndex / (entries.length - 1)) * 100}%`
+                  : "0%",
+              right: isRTL ? 0 : "auto",
+              left: isRTL ? "auto" : 0,
+            }}
+          />
+
           {entries.map(([key, label], index) => {
             const active = index <= currentIndex;
 
             return (
               <div
                 key={key}
-                className="flex-1 flex flex-col items-center relative"
+                className="flex-1 flex flex-col items-center relative z-10"
               >
-                {index !== 0 && (
-                  <div
-                    className={`absolute top-3 w-full h-[2px] ${
-                      active ? "bg-blue-900" : "bg-blue-50"
-                    } ${isRTL ? "-right-1/2" : "-left-1/2"}`}
-                  />
-                )}
-
                 <div
-                  className={`w-6 h-6 rounded-full z-10 ${
+                  className={`w-6 h-6 rounded-full transition ${
                     active ? "bg-blue-900" : "bg-blue-50"
                   }`}
                 />
 
                 <p
                   className={`mt-3 text-xs text-center ${
-                    active ? "text-text-primary" : "text-slate-600"
+                    active ? "text-blue-900 font-medium" : "text-slate-500"
                   }`}
                 >
                   {label}
@@ -264,8 +274,8 @@ function TrackingProgress({ steps, currentIndex, isRTL }) {
               {index !== entries.length - 1 && (
                 <div
                   className={`absolute ${
-                    isRTL ? "right-[11px]" : "left-[11px]"
-                  } top-6 w-[2px] h-full ${
+                    isRTL ? "right-3" : "left-3"
+                  } top-6 w-0.5 h-full ${
                     active ? "bg-blue-900" : "bg-blue-50"
                   }`}
                 />
