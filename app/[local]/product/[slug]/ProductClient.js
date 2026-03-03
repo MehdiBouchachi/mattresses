@@ -353,20 +353,28 @@ export default function ProductClient({
       </section>
 
       {/* TECH SPECS */}
+      {/* TECH SPECS */}
       {technicalSpecs.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-blue-100">
-          <h2 className="text-3xl font-semibold mb-6 sm:mb-8 text-blue-950">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 border-t border-blue-100">
+          {/* TITLE */}
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 sm:mb-8 text-blue-950">
             {featuresTranslation}
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          {/* GRID */}
+          <div className="grid gap-4 sm:gap-6">
             {technicalSpecs.map((spec) => (
               <div
                 key={spec.label}
-                className="flex justify-between border-b pb-4"
+                className="flex justify-between items-center border-b border-blue-100 pb-3 sm:pb-4"
               >
-                <span>{spec.label}</span>
-                <span className="text-slate-600">{spec.value}</span>
+                <span className="text-sm sm:text-base font-medium text-blue-950">
+                  {spec.label}
+                </span>
+
+                <span className="text-sm sm:text-base text-slate-600 text-right max-w-[60%]">
+                  {spec.value}
+                </span>
               </div>
             ))}
           </div>
@@ -375,34 +383,61 @@ export default function ProductClient({
 
       {/* FAQ */}
       {faq.length > 0 && (
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-blue-100">
-          <h2 className="text-3xl font-semibold mb-6 sm:mb-8 text-blue-950">
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 border-t border-blue-100">
+          {/* TITLE */}
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 sm:mb-8 text-blue-950">
             {faqTranslation}
           </h2>
 
-          <div className="space-y-4">
-            {faq.map((item, i) => (
-              <div
-                key={i}
-                className="border border-blue-100 rounded-xl p-5 cursor-pointer"
-                onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
-              >
-                <h4 className="font-semibold">{item.question}</h4>
+          {/* ITEMS */}
+          <div className="space-y-3 sm:space-y-4">
+            {faq.map((item, i) => {
+              const isOpen = openFAQ === i;
 
-                <AnimatePresence>
-                  {openFAQ === i && (
-                    <motion.p
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="text-slate-600 mt-2 text-sm"
-                    >
-                      {item.answer}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
+              return (
+                <div
+                  key={i}
+                  className={`
+              border border-blue-100
+              rounded-lg sm:rounded-xl
+              px-4 py-3 sm:p-5
+              transition-all duration-300
+              ${isOpen ? "bg-blue-50/40" : "bg-white"}
+            `}
+                >
+                  {/* HEADER */}
+                  <button
+                    onClick={() => setOpenFAQ(isOpen ? null : i)}
+                    className="w-full flex justify-between items-center text-left"
+                  >
+                    <h4 className="text-sm sm:text-base font-medium text-blue-950">
+                      {item.question}
+                    </h4>
+
+                    <span className="text-blue-900 text-lg sm:text-xl">
+                      {isOpen ? "−" : "+"}
+                    </span>
+                  </button>
+
+                  {/* ANSWER */}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-xs sm:text-sm text-slate-600 mt-3 leading-relaxed">
+                          {item.answer}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
         </section>
       )}
