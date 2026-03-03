@@ -96,7 +96,7 @@ export default function DimensionFilter({ state, dispatch, translation }) {
 
   return (
     <div className="mt-6 sm:mt-8 lg:mt-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-2  gap-6">
         {/* SIZE */}
         <div className="flex flex-col">
           <label className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">
