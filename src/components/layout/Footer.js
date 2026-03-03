@@ -26,7 +26,7 @@ export default function Footer({ translation }) {
   } = translation;
 
   return (
-    <footer className="bg-white border-t border-blue-100">
+    <footer className="bg-white border-t border-blue-100" id="site-footer">
       {/* ================= MAIN ================= */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 py-14 sm:py-20 lg:py-24">
         <div className="grid gap-12 sm:gap-14 md:grid-cols-2 lg:grid-cols-4">
