@@ -17,6 +17,19 @@ export default function Filters({
   const [open, setOpen] = useState(false);
   const [hideButton, setHideButton] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  /* ================= DETECT DESKTOP ================= */
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsDesktop(window.innerWidth >= 1024); // lg breakpoint
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   /* ================= FOOTER OBSERVER ================= */
 
@@ -39,7 +52,6 @@ export default function Filters({
 
   useEffect(() => {
     if (!hideButton) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setButtonVisible(false);
       const timeout = setTimeout(() => {
         setButtonVisible(true);
@@ -48,9 +60,37 @@ export default function Filters({
     }
   }, [hideButton]);
 
+  /* ================= LOCK BODY SCROLL ================= */
+
+  useEffect(() => {
+    if (open) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+
+      // Lock scroll
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+
+      return () => {
+        // Restore scroll
+        const storedScrollY = document.body.style.top;
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.width = "";
+
+        window.scrollTo(0, parseInt(storedScrollY || "0") * -1);
+      };
+    }
+  }, [open]);
+
   return (
     <>
-      {/* ================= FILTER BUTTON ================= */}
+      {/* ================= FLOATING BUTTON ================= */}
       <AnimatePresence>
         {!hideButton && buttonVisible && (
           <motion.button
@@ -59,32 +99,33 @@ export default function Filters({
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{
               duration: 0.35,
-              ease: [0.22, 1, 0.36, 1], // smooth cubic-bezier
+              ease: [0.22, 1, 0.36, 1],
             }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => setOpen(true)}
             className="
-        fixed bottom-20 right-4 md:bottom-8 md:right-8 cursor-pointer
-        z-40
-        bg-blue-900 text-white
-        px-6 py-3
-        rounded-full
-        shadow-xl
-        text-sm font-medium
-        hover:bg-blue-950
-        transition-colors
-      "
+              fixed bottom-20 right-4 md:bottom-8 md:right-8
+              z-40
+              bg-blue-900 text-white
+              px-6 py-3
+              rounded-full
+              shadow-xl
+              text-sm font-medium
+              hover:bg-blue-950
+              transition-colors
+            "
           >
             {locale === "ar" ? "الفلاتر" : "Filters"}
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* ================= OVERLAY ================= */}
+      {/* ================= DRAWER + OVERLAY ================= */}
       <AnimatePresence>
         {open && (
           <>
+            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -93,20 +134,23 @@ export default function Filters({
               className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
             />
 
-            {/* ================= DRAWER ================= */}
+            {/* Responsive Drawer */}
             <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="
-                fixed top-0 right-0 h-full
-                w-full md:w-[420px] lg:w-[480px]
-                bg-white
-                shadow-2xl
-                z-50
-                flex flex-col
-              "
+              initial={isDesktop ? { x: "100%" } : { y: "100%" }}
+              animate={isDesktop ? { x: 0 } : { y: 0 }}
+              exit={isDesktop ? { x: "100%" } : { y: "100%" }}
+              transition={{
+                duration: 0.35,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className={`
+                fixed z-50 bg-white shadow-2xl flex flex-col
+                ${
+                  isDesktop
+                    ? "top-0 right-0 h-full w-120"
+                    : "bottom-0 left-0 right-0 rounded-t-3xl max-h-[80vh]"
+                }
+              `}
             >
               {/* Header */}
               <div className="flex justify-between items-center px-8 py-6 border-b border-blue-100">
