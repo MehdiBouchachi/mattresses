@@ -91,7 +91,7 @@ export const categories1 = [
   },
 ];
 
-export const categories = [
+export const categories2 = [
   {
     value: "classic",
     translations: {
@@ -128,11 +128,11 @@ export const categories = [
     },
     subcategories: [
       {
-        value: "hr",
+        value: "confort",
         translations: {
-          en: "HR Mattress",
-          fr: "Matelas HR",
-          ar: "مرتبة HR",
+          en: "Comfort Mattress",
+          fr: "Matelas Confort",
+          ar: "مرتبة كونفورت",
         },
       },
       {
@@ -157,9 +157,9 @@ export const categories = [
   {
     value: "spring",
     translations: {
-      en: "Spring Range",
-      fr: "Gamme Ressorts",
-      ar: "فئة النوابض",
+      en: "Hybrid Spring Range",
+      fr: "Gamme Ressorts hybride",
+      ar: "فئة النوابض (hybride)",
     },
     subcategories: [
       {
@@ -180,6 +180,136 @@ export const categories = [
       },
       {
         value: "prestige",
+        translations: {
+          en: "Spring Prestige",
+          fr: "Ressort Prestige",
+          ar: "نوابض بريستيج",
+        },
+      },
+    ],
+  },
+];
+
+export const categories = [
+  /* ================= CLASSIC ROLL ================= */
+  {
+    value: "classic-roll",
+    translations: {
+      en: "Classic Roll Range",
+      fr: "Gamme Classique Roulée",
+      ar: "الفئة الكلاسيكية (ملفوفة)",
+    },
+    subcategories: [
+      {
+        value: "d30-roll",
+        translations: {
+          en: "Mattress D30 (Roll)",
+          fr: "Matelas D30 (Roulé)",
+          ar: "مرتبة D30 (ملفوفة)",
+        },
+      },
+      {
+        value: "d36-roll",
+        translations: {
+          en: "Mattress D36 (Roll)",
+          fr: "Matelas D36 (Roulé)",
+          ar: "مرتبة D36 (ملفوفة)",
+        },
+      },
+    ],
+  },
+
+  /* ================= CLASSIC OPEN ================= */
+  {
+    value: "classic-open",
+    translations: {
+      en: "Classic Open Range",
+      fr: "Gamme Classique Ouverte",
+      ar: "الفئة الكلاسيكية (مفتوحة)",
+    },
+    subcategories: [
+      {
+        value: "d30-open",
+        translations: {
+          en: "Mattress D30 (Open)",
+          fr: "Matelas D30 (Ouvert)",
+          ar: "مرتبة D30 (مفتوحة)",
+        },
+      },
+      {
+        value: "d36-open",
+        translations: {
+          en: "Mattress D36 (Open)",
+          fr: "Matelas D36 (Ouvert)",
+          ar: "مرتبة D36 (مفتوحة)",
+        },
+      },
+    ],
+  },
+
+  /* ================= MULTI LAYER ================= */
+  {
+    value: "multi-layer",
+    translations: {
+      en: "Multi-Layer Range",
+      fr: "Gamme Multi-couches",
+      ar: "فئة متعددة الطبقات",
+    },
+    subcategories: [
+      {
+        value: "confort",
+        translations: {
+          en: "Comfort Mattress",
+          fr: "Matelas Confort",
+          ar: "مرتبة كونفورت",
+        },
+      },
+      {
+        value: "visco",
+        translations: {
+          en: "Visco Mattress",
+          fr: "Matelas Visco",
+          ar: "مرتبة فيسكو",
+        },
+      },
+      {
+        value: "visco-plus",
+        translations: {
+          en: "Visco Plus (D36 + HR + Visco)",
+          fr: "Matelas Visco Plus (D36 + HR + Visco)",
+          ar: "مرتبة فيسكو بلس (D36 + HR + Visco)",
+        },
+      },
+    ],
+  },
+
+  /* ================= SPRING ================= */
+  {
+    value: "spring",
+    translations: {
+      en: "Hybrid Spring Range",
+      fr: "Gamme Ressorts Hybride",
+      ar: "فئة النوابض (هجين)",
+    },
+    subcategories: [
+      {
+        value: "spring-confort",
+        translations: {
+          en: "Spring Confort",
+          fr: "Ressort Confort",
+          ar: "نوابض كونفور",
+        },
+      },
+      {
+        value: "spring-premium",
+        translations: {
+          en: "Spring Premium",
+          fr: "Ressort Premium",
+          ar: "نوابض بريميوم",
+        },
+      },
+      {
+        value: "spring-prestige",
         translations: {
           en: "Spring Prestige",
           fr: "Ressort Prestige",
@@ -799,15 +929,17 @@ export const products2 = [
 export const products = [
   /* ================= CLASSIC RANGE ================= */
 
+  /* ================= CLASSIC OPEN RANGE ================= */
+
   {
     id: 1,
-    slug: "classic-d30",
-    name: "Matelas Densité D30",
+    slug: "classic-open-d30",
+    name: "Matelas Densité D30 (Ouvert)",
     description:
-      "Durable foam mattress with D30 density, designed for everyday comfort and long-term support.",
+      "Traditional open foam mattress with D30 density, designed for stable everyday comfort and long-term durability.",
 
-    category: "classic",
-    subcategory: "d30",
+    category: "classic-open",
+    subcategory: "d30-open",
     available: true,
     featured: false,
 
@@ -856,12 +988,13 @@ export const products = [
       ],
       technicalSpecs: [
         { label: "Density", value: "D30 High-density foam" },
+        { label: "Packaging", value: "Delivered flat (Open form)" },
         { label: "Support", value: "Firm support core" },
         { label: "Warranty", value: "5 years" },
       ],
       advantages: [
         "Firm and stable support",
-        "Affordable solution",
+        "Better structural integrity",
         "Good durability",
       ],
       faq: [],
@@ -870,13 +1003,13 @@ export const products = [
 
   {
     id: 2,
-    slug: "classic-d36",
-    name: "Matelas Densité D36",
+    slug: "classic-open-d36",
+    name: "Matelas Densité D36 (Ouvert)",
     description:
-      "Higher-density foam mattress offering enhanced durability and stronger support.",
+      "Higher-density open foam mattress offering enhanced durability and stronger support.",
 
-    category: "classic",
-    subcategory: "d36",
+    category: "classic-open",
+    subcategory: "d36-open",
     available: true,
     featured: true,
 
@@ -925,6 +1058,7 @@ export const products = [
       ],
       technicalSpecs: [
         { label: "Density", value: "D36 Reinforced foam" },
+        { label: "Packaging", value: "Delivered flat (Open form)" },
         { label: "Support", value: "Extra firm support" },
         { label: "Warranty", value: "8 years" },
       ],
@@ -937,17 +1071,154 @@ export const products = [
     },
   },
 
+  /* ================= CLASSIC ROLL RANGE ================= */
+
+  {
+    id: 9,
+    slug: "classic-roll-d30",
+    name: "Matelas Densité D30 (Roulé)",
+    description:
+      "Compressed roll-packed D30 mattress, practical and affordable with reliable everyday comfort.",
+
+    category: "classic-roll",
+    subcategory: "d30-roll",
+    available: true,
+    featured: false,
+
+    basePrice: 95000,
+    oldPrice: null,
+    discount: 0,
+
+    images: ["/images/mattresses.png"],
+
+    details: {
+      thickness: 22,
+      firmness: 8,
+      dimensions: [
+        {
+          size: "90 x 190",
+          options: [
+            { thickness: 20, price: 13500 },
+            { thickness: 25, price: 15500 },
+            { thickness: 30, price: 19000 },
+          ],
+        },
+        {
+          size: "140 x 190",
+          options: [
+            { thickness: 20, price: 22500 },
+            { thickness: 25, price: 25000 },
+            { thickness: 30, price: 28000 },
+          ],
+        },
+        {
+          size: "160 x 190",
+          options: [
+            { thickness: 20, price: 24500 },
+            { thickness: 25, price: 27000 },
+            { thickness: 30, price: 31000 },
+          ],
+        },
+        {
+          size: "180 x 200",
+          options: [
+            { thickness: 20, price: 28500 },
+            { thickness: 25, price: 32000 },
+            { thickness: 30, price: 36000 },
+          ],
+        },
+      ],
+      technicalSpecs: [
+        { label: "Density", value: "D30 High-density foam" },
+        { label: "Packaging", value: "Compressed & Roll-packed" },
+        { label: "Support", value: "Firm support core" },
+        { label: "Warranty", value: "5 years" },
+      ],
+      advantages: [
+        "Easy transport",
+        "Space-saving packaging",
+        "Affordable solution",
+      ],
+      faq: [],
+    },
+  },
+
+  {
+    id: 10,
+    slug: "classic-roll-d36",
+    name: "Matelas Densité D36 (Roulé)",
+    description:
+      "Compressed D36 roll mattress offering reinforced support with convenient delivery format.",
+
+    category: "classic-roll",
+    subcategory: "d36-roll",
+    available: true,
+    featured: false,
+
+    basePrice: 115000,
+    oldPrice: null,
+    discount: 0,
+
+    images: ["/images/mattresses.png"],
+
+    details: {
+      thickness: 24,
+      firmness: 9,
+      dimensions: [
+        {
+          size: "90 x 190",
+          options: [
+            { thickness: 20, price: 16500 },
+            { thickness: 25, price: 18500 },
+            { thickness: 30, price: 22500 },
+          ],
+        },
+        {
+          size: "140 x 190",
+          options: [
+            { thickness: 20, price: 24500 },
+            { thickness: 25, price: 28500 },
+            { thickness: 30, price: 33000 },
+          ],
+        },
+        {
+          size: "160 x 190",
+          options: [
+            { thickness: 20, price: 28000 },
+            { thickness: 25, price: 32500 },
+            { thickness: 30, price: 37000 },
+          ],
+        },
+        {
+          size: "180 x 200",
+          options: [
+            { thickness: 20, price: 33000 },
+            { thickness: 25, price: 37000 },
+            { thickness: 30, price: 40500 },
+          ],
+        },
+      ],
+      technicalSpecs: [
+        { label: "Density", value: "D36 Reinforced foam" },
+        { label: "Packaging", value: "Compressed & Roll-packed" },
+        { label: "Support", value: "Extra firm support" },
+        { label: "Warranty", value: "8 years" },
+      ],
+      advantages: ["Strong support", "Cost-effective", "Compact delivery"],
+      faq: [],
+    },
+  },
   /* ================= MULTI-LAYER RANGE ================= */
 
   {
     id: 3,
     slug: "hr-mattress",
-    name: "Matelas HR",
+    name: "Matelas Confort",
     description:
       "High-Resilience mattress designed for dynamic support and improved comfort.",
 
     category: "multi-layer",
-    subcategory: "hr",
+    subcategory: "confort",
     available: true,
     featured: false,
 
@@ -955,7 +1226,11 @@ export const products = [
     oldPrice: null,
     discount: 0,
 
-    images: ["/images/mattresses.png"],
+    images: [
+      "/images/vissco/confort-1.jpeg",
+      "/images/vissco/confort-2.jpeg",
+      "/images/vissco/confort.jpeg",
+    ],
 
     details: {
       thickness: 25,
@@ -1020,7 +1295,7 @@ export const products = [
     oldPrice: 165000,
     discount: 12,
 
-    images: ["/images/mattresses.png"],
+    images: ["/images/vissco/vissco.jpeg"],
 
     details: {
       thickness: 26,
@@ -1089,7 +1364,7 @@ export const products = [
     oldPrice: null,
     discount: 0,
 
-    images: ["/images/mattresses.png"],
+    images: ["/images/vissco/vissco-plus-1.jpeg"],
 
     details: {
       thickness: 30,
@@ -1148,7 +1423,7 @@ export const products = [
       "Traditional spring mattress offering reliable support and good ventilation.",
 
     category: "spring",
-    subcategory: "confort",
+    subcategory: "spring-confort",
     available: true,
     featured: false,
 
@@ -1156,7 +1431,10 @@ export const products = [
     oldPrice: null,
     discount: 0,
 
-    images: ["/images/mattresses.png"],
+    images: [
+      "/images/ressort/ressort-confort-1.jpeg",
+      "/images/ressort/ressort-confort.jpeg",
+    ],
 
     details: {
       thickness: 22,
@@ -1208,7 +1486,7 @@ export const products = [
       "Reinforced spring mattress providing stronger support and improved durability.",
 
     category: "spring",
-    subcategory: "premium",
+    subcategory: "spring-premium",
     available: true,
     featured: true,
 
@@ -1216,7 +1494,15 @@ export const products = [
     oldPrice: null,
     discount: 0,
 
-    images: ["/images/mattresses.png"],
+    images: [
+      "/images/ressort/ressort-premium-1.jpeg",
+      "/images/ressort/ressort-premium-2.jpeg",
+      "/images/ressort/ressort-premium-3.jpeg",
+      "/images/ressort/ressort-premium-4.jpeg",
+      "/images/ressort/ressort-premium-5.jpeg",
+      "/images/ressort/ressort-premium-6.jpeg",
+      "/images/ressort/ressort-premium-7.jpeg",
+    ],
 
     details: {
       thickness: 26,
@@ -1268,7 +1554,7 @@ export const products = [
       "High-end spring mattress designed for maximum comfort and longevity.",
 
     category: "spring",
-    subcategory: "prestige",
+    subcategory: "spring-prestige",
     available: true,
     featured: false,
 
@@ -1276,7 +1562,11 @@ export const products = [
     oldPrice: null,
     discount: 0,
 
-    images: ["/images/mattresses.png"],
+    images: [
+      "/images/ressort/ressort-prestige-1.jpeg",
+      "/images/ressort/ressort-prestige-2.jpeg",
+      "/images/ressort/ressort-prestige-3.jpeg",
+    ],
 
     details: {
       thickness: 28,

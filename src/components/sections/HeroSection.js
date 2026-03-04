@@ -24,6 +24,8 @@ export default function HeroSection({ translation }) {
     floatingBadge,
   } = translation?.home?.hero;
 
+
+  
   return (
     <section
       className="relative overflow-hidden bg-white pt-24 sm:pt-28 lg:pt-36 pb-16 sm:pb-20 lg:pb-28"
