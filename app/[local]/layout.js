@@ -10,7 +10,6 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getTranslations } from "@/lib/i18n";
 /* LATIN */
-export const revalidate = 0;
 const headingFont = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "600", "700"],

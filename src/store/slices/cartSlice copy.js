@@ -12,14 +12,11 @@ const cartSlice = createSlice({
     /* ================= ADD ================= */
 
     addToCart: (state, action) => {
-      const { id, size, thickness, density } = action.payload;
+      const { id, size, thickness } = action.payload;
 
       const existing = state.items.find(
         (item) =>
-          item.id === id &&
-          item.size === size &&
-          item.thickness === thickness &&
-          (item.density || null) === (density || null),
+          item.id === id && item.size === size && item.thickness === thickness,
       );
 
       if (existing) {
@@ -35,15 +32,14 @@ const cartSlice = createSlice({
     /* ================= REMOVE ================= */
 
     removeFromCart: (state, action) => {
-      const { id, size, thickness, density } = action.payload;
+      const { id, size, thickness } = action.payload;
 
       state.items = state.items.filter(
         (item) =>
           !(
             item.id === id &&
             item.size === size &&
-            item.thickness === thickness &&
-            (item.density || null) === (density || null)
+            item.thickness === thickness
           ),
       );
     },
@@ -51,14 +47,11 @@ const cartSlice = createSlice({
     /* ================= UPDATE ================= */
 
     updateQuantity: (state, action) => {
-      const { id, size, thickness, density, quantity } = action.payload;
+      const { id, size, thickness, quantity } = action.payload;
 
       const item = state.items.find(
         (item) =>
-          item.id === id &&
-          item.size === size &&
-          item.thickness === thickness &&
-          (item.density || null) === (density || null),
+          item.id === id && item.size === size && item.thickness === thickness,
       );
 
       if (item && quantity > 0) {
@@ -69,14 +62,11 @@ const cartSlice = createSlice({
     /* ================= DECREASE ================= */
 
     decreaseQuantity: (state, action) => {
-      const { id, size, thickness, density } = action.payload;
+      const { id, size, thickness } = action.payload;
 
       const item = state.items.find(
         (item) =>
-          item.id === id &&
-          item.size === size &&
-          item.thickness === thickness &&
-          (item.density || null) === (density || null),
+          item.id === id && item.size === size && item.thickness === thickness,
       );
 
       if (item) {
@@ -85,12 +75,7 @@ const cartSlice = createSlice({
         } else {
           state.items = state.items.filter(
             (i) =>
-              !(
-                i.id === id &&
-                i.size === size &&
-                i.thickness === thickness &&
-                (i.density || null) === (density || null)
-              ),
+              !(i.id === id && i.size === size && i.thickness === thickness),
           );
         }
       }

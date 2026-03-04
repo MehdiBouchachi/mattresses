@@ -54,40 +54,22 @@ export default function ProductClient({
   const [openFAQ, setOpenFAQ] = useState(null);
   const [zoomStyle, setZoomStyle] = useState({});
 
-  const densities = product.details?.densities ?? [];
-
-  const [selectedDensity, setSelectedDensity] = useState(
-    densities.length > 0 ? densities[0].value : null,
-  );
-
   /* ======
      AUTO-SELECT SMALLEST THICKNESS WHEN SIZE CHANGES
   ======= */
 
   useEffect(() => {
     if (selectedDimension?.options?.length > 0) {
-      let filteredOptions = selectedDimension.options;
-
-      // If product has density (Classic)
-      if (selectedDensity) {
-        filteredOptions = filteredOptions.filter(
-          (opt) => opt.density === selectedDensity,
-        );
-      }
-
-      if (filteredOptions.length > 0) {
-        const sorted = [...filteredOptions].sort(
-          (a, b) => a.thickness - b.thickness,
-        );
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setSelectedThickness(sorted[0]);
-      } else {
-        setSelectedThickness(null);
-      }
+      const sorted = [...selectedDimension.options].sort(
+        (a, b) => a.thickness - b.thickness,
+      );
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSelectedThickness(sorted[0]);
     } else {
       setSelectedThickness(null);
     }
-  }, [selectedDimension, selectedDensity]);
+  }, [selectedDimension]);
+
   /*  PRICING  */
 
   const unitBasePrice = selectedThickness?.price ?? 0;
@@ -142,7 +124,6 @@ export default function ProductClient({
         price: discountedUnitPrice,
         size: selectedDimension?.size,
         thickness: selectedThickness?.thickness,
-        density: selectedDensity, // 👈 add this
         quantity,
       }),
     );
@@ -276,28 +257,6 @@ export default function ProductClient({
               )}
             </div>
           </div>
-          {/* DENSITY (ONLY FOR CLASSIC) */}
-          {densities.length > 0 && (
-            <div className="mb-6 sm:mb-8">
-              <h3 className="text-xs uppercase mb-3">Density</h3>
-
-              <div className="grid grid-cols-2 gap-3">
-                {densities.map((d) => (
-                  <button
-                    key={d.value}
-                    onClick={() => setSelectedDensity(d.value)}
-                    className={`py-2.5 sm:py-3 text-sm sm:text-base rounded-lg sm:rounded-xl border ${
-                      selectedDensity === d.value
-                        ? "bg-blue-900 text-white"
-                        : "border-blue-100 hover:bg-blue-50"
-                    }`}
-                  >
-                    {d.value}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* SIZE */}
           <div className="mb-6 sm:mb-8">
@@ -328,17 +287,14 @@ export default function ProductClient({
 
               <div className="grid grid-cols-3 gap-3">
                 {selectedDimension.options
-                  .filter((opt) =>
-                    selectedDensity ? opt.density === selectedDensity : true,
-                  )
                   .sort((a, b) => a.thickness - b.thickness)
                   .map((opt) => (
                     <button
-                      key={`${opt.thickness}-${opt.density || "default"}`}
+                      dir="ltr"
+                      key={opt.thickness}
                       onClick={() => setSelectedThickness(opt)}
                       className={`py-2.5 sm:py-3 text-sm sm:text-base rounded-lg sm:rounded-xl border ${
-                        selectedThickness?.thickness === opt.thickness &&
-                        (!selectedDensity || opt.density === selectedDensity)
+                        selectedThickness?.thickness === opt.thickness
                           ? "bg-blue-900 text-white"
                           : "border-blue-100 hover:bg-blue-50"
                       }`}

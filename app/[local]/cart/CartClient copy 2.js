@@ -42,34 +42,31 @@ export default function CartClient({ locale, translation = {} }) {
   /* ================= ACTIONS ================= */
 
   const actions = {
-    increase: (id, size, thickness, density, qty) =>
+    increase: (id, size, thickness, qty) =>
       dispatch(
         updateQuantity({
           id,
           size,
           thickness,
-          density,
           quantity: qty + 1,
         }),
       ),
 
-    decrease: (id, size, thickness, density) =>
+    decrease: (id, size, thickness) =>
       dispatch(
         decreaseQuantity({
           id,
           size,
           thickness,
-          density,
         }),
       ),
 
-    remove: (id, size, thickness, density) =>
+    remove: (id, size, thickness) =>
       dispatch(
         removeFromCart({
           id,
           size,
           thickness,
-          density,
         }),
       ),
 
@@ -91,11 +88,11 @@ export default function CartClient({ locale, translation = {} }) {
     <div className="relative min-h-screen bg-white" dir={isRTL ? "rtl" : "ltr"}>
       <div
         className="
-          relative
-          max-w-6xl mx-auto
-          px-4 sm:px-6 lg:px-8
-          pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-14 lg:pb-16
-        "
+        relative
+        max-w-6xl mx-auto
+        px-4 sm:px-6 lg:px-8
+        pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-14 lg:pb-16
+      "
       >
         {/* HEADER */}
         <div className="mb-8 sm:mb-10 lg:mb-14">
@@ -110,13 +107,9 @@ export default function CartClient({ locale, translation = {} }) {
         {/* MAIN GRID */}
         <div
           className={`
-            grid gap-8 sm:gap-10 lg:gap-16 items-start
-            ${
-              isRTL
-                ? "lg:grid-cols-[0.6fr_1.4fr]"
-                : "lg:grid-cols-[1.4fr_0.6fr]"
-            }
-          `}
+          grid gap-8 sm:gap-10 lg:gap-16 items-start
+          ${isRTL ? "lg:grid-cols-[0.6fr_1.4fr]" : "lg:grid-cols-[1.4fr_0.6fr]"}
+        `}
         >
           {/* ================= CART ITEMS ================= */}
           <div
@@ -124,7 +117,7 @@ export default function CartClient({ locale, translation = {} }) {
           >
             {data.items.map((product) => (
               <CartItemCard
-                key={`${product.id}-${product.size}-${product.thickness}-${product.density || "default"}`}
+                key={`${product.id}-${product.size}-${product.thickness}`}
                 data={product}
                 actions={actions}
                 i18n={itemI18n}
@@ -136,9 +129,9 @@ export default function CartClient({ locale, translation = {} }) {
           {/* ================= SUMMARY ================= */}
           <div
             className={`
-              mt-6 sm:mt-8 lg:mt-0
-              ${isRTL ? "lg:order-1" : ""}
-            `}
+            mt-6 sm:mt-8 lg:mt-0
+            ${isRTL ? "lg:order-1" : ""}
+          `}
           >
             <CartSummary
               data={data}

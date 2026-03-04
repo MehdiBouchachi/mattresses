@@ -38,11 +38,7 @@ function SummaryItems({ items, locale }) {
   return (
     <div className="space-y-6 sm:space-y-8">
       {items.map((item) => (
-        <SummaryItem
-          key={`${item.id}-${item.size}-${item.thickness}-${item.density || "default"}`}
-          item={item}
-          locale={locale}
-        />
+        <SummaryItem key={item.id + item.size} item={item} locale={locale} />
       ))}
     </div>
   );
@@ -53,7 +49,7 @@ function SummaryItems({ items, locale }) {
 ===================================================== */
 
 function SummaryItem({ item, locale }) {
-  const { name, quantity, price, density } = item;
+  const { name, quantity, price } = item;
 
   return (
     <div className="pb-5 sm:pb-6 border-b border-blue-100 last:border-none last:pb-0">
@@ -63,21 +59,12 @@ function SummaryItem({ item, locale }) {
             {name}
           </p>
 
-          <div className="flex flex-wrap items-center gap-2 mt-2">
-            {/* Density (Classic only) */}
-            {density && (
-              <span className="text-xs sm:text-sm text-slate-500">
-                {density}
-              </span>
-            )}
-
-            {/* Size + Thickness */}
+          <div className="flex items-center gap-2 mt-2">
             <span className="text-xs sm:text-sm text-slate-500">
               {item.size}
               {item.thickness && ` × ${item.thickness} cm`}
             </span>
 
-            {/* Quantity */}
             <span className="px-2.5 py-1 rounded-full bg-blue-50 text-blue-900 text-xs font-semibold">
               × {quantity}
             </span>
@@ -95,7 +82,6 @@ function SummaryItem({ item, locale }) {
 /* =====================================================
    TOTALS SECTION
 ===================================================== */
-
 function SummaryTotals({ total, locale, i18n }) {
   const { subtotal, total: totalLabel } = i18n;
 
@@ -129,7 +115,6 @@ function SummaryTotals({ total, locale, i18n }) {
 /* =====================================================
    SECURE NOTES
 ===================================================== */
-
 function SummarySecureNotes({ i18n }) {
   const { secure1, secure2, secure3 } = i18n;
 

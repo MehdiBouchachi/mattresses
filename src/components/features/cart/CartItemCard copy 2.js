@@ -3,20 +3,9 @@ import Image from "next/image";
 import QuantitySelector from "./QuantitySelector";
 
 function CartItemCard({ data, actions, i18n = {}, locale }) {
-  const {
-    id,
-    size,
-    thickness,
-    density, // ✅ NEW
-    name,
-    image,
-    price,
-    oldPrice,
-    quantity,
-  } = data;
+  const { id, size, thickness, name, image, price, oldPrice, quantity } = data;
 
   const { increase, decrease, remove: removeAction } = actions;
-
   const {
     size: sizeLabel,
     thickness: thicknessLabel,
@@ -62,22 +51,13 @@ function CartItemCard({ data, actions, i18n = {}, locale }) {
               {name}
             </h3>
 
-            {/* OPTIONS */}
+            {/* SIZE + THICKNESS */}
             <div className="text-xs sm:text-sm text-slate-500 mb-4 sm:mb-5 space-y-1">
-              {/* DENSITY (ONLY CLASSIC) */}
-              {density && (
-                <p>
-                  Density: <span>{density}</span>
-                </p>
-              )}
-
-              {/* SIZE */}
               <p>
                 {sizeLabel}: <span dir="ltr">{size}</span>
                 {isRTL ? " سم" : " cm"}
               </p>
 
-              {/* THICKNESS */}
               {thickness && (
                 <p>
                   {thicknessLabel}: <span dir="ltr">{thickness}</span>{" "}
@@ -89,10 +69,9 @@ function CartItemCard({ data, actions, i18n = {}, locale }) {
             <QuantitySelector
               data={{ quantity }}
               actions={{
-                increase: () =>
-                  increase(id, size, thickness, density, quantity),
-                decrease: () => decrease(id, size, thickness, density),
-                remove: () => removeAction(id, size, thickness, density),
+                increase: () => increase(id, size, thickness, quantity),
+                decrease: () => decrease(id, size, thickness),
+                remove: () => removeAction(id, size, thickness),
               }}
               i18n={{ remove }}
             />
@@ -101,10 +80,10 @@ function CartItemCard({ data, actions, i18n = {}, locale }) {
           {/* RIGHT SIDE */}
           <div
             className={`
-              ${isRTL ? "sm:text-left" : "sm:text-right"}
-              text-left sm:text-right
-              mt-2 sm:mt-0
-            `}
+            ${isRTL ? "sm:text-left" : "sm:text-right"}
+            text-left sm:text-right
+            mt-2 sm:mt-0
+          `}
           >
             <p className="text-lg sm:text-xl font-bold text-blue-900">
               {formatPrice(price * quantity, locale)}
