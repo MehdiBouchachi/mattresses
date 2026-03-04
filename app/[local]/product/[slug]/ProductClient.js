@@ -36,6 +36,8 @@ export default function ProductClient({
   const dimensions = product.details?.dimensions ?? [];
 
   const firmness = product.details?.firmness ?? 0;
+  const whyChoose = product.details?.whyChoose ?? [];
+
   const technicalSpecs = product.details?.technicalSpecs ?? [];
   const faq = product.details?.faq ?? [];
 
@@ -152,7 +154,6 @@ export default function ProductClient({
     handleAddToCart();
     router.push(`/${locale}/checkout`);
   };
-
   if (!product) return null;
 
   /*  UI  */
@@ -196,11 +197,12 @@ export default function ProductClient({
       {/*  HERO  */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-14 lg:pb-20 grid lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-24 items-start">
         {/* LEFT */}
-        <div>
+        <div className="w-full max-w-full overflow-hidden">
+          {/* MAIN IMAGE */}
           <div
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="bg-white rounded-3xl shadow-lg overflow-hidden mb-4 cursor-zoom-in"
+            className="relative w-full aspect-[4/3] bg-white rounded-3xl shadow-md overflow-hidden cursor-zoom-in"
           >
             <motion.img
               key={selectedImage}
@@ -210,27 +212,48 @@ export default function ProductClient({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="w-full h-[280px] sm:h-[360px] lg:h-[450px] object-cover transition-transform duration-300"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-300"
             />
           </div>
 
-          <div className="flex gap-3 overflow-x-auto pb-2">
-            {images.map((img, i) => (
-              <button
-                key={i}
-                onClick={() => setSelectedImage(img)}
-                className={`min-w-[65px] h-[65px] sm:min-w-[75px] sm:h-[75px] rounded-lg sm:rounded-xl overflow-hidden border ${
-                  selectedImage === img ? "border-blue-900" : "border-blue-100"
-                }`}
+          {/* THUMBNAILS */}
+          {images.length > 1 && (
+            <div className="mt-5 relative">
+              <div
+                className="
+        flex gap-3 overflow-x-auto 
+        scroll-smooth snap-x snap-mandatory 
+        scrollbar-hide
+        pb-2
+      "
               >
-                <img
-                  src={img}
-                  alt="thumbnail"
-                  className="w-full h-full object-cover"
-                />
-              </button>
-            ))}
-          </div>
+                {images.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedImage(img)}
+                    className={`
+              snap-start flex-shrink-0
+              w-16 h-16
+              rounded-xl
+              overflow-hidden
+              border transition-all duration-200
+              ${
+                selectedImage === img
+                  ? "border-blue-900 ring-2 ring-blue-900/20"
+                  : "border-blue-100"
+              }
+            `}
+                  >
+                    <img
+                      src={img}
+                      alt={`Thumbnail ${i + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* RIGHT */}
@@ -396,7 +419,45 @@ export default function ProductClient({
         </div>
       </section>
 
-      {/* TECH SPECS */}
+      {/* WHY CHOOSE */}
+      {whyChoose.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 border-t border-blue-100">
+          {/* HEADER */}
+          <div className="max-w-3xl mb-14">
+            <div className="w-12 h-[2px] bg-blue-900 mb-6"></div>
+
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 sm:mb-8 text-blue-950">
+              Why Choose This Mattress?
+            </h2>
+
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Every detail is designed to provide reliable support, long-term
+              durability, and consistent comfort night after night.
+            </p>
+          </div>
+
+          {/* GRID */}
+          <div className="grid lg:grid-cols-2 gap-x-16 gap-y-14">
+            {whyChoose.map((item, i) => (
+              <div key={i} className="flex gap-6 items-start">
+                {/* NUMBER */}
+                <div className="flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full border border-blue-900 text-blue-900 flex items-center justify-center text-sm font-semibold">
+                    {i + 1}
+                  </div>
+                </div>
+
+                {/* CONTENT */}
+                <div>
+                  <p className=" text-sm sm:text-base text-slate-800 leading-relaxed">
+                    {item}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
       {/* TECH SPECS */}
       {technicalSpecs.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 border-t border-blue-100">
