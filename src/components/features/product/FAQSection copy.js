@@ -1,17 +1,11 @@
-"use client";
-
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useProduct } from "./ProductContext";
 
-export default function FAQSection() {
-  const { product, translation } = useProduct();
-
-  const faq = product.details?.faq ?? [];
-  const faqTranslation = translation.faq;
-
-  const [openFAQ, setOpenFAQ] = useState(null);
-
+export default function FAQSection({
+  faq,
+  openFAQ,
+  setOpenFAQ,
+  faqTranslation,
+}) {
   if (!faq.length) return null;
 
   return (

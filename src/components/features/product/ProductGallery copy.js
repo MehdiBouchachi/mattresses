@@ -1,50 +1,14 @@
-"use client";
-
 import { motion } from "framer-motion";
-import { useProduct } from "./ProductContext";
 
-export default function ProductGallery() {
-  const { product, state, dispatch } = useProduct();
-
-  const { selectedImage, zoomStyle } = state;
-  const images = product.images ?? [];
-
-  /* =========================
-     ZOOM HANDLERS (LOCAL UI LOGIC)
-  ========================== */
-
-  const handleMouseMove = (e) => {
-    if (window.innerWidth < 1024) return;
-
-    const { left, top, width, height } =
-      e.currentTarget.getBoundingClientRect();
-
-    const x = ((e.clientX - left) / width) * 100;
-    const y = ((e.clientY - top) / height) * 100;
-
-    dispatch({
-      type: "SET_ZOOM",
-      payload: {
-        transformOrigin: `${x}% ${y}%`,
-        transform: "scale(1.8)",
-      },
-    });
-  };
-
-  const handleMouseLeave = () => {
-    dispatch({
-      type: "SET_ZOOM",
-      payload: {
-        transform: "scale(1)",
-        transformOrigin: "center",
-      },
-    });
-  };
-
-  /* =========================
-     RENDER
-  ========================== */
-
+function ProductGallery({
+  images,
+  selectedImage,
+  setSelectedImage,
+  zoomStyle,
+  handleMouseMove,
+  handleMouseLeave,
+  product,
+}) {
   return (
     <div className="w-full max-w-full overflow-hidden">
       <div
@@ -70,7 +34,7 @@ export default function ProductGallery() {
             {images.map((img, i) => (
               <button
                 key={i}
-                onClick={() => dispatch({ type: "SET_IMAGE", payload: img })}
+                onClick={() => setSelectedImage(img)}
                 className={`snap-start flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border transition-all duration-200 ${
                   selectedImage === img
                     ? "border-blue-900 ring-2 ring-blue-900/20"
@@ -90,3 +54,5 @@ export default function ProductGallery() {
     </div>
   );
 }
+
+export default ProductGallery;

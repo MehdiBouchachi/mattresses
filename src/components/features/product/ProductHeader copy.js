@@ -1,12 +1,4 @@
-"use client";
-
-import { useProduct } from "./ProductContext";
-
-export default function ProductHeader() {
-  const { product, locale, translation, router } = useProduct();
-
-  const { breadcrumb } = translation;
-
+function ProductHeader({ breadcrumb, product, locale, router }) {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
       <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-500 mb-4">
@@ -42,3 +34,4 @@ export default function ProductHeader() {
     </section>
   );
 }
+export default ProductHeader;

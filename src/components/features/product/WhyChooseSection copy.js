@@ -1,12 +1,4 @@
-"use client";
-
-import { useProduct } from "./ProductContext";
-
-export default function WhyChooseSection() {
-  const { product } = useProduct();
-
-  const whyChoose = product.details?.whyChoose ?? [];
-
+export default function WhyChooseSection({ whyChoose }) {
   if (!whyChoose.length) return null;
 
   return (

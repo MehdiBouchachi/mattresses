@@ -1,5 +1,5 @@
+import ProductClient from "@/components/features/product/ProductClient";
 import { products } from "@/constants/products";
-import ProductClient from "./ProductClient";
 import { getTranslations } from "@/lib/i18n";
 
 export default async function ProductPage({ params }) {

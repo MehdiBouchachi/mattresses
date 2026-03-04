@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import RelatedSection from "../RelatedSection";
+import RelatedSection from "../../../../src/components/features/product/RelatedSection";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/slices/cartSlice";
 import { useRouter } from "next/navigation";

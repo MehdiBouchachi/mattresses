@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import RelatedSection from "../RelatedSection";
+import RelatedSection from "../../../../src/components/features/product/RelatedSection";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/slices/cartSlice";
 import { useRouter } from "next/navigation";
@@ -147,32 +147,32 @@ export default function ProductClient({
           product={product}
         />
 
-         <ProductInfoCard
-    product={product}
-    locale={locale}
-    hasDiscount={hasDiscount}
-    unitBasePrice={unitBasePrice}
-    discountedUnitPrice={discountedUnitPrice}
-    totalPrice={totalPrice}
-    discount={discount}
-    quantity={quantity}
-    setQuantity={setQuantity}
-    dimensions={dimensions}
-    densities={densities}
-    selectedDimension={selectedDimension}
-    setSelectedDimension={setSelectedDimension}
-    selectedDensity={selectedDensity}
-    setSelectedDensity={setSelectedDensity}
-    selectedThickness={selectedThickness}
-    setSelectedThickness={setSelectedThickness}
-    sizeTranslation={sizeTranslation}
-    thicknessTranslation={thicknessTranslation}
-    quantityTranslation={quantityTranslation}
-    actionTranslation={actionTranslation}
-    guaranteesTranslation={guaranteesTranslation}
-    handleCheckout={handleCheckout}
-    handleAddToCart={handleAddToCart}
-  />
+        <ProductInfoCard
+          product={product}
+          locale={locale}
+          hasDiscount={hasDiscount}
+          unitBasePrice={unitBasePrice}
+          discountedUnitPrice={discountedUnitPrice}
+          totalPrice={totalPrice}
+          discount={discount}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          dimensions={dimensions}
+          densities={densities}
+          selectedDimension={selectedDimension}
+          setSelectedDimension={setSelectedDimension}
+          selectedDensity={selectedDensity}
+          setSelectedDensity={setSelectedDensity}
+          selectedThickness={selectedThickness}
+          setSelectedThickness={setSelectedThickness}
+          sizeTranslation={sizeTranslation}
+          thicknessTranslation={thicknessTranslation}
+          quantityTranslation={quantityTranslation}
+          actionTranslation={actionTranslation}
+          guaranteesTranslation={guaranteesTranslation}
+          handleCheckout={handleCheckout}
+          handleAddToCart={handleAddToCart}
+        />
       </section>
 
       <WhyChooseSection whyChoose={whyChoose} />

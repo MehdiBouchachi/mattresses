@@ -1,13 +1,4 @@
-"use client";
-
-import { useProduct } from "./ProductContext";
-
-export default function TechnicalSpecsSection() {
-  const { product, translation } = useProduct();
-
-  const technicalSpecs = product.details?.technicalSpecs ?? [];
-  const featuresTranslation = translation.features;
-
+function TechnicalSpecsSection({ technicalSpecs, featuresTranslation }) {
   if (!technicalSpecs.length) return null;
 
   return (
@@ -35,3 +26,5 @@ export default function TechnicalSpecsSection() {
     </section>
   );
 }
+
+export default TechnicalSpecsSection;

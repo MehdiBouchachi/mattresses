@@ -1,47 +1,31 @@
-"use client";
-
 import { formatPrice } from "@/utils/helpers";
-import { useProduct } from "./ProductContext";
 
-export default function ProductInfoCard() {
-  const {
-    product,
-    locale,
-    translation,
-    state,
-    dispatch,
-    pricing,
-    router,
-    handleAddToCart,
-  } = useProduct();
-
-  const { selectedDimension, selectedDensity, selectedThickness, quantity } =
-    state;
-
-  const {
-    base: unitBasePrice,
-    discounted: discountedUnitPrice,
-    total: totalPrice,
-    discount,
-    hasDiscount,
-  } = pricing;
-
-  const {
-    size: sizeTranslation,
-    thickness: thicknessTranslation,
-    quantity: quantityTranslation,
-    actions: actionTranslation,
-    guarantees: guaranteesTranslation,
-  } = translation;
-
-  const dimensions = product.details?.dimensions ?? [];
-  const densities = product.details?.densities ?? [];
-
-  const handleCheckout = () => {
-    handleAddToCart();
-    router.push(`/${locale}/checkout`);
-  };
-
+export default function ProductInfoCard({
+  product,
+  locale,
+  hasDiscount,
+  unitBasePrice,
+  discountedUnitPrice,
+  totalPrice,
+  discount,
+  quantity,
+  setQuantity,
+  dimensions,
+  densities,
+  selectedDimension,
+  setSelectedDimension,
+  selectedDensity,
+  setSelectedDensity,
+  selectedThickness,
+  setSelectedThickness,
+  sizeTranslation,
+  thicknessTranslation,
+  quantityTranslation,
+  actionTranslation,
+  guaranteesTranslation,
+  handleCheckout,
+  handleAddToCart,
+}) {
   return (
     <div className="bg-white p-5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl shadow-md sm:shadow-lg border border-blue-100">
       <p className="text-xs uppercase tracking-widest text-slate-500 mb-2">
@@ -95,9 +79,7 @@ export default function ProductInfoCard() {
             {densities.map((d) => (
               <button
                 key={d.value}
-                onClick={() =>
-                  dispatch({ type: "SET_DENSITY", payload: d.value })
-                }
+                onClick={() => setSelectedDensity(d.value)}
                 className={`py-2.5 sm:py-3 text-sm sm:text-base rounded-lg sm:rounded-xl border ${
                   selectedDensity === d.value
                     ? "bg-blue-900 text-white"
@@ -120,7 +102,7 @@ export default function ProductInfoCard() {
             <button
               dir="ltr"
               key={dim.size}
-              onClick={() => dispatch({ type: "SET_DIMENSION", payload: dim })}
+              onClick={() => setSelectedDimension(dim)}
               className={`py-2.5 sm:py-3 text-sm sm:text-base rounded-lg sm:rounded-xl border ${
                 selectedDimension?.size === dim.size
                   ? "bg-blue-900 text-white"
@@ -147,12 +129,7 @@ export default function ProductInfoCard() {
               .map((opt) => (
                 <button
                   key={`${opt.thickness}-${opt.density || "default"}`}
-                  onClick={() =>
-                    dispatch({
-                      type: "SET_THICKNESS",
-                      payload: opt,
-                    })
-                  }
+                  onClick={() => setSelectedThickness(opt)}
                   className={`py-2.5 sm:py-3 text-sm sm:text-base rounded-lg sm:rounded-xl border ${
                     selectedThickness?.thickness === opt.thickness &&
                     (!selectedDensity || opt.density === selectedDensity)
@@ -173,12 +150,7 @@ export default function ProductInfoCard() {
 
         <div className="flex items-center border rounded-full w-fit overflow-hidden text-sm sm:text-base">
           <button
-            onClick={() =>
-              dispatch({
-                type: "SET_QUANTITY",
-                payload: Math.max(1, quantity - 1),
-              })
-            }
+            onClick={() => setQuantity(Math.max(1, quantity - 1))}
             className="px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-gray-100"
           >
             −
@@ -187,12 +159,7 @@ export default function ProductInfoCard() {
           <div className="px-4">{quantity}</div>
 
           <button
-            onClick={() =>
-              dispatch({
-                type: "SET_QUANTITY",
-                payload: quantity + 1,
-              })
-            }
+            onClick={() => setQuantity(quantity + 1)}
             className="px-4 py-2 hover:bg-gray-100"
           >
             +
