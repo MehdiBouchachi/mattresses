@@ -947,7 +947,11 @@ export const products = [
     oldPrice: null,
     discount: 0,
 
-    images: ["/images/mattresses.png"],
+    images: [
+      "/images/classic/classic-D30-4.jpeg",
+      "/images/classic/classic-D30-5.jpeg",
+      "/images/classic/classic-D30-6.jpeg",
+    ],
 
     details: {
       thickness: 22,
@@ -1089,7 +1093,11 @@ export const products = [
     oldPrice: null,
     discount: 0,
 
-    images: ["/images/mattresses.png"],
+    images: [
+      "/images/classic/classic-D30-4.jpeg",
+      "/images/classic/classic-D30-5.jpeg",
+      "/images/classic/classic-D30-6.jpeg",
+    ],
 
     details: {
       thickness: 22,
@@ -1159,7 +1167,10 @@ export const products = [
     oldPrice: null,
     discount: 0,
 
-    images: ["/images/mattresses.png"],
+    images: [
+      "/images/classic/classic-D36-1.jpeg",
+      "/images/classic/classic-D36-2.jpeg",
+    ],
 
     details: {
       thickness: 24,
@@ -1227,9 +1238,12 @@ export const products = [
     discount: 0,
 
     images: [
+      "/images/vissco/confort.jpeg",
+      "/images/vissco/confort-3.jpeg",
+      "/images/vissco/confort-4.jpeg",
+      "/images/vissco/confort-5.jpeg",
       "/images/vissco/confort-1.jpeg",
       "/images/vissco/confort-2.jpeg",
-      "/images/vissco/confort.jpeg",
     ],
 
     details: {
@@ -1295,7 +1309,12 @@ export const products = [
     oldPrice: 165000,
     discount: 12,
 
-    images: ["/images/vissco/vissco.jpeg"],
+    images: [
+      "/images/vissco/vissco-1.jpeg",
+      "/images/vissco/vissco.jpeg",
+      "/images/vissco/vissco-2.jpeg",
+      "/images/vissco/vissco-3.jpeg",
+    ],
 
     details: {
       thickness: 26,
@@ -1364,7 +1383,14 @@ export const products = [
     oldPrice: null,
     discount: 0,
 
-    images: ["/images/vissco/vissco-plus-1.jpeg"],
+    images: [
+      "/images/vissco/vissco-plus-1.jpeg",
+      "/images/vissco/vissco-plus-4.jpeg",
+      "/images/vissco/vissco-plus-5.jpeg",
+      "/images/vissco/vissco-plus-6.jpeg",
+      "/images/vissco/vissco-plus-7.jpeg",
+      "/images/vissco/vissco-plus-8.jpeg",
+    ],
 
     details: {
       thickness: 30,
