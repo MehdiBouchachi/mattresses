@@ -948,8 +948,9 @@ export const products = [
     discount: 0,
 
     images: [
-      "/images/classic/classic-D30-4.jpeg",
       "/images/classic/classic-D30-5.jpeg",
+
+      "/images/classic/classic-D30-4.jpeg",
       "/images/classic/classic-D30-6.jpeg",
     ],
 
@@ -1021,7 +1022,8 @@ export const products = [
     oldPrice: null,
     discount: 10,
 
-    images: ["/images/mattresses.png"],
+    images: [  "/images/classic/classic-D36-2.jpeg",
+      "/images/classic/classic-D36-1.jpeg",],
 
     details: {
       thickness: 24,
@@ -1094,9 +1096,10 @@ export const products = [
     discount: 0,
 
     images: [
+      "/images/classic/classic-D30-6.jpeg",
+
       "/images/classic/classic-D30-4.jpeg",
       "/images/classic/classic-D30-5.jpeg",
-      "/images/classic/classic-D30-6.jpeg",
     ],
 
     details: {
