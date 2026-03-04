@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import Button from "@/components/ui/Button";
 import { formatPrice } from "@/utils/helpers";
+import Image from "next/image";
 
 export default function RelatedSection({ currentProduct, allProducts }) {
   const params = useParams();
@@ -121,31 +122,49 @@ export default function RelatedSection({ currentProduct, allProducts }) {
             {products.map((item) => {
               const image = item.images?.[0] ?? item.image;
 
-              const basePrice = item.basePrice ?? item.price ?? 0;
+              /* =========================
+     RANGE PRICE COMPUTATION
+  ========================== */
+
+              const allPrices =
+                item.details?.dimensions?.flatMap((d) =>
+                  d.options?.map((o) => o.price),
+                ) || [];
+
+              const hasPrices = allPrices.length > 0;
+
+              const minPrice = hasPrices ? Math.min(...allPrices) : null;
+              const maxPrice = hasPrices ? Math.max(...allPrices) : null;
 
               const discount = item.discount ?? 0;
               const hasDiscount = discount > 0;
 
-              const finalPrice = hasDiscount
-                ? Math.round(basePrice * (1 - discount / 100))
-                : basePrice;
+              const discountedMin = hasDiscount
+                ? Math.round(minPrice * (1 - discount / 100))
+                : minPrice;
+
+              const discountedMax = hasDiscount
+                ? Math.round(maxPrice * (1 - discount / 100))
+                : maxPrice;
 
               return (
                 <motion.div
                   key={item.slug}
                   whileHover={{ y: -6 }}
                   className="
-                    snap-start min-w-[190px] sm:min-w-[240px] lg:min-w-[280px]
-                    bg-white rounded-xl sm:rounded-2xl border border-blue-100 shadow-sm hover:shadow-md
-                    transition
-                  "
+        snap-start min-w-[190px] sm:min-w-[240px] lg:min-w-[280px]
+        bg-white rounded-xl sm:rounded-2xl border border-blue-100 shadow-sm hover:shadow-md
+        transition
+      "
                 >
                   {/* IMAGE */}
-                  <div className="overflow-hidden rounded-t-xl relative">
-                    <img
+                  <div className="overflow-hidden rounded-t-xl relative h-[150px] sm:h-[190px] lg:h-[220px]">
+                    <Image
                       src={image}
                       alt={item.name}
-                      className="w-full h-[150px] sm:h-[190px] lg:h-[220px] object-cover transition duration-500 hover:scale-105"
+                      fill
+                      sizes="(max-width: 768px) 60vw, 280px"
+                      className="object-cover transition duration-500 hover:scale-105"
                     />
 
                     {hasDiscount && (
@@ -165,25 +184,39 @@ export default function RelatedSection({ currentProduct, allProducts }) {
                       {item.name}
                     </h3>
 
+                    {/* PRICE */}
                     <div className="mb-4">
-                      {hasDiscount ? (
-                        <>
+                      {hasPrices ? (
+                        hasDiscount ? (
+                          <>
+                            <p className="text-blue-900 font-bold text-base">
+                              {formatPrice(discountedMin, locale)}
+                              {discountedMin !== discountedMax &&
+                                ` – ${formatPrice(discountedMax, locale)}`}
+                            </p>
+
+                            <p className="text-xs text-slate-400 line-through">
+                              {formatPrice(minPrice, locale)}
+                              {minPrice !== maxPrice &&
+                                ` – ${formatPrice(maxPrice, locale)}`}
+                            </p>
+                          </>
+                        ) : (
                           <p className="text-blue-900 font-bold text-base">
-                            {formatPrice(finalPrice, locale)}
+                            {formatPrice(minPrice, locale)}
+                            {minPrice !== maxPrice &&
+                              ` – ${formatPrice(maxPrice, locale)}`}
                           </p>
-                          <p className="text-xs text-slate-400 line-through">
-                            {formatPrice(basePrice, locale)}
-                          </p>
-                        </>
+                        )
                       ) : (
-                        <p className="text-blue-900 font-bold text-base">
-                          {formatPrice(basePrice, locale)}
+                        <p className="text-xs text-slate-400">
+                          {locale === "ar" ? "غير متوفر" : "Unavailable"}
                         </p>
                       )}
                     </div>
 
                     <Link href={`/${locale}/product/${item.slug}`}>
-                      <Button size="sm" className="w-full ">
+                      <Button size="sm" className="w-full">
                         {locale === "ar" ? "عرض المنتج" : "View Product"}
                       </Button>
                     </Link>

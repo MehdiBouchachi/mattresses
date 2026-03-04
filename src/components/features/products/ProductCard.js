@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { formatPrice } from "@/utils/helpers";
+import Image from "next/image";
 
 function ProductCard({ product, translation }) {
   const params = useParams();
@@ -77,19 +78,26 @@ overflow-hidden flex flex-col
       "
     >
       {/* IMAGE */}
-      <div className="relative overflow-hidden">
-        <img
-          src={image}
-          alt={name}
-          className={`w-full 
-            h-40        /* mobile smaller */
-            sm:h-44     /* small tablet */
-            md:h-48     /* ipad */
-            lg:h-[240px] /* desktop */
-            object-cover transition duration-700 ${
+      <div
+        className="relative overflow-hidden 
+  h-40 
+  sm:h-44 
+  md:h-48 
+  lg:h-[240px]"
+      >
+        <Link href={`/${locale}/product/${slug}`}>
+          <Image
+            src={image}
+            alt={name}
+            fill
+            sizes="(max-width: 640px) 100vw,
+           (max-width: 1024px) 50vw,
+           33vw"
+            className={`object-cover transition duration-700 ${
               isAvailable ? "group-hover:scale-105" : "grayscale"
             }`}
-        />
+          />
+        </Link>
 
         {!isAvailable && (
           <div className="absolute inset-0 bg-blue-900/40 flex items-center justify-center">
