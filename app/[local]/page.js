@@ -16,11 +16,11 @@ export default async function Home({ params }) {
 
       <TrustStrip translation={translation} />
       <CategoriesSection locale={local} translation={translation} />
-      <ProductsSection translation={translation} />
+      <ProductsSection translation={translation} locale={local} />
 
       {/* <MattressEngineeringSection /> */}
       <WhyLitmadSection locale={local} translation={translation} />
-      <FinalCTA translation={translation} />
+      <FinalCTA translation={translation} locale={local} />
     </div>
   );
 }

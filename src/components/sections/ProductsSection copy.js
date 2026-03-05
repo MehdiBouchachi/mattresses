@@ -1,15 +1,24 @@
+"use client";
 import Button from "@/components/ui/Button";
+import { usePathname } from "next/navigation";
 import ProductCard from "../features/products/ProductCard";
 import { products } from "@/constants/products";
 
-function ProductsSection({ translation, locale }) {
-  /* ================= FEATURED PRODUCTS ================= */
+function ProductsSection({ translation }) {
+  const pathname = usePathname();
+  const locale = pathname.split("/")[1];
 
-  const featuredProducts = products.filter((p) =>
-    ["visco-mattress", "ressort-prestige", "ressort-confort"].includes(p.slug),
-  );
+  // 🎯 CURATED PRODUCTS
+  const normalProduct = products.find((p) => p.available && !p.oldPrice);
+  const discountedProduct = products.find((p) => p.available && p.oldPrice);
+  const soldOutProduct = products.find((p) => !p.available);
 
-  /* ================= PRICE RANGE ================= */
+  const featuredProducts = [
+    normalProduct,
+    discountedProduct,
+    soldOutProduct,
+  ].filter(Boolean);
+  /* ================= ENHANCE PRODUCTS WITH PRICE ================= */
 
   const enhancedProducts = featuredProducts.map((p) => {
     const allPrices =
@@ -26,7 +35,6 @@ function ProductsSection({ translation, locale }) {
       priceRange: { min, max },
     };
   });
-
   const {
     title,
     desc,
@@ -35,38 +43,16 @@ function ProductsSection({ translation, locale }) {
   } = translation.home.products;
 
   return (
-    <section className="py-18 sm:py-22 lg:py-32 bg-white" id="collections">
+    <section className="py-16 sm:py-20 lg:py-28 bg-white" id="collections">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        {/* ================= HEADER ================= */}
-
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8 mb-12 sm:mb-16 lg:mb-24">
-          <div className="text-center sm:text-start max-w-lg">
-            <h3
-              className="
-              text-2xl
-              sm:text-3xl
-              lg:text-4xl
-              font-semibold
-              tracking-tight
-              text-blue-950
-            "
-            >
+        {/* HEADER */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 sm:mb-14 lg:mb-20">
+          <div className="text-center sm:text-start">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-blue-950">
               {title}
             </h3>
 
-            <p
-              className="
-              text-slate-600
-              mt-3
-              sm:mt-4
-              max-w-md
-              mx-auto
-              lg:mx-0
-              text-sm
-              sm:text-base
-              leading-relaxed
-            "
-            >
+            <p className="text-slate-600 mt-2 sm:mt-3 text-sm sm:text-base max-w-md mx-auto sm:mx-0">
               {desc}
             </p>
           </div>
@@ -84,19 +70,8 @@ function ProductsSection({ translation, locale }) {
           </div>
         </div>
 
-        {/* ================= PRODUCTS GRID ================= */}
-
-        <div
-          className="
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          lg:grid-cols-3
-          gap-7
-          sm:gap-9
-          lg:gap-12
-          "
-        >
+        {/* GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
           {enhancedProducts.map((product) => (
             <ProductCard
               key={product.id}

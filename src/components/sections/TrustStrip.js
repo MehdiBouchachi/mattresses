@@ -15,17 +15,42 @@ export default function TrustStrip({ translation }) {
 
   return (
     <section className="bg-white border-y border-blue-100">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 lg:grid-cols-4 text-center gap-y-8 lg:gap-y-0 lg:divide-x lg:divide-blue-100">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-7 sm:py-9">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-7 lg:gap-y-0 lg:divide-x  lg:divide-blue-100">
           {items.map((item, index) => (
-            <div key={index} className="px-4 sm:px-6 space-y-2 sm:space-y-3">
-              {/* Value */}
-              <div className="text-2xl sm:text-3xl font-bold text-blue-900">
+            <div
+              key={index}
+              className="
+                flex flex-col items-center justify-center
+                text-center
+                px-4 sm:px-6 
+              "
+            >
+              {/* VALUE */}
+              <div
+                className="
+                text-2xl
+                sm:text-3xl
+                font-semibold
+                text-blue-900
+                tracking-tight
+                "
+              >
                 {item.value}
               </div>
 
-              {/* Label */}
-              <div className="text-xs sm:text-sm tracking-wide text-slate-600 leading-snug">
+              {/* ACCENT LINE */}
+
+              {/* LABEL */}
+              <div
+                className="
+                text-[11px]
+                sm:text-xs
+                text-slate-500
+                leading-snug
+                max-w-30
+              "
+              >
                 {item.label}
               </div>
             </div>

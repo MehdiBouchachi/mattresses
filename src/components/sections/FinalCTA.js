@@ -1,8 +1,7 @@
-"use client";
-
+import Link from "next/link";
 import Button from "../ui/Button";
 
-export default function FinalCTA({ translation }) {
+export default function FinalCTA({ translation, locale }) {
   const { title, desc, button } = translation.home.cta;
 
   return (
@@ -20,14 +19,16 @@ export default function FinalCTA({ translation }) {
         </p>
 
         <div className="w-full sm:w-auto">
-          <Button
-            variant="primary"
-            size="lg"
-            fullWidth
-            className="sm:w-auto px-8 sm:px-10 lg:px-12 py-3 sm:py-4 lg:py-5 text-sm sm:text-base lg:text-lg"
-          >
-            {button}
-          </Button>
+          <Link href={`/${locale}/mattresses`}>
+            <Button
+              variant="primary"
+              size="lg"
+              fullWidth
+              className="sm:w-auto px-8 sm:px-10 lg:px-12 py-3 sm:py-4 lg:py-5 text-sm sm:text-base lg:text-lg"
+            >
+              {button}
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
