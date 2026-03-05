@@ -219,8 +219,8 @@ export const products = [
     discount: 0,
 
     images: [
-      "/images/classic/classic-D30-6.jpeg",
       "/images/classic/classic-D36-2.jpeg",
+      "/images/classic/classic-D30-6.jpeg",
     ],
 
     details: {
