@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
 import Button from "../ui/Button";
 
 export default function HeroSection({ translation }) {
@@ -12,28 +13,30 @@ export default function HeroSection({ translation }) {
     translation?.home?.hero || {};
 
   return (
-    <section className="relative min-h-[90vh] md:min-h-[90vh] lg:min-h-screen w-full flex items-center justify-center overflow-hidden text-white">
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden text-white">
       {/* Background Image */}
-      <img
+      <Image
         src="/images/mattresses.png"
         alt="Luxury Mattress"
-        className="absolute inset-0 w-full h-full object-cover object-center md:object-[center_60%]"
+        fill
+        priority
+        className="object-cover object-center md:object-[center_60%]"
       />
 
       {/* Header readability gradient */}
-      <div className="absolute top-0 left-0 w-full h-32 md:h-36 bg-gradient-to-b from-black/70 via-black/35 to-transparent z-[1]" />
+      <div className="absolute top-0 left-0 w-full h-32 md:h-36 bg-linear-to-b from-black/70 via-black/35 to-transparent z-1" />
 
       {/* Cinematic vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.15)_0%,rgba(0,0,0,0.45)_70%)]" />
 
       {/* Bottom contrast */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/70" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/25 via-transparent to-black/70" />
 
       {/* Soft spotlight */}
-      <div className="absolute top-[-140px] left-1/2 -translate-x-1/2 w-[600px] md:w-[850px] h-[280px] md:h-[420px] bg-white/20 blur-[130px] md:blur-[160px]" />
+      <div className="absolute -top-35 left-1/2 -translate-x-1/2 w-150 md:w-212.5 h-70 md:h-105 bg-white/20 blur-[130px] md:blur-[160px]" />
 
       {/* Side fade */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/35" />
+      <div className="absolute inset-0 bg-linear-to-r from-black/35 via-transparent to-black/35" />
 
       {/* CONTENT */}
       <div className="relative z-10 max-w-4xl mx-auto text-center px-6 pt-16 md:pt-20">
@@ -51,7 +54,7 @@ export default function HeroSection({ translation }) {
           text-white
           drop-shadow-[0_10px_25px_rgba(0,0,0,0.55)]
           text-[clamp(24px,6.5vw,60px)]
-          "
+        "
         >
           {titleLine1}
           <br />

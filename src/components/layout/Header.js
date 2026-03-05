@@ -287,13 +287,18 @@ export default function Header({ translation }) {
       {/* =========================================================
          IMPROVED BOTTOM NAV
       ========================================================= */}
-
       <div
         dir={isRTL ? "rtl" : "ltr"}
-        className="fixed bottom-0 left-0 w-full bg-white border-t border-blue-100 md:hidden z-40"
+        className={`fixed bottom-0 left-0 w-full md:hidden z-40 transition-all duration-300
+  ${
+    isAtTop && isHomePage
+      ? "bg-slate-50/10 backdrop-blur-xs  border-t border-slate-50/20"
+      : "bg-white border-t border-blue-100"
+  }`}
       >
         <div className="flex justify-around py-2">
           <NavItem
+            hero={isAtTop && isHomePage}
             active={pathname === `/${locale}`}
             icon={<FiHome />}
             label={bottomNav.home}
@@ -301,6 +306,7 @@ export default function Header({ translation }) {
           />
 
           <NavItem
+            hero={isAtTop && isHomePage}
             active={isActive("mattresses")}
             icon={<FiGrid />}
             label={bottomNav.shop}
@@ -308,6 +314,7 @@ export default function Header({ translation }) {
           />
 
           <NavItem
+            hero={isAtTop && isHomePage}
             active={isActive("track-order")}
             icon={<FiTruck />}
             label={bottomNav.track}
@@ -315,6 +322,7 @@ export default function Header({ translation }) {
           />
 
           <NavItem
+            hero={isAtTop && isHomePage}
             active={isActive("cart")}
             icon={<FiShoppingCart />}
             label={bottomNav.cart}
@@ -331,7 +339,7 @@ export default function Header({ translation }) {
    IMPROVED NAV ITEM
 ========================================================= */
 
-function NavItem({ icon, label, onClick, badge, active }) {
+function NavItem({ icon, label, onClick, badge, active, hero }) {
   return (
     <button
       onClick={onClick}
@@ -339,7 +347,11 @@ function NavItem({ icon, label, onClick, badge, active }) {
     >
       <div
         className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all ${
-          active ? "bg-blue-900 text-blue-50 shadow-md" : "text-slate-600"
+          active
+            ? "bg-blue-900 text-blue-50 shadow-md"
+            : hero
+              ? "text-white"
+              : "text-slate-600"
         }`}
       >
         {icon}
@@ -353,7 +365,11 @@ function NavItem({ icon, label, onClick, badge, active }) {
 
       <span
         className={`mt-1 ${
-          active ? "text-blue-900 font-medium" : "text-slate-600"
+          active
+            ? "text-blue-900 font-medium"
+            : hero
+              ? "text-white/80"
+              : "text-slate-600"
         }`}
       >
         {label}
