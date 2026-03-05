@@ -134,8 +134,7 @@ export default function Filters({ filtersTranslation, locale }) {
             onClick={() => setOpen(true)}
             className="
     fixed
-    bottom-20
-    right-2
+    bottom-20 right-4 md:bottom-8 md:right-8
     z-40
     flex items-center gap-2
     bg-blue-900
