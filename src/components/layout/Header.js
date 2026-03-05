@@ -3,7 +3,7 @@
 import { useSelector } from "react-redux";
 import { selectCartCount } from "@/store/slices/cartSlice";
 import { useRouter, usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FiShoppingCart,
   FiChevronDown,
@@ -15,7 +15,6 @@ import {
 } from "react-icons/fi";
 import Image from "next/image";
 import Button from "../ui/Button";
-import Link from "next/link";
 
 const languages = [
   { code: "en", label: "English" },
@@ -34,22 +33,28 @@ export default function Header({ translation }) {
   const [openMenu, setOpenMenu] = useState(false);
   const isHomePage = pathname === `/${locale}`;
   useEffect(() => {
-    let ticking = false;
+    let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const atTop = window.scrollY < 80;
-          setIsAtTop((prev) => (prev === atTop ? prev : atTop));
-          ticking = false;
-        });
+      const current = window.scrollY;
 
-        ticking = true;
+      // Transparent zone (hero area)
+      setIsAtTop(current < 80);
+
+      // Always show at very top
+      if (current <= 10) {
+        lastScrollY = current;
+        return;
       }
+
+      // Hide when scrolling down
+
+      // Show when scrolling up
+
+      lastScrollY = current;
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const switchLanguage = (newLocale) => {
@@ -92,7 +97,7 @@ export default function Header({ translation }) {
             className="cursor-pointer h-14 lg:h-16 flex items-center transition-transform duration-300 hover:scale-105"
           >
             <Image
-              src={"/images/logo.webp"}
+              src="/images/logo.webp"
               alt="Empreinte Flex"
               width={220}
               height={90}
@@ -282,67 +287,41 @@ export default function Header({ translation }) {
       {/* =========================================================
          IMPROVED BOTTOM NAV
       ========================================================= */}
+
       <div
         dir={isRTL ? "rtl" : "ltr"}
-        className={`fixed bottom-0 left-0 w-full md:hidden z-40
-  transition-colors duration-300
-  ${
-    isAtTop && isHomePage
-      ? "bg-black/20 backdrop-blur-md border-t border-white/10"
-      : "bg-white border-t border-blue-100"
-  }
-`}
+        className="fixed bottom-0 left-0 w-full bg-white border-t border-blue-100 md:hidden z-40"
       >
-        <nav className="grid grid-cols-4 py-2">
-          <Link
-            href={`/${locale}`}
-            className="flex flex-col items-center justify-center"
-          >
-            <NavItem
-              hero={isAtTop && isHomePage}
-              active={pathname === `/${locale}`}
-              icon={<FiHome />}
-              label={bottomNav.home}
-            />
-          </Link>
+        <div className="flex justify-around py-2">
+          <NavItem
+            active={pathname === `/${locale}`}
+            icon={<FiHome />}
+            label={bottomNav.home}
+            onClick={() => router.push(`/${locale}`)}
+          />
 
-          <Link
-            href={`/${locale}/mattresses`}
-            className="flex flex-col items-center justify-center"
-          >
-            <NavItem
-              hero={isAtTop && isHomePage}
-              active={pathname.includes("mattresses")}
-              icon={<FiGrid />}
-              label={bottomNav.shop}
-            />
-          </Link>
+          <NavItem
+            active={isActive("mattresses")}
+            icon={<FiGrid />}
+            label={bottomNav.shop}
+            onClick={() => router.push(`/${locale}/mattresses`)}
+          />
 
-          <Link
-            href={`/${locale}/track-order`}
-            className="flex flex-col items-center justify-center"
-          >
-            <NavItem
-              hero={isAtTop && isHomePage}
-              active={pathname.includes("track-order")}
-              icon={<FiTruck />}
-              label={bottomNav.track}
-            />
-          </Link>
+          <NavItem
+            active={isActive("track-order")}
+            icon={<FiTruck />}
+            label={bottomNav.track}
+            onClick={() => router.push(`/${locale}/track-order`)}
+          />
 
-          <Link
-            href={`/${locale}/cart`}
-            className="flex flex-col items-center justify-center"
-          >
-            <NavItem
-              hero={isAtTop && isHomePage}
-              active={pathname.includes("cart")}
-              icon={<FiShoppingCart />}
-              label={bottomNav.cart}
-              badge={count}
-            />
-          </Link>
-        </nav>
+          <NavItem
+            active={isActive("cart")}
+            icon={<FiShoppingCart />}
+            label={bottomNav.cart}
+            onClick={() => router.push(`/${locale}/cart`)}
+            badge={count}
+          />
+        </div>
       </div>
     </>
   );
@@ -352,14 +331,7 @@ export default function Header({ translation }) {
    IMPROVED NAV ITEM
 ========================================================= */
 
-const NavItem = React.memo(function NavItem({
-  icon,
-  label,
-  onClick,
-  badge,
-  active,
-  hero,
-}) {
+function NavItem({ icon, label, onClick, badge, active }) {
   return (
     <button
       onClick={onClick}
@@ -367,11 +339,7 @@ const NavItem = React.memo(function NavItem({
     >
       <div
         className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all ${
-          active
-            ? "bg-blue-900 text-blue-50 shadow-md"
-            : hero
-              ? "text-white"
-              : "text-slate-600"
+          active ? "bg-blue-900 text-blue-50 shadow-md" : "text-slate-600"
         }`}
       >
         {icon}
@@ -385,18 +353,14 @@ const NavItem = React.memo(function NavItem({
 
       <span
         className={`mt-1 ${
-          active
-            ? "text-blue-900 font-medium"
-            : hero
-              ? "text-white/80"
-              : "text-slate-600"
+          active ? "text-blue-900 font-medium" : "text-slate-600"
         }`}
       >
         {label}
       </span>
     </button>
   );
-});
+}
 
 function DrawerItem({ children, onClick, active }) {
   return (

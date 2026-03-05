@@ -13,7 +13,7 @@ export default function HeroSection({ translation }) {
     translation?.home?.hero || {};
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden text-white">
+    <section className="relative min-h-svh flex items-center justify-center overflow-hidden text-white">
       {/* Background */}
       <Image
         src="/images/mattresses.png"
@@ -27,7 +27,7 @@ export default function HeroSection({ translation }) {
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
 
       {/* CONTENT */}
-      <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 pb-28 h-full flex flex-col justify-center items-stretch text-center">
         {/* Badge */}
         <p className="uppercase tracking-[0.32em] text-[11px] text-white/80 mb-4 font-medium">
           {badge}
