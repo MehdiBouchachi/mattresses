@@ -7,98 +7,84 @@ export default function HeroSection({ translation }) {
   const router = useRouter();
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
-  const isRTL = locale === "ar";
 
-  const handleScrollToCollection = () => {
-    const section = document.getElementById("collections");
-    section?.scrollIntoView({ behavior: "smooth" });
-  };
+  const { badge, titleLine1, titleHighlight, description, shop, collection } =
+    translation?.home?.hero || {};
 
-  const {
-    badge,
-    titleLine1,
-    titleHighlight,
-    description,
-    shop,
-    collection,
-    floatingBadge,
-  } = translation?.home?.hero;
-
-
-  
   return (
-    <section
-      className="relative overflow-hidden bg-white pt-24 sm:pt-28 lg:pt-36 pb-16 sm:pb-20 lg:pb-28"
-      dir={isRTL ? "rtl" : "ltr"}
-    >
-      {/* Soft Ambient Glow */}
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-blue-100/40 blur-[140px] pointer-events-none" />
+    <section className="relative min-h-[90vh] md:min-h-[90vh] lg:min-h-screen w-full flex items-center justify-center overflow-hidden text-white">
+      {/* Background Image */}
+      <img
+        src="/images/mattresses.png"
+        alt="Luxury Mattress"
+        className="absolute inset-0 w-full h-full object-cover object-center md:object-[center_60%]"
+      />
 
-      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 grid md:grid-cols-2 gap-14 lg:gap-20 items-center">
-        {/* ================= LEFT ================= */}
-        <div className="space-y-6 sm:space-y-8 text-center md:text-start">
-          {/* Badge */}
-          <span className="uppercase tracking-[0.35em] text-[11px] sm:text-xs text-blue-700 font-semibold">
-            {badge}
-          </span>
+      {/* Header readability gradient */}
+      <div className="absolute top-0 left-0 w-full h-32 md:h-36 bg-gradient-to-b from-black/70 via-black/35 to-transparent z-[1]" />
 
-          {/* Title */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.1] text-blue-950">
-            {titleLine1}
-            <br />
-            <span className="relative inline-block text-blue-900">
-              {titleHighlight}
-              <span className="absolute left-0 -bottom-2  w-full h-0.5 bg-red-500/70 rounded-full" />
-            </span>
-          </h1>
+      {/* Cinematic vignette */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.15)_0%,rgba(0,0,0,0.45)_70%)]" />
 
-          {/* Description */}
-          <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-md mx-auto md:mx-0 leading-relaxed">
-            {description}
-          </p>
+      {/* Bottom contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/70" />
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
-            <Button
-              size="lg"
-              onClick={() => router.push(`/${locale}/mattresses`)}
-              className="sm:w-auto"
-            >
-              {shop}
-            </Button>
+      {/* Soft spotlight */}
+      <div className="absolute top-[-140px] left-1/2 -translate-x-1/2 w-[600px] md:w-[850px] h-[280px] md:h-[420px] bg-white/20 blur-[130px] md:blur-[160px]" />
 
-            <Button
-              variant="secondary"
-              size="lg"
-              onClick={handleScrollToCollection}
-              className="sm:w-auto"
-            >
-              {collection}
-            </Button>
-          </div>
-        </div>
+      {/* Side fade */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/35" />
 
-        {/* ================= RIGHT ================= */}
-        <div className="relative">
-          {/* Card Background */}
-          <div className="absolute inset-0 bg-blue-50 rounded-3xl scale-[0.96] -z-10" />
+      {/* CONTENT */}
+      <div className="relative z-10 max-w-4xl mx-auto text-center px-6 pt-16 md:pt-20">
+        {/* Badge */}
+        <p className="uppercase tracking-[0.32em] text-[10px] md:text-xs text-white/80 mb-4 font-medium">
+          {badge}
+        </p>
 
-          <img
-            src="/images/mattresses.png"
-            alt="Premium Mattress"
-            className="rounded-3xl w-full shadow-[0_30px_80px_rgba(0,0,0,0.08)]"
-          />
+        {/* Title */}
+        <h1
+          className="
+          font-semibold
+          leading-[1.15]
+          mb-6
+          text-white
+          drop-shadow-[0_10px_25px_rgba(0,0,0,0.55)]
+          text-[clamp(24px,6.5vw,60px)]
+          "
+        >
+          {titleLine1}
+          <br />
+          <span className="text-white/90">{titleHighlight}</span>
+        </h1>
 
-          {/* Floating Badge */}
-          <div
-            className={`absolute bottom-6 ${
-              isRTL ? "right-6" : "left-6"
-            } bg-white px-5 py-3 rounded-xl border border-blue-100 shadow-md`}
+        {/* Description */}
+        <p className="text-[14px] md:text-[16px] text-white/85 max-w-[310px] md:max-w-xl mx-auto leading-relaxed mb-8 md:mb-10 drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+          {description}
+        </p>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-5 mb-10">
+          <Button
+            size="lg"
+            className="w-full sm:w-auto"
+            onClick={() => router.push(`/${locale}/mattresses`)}
           >
-            <p className="text-xs sm:text-sm font-medium text-blue-900">
-              {floatingBadge}
-            </p>
-          </div>
+            {shop}
+          </Button>
+
+          <Button
+            variant="secondaryHero"
+            size="lg"
+            className="w-full sm:w-auto"
+            onClick={() =>
+              document
+                .getElementById("collections")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            {collection}
+          </Button>
         </div>
       </div>
     </section>

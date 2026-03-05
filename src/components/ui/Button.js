@@ -53,6 +53,8 @@ export default function Button({
     primary: "bg-blue-900 text-white shadow-md hover:bg-blue-950",
 
     secondary: "border border-blue-600/30 text-blue-800 hover:bg-blue-50",
+    secondaryHero:
+      "border border-blue-50/30 text-blue-50 hover:bg-blue-50/10 hover:border-blue-50/50 hover:text-blue-50",
 
     gold: "bg-amber-500 text-white shadow-md hover:bg-amber-600",
 

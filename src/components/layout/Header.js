@@ -31,7 +31,7 @@ export default function Header({ translation }) {
   const [isAtTop, setIsAtTop] = useState(true);
   const [openLang, setOpenLang] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-
+  const isHomePage = pathname === `/${locale}`;
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -110,7 +110,11 @@ export default function Header({ translation }) {
           <div className="hidden md:flex items-center gap-6">
             <button
               onClick={() => router.push(`/${locale}/track-order`)}
-              className="text-sm text-slate-600 hover:text-blue-950 transition"
+              className={`text-sm   transition   ${
+                isAtTop && isHomePage
+                  ? "text-white hover:text-slate-300"
+                  : "hover:text-blue-950 text-slate-600"
+              }`}
             >
               {navigation.trackOrder}
             </button>
@@ -119,7 +123,11 @@ export default function Header({ translation }) {
             <div className="relative">
               <button
                 onClick={() => setOpenLang(!openLang)}
-                className="flex items-center gap-2 text-sm px-4 py-2 rounded-xl border border-blue-100 hover:bg-blue-50 transition"
+                className={`flex items-center gap-2 text-sm px-4 py-2 rounded-xl border  transition ${
+                  isAtTop && isHomePage
+                    ? "border border-blue-50/30 text-blue-50 hover:bg-blue-50/10 hover:border-blue-50/50 hover:text-blue-50 "
+                    : "border-slate-300 hover:bg-blue-50"
+                }`}
               >
                 {languages.find((l) => l.code === locale)?.label}
                 <FiChevronDown
@@ -158,7 +166,7 @@ export default function Header({ translation }) {
 
             <Button
               size="sm"
-              variant="secondary"
+              variant={isAtTop && isHomePage ? "secondaryHero" : "secondary"}
               className="relative p-3"
               onClick={() => router.push(`/${locale}/cart`)}
             >
@@ -174,7 +182,7 @@ export default function Header({ translation }) {
 
           {/* MOBILE MENU BUTTON */}
           <button
-            className="md:hidden w-10 h-10 rounded-xl border border-blue-100 flex items-center justify-center"
+            className={`md:hidden w-10 h-10 rounded-xl border  flex items-center justify-center ${isAtTop && isHomePage ? " border-blue-50/30 text-blue-50 hover:bg-blue-50/10 hover:border-blue-50/50 hover:text-blue-50 " : "text-slate-600 border-slate-200 hover:text-blue-950"}`}
             onClick={() => setOpenMenu(true)}
           >
             <FiMenu size={20} />
