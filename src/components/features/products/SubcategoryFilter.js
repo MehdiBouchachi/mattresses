@@ -3,20 +3,38 @@
 import { categories } from "@/constants/products";
 
 export default function SubcategoryFilter({
-  state,
-  dispatch,
   translation,
   locale = "en",
+  searchParams,
+  setParam,
 }) {
   const { subcategory, all } = translation;
 
-  const currentCategory = categories.find((c) => c.value === state.category);
+  const isRTL = locale === "ar";
+
+  /* ================= URL VALUES ================= */
+
+  const currentCategoryValue = searchParams.get("category") || "all";
+  const activeSubcategory = searchParams.get("subcategory") || "all";
+
+  /* ================= FIND CATEGORY ================= */
+
+  const currentCategory = categories.find(
+    (c) => c.value === currentCategoryValue,
+  );
 
   const subcategories = currentCategory?.subcategories ?? [];
-  const isRTL = locale === "ar";
 
   // Hide if no subcategories
   if (!subcategories.length) return null;
+
+  const handleSubcategory = (value) => {
+    if (value === "all") {
+      setParam({ subcategory: "" });
+    } else {
+      setParam({ subcategory: value });
+    }
+  };
 
   return (
     <div dir={isRTL ? "rtl" : "ltr"}>
@@ -25,7 +43,11 @@ export default function SubcategoryFilter({
           text-xs sm:text-sm
           mb-4 sm:mb-6
           text-slate-500
-          ${isRTL ? "text-right tracking-normal" : "uppercase tracking-[0.25em] text-left"}
+          ${
+            isRTL
+              ? "text-right tracking-normal"
+              : "uppercase tracking-[0.25em] text-left"
+          }
         `}
       >
         {subcategory}
@@ -37,9 +59,10 @@ export default function SubcategoryFilter({
         }`}
       >
         {/* ALL */}
+
         <FilterItem
-          active={state.subcategory === "all"}
-          onClick={() => dispatch({ type: "SET_SUBCATEGORY", payload: "all" })}
+          active={activeSubcategory === "all"}
+          onClick={() => handleSubcategory("all")}
           isRTL={isRTL}
         >
           {all}
@@ -48,13 +71,8 @@ export default function SubcategoryFilter({
         {subcategories.map((sub) => (
           <FilterItem
             key={sub.value}
-            active={state.subcategory === sub.value}
-            onClick={() =>
-              dispatch({
-                type: "SET_SUBCATEGORY",
-                payload: sub.value,
-              })
-            }
+            active={activeSubcategory === sub.value}
+            onClick={() => handleSubcategory(sub.value)}
             isRTL={isRTL}
           >
             {sub.translations?.[locale] ?? sub.translations?.en ?? sub.value}

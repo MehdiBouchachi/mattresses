@@ -1,14 +1,26 @@
+"use client";
+
 import { categories } from "@/constants/products";
 
 export default function CategoryFilter({
-  state,
-  dispatch,
   translation,
   locale,
+  searchParams,
+  setParam,
 }) {
   const { category, all } = translation;
 
   const isRTL = locale === "ar";
+
+  const activeCategory = searchParams.get("category") || "all";
+
+  const handleCategory = (value) => {
+    if (value === "all") {
+      setParam({ category: "" });
+    } else {
+      setParam({ category: value });
+    }
+  };
 
   return (
     <div dir={isRTL ? "rtl" : "ltr"}>
@@ -17,7 +29,11 @@ export default function CategoryFilter({
           text-xs sm:text-sm
           mb-4 sm:mb-6
           text-slate-500
-          ${isRTL ? "text-right tracking-normal" : "uppercase tracking-[0.25em] text-left"}
+          ${
+            isRTL
+              ? "text-right tracking-normal"
+              : "uppercase tracking-[0.25em] text-left"
+          }
         `}
       >
         {category}
@@ -30,9 +46,10 @@ export default function CategoryFilter({
         `}
       >
         {/* ALL */}
+
         <FilterItem
-          active={state.category === "all"}
-          onClick={() => dispatch({ type: "SET_CATEGORY", payload: "all" })}
+          active={activeCategory === "all"}
+          onClick={() => handleCategory("all")}
           isRTL={isRTL}
         >
           {all}
@@ -41,10 +58,8 @@ export default function CategoryFilter({
         {categories.map((cat) => (
           <FilterItem
             key={cat.value}
-            active={state.category === cat.value}
-            onClick={() =>
-              dispatch({ type: "SET_CATEGORY", payload: cat.value })
-            }
+            active={activeCategory === cat.value}
+            onClick={() => handleCategory(cat.value)}
             isRTL={isRTL}
           >
             {cat.translations[locale]}

@@ -1,38 +1,17 @@
+"use client";
+
+import useProducts from "@/components/features/products/useProducts";
 import Filters from "@/components/features/products/Filters";
 import ProductGrid from "@/components/features/products/ProductGrid";
 import Pagination from "@/components/features/products/Pagination";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 
-import { products, itemsPerPage } from "@/constants/products";
-import { filterProducts } from "@/lib/filterProducts";
-
 /* ======================================================
-   MAIN PAGE (SERVER COMPONENT)
+   MAIN PAGE
 ====================================================== */
 
-export default function MattressesClient({ locale, translation, searchParams }) {
-  /* ================= URL FILTERS ================= */
-
-  const filters = {
-    category: searchParams?.category || "all",
-    subcategory: searchParams?.subcategory || "all",
-    minPrice: searchParams?.min ? Number(searchParams.min) : 0,
-    maxPrice: searchParams?.max ? Number(searchParams.max) : 200000,
-    size: searchParams?.size || "",
-    thickness: searchParams?.thickness ? Number(searchParams.thickness) : null,
-    page: searchParams?.page ? Number(searchParams.page) : 1,
-  };
-
-  /* ================= FILTER PRODUCTS ================= */
-
-  const filteredProducts = filterProducts(products, filters);
-
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-
-  const paginatedProducts = filteredProducts.slice(
-    (filters.page - 1) * itemsPerPage,
-    filters.page * itemsPerPage,
-  );
+export default function MattressesClient({ locale, translation }) {
+  const { state, dispatch, paginatedProducts, totalPages } = useProducts();
 
   const {
     mattressesPage: {
@@ -61,10 +40,15 @@ export default function MattressesClient({ locale, translation, searchParams }) 
         ]}
       />
 
-      {/* FILTERS */}
-      <Filters locale={locale} filtersTranslation={filtersTranslation} />
+      {/* ================= FILTERS ================= */}
+      <Filters
+        locale={locale}
+        state={state}
+        dispatch={dispatch}
+        filtersTranslation={filtersTranslation}
+      />
 
-      {/* PRODUCTS */}
+      {/* ================= PRODUCTS ================= */}
       <section className="py-8 sm:py-10 border-t border-blue-100">
         <div className="max-w-7xl mx-auto px-6 sm:px-8">
           <div className="mb-6 sm:mb-8 text-xs sm:text-sm text-slate-500">
@@ -78,7 +62,11 @@ export default function MattressesClient({ locale, translation, searchParams }) 
           />
 
           <div className="mt-10 sm:mt-14 lg:mt-16">
-            <Pagination totalPages={totalPages} page={filters.page} />
+            <Pagination
+              totalPages={totalPages}
+              page={state.page}
+              dispatch={dispatch}
+            />
           </div>
         </div>
       </section>

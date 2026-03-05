@@ -1,12 +1,21 @@
 "use client";
 
-export default function Pagination({ totalPages, page, dispatch }) {
+import { useRouter, useSearchParams } from "next/navigation";
+
+export default function Pagination({ totalPages, page }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   if (totalPages <= 1) return null;
+
+  const params = new URLSearchParams(searchParams.toString());
 
   const goToPage = (newPage) => {
     if (newPage < 1 || newPage > totalPages) return;
 
-    dispatch({ type: "SET_PAGE", payload: newPage });
+    params.set("page", newPage);
+
+    router.push(`?${params.toString()}`, { scroll: false });
 
     window.scrollTo({
       top: 0,
@@ -14,7 +23,7 @@ export default function Pagination({ totalPages, page, dispatch }) {
     });
   };
 
-  /*  SMART PAGE RANGE  */
+  /* ================= SMART PAGE RANGE ================= */
 
   const getVisiblePages = () => {
     const delta = 2;
