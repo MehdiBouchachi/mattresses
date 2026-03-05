@@ -13,7 +13,7 @@ export default function HeroSection({ translation }) {
     translation?.home?.hero || {};
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden text-white">
+    <section className="relative min-h-svh w-full flex items-center justify-center overflow-hidden text-white">
       {/* Background Image */}
       <Image
         src="/images/mattresses.png"
