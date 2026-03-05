@@ -15,6 +15,7 @@ import {
 } from "react-icons/fi";
 import Image from "next/image";
 import Button from "../ui/Button";
+import Link from "next/link";
 
 const languages = [
   { code: "en", label: "English" },
@@ -33,30 +34,17 @@ export default function Header({ translation }) {
   const [openMenu, setOpenMenu] = useState(false);
   const isHomePage = pathname === `/${locale}`;
   useEffect(() => {
-    let lastScrollY = window.scrollY;
+    if (!isHomePage) return;
 
     const handleScroll = () => {
-      const current = window.scrollY;
-
-      // Transparent zone (hero area)
-      setIsAtTop(current < 80);
-
-      // Always show at very top
-      if (current <= 10) {
-        lastScrollY = current;
-        return;
-      }
-
-      // Hide when scrolling down
-
-      // Show when scrolling up
-
-      lastScrollY = current;
+      const atTop = window.scrollY < 80;
+      setIsAtTop((prev) => (prev === atTop ? prev : atTop));
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
   const switchLanguage = (newLocale) => {
     const segments = pathname.split("/");
     segments[1] = newLocale;
@@ -297,38 +285,40 @@ export default function Header({ translation }) {
   }`}
       >
         <div className="flex justify-around py-2">
-          <NavItem
-            hero={isAtTop && isHomePage}
-            active={pathname === `/${locale}`}
-            icon={<FiHome />}
-            label={bottomNav.home}
-            onClick={() => router.push(`/${locale}`)}
-          />
+          <Link href={`/${locale}`}>
+            <NavItem
+              hero={isAtTop && isHomePage}
+              active={pathname === `/${locale}`}
+              icon={<FiHome />}
+              label={bottomNav.home}
+            />
+          </Link>
+          <Link href={`/${locale}/mattresses`}>
+            <NavItem
+              hero={isAtTop && isHomePage}
+              active={isActive("mattresses")}
+              icon={<FiGrid />}
+              label={bottomNav.shop}
+            />
+          </Link>
+          <Link href={`/${locale}/track-order`}>
+            <NavItem
+              hero={isAtTop && isHomePage}
+              active={isActive("track-order")}
+              icon={<FiTruck />}
+              label={bottomNav.track}
+            />
+          </Link>
 
-          <NavItem
-            hero={isAtTop && isHomePage}
-            active={isActive("mattresses")}
-            icon={<FiGrid />}
-            label={bottomNav.shop}
-            onClick={() => router.push(`/${locale}/mattresses`)}
-          />
-
-          <NavItem
-            hero={isAtTop && isHomePage}
-            active={isActive("track-order")}
-            icon={<FiTruck />}
-            label={bottomNav.track}
-            onClick={() => router.push(`/${locale}/track-order`)}
-          />
-
-          <NavItem
-            hero={isAtTop && isHomePage}
-            active={isActive("cart")}
-            icon={<FiShoppingCart />}
-            label={bottomNav.cart}
-            onClick={() => router.push(`/${locale}/cart`)}
-            badge={count}
-          />
+          <Link href={`/${locale}/cart`}>
+            <NavItem
+              hero={isAtTop && isHomePage}
+              active={isActive("cart")}
+              icon={<FiShoppingCart />}
+              label={bottomNav.cart}
+              badge={count}
+            />
+          </Link>
         </div>
       </div>
     </>
