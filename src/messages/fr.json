@@ -171,8 +171,8 @@
       "delivery": "Livraison",
       "free": "Gratuite",
       "total": "Total",
-      "secure": "Paiement sécurisé. Taxes incluses.",
-      "checkout": "Passer au paiement"
+      "secure": "Commande sécurisée. La confirmation sera effectuée ultérieurement.",
+      "checkout": "Commander"
     }
   },
   "checkoutPage": {

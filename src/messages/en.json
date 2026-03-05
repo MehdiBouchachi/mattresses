@@ -171,8 +171,8 @@
       "delivery": "Delivery",
       "free": "Free",
       "total": "Total",
-      "secure": "Secure checkout. Taxes included.",
-      "checkout": "Proceed to Checkout"
+      "secure": "Secure order. The order will be confirmed later.",
+      "checkout": "Submit Order"
     }
   },
   "checkoutPage": {
