@@ -1,9 +1,9 @@
 "use client";
-
+import Link from "next/link";
 import { useSelector } from "react-redux";
 import { selectCartCount } from "@/store/slices/cartSlice";
-import { usePathname } from "next/navigation";
-import { useEffect, useState, memo } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   FiShoppingCart,
   FiChevronDown,
@@ -14,7 +14,6 @@ import {
   FiTruck,
 } from "react-icons/fi";
 import Image from "next/image";
-import Link from "next/link";
 import Button from "../ui/Button";
 
 const languages = [
@@ -25,26 +24,46 @@ const languages = [
 
 export default function Header({ translation }) {
   const count = useSelector(selectCartCount);
+  const router = useRouter();
   const pathname = usePathname();
-
   const locale = pathname.split("/")[1] || "en";
   const isRTL = locale === "ar";
-
   const [isAtTop, setIsAtTop] = useState(true);
   const [openLang, setOpenLang] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-
   const isHomePage = pathname === `/${locale}`;
-
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsAtTop(window.scrollY < 80);
+      const current = window.scrollY;
+
+      // Transparent zone (hero area)
+      setIsAtTop(current < 80);
+
+      // Always show at very top
+      if (current <= 10) {
+        lastScrollY = current;
+        return;
+      }
+
+      // Hide when scrolling down
+
+      // Show when scrolling up
+
+      lastScrollY = current;
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const switchLanguage = (newLocale) => {
+    const segments = pathname.split("/");
+    segments[1] = newLocale;
+    router.push(segments.join("/"));
+    setOpenLang(false);
+    setOpenMenu(false);
+  };
 
   const {
     header: { shopNow, menu, navigation, language, bottomNav },
@@ -52,27 +71,30 @@ export default function Header({ translation }) {
 
   const isActive = (path) => pathname.includes(path);
 
+  /* =========================================================
+     HEADER
+  ========================================================= */
+
   return (
     <>
-      {/* ================= HEADER ================= */}
-
       <header
+        dir="ltr"
         className={`
-        fixed top-0 left-0 w-full z-50
-        transition-all duration-300
-        ${
-          isAtTop
-            ? "bg-transparent border-transparent"
-            : "bg-white/90 backdrop-blur-xl border-b border-blue-100 shadow-sm"
-        }
-        `}
+    fixed top-0 left-0 w-full z-50
+    transition-all duration-300 ease-in-out
+  
+    ${
+      isAtTop
+        ? "bg-transparent border-transparent"
+        : "bg-white/90 backdrop-blur-xl border-b border-blue-100 shadow-sm"
+    }
+  `}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-3 flex items-center justify-between">
-          {/* Logo */}
-
-          <Link
-            href={`/${locale}`}
-            className="cursor-pointer h-14 lg:h-16 flex items-center transition-transform hover:scale-105"
+          {/* LOGO */}
+          <div
+            onClick={() => router.push(`/${locale}`)}
+            className="cursor-pointer h-14 lg:h-16 flex items-center transition-transform duration-300 hover:scale-105"
           >
             <Image
               src="/images/logo.webp"
@@ -82,30 +104,28 @@ export default function Header({ translation }) {
               className="h-full w-auto object-contain"
               priority
             />
-          </Link>
+          </div>
 
-          {/* Desktop Nav */}
-
+          {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center gap-6">
-            <Link
-              href={`/${locale}/track-order`}
-              className={`text-sm transition ${
+            <button
+              onClick={() => router.push(`/${locale}/track-order`)}
+              className={`text-sm   transition   ${
                 isAtTop && isHomePage
                   ? "text-white hover:text-slate-300"
-                  : "text-slate-600 hover:text-blue-950"
+                  : "hover:text-blue-950 text-slate-600"
               }`}
             >
               {navigation.trackOrder}
-            </Link>
+            </button>
 
             {/* Language */}
-
             <div className="relative">
               <button
                 onClick={() => setOpenLang(!openLang)}
-                className={`flex items-center gap-2 text-sm px-4 py-2 rounded-xl border transition ${
+                className={`flex items-center gap-2 text-sm px-4 py-2 rounded-xl border  transition ${
                   isAtTop && isHomePage
-                    ? "border-blue-50/30 text-blue-50 hover:bg-blue-50/10"
+                    ? "border border-blue-50/30 text-blue-50 hover:bg-blue-50/10 hover:border-blue-50/50 hover:text-blue-50 "
                     : "border-slate-300 hover:bg-blue-50"
                 }`}
               >
@@ -120,53 +140,49 @@ export default function Header({ translation }) {
               {openLang && (
                 <div className="absolute right-0 mt-2 w-44 bg-white border border-blue-100 rounded-xl shadow-lg overflow-hidden">
                   {languages.map((lng) => (
-                    <Link
+                    <button
                       key={lng.code}
-                      href={`/${lng.code}`}
-                      className={`block px-4 py-3 text-sm ${
+                      onClick={() => switchLanguage(lng.code)}
+                      className={`w-full px-4 py-3 text-sm text-start ${
                         locale === lng.code
                           ? "bg-blue-50 text-blue-900 font-medium"
                           : "hover:bg-blue-100"
                       }`}
                     >
                       {lng.label}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               )}
             </div>
 
-            <Link href={`/${locale}/mattresses`}>
-              <Button size="sm" variant="primary">
-                {shopNow}
-              </Button>
-            </Link>
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={() => router.push(`/${locale}/mattresses`)}
+            >
+              {shopNow}
+            </Button>
 
-            <Link href={`/${locale}/cart`}>
-              <Button
-                size="sm"
-                variant={isAtTop && isHomePage ? "secondaryHero" : "secondary"}
-                className="relative p-3"
-              >
-                <FiShoppingCart className="text-lg" />
+            <Button
+              size="sm"
+              variant={isAtTop && isHomePage ? "secondaryHero" : "secondary"}
+              className="relative p-3"
+              onClick={() => router.push(`/${locale}/cart`)}
+            >
+              <FiShoppingCart className="text-lg" />
 
-                {count > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-blue-900 text-blue-50 text-[10px] px-2 py-0.5 rounded-full">
-                    {count}
-                  </span>
-                )}
-              </Button>
-            </Link>
+              {count > 0 && (
+                <span className="absolute -top-2 -right-2 bg-blue-900 text-blue-50 text-[10px] px-2 py-0.5 rounded-full font-medium">
+                  {count}
+                </span>
+              )}
+            </Button>
           </div>
 
-          {/* Mobile menu button */}
-
+          {/* MOBILE MENU BUTTON */}
           <button
-            className={`md:hidden w-10 h-10 rounded-xl border flex items-center justify-center ${
-              isAtTop && isHomePage
-                ? "border-blue-50/30 text-blue-50"
-                : "border-slate-200 text-slate-600"
-            }`}
+            className={`md:hidden w-10 h-10 rounded-xl border  flex items-center justify-center ${isAtTop && isHomePage ? " border-blue-50/30 text-blue-50 hover:bg-blue-50/10 hover:border-blue-50/50 hover:text-blue-50 " : "text-slate-600 border-slate-200 hover:text-blue-950"}`}
             onClick={() => setOpenMenu(true)}
           >
             <FiMenu size={20} />
@@ -174,15 +190,15 @@ export default function Header({ translation }) {
         </div>
       </header>
 
-      {/* ================= MOBILE DRAWER ================= */}
+      {/* =========================================================
+         MOBILE DRAWER
+      ========================================================= */}
 
       <div
-        className={`fixed inset-0 z-50 ${
-          openMenu ? "visible" : "invisible"
-        } md:hidden`}
+        className={`fixed inset-0 z-50 ${openMenu ? "visible" : "invisible"}`}
       >
         <div
-          className={`absolute inset-0 bg-black/40 transition-opacity ${
+          className={`absolute inset-0 bg-black/40 ${
             openMenu ? "opacity-100" : "opacity-0"
           }`}
           onClick={() => setOpenMenu(false)}
@@ -206,47 +222,54 @@ export default function Header({ translation }) {
           </div>
 
           <nav className="flex flex-col gap-6 text-base mb-10">
-            <DrawerItem href={`/${locale}`} active={pathname === `/${locale}`}>
+            <DrawerItem
+              active={pathname === `/${locale}`}
+              onClick={() => router.push(`/${locale}`)}
+              isRTL={isRTL}
+            >
               {navigation.home}
             </DrawerItem>
 
             <DrawerItem
-              href={`/${locale}/mattresses`}
               active={pathname.includes("mattresses")}
+              onClick={() => router.push(`/${locale}/mattresses`)}
+              isRTL={isRTL}
             >
               {navigation.collection}
             </DrawerItem>
 
             <DrawerItem
-              href={`/${locale}/about`}
               active={pathname.includes("about")}
+              onClick={() => router.push(`/${locale}/about`)}
+              isRTL={isRTL}
             >
               {navigation.about}
             </DrawerItem>
 
             <DrawerItem
-              href={`/${locale}/contact`}
               active={pathname.includes("contact")}
+              onClick={() => router.push(`/${locale}/contact`)}
+              isRTL={isRTL}
             >
               {navigation.contact}
             </DrawerItem>
-
             <DrawerItem
-              href={`/${locale}/track-order`}
               active={pathname.includes("track-order")}
+              onClick={() => router.push(`/${locale}/track-order`)}
             >
               {navigation.trackOrder}
             </DrawerItem>
           </nav>
 
+          {/* Language */}
           <div className="mt-auto pt-6 border-t border-blue-100">
             <p className="text-xs mb-4 text-slate-500">{language}</p>
 
             <div className="flex flex-col gap-3">
               {languages.map((lng) => (
-                <Link
+                <button
                   key={lng.code}
-                  href={`/${lng.code}`}
+                  onClick={() => switchLanguage(lng.code)}
                   className={`text-sm px-3 py-2 rounded-lg ${
                     locale === lng.code
                       ? "bg-blue-50 text-blue-900 font-medium"
@@ -254,14 +277,16 @@ export default function Header({ translation }) {
                   }`}
                 >
                   {lng.label}
-                </Link>
+                </button>
               ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* ================= MOBILE BOTTOM NAV ================= */}
+      {/* =========================================================
+         IMPROVED BOTTOM NAV
+      ========================================================= */}
 
       <div
         dir={isRTL ? "rtl" : "ltr"}
@@ -302,14 +327,13 @@ export default function Header({ translation }) {
   );
 }
 
-/* ================= NAV ITEM ================= */
+/* =========================================================
+   IMPROVED NAV ITEM
+========================================================= */
 
-const NavItem = memo(function NavItem({ icon, label, href, badge, active }) {
+function NavItem({ icon, label, href, badge, active }) {
   return (
-    <Link
-      href={href}
-      className="flex flex-col items-center text-xs relative active:scale-95 transition"
-    >
+    <Link href={href} className="flex flex-col items-center text-xs relative">
       <div
         className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all ${
           active ? "bg-blue-900 text-blue-50 shadow-md" : "text-slate-600"
@@ -333,19 +357,16 @@ const NavItem = memo(function NavItem({ icon, label, href, badge, active }) {
       </span>
     </Link>
   );
-});
-
-/* ================= DRAWER ITEM ================= */
-
-function DrawerItem({ children, href, active }) {
+}
+function DrawerItem({ children, onClick, active }) {
   return (
-    <Link
-      href={href}
+    <button
+      onClick={onClick}
       className={`text-base ${
         active ? "text-blue-900 font-medium" : "text-slate-600"
       }`}
     >
       {children}
-    </Link>
+    </button>
   );
 }
