@@ -39,7 +39,7 @@ export default function HeroSection({ translation }) {
       <div className="absolute inset-0 bg-linear-to-r from-black/35 via-transparent to-black/35" />
 
       {/* CONTENT */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center px-6 pt-16 md:pt-20">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 pb-28 h-full flex flex-col justify-center items-stretch text-center">
         {/* Badge */}
         <p className="uppercase tracking-[0.32em] text-[10px] md:text-xs text-white/80 mb-4 font-medium">
           {badge}
