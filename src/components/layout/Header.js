@@ -85,7 +85,11 @@ export default function Header({ translation }) {
             className="cursor-pointer h-14 lg:h-16 flex items-center transition-transform duration-300 hover:scale-105"
           >
             <Image
-              src="/images/logo.webp"
+              src={
+                isAtTop && isHomePage
+                  ? "/images/logo-light.webp"
+                  : "/images/logo.webp"
+              }
               alt="Empreinte Flex"
               width={220}
               height={90}
