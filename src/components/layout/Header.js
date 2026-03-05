@@ -34,8 +34,6 @@ export default function Header({ translation }) {
   const [openMenu, setOpenMenu] = useState(false);
   const isHomePage = pathname === `/${locale}`;
   useEffect(() => {
-    if (!isHomePage) return;
-
     const handleScroll = () => {
       const atTop = window.scrollY < 80;
       setIsAtTop((prev) => (prev === atTop ? prev : atTop));
