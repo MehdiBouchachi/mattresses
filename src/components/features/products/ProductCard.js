@@ -68,28 +68,34 @@ border border-blue-100
 hover:border-blue-200
 shadow-sm sm:shadow-sm lg:hover:shadow-md
 transition-all duration-300
-overflow-hidden flex flex-col
+overflow-hidden flex flex-col will-change-transform
       "
     >
       {/* IMAGE */}
       <div
-        className="relative overflow-hidden 
-  h-40 
-  sm:h-44 
-  md:h-48 
-  lg:h-[240px]"
+        className="
+    relative overflow-hidden
+    h-40 
+    sm:h-44 
+    md:h-48 
+    lg:h-[240px]
+  "
       >
         <Link href={`/${locale}/product/${slug}`}>
           <Image
             src={image}
             alt={name}
-            fill
-            sizes="(max-width: 640px) 100vw,
-           (max-width: 1024px) 50vw,
-           33vw"
-            className={`object-cover transition duration-700 ${
+            width={600}
+            height={600}
+            sizes="(max-width:640px) 100vw,
+             (max-width:1024px) 50vw,
+             33vw"
+            className={`w-full h-full object-cover transition duration-700 ${
               isAvailable ? "group-hover:scale-105" : "grayscale"
             }`}
+            priority={false}
+            placeholder="empty"
+            loading="lazy"
           />
         </Link>
 
