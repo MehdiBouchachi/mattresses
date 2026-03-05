@@ -51,12 +51,17 @@ export default function Header({ translation }) {
   } = translation || {};
 
   const isActive = (path) => pathname.includes(path);
-
+  const switchLocalePath = (lng) => {
+    const segments = pathname.split("/");
+    segments[1] = lng; // replace locale segment
+    return segments.join("/");
+  };
   return (
     <>
       {/* ================= HEADER ================= */}
 
       <header
+        dir="ltr"
         className={`
         fixed top-0 left-0 w-full z-50
         transition-all duration-300
@@ -121,8 +126,9 @@ export default function Header({ translation }) {
                 <div className="absolute right-0 mt-2 w-44 bg-white border border-blue-100 rounded-xl shadow-lg overflow-hidden">
                   {languages.map((lng) => (
                     <Link
+                      onClick={() => setOpenLang(false)}
                       key={lng.code}
-                      href={`/${lng.code}`}
+                      href={switchLocalePath(lng.code)}
                       className={`block px-4 py-3 text-sm ${
                         locale === lng.code
                           ? "bg-blue-50 text-blue-900 font-medium"
@@ -246,7 +252,7 @@ export default function Header({ translation }) {
               {languages.map((lng) => (
                 <Link
                   key={lng.code}
-                  href={`/${lng.code}`}
+                  href={switchLocalePath(lng.code)}
                   className={`text-sm px-3 py-2 rounded-lg ${
                     locale === lng.code
                       ? "bg-blue-50 text-blue-900 font-medium"
