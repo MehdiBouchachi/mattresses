@@ -1,15 +1,9 @@
-"use client";
-
 import Button from "@/components/ui/Button";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { formatPrice } from "@/utils/helpers";
 import Image from "next/image";
 
-function ProductCard({ product, translation }) {
-  const params = useParams();
-  const locale = params?.local;
-
+function ProductCard({ product, translation, locale = "en" }) {
   const {
     name,
     description,

@@ -41,6 +41,7 @@ export default function ProductGrid({
     <div className="grid xs:grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-4 sm:gap-8 md:gap-8 lg:gap-10">
       {products.map((product) => (
         <ProductCard
+          locale={locale}
           key={product.id}
           product={product}
           translation={productCardTranslation}
