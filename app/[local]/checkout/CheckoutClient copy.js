@@ -8,7 +8,6 @@ import {
   clearCart,
 } from "@/store/slices/cartSlice";
 import { useRouter } from "next/navigation";
-import { checkoutOrderAction } from "@/lib/actions";
 import BackTitle from "@/components/ui/BackTitle";
 import OrderSummary from "@/components/features/checkout/OrderSummary";
 import CheckoutForm from "@/components/features/checkout/CheckoutForm";
@@ -54,7 +53,7 @@ export default function CheckoutClient({ locale, translation = {} }) {
         [e.target.name]: e.target.value,
       })),
 
-    submit: async () => {
+    submit: () => {
       const { firstName, lastName, phone, wilaya, city, street } = form;
 
       if (!firstName || !lastName || !phone || !wilaya || !city || !street) {
@@ -62,83 +61,81 @@ export default function CheckoutClient({ locale, translation = {} }) {
         return;
       }
 
-      if (!items.length) {
-        alert("Your cart is empty.");
-        return;
-      }
-
       setIsSubmitting(true);
 
-      try {
-        const orderData = {
-          customer: {
-            firstName: form.firstName,
-            lastName: form.lastName,
-            email: form.email,
-            phone: form.phone,
-          },
+      const orderData = {
+        orderId: "LTM-" + Math.floor(100000 + Math.random() * 900000),
 
-          shipping: {
-            wilaya: form.wilaya,
-            city: form.city,
-            street: form.street,
-            mapLink: form.mapLink,
-          },
+        createdAt: new Date().toISOString(),
 
-          payment: {
-            method: "cash_on_delivery",
-            status: "pending",
-          },
+        customer: {
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          phone: form.phone,
+        },
 
-          items: items.map((item) => ({
-            productId: item.id,
-            name: item.name,
-            size: item.size,
-            thickness: item.thickness,
-            density: item.density || null,
-            price: item.price,
-            quantity: item.quantity,
-            subtotal: item.price * item.quantity,
-          })),
+        shipping: {
+          wilaya: form.wilaya,
+          city: form.city,
+          street: form.street,
+          mapLink: form.mapLink,
+        },
 
-          summary: {
-            itemsCount: items.length,
-            totalQuantity: items.reduce((t, i) => t + i.quantity, 0),
-            totalPrice: total,
-          },
+        payment: {
+          method: "cash_on_delivery",
+          status: "pending",
+        },
 
-          status: "unconfirmed",
-        };
+        items: items.map((item) => ({
+          productId: item.id,
+          name: item.name,
 
-        const result = await checkoutOrderAction(orderData);
+          size: item.size,
+          thickness: item.thickness,
+          density: item.density || null,
 
-        if (result.success) {
-          // Save orderCode for the success page
-          localStorage.setItem("lastOrderCode", result.orderCode);
+          price: item.price,
+          quantity: item.quantity,
 
-          dispatch(clearCart());
-          router.push(`/${locale}/order-success`);
-        }
-      } catch (error) {
-        console.error("[checkout]", error.message);
-        alert("Something went wrong. Please try again.");
-      } finally {
-        setIsSubmitting(false);
-      }
+          subtotal: item.price * item.quantity,
+        })),
+
+        summary: {
+          itemsCount: items.length,
+          totalQuantity: items.reduce((t, i) => t + i.quantity, 0),
+          totalPrice: total,
+        },
+
+        status: "new",
+      };
+
+      /* ================= LOG ORDER ================= */
+
+      console.log("ORDER DATA ↓");
+      console.log(JSON.stringify(orderData, null, 2));
+
+      /* ================= SAVE FOR TEST ================= */
+
+      localStorage.setItem("lastOrder", JSON.stringify(orderData));
+
+      setTimeout(() => {
+        dispatch(clearCart());
+        router.push(`/${locale}/order-success`);
+      }, 800);
     },
 
     back: () => router.back(),
   };
-
   return (
     <div className="relative min-h-screen bg-white">
       <div
         className="
-          relative
-          max-w-7xl mx-auto
-          px-4 sm:px-6 lg:px-8
-          pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-14 lg:pb-16
-        "
+        relative
+        max-w-7xl mx-auto
+        px-4 sm:px-6 lg:px-8
+        pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-14 lg:pb-16
+      "
       >
         {/* Header */}
         <BackTitle
@@ -151,13 +148,13 @@ export default function CheckoutClient({ locale, translation = {} }) {
         {/* Layout */}
         <div
           className="
-            grid
-            grid-cols-1
-            lg:grid-cols-[1.15fr_0.85fr]
-            gap-8 sm:gap-10 lg:gap-16
-            items-start
-            mt-6 sm:mt-8
-          "
+          grid
+          grid-cols-1
+          lg:grid-cols-[1.15fr_0.85fr]
+          gap-8 sm:gap-10 lg:gap-16
+          items-start
+          mt-6 sm:mt-8
+        "
         >
           {/* LEFT — FORM */}
           <div className="order-2 lg:order-1">

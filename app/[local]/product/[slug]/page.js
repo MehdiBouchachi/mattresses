@@ -1,19 +1,26 @@
-import ProductClient from "@/components/features/product/ProductClient";
-import { products } from "@/constants/products";
 import { getTranslations } from "@/lib/i18n";
+import {
+  getProductBySlug,
+  getProductsWithDetails,
+} from "@/lib/data-services/products";
+import { notFound } from "next/navigation";
+import ProductClient from "@/components/features/product/ProductClient";
 
 export default async function ProductPage({ params }) {
   const { local, slug } = await params;
 
-  const product = products.find((p) => p.slug === slug);
+  const product = await getProductBySlug(slug);
+
+  if (!product) notFound();
+
   const { productPage } = getTranslations(local);
-  if (!product) return null;
+  const allProducts = await getProductsWithDetails();
 
   return (
     <ProductClient
       product={product}
       locale={local}
-      allProducts={products}
+      allProducts={allProducts}
       translation={productPage}
     />
   );

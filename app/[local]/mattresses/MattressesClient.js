@@ -3,21 +3,27 @@ import ProductGrid from "@/components/features/products/ProductGrid";
 import Pagination from "@/components/features/products/Pagination";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 
-import { products, itemsPerPage } from "@/constants/products";
 import { filterProducts } from "@/lib/filterProducts";
 
+const ITEMS_PER_PAGE = 6;
+
 /* ======================================================
-   MAIN PAGE (SERVER COMPONENT)
+   MAIN PAGE
 ====================================================== */
 
-export default function MattressesClient({ locale, translation, searchParams }) {
+export default function MattressesClient({
+  locale,
+  translation,
+  searchParams,
+  products,
+}) {
   /* ================= URL FILTERS ================= */
 
   const filters = {
     category: searchParams?.category || "all",
     subcategory: searchParams?.subcategory || "all",
     minPrice: searchParams?.min ? Number(searchParams.min) : 0,
-    maxPrice: searchParams?.max ? Number(searchParams.max) : 200000,
+    maxPrice: searchParams?.max ? Number(searchParams.max) : Infinity,
     size: searchParams?.size || "",
     thickness: searchParams?.thickness ? Number(searchParams.thickness) : null,
     page: searchParams?.page ? Number(searchParams.page) : 1,
@@ -27,11 +33,11 @@ export default function MattressesClient({ locale, translation, searchParams }) 
 
   const filteredProducts = filterProducts(products, filters);
 
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
 
   const paginatedProducts = filteredProducts.slice(
-    (filters.page - 1) * itemsPerPage,
-    filters.page * itemsPerPage,
+    (filters.page - 1) * ITEMS_PER_PAGE,
+    filters.page * ITEMS_PER_PAGE,
   );
 
   const {

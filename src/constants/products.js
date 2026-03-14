@@ -112,6 +112,90 @@ export const categories = [
       },
     ],
   },
+
+  /* ================= SUR MATELAS ================= */
+  {
+    value: "sur-matelas",
+    translations: {
+      en: "Mattress Toppers",
+      fr: "Sur-matelas",
+      ar: "مضافات المراتب",
+    },
+    subcategories: [
+      {
+        value: "classic-topper",
+        translations: {
+          en: "Classic Topper",
+          fr: "Sur-matelas Classique",
+          ar: "طبقة علوية كلاسيكية",
+        },
+        types: [
+          {
+            value: "soft-comfort",
+            translations: {
+              en: "Soft Comfort",
+              fr: "Confort Doux",
+              ar: "راحة ناعمة",
+            },
+          },
+          {
+            value: "firm-support",
+            translations: {
+              en: "Firm Support",
+              fr: "Support Ferme",
+              ar: "دعم صلب",
+            },
+          },
+        ],
+      },
+    ],
+  },
+
+  /* ================= OREILLER ================= */
+  {
+    value: "oreiller",
+    translations: {
+      en: "Pillows",
+      fr: "Oreillers",
+      ar: "وسائد",
+    },
+    subcategories: [
+      {
+        value: "comfort-pillows",
+        translations: {
+          en: "Comfort Pillows",
+          fr: "Oreillers Confort",
+          ar: "وسائد مريحة",
+        },
+        types: [
+          {
+            value: "cloud-rest",
+            translations: {
+              en: "Cloud Rest",
+              fr: "Repos Nuage",
+              ar: "راحة السحابة",
+            },
+          },
+          {
+            value: "dream-soft",
+            translations: {
+              en: "Dream Soft",
+              fr: "Rêve Doux",
+              ar: "حلم ناعم",
+            },
+          },
+          {
+            value: "night-support",
+            translations: {
+              en: "Night Support",
+              fr: "Support Nuit",
+              ar: "دعم الليل",
+            },
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 /* ================= PRODUCTS ================= */
@@ -132,8 +216,6 @@ export const products = [
     available: true,
     featured: false,
 
-    basePrice: 105000,
-    oldPrice: null,
     discount: 0,
 
     images: [
@@ -214,8 +296,6 @@ export const products = [
     available: true,
     featured: false,
 
-    basePrice: 95000,
-    oldPrice: null,
     discount: 0,
 
     images: [
@@ -295,8 +375,6 @@ export const products = [
     available: true,
     featured: false,
 
-    basePrice: 135000,
-    oldPrice: null,
     discount: 0,
 
     images: [
@@ -378,8 +456,6 @@ export const products = [
     available: true,
     featured: true,
 
-    basePrice: 145000,
-    oldPrice: 165000,
     discount: 12,
 
     images: [
@@ -468,8 +544,6 @@ export const products = [
     available: true,
     featured: false,
 
-    basePrice: 175000,
-    oldPrice: null,
     discount: 0,
 
     images: [
@@ -553,8 +627,6 @@ export const products = [
     available: true,
     featured: false,
 
-    basePrice: 99000,
-    oldPrice: null,
     discount: 0,
 
     images: [
@@ -631,8 +703,6 @@ export const products = [
     available: true,
     featured: true,
 
-    basePrice: 145000,
-    oldPrice: null,
     discount: 0,
 
     images: [
@@ -717,8 +787,6 @@ export const products = [
     available: true,
     featured: false,
 
-    basePrice: 175000,
-    oldPrice: null,
     discount: 0,
 
     images: [

@@ -116,7 +116,7 @@ function OrderMeta({ locale, order, details, isRTL }) {
           {details.total}
         </p>
         <p className="text-xl font-bold text-blue-900 mt-1">
-          {formatPrice(order.total, locale)}
+          {formatPrice(order.summary.totalPrice, locale)}
         </p>
       </div>
     </div>
