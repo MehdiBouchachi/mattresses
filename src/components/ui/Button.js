@@ -15,7 +15,7 @@ export default function Button({
   ...props
 }) {
   const base =
-    "inline-flex items-center justify-center font-medium transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98]";
+    "inline-flex items-center justify-center font-medium transition-all duration-300 disabled:opacity-60 cursor-pointer disabled:cursor-not-allowed active:scale-[0.98]";
 
   /* =========================
      RESPONSIVE SIZE SYSTEM

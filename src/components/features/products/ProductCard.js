@@ -113,17 +113,17 @@ overflow-hidden flex flex-col will-change-transform
         <p className="text-[10px] sm:text-xs uppercase tracking-wider text-slate-500 mb-1">
           {category}
         </p>
-
-        <h3
-          className=" text-sm 
+        <Link href={`/${locale}/product/${slug}`}>
+          <h3
+            className=" text-sm 
           sm:text-base 
           md:text-base 
           lg:text-lg 
           font-semibold leading-snug mb-2 text-blue-900"
-        >
-          {name}
-        </h3>
-
+          >
+            {name}
+          </h3>
+        </Link>
         <p
           className="  sm:block 
           text-xs 
