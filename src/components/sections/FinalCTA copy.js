@@ -1,0 +1,36 @@
+import Link from "next/link";
+import Button from "../ui/Button";
+
+export default function FinalCTA({ translation, locale }) {
+  const { title, desc, button } = translation.home.cta;
+
+  return (
+    <section className="relative py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
+      {/* Soft Blue Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-100 rounded-full blur-[200px] opacity-20" />
+
+      <div className="max-w-5xl mx-auto px-6 sm:px-8 text-center relative z-10">
+        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 tracking-tight text-blue-950">
+          {title}
+        </h3>
+
+        <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-xl sm:max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10 lg:mb-12">
+          {desc}
+        </p>
+
+        <div className="w-full sm:w-auto">
+          <Link href={`/${locale}/mattresses`}>
+            <Button
+              variant="primary"
+              size="lg"
+              fullWidth
+              className="sm:w-auto px-8 sm:px-10 lg:px-12 py-3 sm:py-4 lg:py-5 text-sm sm:text-base lg:text-lg"
+            >
+              {button}
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
