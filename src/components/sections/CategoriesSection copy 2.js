@@ -1,39 +1,5 @@
 import Link from "next/link";
-
-/* ================= HOMEPAGE CATEGORIES ================= */
-
-const HOMEPAGE_CATEGORIES = [
-  {
-    id: "mattresses",
-    translations: {
-      en: "Mattresses",
-      fr: "Matelas",
-      ar: "مراتب",
-    },
-    href: (locale) => `/${locale}/mattresses`,
-    image: "/images/mattresses.png",
-  },
-  {
-    id: "toppers",
-    translations: {
-      en: "Mattress Toppers",
-      fr: "Sur-Matelas",
-      ar: "أغطية المراتب",
-    },
-    href: (locale) => `/${locale}/mattresses?category=sur-matelas`,
-    image: "/images/mattresses.png",
-  },
-  {
-    id: "pillows",
-    translations: {
-      en: "Pillows",
-      fr: "Oreillers",
-      ar: "وسائد",
-    },
-    href: (locale) => `/${locale}/mattresses?category=oreiller`,
-    image: "/images/mattresses.png",
-  },
-];
+import { getMainCategoriesAction } from "@/lib/actions";
 
 /* ================= CATEGORY CARD ================= */
 
@@ -42,7 +8,7 @@ function CategoryCard({ cat, locale, discover, index }) {
 
   return (
     <Link
-      href={cat.href(locale)}
+      href={`/${locale}/mattresses?category=${cat.value}`}
       className={`
         group relative
         h-56 sm:h-64 lg:h-[420px]
@@ -56,7 +22,7 @@ function CategoryCard({ cat, locale, discover, index }) {
     >
       {/* IMAGE */}
       <img
-        src={cat.image}
+        src="/images/mattresses.png"
         alt={title}
         className="
           absolute inset-0
@@ -110,8 +76,13 @@ function CategoryCard({ cat, locale, discover, index }) {
 
 /* ================= MAIN SECTION ================= */
 
-export default function CategoriesSection({ locale = "en", translation }) {
+export default async function CategoriesSection({
+  locale = "en",
+  translation,
+}) {
   const { title, desc, discover } = translation.home.categories;
+
+  const categories = await getMainCategoriesAction();
 
   return (
     <section className="py-14 sm:py-18 lg:py-28 bg-white">
@@ -152,7 +123,7 @@ export default function CategoriesSection({ locale = "en", translation }) {
         {/* GRID */}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7 lg:gap-14">
-          {HOMEPAGE_CATEGORIES.map((cat, index) => (
+          {categories.map((cat, index) => (
             <CategoryCard
               key={cat.id}
               cat={cat}
