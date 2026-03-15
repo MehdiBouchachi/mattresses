@@ -6,10 +6,17 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import CategoryFilter from "./CategoryFilter";
 import SubcategoryFilter from "./SubcategoryFilter";
+import TypeFilter from "./TypeFilter";
 import PriceFilter from "./PriceFilter";
 import DimensionFilter from "./DimensionFilter";
 
-export default function Filters({ filtersTranslation, locale }) {
+export default function Filters({
+  filtersTranslation,
+  locale,
+  categories,
+  dimensions,
+  thicknesses,
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -226,6 +233,7 @@ export default function Filters({ filtersTranslation, locale }) {
                   translation={filtersTranslation}
                   setParam={setParam}
                   searchParams={searchParams}
+                  categories={categories.filter((c) => c.type === "main")}
                 />
 
                 <SubcategoryFilter
@@ -233,6 +241,15 @@ export default function Filters({ filtersTranslation, locale }) {
                   translation={filtersTranslation}
                   setParam={setParam}
                   searchParams={searchParams}
+                  categories={categories}
+                />
+
+                <TypeFilter
+                  locale={locale}
+                  translation={filtersTranslation}
+                  setParam={setParam}
+                  searchParams={searchParams}
+                  categories={categories}
                 />
 
                 <PriceFilter
@@ -246,6 +263,8 @@ export default function Filters({ filtersTranslation, locale }) {
                   translation={filtersTranslation}
                   setParam={setParam}
                   searchParams={searchParams}
+                  dimensions={dimensions}
+                  thicknesses={thicknesses}
                 />
               </div>
 

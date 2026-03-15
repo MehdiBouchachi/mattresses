@@ -1,44 +1,43 @@
 "use client";
 
-export default function SubcategoryFilter({
+export default function TypeFilter({
   translation,
   locale = "en",
   searchParams,
   setParam,
   categories,
 }) {
-  const { subcategory, all } = translation;
+  const { type: typeLabel, all } = translation;
 
   const isRTL = locale === "ar";
 
   /* ================= URL VALUES ================= */
 
-  const currentCategoryValue = searchParams.get("category") || "all";
-  const activeSubcategory = searchParams.get("subcategory") || "all";
+  const currentSubcategoryValue = searchParams.get("subcategory") || "all";
+  const activeType = searchParams.get("type") || "all";
 
-  /* ================= FIND SELECTED MAIN CATEGORY ================= */
+  /* ================= FIND SELECTED SUBCATEGORY ================= */
 
-  const currentMainCategory = categories.find(
-    (c) => c.value === currentCategoryValue && c.type === "main",
+  const currentSubcategory = categories.find(
+    (c) => c.value === currentSubcategoryValue && c.type === "subcategory",
   );
 
-  /* ================= GET SUBCATEGORIES (children of main) ================= */
+  /* ================= GET TYPES (children of subcategory) ================= */
 
-  const subcategories = currentMainCategory
+  const types = currentSubcategory
     ? categories.filter(
-        (c) =>
-          c.parent_id === currentMainCategory.id && c.type === "subcategory",
+        (c) => c.parent_id === currentSubcategory.id && c.type === "type",
       )
     : [];
 
-  // Hide if no main category selected or no subcategories
-  if (!currentMainCategory || !subcategories.length) return null;
+  // Hide if no subcategory selected or no types
+  if (!currentSubcategory || !types.length) return null;
 
-  const handleSubcategory = (value) => {
+  const handleType = (value) => {
     if (value === "all") {
-      setParam({ subcategory: "", type: "" });
+      setParam({ type: "" });
     } else {
-      setParam({ subcategory: value, type: "" });
+      setParam({ type: value });
     }
   };
 
@@ -56,7 +55,7 @@ export default function SubcategoryFilter({
           }
         `}
       >
-        {subcategory}
+        {typeLabel}
       </h3>
 
       <div
@@ -67,21 +66,21 @@ export default function SubcategoryFilter({
         {/* ALL */}
 
         <FilterItem
-          active={activeSubcategory === "all"}
-          onClick={() => handleSubcategory("all")}
+          active={activeType === "all"}
+          onClick={() => handleType("all")}
           isRTL={isRTL}
         >
           {all}
         </FilterItem>
 
-        {subcategories.map((sub) => (
+        {types.map((t) => (
           <FilterItem
-            key={sub.id}
-            active={activeSubcategory === sub.value}
-            onClick={() => handleSubcategory(sub.value)}
+            key={t.id}
+            active={activeType === t.value}
+            onClick={() => handleType(t.value)}
             isRTL={isRTL}
           >
-            {sub.translations?.[locale] ?? sub.translations?.en ?? sub.value}
+            {t.translations?.[locale] ?? t.translations?.en ?? t.value}
           </FilterItem>
         ))}
       </div>

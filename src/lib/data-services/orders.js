@@ -352,3 +352,72 @@ export async function getOrder(orderCode) {
 
   return formatFullOrder(data);
 }
+export async function getOrderByCode(orderCode) {
+  const { data, error } = await fullOrderQuery()
+    .eq("order_code", orderCode)
+    .single();
+
+  if (error) {
+    if (error.code === "PGRST116") return null;
+    console.error("[getOrderByCode]", error);
+    throw new Error("Order could not be loaded");
+  }
+
+  if (!data) return null;
+
+  const customer = normalizeRelation(data.customer);
+  const shipping = normalizeRelation(data.shipping);
+  const payment = normalizeRelation(data.payment);
+  const summary = normalizeRelation(data.summary);
+  const items = Array.isArray(data.items) ? data.items : [];
+
+  return {
+    id: data.order_code,
+    status: data.status,
+    createdAt: data.created_at,
+
+    customer: customer
+      ? {
+          firstName: customer.first_name,
+          lastName: customer.last_name,
+          email: customer.email,
+          phone: customer.phone,
+        }
+      : null,
+
+    shipping: shipping
+      ? {
+          wilaya: shipping.wilaya,
+          city: shipping.city,
+          street: shipping.street,
+          mapLink: shipping.map_link,
+        }
+      : null,
+
+    payment: payment
+      ? {
+          method: payment.method,
+          status: payment.status,
+        }
+      : null,
+
+    items: items.map((item) => ({
+      id: item.id,
+      name: item.name,
+      size: item.size,
+      thickness: item.thickness,
+      density: item.density,
+      price: Number(item.price),
+      quantity: item.quantity,
+      subtotal: Number(item.subtotal),
+    })),
+
+    summary: summary
+      ? {
+          itemsCount: summary.items_count,
+          totalQuantity: summary.total_quantity,
+          totalPrice: Number(summary.total_price),
+        }
+      : null,
+  };
+}

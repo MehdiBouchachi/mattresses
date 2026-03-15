@@ -1,13 +1,12 @@
 import Button from "@/components/ui/Button";
 import ProductCard from "../features/products/ProductCard";
-import { products } from "@/constants/products";
+import { getProductsWithDetails } from "@/lib/data-services/products";
 
-function ProductsSection({ translation, locale }) {
+async function ProductsSection({ translation, locale }) {
   /* ================= FEATURED PRODUCTS ================= */
 
-  const featuredProducts = products.filter((p) =>
-    ["visco-mattress", "ressort-prestige", "ressort-confort"].includes(p.slug),
-  );
+  const products = await getProductsWithDetails({ featured: true });
+  const featuredProducts = products.slice(0, 3);
 
   /* ================= PRICE RANGE ================= */
 
@@ -102,6 +101,7 @@ function ProductsSection({ translation, locale }) {
               key={product.id}
               product={product}
               translation={productCardTranslation}
+              locale={locale}
             />
           ))}
         </div>

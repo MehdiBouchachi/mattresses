@@ -134,7 +134,7 @@ function buildFullProduct(product) {
     value: s.value,
   }));
 
-  const advantages = features.map((f) => ({
+  const whyChoose = features.map((f) => ({
     id: f.id,
     translations: f.translations,
   }));
@@ -170,7 +170,7 @@ function buildFullProduct(product) {
       firmness,
       dimensions: groupVariantsByDimension(variants),
       technicalSpecs,
-      advantages,
+      whyChoose,
     },
   };
 }

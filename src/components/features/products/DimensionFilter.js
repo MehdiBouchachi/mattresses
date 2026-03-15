@@ -1,12 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
-import { products } from "@/constants/products";
-
 export default function DimensionFilter({
   translation,
   searchParams,
   setParam,
+  dimensions,
+  thicknesses,
 }) {
   const {
     dimension: sizeLabel,
@@ -16,29 +15,6 @@ export default function DimensionFilter({
 
   const selectedSize = searchParams.get("size") || "";
   const selectedThickness = searchParams.get("thickness") || "";
-
-  /* ================= SIZES ================= */
-
-  const sizes = useMemo(() => {
-    const allSizes = products.flatMap(
-      (p) => p.details?.dimensions?.map((d) => d.size) || [],
-    );
-
-    return [...new Set(allSizes)];
-  }, []);
-
-  /* ================= THICKNESS ================= */
-
-  const thicknesses = useMemo(() => {
-    const all = products.flatMap(
-      (p) =>
-        p.details?.dimensions?.flatMap((d) =>
-          d.options?.map((o) => o.thickness),
-        ) || [],
-    );
-
-    return [...new Set(all)];
-  }, []);
 
   /* ================= HANDLERS ================= */
 
@@ -67,9 +43,9 @@ export default function DimensionFilter({
           >
             <option value="">{allLabel}</option>
 
-            {sizes.map((size) => (
-              <option key={size} value={size}>
-                {size} cm
+            {dimensions.map((d) => (
+              <option key={d.id} value={d.label}>
+                {d.label} cm
               </option>
             ))}
           </select>
@@ -90,8 +66,8 @@ export default function DimensionFilter({
             <option value="">{allLabel}</option>
 
             {thicknesses.map((t) => (
-              <option key={t} value={t}>
-                {t} cm
+              <option key={t.id} value={t.value}>
+                {t.value} cm
               </option>
             ))}
           </select>

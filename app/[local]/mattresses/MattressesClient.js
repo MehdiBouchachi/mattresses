@@ -1,3 +1,5 @@
+"use client";
+
 import Filters from "@/components/features/products/Filters";
 import ProductGrid from "@/components/features/products/ProductGrid";
 import Pagination from "@/components/features/products/Pagination";
@@ -16,6 +18,9 @@ export default function MattressesClient({
   translation,
   searchParams,
   products,
+  categories,
+  dimensions,
+  thicknesses,
 }) {
   /* ================= URL FILTERS ================= */
 
@@ -68,7 +73,13 @@ export default function MattressesClient({
       />
 
       {/* FILTERS */}
-      <Filters locale={locale} filtersTranslation={filtersTranslation} />
+      <Filters
+        locale={locale}
+        filtersTranslation={filtersTranslation}
+        categories={categories}
+        dimensions={dimensions}
+        thicknesses={thicknesses}
+      />
 
       {/* PRODUCTS */}
       <section className="py-8 sm:py-10 border-t border-blue-100">

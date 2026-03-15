@@ -1,12 +1,11 @@
 "use client";
 
-import { categories } from "@/constants/products";
-
 export default function CategoryFilter({
   translation,
   locale,
   searchParams,
   setParam,
+  categories,
 }) {
   const { category, all } = translation;
 
@@ -16,9 +15,9 @@ export default function CategoryFilter({
 
   const handleCategory = (value) => {
     if (value === "all") {
-      setParam({ category: "" });
+      setParam({ category: "", subcategory: "" });
     } else {
-      setParam({ category: value });
+      setParam({ category: value, subcategory: "" });
     }
   };
 
@@ -57,12 +56,12 @@ export default function CategoryFilter({
 
         {categories.map((cat) => (
           <FilterItem
-            key={cat.value}
+            key={cat.id}
             active={activeCategory === cat.value}
             onClick={() => handleCategory(cat.value)}
             isRTL={isRTL}
           >
-            {cat.translations[locale]}
+            {cat.translations?.[locale] || cat.translations?.en || cat.value}
           </FilterItem>
         ))}
       </div>

@@ -3,26 +3,52 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/utils/helpers";
+import { getOrderByCodeAction } from "@/lib/actions";
 import Button from "@/components/ui/Button";
 
 export default function OrderSuccessClient({ locale, translation }) {
   const router = useRouter();
   const [order, setOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const saved = localStorage.getItem("lastOrder");
+    async function fetchOrder() {
+      const orderCode = localStorage.getItem("lastOrderCode");
 
-    if (saved) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setOrder(JSON.parse(saved));
-    } else {
-      router.push("/");
+      if (!orderCode) {
+        router.push(`/${locale}`);
+        return;
+      }
+
+      try {
+        const fetchedOrder = await getOrderByCodeAction(orderCode);
+
+        if (!fetchedOrder) {
+          router.push(`/${locale}`);
+          return;
+        }
+
+        setOrder(fetchedOrder);
+      } catch (error) {
+        console.error("[OrderSuccess] Failed to fetch order:", error.message);
+        router.push(`/${locale}`);
+      } finally {
+        setLoading(false);
+      }
     }
-  }, [router]);
 
+    fetchOrder();
+  }, [locale, router]);
+
+  if (loading) return <LoadingSkeleton />;
   if (!order) return null;
 
   const { header, details, infoBox, button } = translation;
+
+  const handleGoHome = () => {
+    localStorage.removeItem("lastOrderCode");
+    router.push(`/${locale}`);
+  };
 
   return (
     <div className="min-h-screen bg-white px-4 sm:px-6 pt-24 lg:pt-32 pb-16 sm:pb-20">
@@ -34,8 +60,59 @@ export default function OrderSuccessClient({ locale, translation }) {
           details={details}
           infoBox={infoBox}
           buttonLabel={button}
-          onHome={() => router.push(`/${locale}`)}
+          onHome={handleGoHome}
         />
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================
+   LOADING SKELETON
+========================================================= */
+
+function LoadingSkeleton() {
+  return (
+    <div className="min-h-screen bg-white px-4 sm:px-6 pt-24 lg:pt-32 pb-16 sm:pb-20">
+      <div className="max-w-2xl mx-auto">
+        {/* Header skeleton */}
+        <div className="text-center mb-8 sm:mb-10">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 animate-pulse" />
+          <div className="h-7 w-48 mx-auto mb-3 bg-blue-100 rounded-lg animate-pulse" />
+          <div className="h-4 w-64 mx-auto bg-blue-50 rounded-lg animate-pulse" />
+        </div>
+
+        {/* Card skeleton */}
+        <div className="bg-white rounded-3xl p-6 lg:p-8 shadow-[0_15px_40px_rgba(0,0,0,0.05)] border border-blue-100">
+          <div className="flex justify-between mb-8">
+            <div>
+              <div className="h-3 w-24 bg-blue-50 rounded mb-2 animate-pulse" />
+              <div className="h-6 w-32 bg-blue-100 rounded animate-pulse" />
+            </div>
+            <div className="text-right">
+              <div className="h-3 w-16 bg-blue-50 rounded mb-2 animate-pulse" />
+              <div className="h-7 w-28 bg-blue-100 rounded animate-pulse" />
+            </div>
+          </div>
+
+          <div className="space-y-6 mb-8">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="flex justify-between border-b border-blue-100 pb-4"
+              >
+                <div>
+                  <div className="h-4 w-36 bg-blue-50 rounded mb-2 animate-pulse" />
+                  <div className="h-3 w-24 bg-blue-50/60 rounded animate-pulse" />
+                </div>
+                <div className="h-4 w-20 bg-blue-50 rounded animate-pulse" />
+              </div>
+            ))}
+          </div>
+
+          <div className="h-24 bg-blue-50 rounded-2xl mb-8 animate-pulse" />
+          <div className="h-12 bg-blue-100 rounded-xl animate-pulse" />
+        </div>
       </div>
     </div>
   );

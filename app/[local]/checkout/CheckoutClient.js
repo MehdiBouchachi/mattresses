@@ -112,13 +112,11 @@ export default function CheckoutClient({ locale, translation = {} }) {
 
         const result = await checkoutOrderAction(orderData);
 
-        if (result.success) {
-          // Save orderCode for the success page
-          localStorage.setItem("lastOrderCode", result.orderCode);
-
-          dispatch(clearCart());
-          router.push(`/${locale}/order-success`);
-        }
+       if (result.success) {
+  localStorage.setItem("lastOrderCode", result.orderCode);
+  dispatch(clearCart());
+  router.push(`/${locale}/order-success`);
+}
       } catch (error) {
         console.error("[checkout]", error.message);
         alert("Something went wrong. Please try again.");

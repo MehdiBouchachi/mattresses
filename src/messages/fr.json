@@ -114,7 +114,8 @@
     "products": "produits",
     "filters": {
       "category": "Catégories",
-      "subcategory": "Type",
+      "subcategory": "Sous-catégories",
+      "type": "Types",
       "priceRange": "Budget",
       "dimension": "Taille",
       "thickness": "Épaisseur",
@@ -141,6 +142,10 @@
       "addToCart": "Ajouter au panier"
     },
     "features": "Spécifications techniques",
+    "whyChoose": {
+      "title": "Pourquoi choisir ce matelas ?",
+      "desc": "Chaque détail est conçu pour offrir un soutien fiable, une durabilité à long terme et un confort constant nuit après nuit."
+    },
     "faq": "Questions fréquentes",
     "guarantees": "Livraison gratuite • Garantie 10 ans • Paiement sécurisé"
   },

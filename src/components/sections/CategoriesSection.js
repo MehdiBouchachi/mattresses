@@ -1,5 +1,5 @@
-import { categories } from "@/constants/products";
 import Link from "next/link";
+import { getMainCategoriesAction } from "@/lib/actions";
 
 /* ================= CATEGORY CARD ================= */
 
@@ -76,8 +76,13 @@ function CategoryCard({ cat, locale, discover, index }) {
 
 /* ================= MAIN SECTION ================= */
 
-export default function CategoriesSection({ locale = "en", translation }) {
+export default async function CategoriesSection({
+  locale = "en",
+  translation,
+}) {
   const { title, desc, discover } = translation.home.categories;
+
+  const categories = await getMainCategoriesAction();
 
   return (
     <section className="py-14 sm:py-18 lg:py-28 bg-white">
@@ -120,7 +125,7 @@ export default function CategoriesSection({ locale = "en", translation }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7 lg:gap-14">
           {categories.map((cat, index) => (
             <CategoryCard
-              key={cat.value}
+              key={cat.id}
               cat={cat}
               locale={locale}
               discover={discover}

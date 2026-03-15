@@ -114,7 +114,8 @@
     "products": "products",
     "filters": {
       "category": "Categories",
-      "subcategory": "Type",
+      "subcategory": "Subcategories",
+      "type": "Type",
       "priceRange": "Your Budget",
       "dimension": "Size",
       "thickness": "Thickness",
@@ -141,6 +142,11 @@
       "addToCart": "Add to Cart"
     },
     "features": "Technical Specifications",
+    "whyChoose": {
+      "title": "Why Choose This Mattress?",
+      "desc": "Every detail is designed to provide reliable support, long-term durability, and consistent comfort night after night."
+    },
+
     "faq": "Frequently Asked Questions",
     "guarantees": "Free delivery • 10-year warranty • Secure checkout"
   },
