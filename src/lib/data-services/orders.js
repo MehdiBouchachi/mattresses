@@ -1,7 +1,7 @@
 // lib/data-services/orders.js
 
 import { supabase } from "@/lib/supabase";
-
+import { sendOrderEmail } from "@/lib/email";
 // ─────────────────────────────────────────────
 // SHARED HELPERS (DRY)
 // ─────────────────────────────────────────────
@@ -287,10 +287,17 @@ export async function createOrder(orderData) {
       .join("; ");
     console.error(messages);
 
-    // Clean up orphan order
     await supabase.from("orders").delete().eq("id", orderId);
 
     throw new Error("Order details could not be created");
+  }
+
+  // 4. Send email notification (non-blocking)
+  try {
+    await sendOrderEmail(orderData, orderCode);
+  } catch (emailError) {
+    console.error("[sendOrderEmail]", emailError.message);
+    // Don't fail the order if email fails
   }
 
   return {
